@@ -15,9 +15,6 @@ jobs:
         with:
           node-version: lts/*
           cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm lint
-      - run: pnpm typecheck
-      - run: pnpm test
-      - run: pnpm build
-      - run: pnpm exec web-ext lint --source-dir distribution
+      - uses: go-task/setup-task@v2
+      - run: task install
+      - run: task check
