@@ -10,14 +10,13 @@ async function request(path: string, init: RequestInit = {}): Promise<Response> 
 		throw new GitHubApiError('No GitHub token: set one in the github-power options');
 	}
 
-	const response = await fetch(`https://api.github.com${path}`, {
-		...init,
-		headers: {
-			Accept: 'application/vnd.github+json',
-			Authorization: `Bearer ${token}`,
-			...init.headers,
-		},
-	});
+	const headers = new Headers(init.headers);
+	headers.set('Authorization', `Bearer ${token}`);
+	if (!headers.has('Accept')) {
+		headers.set('Accept', 'application/vnd.github+json');
+	}
+
+	const response = await fetch(`https://api.github.com${path}`, {...init, headers});
 
 	if (response.ok) {
 		return response;

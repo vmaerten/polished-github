@@ -17,15 +17,12 @@ function respond(status: number, body: unknown, headers: Record<string, string> 
 }
 
 describe('v3', () => {
-	test('sends the token', async () => {
+	test('sends the token alongside caller headers', async () => {
 		respond(200, {login: 'octocat'});
-		await expect(v3('/user')).resolves.toEqual({login: 'octocat'});
-		expect(fetchMock).toHaveBeenCalledWith(
-			'https://api.github.com/user',
-			expect.objectContaining({
-				headers: expect.objectContaining({Authorization: 'Bearer secret'}),
-			}),
-		);
+		await expect(v3('/user', {headers: new Headers({'X-Custom': 'yes'})})).resolves.toEqual({login: 'octocat'});
+		const headers = new Headers(fetchMock.mock.calls[0][1]?.headers);
+		expect(headers.get('Authorization')).toBe('Bearer secret');
+		expect(headers.get('X-Custom')).toBe('yes');
 	});
 
 	test('fails before calling GitHub without a token', async () => {
