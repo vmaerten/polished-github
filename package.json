@@ -49,7 +49,5 @@
 		"vitest": "^5.0.5",
 		"web-ext": "^10.8.0"
 	},
-	"allowScripts": {
-		"dprint@0.64.3": true
-	}
+	"packageManager": "pnpm@12.15.0"
 }
