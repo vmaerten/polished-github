@@ -4,10 +4,18 @@ export type QuickComment = {
 	on: 'issues' | 'prs' | 'both';
 };
 
+export type DiffStatsSettings = {
+	showChangedFiles: boolean;
+	showSizeLabel: boolean;
+	/** Largest number of changed lines for XS, S, M and L; anything bigger is XL. */
+	sizeThresholds: [number, number, number, number];
+};
+
 export type Options = {
 	// Stored as an opt-out list so new features are on by default
 	disabledFeatures: string[];
 	quickComments: QuickComment[];
+	diffStats: DiffStatsSettings;
 };
 
 const defaults: Options = {
@@ -17,10 +25,20 @@ const defaults: Options = {
 		{label: 'Rebase', body: '@dependabot rebase', on: 'prs'},
 		{label: 'Thanks', body: 'Thanks for the contribution!', on: 'both'},
 	],
+	diffStats: {showChangedFiles: true, showSizeLabel: true, sizeThresholds: [10, 50, 250, 1000]},
 };
 
 export async function getOptions(): Promise<Options> {
 	return (await chrome.storage.sync.get(defaults)) as Options;
+}
+
+export async function setOptions(changes: Partial<Options>): Promise<void> {
+	await chrome.storage.sync.set(changes);
+}
+
+/** Restores every setting; the token survives since it lives in local storage. */
+export async function resetOptions(): Promise<void> {
+	await chrome.storage.sync.clear();
 }
 
 export async function setFeatureEnabled(id: string, enabled: boolean): Promise<void> {

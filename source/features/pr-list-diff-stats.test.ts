@@ -1,11 +1,22 @@
 import {beforeEach, expect, test, vi} from 'vitest';
 
 import {v4} from '../github-helpers/api.js';
-import prListDiffStats from './pr-list-diff-stats.js';
+import prListDiffStats, {getSizeLabel} from './pr-list-diff-stats.js';
 
 vi.mock('../github-helpers/api.js', () => ({v4: vi.fn<typeof v4>()}));
 
 const v4Mock = vi.mocked(v4);
+
+vi.stubGlobal('chrome', {
+	storage: {
+		sync: {
+			get: async (defaults: object) => ({
+				...defaults,
+				diffStats: {showChangedFiles: false, showSizeLabel: false, sizeThresholds: [10, 50, 250, 1000]},
+			}),
+		},
+	},
+});
 
 function row(number: number): string {
 	return `<li><div><h3><a href="/o/r/pull/${number}">PR ${number}</a></h3></div></li>`;
@@ -44,4 +55,12 @@ test('fetches each PR once, in batches, and never adds a badge twice', async () 
 	await new Promise((resolve) => setTimeout(resolve));
 	expect(badges()).toEqual(['+10 −1', '+20 −2', '+30 −3']);
 	expect(v4Mock).toHaveBeenCalledTimes(2);
+});
+
+test('sizes PRs by changed lines', () => {
+	const thresholds: [number, number, number, number] = [10, 50, 250, 1000];
+	expect(getSizeLabel(10, thresholds)).toBe('XS');
+	expect(getSizeLabel(11, thresholds)).toBe('S');
+	expect(getSizeLabel(1000, thresholds)).toBe('L');
+	expect(getSizeLabel(1001, thresholds)).toBe('XL');
 });
