@@ -9,10 +9,11 @@
 		setOptions,
 	} from '../options-storage.js';
 	import DiffStatsEditor from './DiffStatsEditor.svelte';
+	import ImageModalEditor from './ImageModalEditor.svelte';
 	import QuickCommentsEditor from './QuickCommentsEditor.svelte';
 	import TokenSection from './TokenSection.svelte';
 
-	const configurable = new Set(['quick-comments', 'pr-list-diff-stats']);
+	const configurable = new Set(['image-modal', 'quick-comments', 'pr-list-diff-stats']);
 	const {version} = chrome.runtime.getManifest();
 
 	let options = $state<Options>();
@@ -115,7 +116,12 @@
 						</div>
 						{#if expanded === feature.id}
 							<div class="settings">
-								{#if feature.id === 'quick-comments'}
+								{#if feature.id === 'image-modal'}
+									<ImageModalEditor
+										bind:settings={options.imageModal}
+										onsave={() => save({imageModal: $state.snapshot(options!.imageModal)})}
+									/>
+								{:else if feature.id === 'quick-comments'}
 									<QuickCommentsEditor
 										bind:comments={options.quickComments}
 										onsave={() => save({quickComments: $state.snapshot(options!.quickComments)})}

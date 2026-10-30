@@ -3,6 +3,7 @@ import {beforeEach, describe, expect, test} from 'vitest';
 import {getGallery} from './gallery.js';
 
 const attachment = 'https://github.com/user-attachments/assets/1';
+const defaults = {cycleImages: true, includeLinkedImages: false};
 
 beforeEach(() => {
 	document.body.innerHTML = `
@@ -25,7 +26,7 @@ function click(id: string, init: MouseEventInit = {}): MouseEvent {
 
 describe('getGallery', () => {
 	test('collects the zoomable images of the clicked comment', () => {
-		expect(getGallery(click('readme'))).toEqual({
+		expect(getGallery(click('readme'), defaults)).toEqual({
 			images: [
 				{src: attachment, alt: 'screenshot'},
 				{src: 'https://github.com/o/r/raw/main/media/demo.png', alt: ''},
@@ -36,13 +37,26 @@ describe('getGallery', () => {
 	});
 
 	test('leaves badges, emoji and images outside Markdown alone', () => {
-		expect(getGallery(click('badge'))).toBeUndefined();
-		expect(getGallery(click('emoji'))).toBeUndefined();
-		expect(getGallery(click('outside'))).toBeUndefined();
+		expect(getGallery(click('badge'), defaults)).toBeUndefined();
+		expect(getGallery(click('emoji'), defaults)).toBeUndefined();
+		expect(getGallery(click('outside'), defaults)).toBeUndefined();
 	});
 
 	test('leaves modified clicks to the browser', () => {
-		expect(getGallery(click('attachment', {metaKey: true}))).toBeUndefined();
-		expect(getGallery(click('attachment', {button: 1}))).toBeUndefined();
+		expect(getGallery(click('attachment', {metaKey: true}), defaults)).toBeUndefined();
+		expect(getGallery(click('attachment', {button: 1}), defaults)).toBeUndefined();
+	});
+
+	test('opens badges too when linked images are included', () => {
+		const gallery = getGallery(click('badge'), {...defaults, includeLinkedImages: true});
+		expect(gallery?.images).toHaveLength(4);
+		expect(gallery?.start).toBe(1);
+	});
+
+	test('shows only the clicked image when cycling is off', () => {
+		expect(getGallery(click('readme'), {...defaults, cycleImages: false})).toEqual({
+			images: [{src: 'https://github.com/o/r/raw/main/media/demo.png', alt: ''}],
+			start: 0,
+		});
 	});
 });
