@@ -18,7 +18,7 @@ Before pushing: `pnpm lint && pnpm typecheck && pnpm test`. `pnpm format` fixes 
 
 - `source/content-script.ts` starts the feature manager on every github.com page.
 - `source/feature-manager.ts` runs each feature on matching pages, again after every in-app navigation, and skips features the user disabled or that need a missing token.
-- `source/features/` holds one file per feature, registered in `features/index.ts`.
+- `source/features/` holds one file per feature (a folder for bigger ones), registered in `features/index.ts`.
 - `source/github-helpers/api.ts` calls the GitHub REST (`v3`) and GraphQL (`v4`) APIs with the user's token.
 - `source/options/` is the options page (Svelte).
 
