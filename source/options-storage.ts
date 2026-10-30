@@ -32,6 +32,15 @@ export async function getOptions(): Promise<Options> {
 	return (await chrome.storage.sync.get(defaults)) as Options;
 }
 
+export async function setOptions(changes: Partial<Options>): Promise<void> {
+	await chrome.storage.sync.set(changes);
+}
+
+/** Restores every setting; the token survives since it lives in local storage. */
+export async function resetOptions(): Promise<void> {
+	await chrome.storage.sync.clear();
+}
+
 export async function setFeatureEnabled(id: string, enabled: boolean): Promise<void> {
 	const {disabledFeatures} = await getOptions();
 	const others = disabledFeatures.filter((disabledId) => disabledId !== id);
