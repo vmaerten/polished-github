@@ -4,15 +4,27 @@ Browser extension (Chrome & Firefox) that adds superpowers to GitHub. Architectu
 
 ## Development
 
+Needs [pnpm](https://pnpm.io) and [Task](https://taskfile.dev). `task` lists every command.
+
 ```sh
-pnpm install
-pnpm watch                # rebuilds distribution/ on change
-pnpm start:chrome         # or start:firefox: opens a browser with the extension loaded
+task install
+task dev                  # rebuilds distribution/ on change
+task start                # opens Chromium with the extension loaded; TARGET=firefox-desktop for Firefox
 ```
 
 To use your everyday browser instead, load `distribution/` as an unpacked extension (`chrome://extensions`, developer mode) or as a temporary add-on (`about:debugging` in Firefox). In Firefox, grant the github.com permission from the extension's page in `about:addons`: Manifest V3 makes host permissions opt-in.
 
-Before pushing: `pnpm lint && pnpm typecheck && pnpm test`. `pnpm format` fixes formatting.
+Before pushing: `task check`, which runs what CI runs. `task format` fixes formatting.
+
+## Releasing
+
+Every PR adds its user-facing changes under `## Unreleased` in `CHANGELOG.md`. To release, from an up-to-date `main`:
+
+```sh
+task release VERSION=1.2.0
+```
+
+It runs the checks, bumps `package.json` and `manifest.json`, dates the changelog section, commits, tags `v1.2.0` and pushes. The tag starts the release workflow, which builds the zip and publishes a GitHub release with that changelog section as notes.
 
 ## Layout
 

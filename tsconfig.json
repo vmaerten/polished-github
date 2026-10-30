@@ -12,5 +12,5 @@
 		"skipLibCheck": true,
 		"types": ["chrome"]
 	},
-	"include": ["source", "*.ts"]
+	"include": ["source", "build", "*.ts"]
 }

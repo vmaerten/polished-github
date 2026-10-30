@@ -1,0 +1,29 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version: lts/*
+          cache: pnpm
+      - uses: go-task/setup-task@v2
+      - run: task install
+      - run: task check
+      - run: task package
+      - name: Create the GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node build/release.ts notes "${GITHUB_REF_NAME#v}" > release-notes.md
+          gh release create "$GITHUB_REF_NAME" web-ext-artifacts/*.zip --title "$GITHUB_REF_NAME" --notes-file release-notes.md

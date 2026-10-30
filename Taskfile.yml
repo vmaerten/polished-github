@@ -1,0 +1,88 @@
+version: '3'
+
+tasks:
+  default:
+    cmds:
+      - task --list
+    silent: true
+
+  install:
+    desc: Install dependencies
+    cmds:
+      - pnpm install --frozen-lockfile
+
+  build:
+    desc: Build the extension into distribution/
+    cmds:
+      - pnpm exec tsdown
+
+  dev:
+    desc: Rebuild distribution/ on every change
+    cmds:
+      - pnpm exec tsdown --watch
+
+  start:
+    desc: 'Open a browser with the built extension loaded (TARGET=firefox-desktop for Firefox)'
+    vars:
+      TARGET: '{{.TARGET | default "chromium"}}'
+    cmds:
+      - pnpm exec web-ext run --source-dir distribution --target {{.TARGET}} --start-url https://github.com/vmaerten/github-power
+
+  lint:
+    desc: Lint and check formatting
+    cmds:
+      - pnpm exec oxlint --type-aware --deny-warnings
+      - pnpm exec oxfmt --check
+
+  format:
+    desc: Format every file
+    cmds:
+      - pnpm exec oxfmt
+
+  typecheck:
+    desc: Type-check TypeScript and Svelte files
+    cmds:
+      # svelte-check never removes the components it transpiled, so a deleted one would keep failing
+      - rm -rf .svelte-check
+      - pnpm exec svelte-check --tsgo --fail-on-warnings
+
+  test:
+    desc: Run the unit tests
+    cmds:
+      - pnpm exec vitest run
+
+  check:
+    desc: Run every check CI runs
+    deps: [lint, typecheck, test]
+    cmds:
+      - task: build
+      - pnpm exec web-ext lint --source-dir distribution
+
+  package:
+    desc: Zip distribution/ into web-ext-artifacts/
+    deps: [build]
+    vars:
+      VERSION:
+        sh: jq -r .version package.json
+    cmds:
+      - pnpm exec web-ext build --source-dir distribution --artifacts-dir web-ext-artifacts --filename github-power-{{.VERSION}}.zip --overwrite-dest
+
+  release:
+    desc: 'Release a version from main, e.g. task release VERSION=1.2.0'
+    requires:
+      vars: [VERSION]
+    prompt: Release v{{.VERSION}} and push it to origin?
+    preconditions:
+      - sh: '[ "$(git branch --show-current)" = main ]'
+        msg: Releases are cut from main
+      - sh: git diff --quiet HEAD
+        msg: Commit or stash your changes first
+    cmds:
+      - task: check
+      - node build/release.ts bump {{.VERSION}}
+      - pnpm exec oxfmt package.json source/manifest.json CHANGELOG.md
+      - git add package.json source/manifest.json CHANGELOG.md
+      - 'git commit -m "chore(release): v{{.VERSION}}"'
+      - git tag v{{.VERSION}}
+      # Atomic: the tag triggers the release workflow, which must find the release commit on main
+      - git push --atomic origin main v{{.VERSION}}
