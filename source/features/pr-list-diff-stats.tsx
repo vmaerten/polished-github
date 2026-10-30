@@ -39,7 +39,8 @@ async function fetchStats(owner: string, name: string, numbers: number[]): Promi
 
 function addBadge(link: HTMLAnchorElement, stats: DiffStats, settings: DiffStatsSettings): void {
 	const title = link.closest('h3');
-	if (!title || title.nextElementSibling?.classList.contains(badgeClass)) {
+	// Other features add badges next to the title too, so ours is not always right after it
+	if (!title || title.parentElement?.querySelector(`:scope > .${badgeClass}`)) {
 		return;
 	}
 
