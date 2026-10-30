@@ -11,11 +11,19 @@ export type DiffStatsSettings = {
 	sizeThresholds: [number, number, number, number];
 };
 
+export type ImageModalSettings = {
+	cycleImages: boolean;
+	zoom: boolean;
+	/** Also open images that link elsewhere, like CI badges, instead of following their link. */
+	includeLinkedImages: boolean;
+};
+
 export type Options = {
 	// Stored as an opt-out list so new features are on by default
 	disabledFeatures: string[];
 	quickComments: QuickComment[];
 	diffStats: DiffStatsSettings;
+	imageModal: ImageModalSettings;
 };
 
 const defaults: Options = {
@@ -26,6 +34,7 @@ const defaults: Options = {
 		{label: 'Thanks', body: 'Thanks for the contribution!', on: 'both'},
 	],
 	diffStats: {showChangedFiles: true, showSizeLabel: true, sizeThresholds: [10, 50, 250, 1000]},
+	imageModal: {cycleImages: true, zoom: true, includeLinkedImages: false},
 };
 
 export async function getOptions(): Promise<Options> {

@@ -7,7 +7,12 @@
 	const zoomStep = 1.25;
 	const initialView: View = {scale: 1, x: 0, y: 0};
 
-	let {images, start, onclose}: {images: ModalImage[]; start: number; onclose: () => void} = $props();
+	let {
+		images,
+		start,
+		zoomable,
+		onclose,
+	}: {images: ModalImage[]; start: number; zoomable: boolean; onclose: () => void} = $props();
 
 	// `start` only seeds the index: the modal is mounted once per click
 	// svelte-ignore state_referenced_locally
@@ -19,8 +24,10 @@
 
 	onMount(() => {
 		dialog.showModal();
-		// Svelte registers wheel listeners as passive, which forbids preventDefault
-		dialog.addEventListener('wheel', onwheel, {passive: false});
+		if (zoomable) {
+			// Svelte registers wheel listeners as passive, which forbids preventDefault
+			dialog.addEventListener('wheel', onwheel, {passive: false});
+		}
 	});
 
 	function fromCenter(event: MouseEvent): {x: number; y: number} {
@@ -41,9 +48,11 @@
 		zoom(Math.exp(-event.deltaY * 0.002), fromCenter(event));
 	}
 
-	const shortcuts: Record<string, () => void> = {
+	const navigationShortcuts: Record<string, () => void> = {
 		ArrowLeft: () => show(-1),
 		ArrowRight: () => show(1),
+	};
+	const zoomShortcuts: Record<string, () => void> = {
 		'+': () => zoom(zoomStep),
 		'=': () => zoom(zoomStep),
 		'-': () => zoom(1 / zoomStep),
@@ -51,7 +60,7 @@
 	};
 
 	function onkeydown(event: KeyboardEvent): void {
-		const action = shortcuts[event.key];
+		const action = navigationShortcuts[event.key] ?? (zoomable ? zoomShortcuts[event.key] : undefined);
 		if (action) {
 			event.preventDefault();
 			// Keeps GitHub's own hotkeys from firing behind the modal
@@ -69,6 +78,10 @@
 
 	function onpointerdown(event: PointerEvent): void {
 		event.preventDefault();
+		if (!zoomable) {
+			return;
+		}
+
 		drag = {x: event.clientX - view.x, y: event.clientY - view.y};
 		(event.currentTarget as HTMLElement).setPointerCapture(event.pointerId);
 	}
@@ -88,6 +101,7 @@
 		src={image.src}
 		alt={image.alt}
 		draggable="false"
+		class:zoomable
 		class:dragging={drag}
 		style:transform="translate({view.x}px, {view.y}px) scale({view.scale})"
 		{onpointerdown}
@@ -100,11 +114,13 @@
 			<span class="counter">{index + 1} / {images.length}</span>
 			<button type="button" aria-label="Next image" onclick={() => show(1)}>›</button>
 		{/if}
-		<button type="button" aria-label="Zoom out" onclick={() => zoom(1 / zoomStep)}>−</button>
-		<button type="button" aria-label="Reset zoom" class="scale" onclick={() => (view = initialView)}>
-			{Math.round(view.scale * 100)}%
-		</button>
-		<button type="button" aria-label="Zoom in" onclick={() => zoom(zoomStep)}>+</button>
+		{#if zoomable}
+			<button type="button" aria-label="Zoom out" onclick={() => zoom(1 / zoomStep)}>−</button>
+			<button type="button" aria-label="Reset zoom" class="scale" onclick={() => (view = initialView)}>
+				{Math.round(view.scale * 100)}%
+			</button>
+			<button type="button" aria-label="Zoom in" onclick={() => zoom(zoomStep)}>+</button>
+		{/if}
 		<a href={image.src} target="_blank" rel="noopener noreferrer">Open original</a>
 		<button type="button" aria-label="Close" onclick={() => dialog.close()}>×</button>
 	</div>
@@ -139,6 +155,9 @@
 		max-height: 95vh;
 		object-fit: contain;
 		user-select: none;
+	}
+
+	img.zoomable {
 		cursor: grab;
 	}
 
