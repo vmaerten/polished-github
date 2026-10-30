@@ -5,6 +5,7 @@ import prListDiffStats from './pr-list-diff-stats.js';
 import prListReviewStatus from './pr-list-review-status.js';
 import prListStale from './pr-list-stale.js';
 import quickComments from './quick-comments.js';
+import reviewerLoad from './reviewer-load.js';
 
 export const features: Feature[] = [
 	imageModal,
@@ -13,4 +14,5 @@ export const features: Feature[] = [
 	prListReviewStatus,
 	prListStale,
 	quickComments,
+	reviewerLoad,
 ];
