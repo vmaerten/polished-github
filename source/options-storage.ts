@@ -18,12 +18,19 @@ export type ImageModalSettings = {
 	includeLinkedImages: boolean;
 };
 
+export type StaleSettings = {
+	/** Days without activity before a PR is flagged. */
+	days: number;
+	includeDrafts: boolean;
+};
+
 export type Options = {
 	// Stored as an opt-out list so new features are on by default
 	disabledFeatures: string[];
 	quickComments: QuickComment[];
 	diffStats: DiffStatsSettings;
 	imageModal: ImageModalSettings;
+	stale: StaleSettings;
 };
 
 const defaults: Options = {
@@ -35,6 +42,7 @@ const defaults: Options = {
 	],
 	diffStats: {showChangedFiles: true, showSizeLabel: true, sizeThresholds: [10, 50, 250, 1000]},
 	imageModal: {cycleImages: true, zoom: true, includeLinkedImages: false},
+	stale: {days: 7, includeDrafts: false},
 };
 
 export async function getOptions(): Promise<Options> {

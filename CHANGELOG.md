@@ -10,4 +10,5 @@ All notable changes to this project are documented here. The format follows [Kee
 - `quick-comments`: buttons above the comment box post a predefined comment in one click.
 - `pr-list-diff-stats`: the repository PR list shows lines added and removed, changed files and a size label for each PR.
 - `pr-list-review-status`: the repository PR list shows where each PR stands for you: review requested, re-review, approved or changes requested.
+- `pr-list-stale`: the repository PR list flags PRs with no activity for a configurable number of days, drafts excluded unless asked.
 - Options page with the GitHub token, feature switches and per-feature settings.
