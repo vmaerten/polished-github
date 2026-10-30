@@ -19,7 +19,7 @@
 		"start:firefox": "web-ext run --source-dir distribution --target firefox-desktop --start-url https://github.com/vmaerten/github-power",
 		"lint": "oxlint --type-aware --deny-warnings && oxfmt --check",
 		"format": "oxfmt",
-		"typecheck": "svelte-check --fail-on-warnings",
+		"typecheck": "svelte-check --tsgo --fail-on-warnings",
 		"test": "vitest run"
 	},
 	"dependencies": {
@@ -30,6 +30,7 @@
 	},
 	"devDependencies": {
 		"@types/chrome": "^0.3.7",
+		"@typescript/native": "npm:typescript@7",
 		"happy-dom": "^21.0.4",
 		"npm-run-all2": "^9.0.4",
 		"oxfmt": "^0.75.0",
@@ -39,7 +40,7 @@
 		"svelte": "^5.57.3",
 		"svelte-check": "^4.7.7",
 		"tsdown": "^0.23.4",
-		"typescript": "^6.0.3",
+		"typescript": "~6.0.3",
 		"vitest": "^5.0.5",
 		"web-ext": "^10.8.0"
 	},
