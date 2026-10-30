@@ -11,9 +11,10 @@
 	import DiffStatsEditor from './DiffStatsEditor.svelte';
 	import ImageModalEditor from './ImageModalEditor.svelte';
 	import QuickCommentsEditor from './QuickCommentsEditor.svelte';
+	import StaleEditor from './StaleEditor.svelte';
 	import TokenSection from './TokenSection.svelte';
 
-	const configurable = new Set(['image-modal', 'quick-comments', 'pr-list-diff-stats']);
+	const configurable = new Set(['image-modal', 'quick-comments', 'pr-list-diff-stats', 'pr-list-stale']);
 	const {version} = chrome.runtime.getManifest();
 
 	let options = $state<Options>();
@@ -130,6 +131,11 @@
 									<DiffStatsEditor
 										bind:settings={options.diffStats}
 										onsave={() => save({diffStats: $state.snapshot(options!.diffStats)})}
+									/>
+								{:else if feature.id === 'pr-list-stale'}
+									<StaleEditor
+										bind:settings={options.stale}
+										onsave={() => save({stale: $state.snapshot(options!.stale)})}
 									/>
 								{/if}
 							</div>
