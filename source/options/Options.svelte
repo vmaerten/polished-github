@@ -6,10 +6,13 @@
 	let tokenSaved = $state(false);
 	let disabledFeatures = $state<string[]>([]);
 
-	void Promise.all([getOptions(), getToken()]).then(([options, storedToken]) => {
+	async function load(): Promise<void> {
+		const [options, storedToken] = await Promise.all([getOptions(), getToken()]);
 		disabledFeatures = options.disabledFeatures;
 		token = storedToken;
-	});
+	}
+
+	void load();
 
 	async function saveToken(event: SubmitEvent): Promise<void> {
 		event.preventDefault();

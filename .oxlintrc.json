@@ -1,0 +1,17 @@
+{
+	"$schema": "./node_modules/oxlint/configuration_schema.json",
+	"plugins": ["typescript", "unicorn", "import", "oxc", "promise", "vitest"],
+	"categories": {
+		"correctness": "error",
+		"suspicious": "error",
+		"perf": "error"
+	},
+	"rules": {
+		"typescript/no-unsafe-type-assertion": "off"
+	},
+	"env": {
+		"browser": true,
+		"webextensions": true
+	},
+	"ignorePatterns": ["distribution", "web-ext-artifacts"]
+}
