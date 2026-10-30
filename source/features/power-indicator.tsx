@@ -12,7 +12,7 @@ async function init(signal: AbortSignal): Promise<void> {
 	}
 
 	repoName.after(
-		<span className='Label Label--secondary github-power-indicator' title='github-power is running'>
+		<span className="Label Label--secondary github-power-indicator" title="github-power is running">
 			github-power
 		</span>,
 	);

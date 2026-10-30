@@ -21,11 +21,11 @@ export function shouldRun(feature: Feature, {disabled, hasToken}: RunContext): b
 		return false;
 	}
 
-	if (feature.include && !feature.include.some(matches => matches())) {
+	if (feature.include && !feature.include.some((matches) => matches())) {
 		return false;
 	}
 
-	return !feature.exclude?.some(matches => matches());
+	return !feature.exclude?.some((matches) => matches());
 }
 
 // GitHub swaps pages without a full load: Turbo on most pages, React soft navigation on newer ones

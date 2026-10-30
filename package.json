@@ -17,8 +17,8 @@
 		"watch": "tsdown --watch",
 		"start:chrome": "web-ext run --source-dir distribution --target chromium --start-url https://github.com/vmaerten/github-power",
 		"start:firefox": "web-ext run --source-dir distribution --target firefox-desktop --start-url https://github.com/vmaerten/github-power",
-		"lint": "oxlint --type-aware --deny-warnings && dprint check",
-		"format": "dprint fmt",
+		"lint": "oxlint --type-aware --deny-warnings && oxfmt --check",
+		"format": "oxfmt",
 		"typecheck": "svelte-check --fail-on-warnings",
 		"test": "vitest run"
 	},
@@ -29,13 +29,10 @@
 		"select-dom": "^10.1.0"
 	},
 	"devDependencies": {
-		"@dprint/json": "^0.25.2",
-		"@dprint/markdown": "^0.28.2",
-		"@dprint/typescript": "^0.96.1",
 		"@types/chrome": "^0.3.7",
-		"dprint": "^0.64.3",
 		"happy-dom": "^21.0.4",
 		"npm-run-all2": "^9.0.4",
+		"oxfmt": "^0.75.0",
 		"oxlint": "^1.90.0",
 		"oxlint-tsgolint": "^7.0.2005",
 		"rollup-plugin-svelte": "^7.2.3",

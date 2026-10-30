@@ -32,22 +32,22 @@ async function request(path: string, init: RequestInit = {}): Promise<Response> 
 	}
 
 	// Error bodies are usually `{message}`, but proxies can answer with HTML
-	const {message} = await response.json().catch(() => ({message: response.statusText})) as {message: string};
+	const {message} = (await response.json().catch(() => ({message: response.statusText}))) as {message: string};
 	throw new GitHubApiError(`GitHub API ${response.status}: ${message}`);
 }
 
 /** REST API. `path` starts with `/`, e.g. `/repos/owner/name`. */
 export async function v3<T>(path: string, init?: RequestInit): Promise<T> {
 	const response = await request(path, init);
-	return response.status === 204 ? undefined as T : await response.json() as T;
+	return response.status === 204 ? (undefined as T) : ((await response.json()) as T);
 }
 
 /** GraphQL API. Throws on partial errors instead of returning half the data. */
 export async function v4<T>(query: string, variables: Record<string, unknown> = {}): Promise<T> {
 	const response = await request('/graphql', {method: 'POST', body: JSON.stringify({query, variables})});
-	const {data, errors} = await response.json() as {data: T; errors?: Array<{message: string}>};
+	const {data, errors} = (await response.json()) as {data: T; errors?: Array<{message: string}>};
 	if (errors?.length) {
-		throw new GitHubApiError(`GitHub GraphQL: ${errors.map(error => error.message).join('; ')}`);
+		throw new GitHubApiError(`GitHub GraphQL: ${errors.map((error) => error.message).join('; ')}`);
 	}
 
 	return data;
