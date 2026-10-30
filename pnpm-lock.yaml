@@ -178,6 +178,9 @@ importers:
       select-dom:
         specifier: ^10.1.0
         version: 10.1.0
+      text-field-edit:
+        specifier: ^4.1.1
+        version: 4.1.1
     devDependencies:
       '@types/chrome':
         specifier: ^0.3.7
@@ -2466,6 +2469,10 @@ packages:
   svg-tag-names@3.0.1:
     resolution: {integrity: sha512-R5EDS44RQSOwwKIOOUZLKZggMeFL8fDSSZr1hVK5Z0KkyuGVOZfyepBZDkPu/aoL+hSOysxxvAk8uN4yN2LOMQ==}
 
+  text-field-edit@4.1.1:
+    resolution: {integrity: sha512-bgvsU5CFdBm8YuDdpLALNqS7Th8bVaRD5cww9VMYaBYab324iN3XOXvuQxTxp9JSPhHHF6zGCDEyF08JUV2hPw==}
+    engines: {node: '>=18'}
+
   thread-stream@4.2.0:
     resolution: {integrity: sha512-e2zZ96wSChazBsbENf/Pcm/4swHt2cEKQ92rhUjkL9GCKiTDJIaTBenjE/m9DXi0QBmTMDkFDdOomUy20A1tDQ==}
     engines: {node: '>=20'}
@@ -4689,6 +4696,8 @@ snapshots:
       - '@typescript-eslint/types'
 
   svg-tag-names@3.0.1: {}
+
+  text-field-edit@4.1.1: {}
 
   thread-stream@4.2.0:
     dependencies:
