@@ -19,7 +19,7 @@
 		"start:firefox": "web-ext run --source-dir distribution --target firefox-desktop --start-url https://github.com/vmaerten/github-power",
 		"lint": "oxlint --type-aware --deny-warnings && oxfmt --check",
 		"format": "oxfmt",
-		"typecheck": "svelte-check --tsgo --fail-on-warnings",
+		"typecheck": "rm -rf .svelte-check && svelte-check --tsgo --fail-on-warnings",
 		"test": "vitest run"
 	},
 	"dependencies": {
