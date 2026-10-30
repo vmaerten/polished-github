@@ -1,9 +1,23 @@
+export type QuickComment = {
+	label: string;
+	body: string;
+	on: 'issues' | 'prs' | 'both';
+};
+
 export type Options = {
 	// Stored as an opt-out list so new features are on by default
 	disabledFeatures: string[];
+	quickComments: QuickComment[];
 };
 
-const defaults: Options = {disabledFeatures: []};
+const defaults: Options = {
+	disabledFeatures: [],
+	quickComments: [
+		{label: 'LGTM', body: 'LGTM :rocket:', on: 'prs'},
+		{label: 'Rebase', body: '@dependabot rebase', on: 'prs'},
+		{label: 'Thanks', body: 'Thanks for the contribution!', on: 'both'},
+	],
+};
 
 export async function getOptions(): Promise<Options> {
 	return (await chrome.storage.sync.get(defaults)) as Options;
