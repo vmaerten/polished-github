@@ -31,14 +31,11 @@
 		<div class="comment-row">
 			<input aria-label="Button label" bind:value={comment.label} onchange={onsave}>
 			<input aria-label="Comment" class="mono" bind:value={comment.body} onchange={onsave}>
-			<div class="segmented" role="radiogroup" aria-label="Show on">
+			<select aria-label="Show on" bind:value={comment.on} onchange={onsave}>
 				{#each scopes as scope (scope.value)}
-					<label class:selected={comment.on === scope.value}>
-						<input type="radio" name="on-{index}" value={scope.value} bind:group={comment.on} onchange={onsave}>
-						{scope.label}
-					</label>
+					<option value={scope.value}>{scope.label}</option>
 				{/each}
-			</div>
+			</select>
 			<div class="actions">
 				<button type="button" class="icon" aria-label="Move up" disabled={index === 0} onclick={() => move(index, -1)}>↑</button>
 				<button
@@ -77,45 +74,70 @@
 		display: flex;
 	}
 
-	.segmented {
-		display: flex;
-		height: 36px;
-		box-sizing: border-box;
-		border: 1px solid var(--border);
-		border-radius: 6px;
-		overflow: hidden;
+	/* Chrome draws a stylable select whose menu opens under it; other browsers keep the native one */
+	select,
+	::picker(select) {
+		appearance: base-select;
 	}
 
-	.segmented label {
-		position: relative;
-		display: flex;
+	select {
+		display: inline-flex;
 		align-items: center;
-		padding: 0 10px;
-		font-size: 13px;
-		color: var(--muted);
+		box-sizing: border-box;
+		min-width: 100px;
+		min-height: 36px;
+		padding: 0 8px 0 10px;
+		border: 1px solid var(--border);
+		border-radius: 6px;
+		background: var(--surface);
+		color: var(--text);
+		font: inherit;
 		cursor: pointer;
 	}
 
-	.segmented label + label {
-		border-left: 1px solid var(--border);
+	select:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: -1px;
 	}
 
-	.segmented label.selected {
-		background: var(--accent-emphasis);
-		color: #fff;
+	select::picker-icon {
+		color: var(--muted);
+		transition: rotate 0.15s;
+	}
+
+	select:open::picker-icon {
+		rotate: 180deg;
+	}
+
+	::picker(select) {
+		margin-top: 4px;
+		padding: 4px;
+		border: 1px solid var(--border);
+		border-radius: 8px;
+		background: var(--surface);
+		box-shadow: 0 8px 24px rgb(0 0 0 / 25%);
+	}
+
+	option {
+		padding: 6px 10px;
+		border-radius: 6px;
+		color: var(--text);
+	}
+
+	option:hover,
+	option:focus-visible {
+		background: var(--canvas);
+		outline: none;
+	}
+
+	option:checked {
 		font-weight: 600;
 	}
 
-	.segmented label:has(input:focus-visible) {
-		outline: 2px solid var(--accent);
-		outline-offset: -2px;
-	}
-
-	/* Visually hidden but still focusable with the keyboard */
-	.segmented input {
-		position: absolute;
-		opacity: 0;
-		pointer-events: none;
+	option::checkmark {
+		order: 1;
+		margin-left: auto;
+		color: var(--accent);
 	}
 
 	@media (max-width: 640px) {
