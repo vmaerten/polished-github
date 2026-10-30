@@ -151,6 +151,7 @@
 		--canvas: #f6f8fa;
 		--surface: #ffffff;
 		--accent: #0969da;
+		--accent-emphasis: #0969da;
 		--success: #1a7f37;
 		--danger: #d1242f;
 		--warning: #9a6700;
@@ -166,6 +167,7 @@
 			--canvas: #0d1117;
 			--surface: #151b23;
 			--accent: #4493f8;
+			--accent-emphasis: #1f6feb;
 			--success: #3fb950;
 			--danger: #f85149;
 			--warning: #d29922;
@@ -237,7 +239,7 @@
 		font-weight: 600;
 	}
 
-	:global(input:not([type='checkbox']), select) {
+	:global(input:not([type='checkbox'], [type='radio'])) {
 		box-sizing: border-box;
 		min-height: 36px;
 		padding: 0 10px;

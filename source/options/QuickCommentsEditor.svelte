@@ -3,6 +3,12 @@
 
 	let {comments = $bindable(), onsave}: {comments: QuickComment[]; onsave: () => void} = $props();
 
+	const scopes: Array<{value: QuickComment['on']; label: string}> = [
+		{value: 'prs', label: 'PRs'},
+		{value: 'issues', label: 'Issues'},
+		{value: 'both', label: 'Both'},
+	];
+
 	function move(index: number, step: number): void {
 		const [comment] = comments.splice(index, 1);
 		comments.splice(index + step, 0, comment);
@@ -25,11 +31,14 @@
 		<div class="comment-row">
 			<input aria-label="Button label" bind:value={comment.label} onchange={onsave}>
 			<input aria-label="Comment" class="mono" bind:value={comment.body} onchange={onsave}>
-			<select aria-label="Show on" bind:value={comment.on} onchange={onsave}>
-				<option value="prs">PRs</option>
-				<option value="issues">Issues</option>
-				<option value="both">Both</option>
-			</select>
+			<div class="segmented" role="radiogroup" aria-label="Show on">
+				{#each scopes as scope (scope.value)}
+					<label class:selected={comment.on === scope.value}>
+						<input type="radio" name="on-{index}" value={scope.value} bind:group={comment.on} onchange={onsave}>
+						{scope.label}
+					</label>
+				{/each}
+			</div>
 			<div class="actions">
 				<button type="button" class="icon" aria-label="Move up" disabled={index === 0} onclick={() => move(index, -1)}>↑</button>
 				<button
@@ -59,7 +68,7 @@
 <style>
 	.comment-row {
 		display: grid;
-		grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) 100px auto;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) auto auto;
 		gap: 8px;
 		align-items: center;
 	}
@@ -68,9 +77,50 @@
 		display: flex;
 	}
 
+	.segmented {
+		display: flex;
+		height: 36px;
+		box-sizing: border-box;
+		border: 1px solid var(--border);
+		border-radius: 6px;
+		overflow: hidden;
+	}
+
+	.segmented label {
+		position: relative;
+		display: flex;
+		align-items: center;
+		padding: 0 10px;
+		font-size: 13px;
+		color: var(--muted);
+		cursor: pointer;
+	}
+
+	.segmented label + label {
+		border-left: 1px solid var(--border);
+	}
+
+	.segmented label.selected {
+		background: var(--accent-emphasis);
+		color: #fff;
+		font-weight: 600;
+	}
+
+	.segmented label:has(input:focus-visible) {
+		outline: 2px solid var(--accent);
+		outline-offset: -2px;
+	}
+
+	/* Visually hidden but still focusable with the keyboard */
+	.segmented input {
+		position: absolute;
+		opacity: 0;
+		pointer-events: none;
+	}
+
 	@media (max-width: 640px) {
 		.comment-row {
-			grid-template-columns: minmax(0, 1fr) 100px;
+			grid-template-columns: minmax(0, 1fr) auto;
 		}
 
 		.comment-row .mono {
