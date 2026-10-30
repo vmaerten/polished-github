@@ -1,0 +1,33 @@
+{
+	"$schema": "https://json.schemastore.org/chrome-manifest",
+	"manifest_version": 3,
+	"name": "github-power",
+	"version": "0.0.0",
+	"description": "Adds superpowers to GitHub",
+	"homepage_url": "https://github.com/vmaerten/github-power",
+	"minimum_chrome_version": "120",
+	"browser_specific_settings": {
+		"gecko": {
+			"id": "github-power@vmaerten",
+			"strict_min_version": "140.0",
+			"data_collection_permissions": {
+				"required": ["none"]
+			}
+		},
+		"gecko_android": {
+			"strict_min_version": "142.0"
+		}
+	},
+	"permissions": ["storage"],
+	"host_permissions": ["https://github.com/*", "https://api.github.com/*"],
+	"options_ui": {
+		"page": "options.html",
+		"open_in_tab": true
+	},
+	"content_scripts": [
+		{
+			"matches": ["https://github.com/*"],
+			"js": ["content-script.js"]
+		}
+	]
+}
