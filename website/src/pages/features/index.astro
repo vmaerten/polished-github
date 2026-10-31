@@ -1,0 +1,79 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import {featureUrl, getFeatures, hasPage} from '../../features';
+
+const features = await getFeatures();
+const coming = features.filter((f) => f.data.soon).length;
+---
+
+<Layout title="All features">
+	<main class="wrap">
+		<section class="cat-head">
+			<div style="display: flex; flex-direction: column; gap: 8px">
+				<h1>All features</h1>
+				<p class="muted">{features.length - coming} available, {coming} coming. Every one can be turned off in the options.</p>
+			</div>
+			<div class="filters">
+				<label for="feature-search" class="sr-only">Search features</label>
+				<input id="feature-search" type="search" placeholder="Search features" autocomplete="off" />
+				<div class="chips" role="group" aria-label="Filter by moment">
+					<button type="button" data-group="All" aria-pressed="true">All</button>
+					<button type="button" data-group="Triage" aria-pressed="false">Triage</button>
+					<button type="button" data-group="Reviewing code" aria-pressed="false">Reviewing code</button>
+					<button type="button" data-group="Discussing" aria-pressed="false">Discussing</button>
+					<button type="button" data-group="Reading" aria-pressed="false">Reading</button>
+				</div>
+			</div>
+		</section>
+
+		<section class="cat-grid" aria-label="Features" id="grid">
+			{
+				features.map((f) => {
+					const Card = hasPage(f) ? 'a' : 'div';
+					return (
+						<Card class="panel cat-card" href={hasPage(f) ? featureUrl(f) : undefined} data-group={f.data.group}>
+							<span class="top">
+								{f.data.title} {f.data.soon && <span class="soon">Soon</span>}
+							</span>
+							<p>{f.data.summary}</p>
+							<span class="tags">
+								<span class="tag">{f.data.appearsIn}</span>
+								<span class="tag tag-muted">{f.data.group}</span>
+								{f.data.needsToken && <span class="tag tag-token">Needs token</span>}
+							</span>
+						</Card>
+					);
+				})
+			}
+			<p class="empty" id="empty" hidden>
+				No feature matches. <a href="https://github.com/vmaerten/supercharged-github/issues/new">Suggest one</a>
+			</p>
+		</section>
+	</main>
+
+	<script>
+		const search = document.getElementById('feature-search');
+		const chips = document.querySelectorAll('.chips button');
+		const cards = document.querySelectorAll('.cat-card');
+		const empty = document.getElementById('empty');
+		let group = 'All';
+		function apply() {
+			const q = search.value.trim().toLowerCase();
+			let shown = 0;
+			cards.forEach((card) => {
+				const match = (group === 'All' || card.dataset.group === group) && card.textContent.toLowerCase().includes(q);
+				card.hidden = !match;
+				if (match) shown++;
+			});
+			empty.hidden = shown > 0;
+		}
+		chips.forEach((chip) => {
+			chip.addEventListener('click', () => {
+				group = chip.dataset.group;
+				chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+				apply();
+			});
+		});
+		search.addEventListener('input', apply);
+	</script>
+</Layout>

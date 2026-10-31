@@ -3,3 +3,5 @@ distribution
 web-ext-artifacts
 .svelte-check
 .DS_Store
+website/dist
+website/.astro

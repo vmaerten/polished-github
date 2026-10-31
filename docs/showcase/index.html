@@ -662,8 +662,9 @@
 				<div class="section-head">
 					<h2 id="site-t">Site web</h2>
 					<p>
-						En anglais, pour les stores. Nom provisoire « GitHub Power » et charte neutre en attendant le choix de
-						l'identité. Toutes les données de PR viennent du repo go-task/task.
+						En anglais, pour les stores. Aux couleurs de Supercharged GitHub en Boost, avec le logo P3. Les maquettes A
+						à L ci-dessous datent d'avant le choix de l'identité. Toutes les données de PR viennent du repo
+						go-task/task.
 					</p>
 				</div>
 
@@ -671,24 +672,25 @@
 					<div class="round-head">
 						<h3>Version retenue, cliquable</h3>
 						<p>
-							La structure L montée en vrai site de trois pages. Le bouton de comparaison et les filtres fonctionnent.
+							La structure L montée en vrai site de trois pages, en Astro. Lancer <code>task website:dev</code> avant
+							d'ouvrir les liens. Le bouton de comparaison et les filtres fonctionnent.
 						</p>
 					</div>
 					<div class="featured">
-						<a class="card" href="site/index.html"
-							><span class="id">site/index.html <span class="pick">retenue</span></span
+						<a class="card" href="http://localhost:4321/"
+							><span class="id">website/src/pages/index.astro <span class="pick">retenue</span></span
 							><b>Accueil</b>
 							<p>
 								Démo de la liste de PR avec et sans l'extension, trois features en vedette, le reste en liste,
 								installation et FAQ.
 							</p></a
 						>
-						<a class="card" href="site/features.html"
-							><span class="id">site/features.html</span><b>Toutes les features</b>
+						<a class="card" href="http://localhost:4321/features/"
+							><span class="id">website/src/pages/features/index.astro</span><b>Toutes les features</b>
 							<p>Les 13 features en cartes, avec recherche et filtres par moment.</p></a
 						>
-						<a class="card" href="site/review-status.html"
-							><span class="id">site/review-status.html</span><b>Page d'une feature</b>
+						<a class="card" href="http://localhost:4321/features/review-status/"
+							><span class="id">website/src/pages/features/review-status.astro</span><b>Page d'une feature</b>
 							<p>Le gabarit, avec Review status en exemple.</p></a
 						>
 					</div>
@@ -763,6 +765,22 @@
 								>
 									<path d="M3 8.5l3.2 3L13 4.5" />
 								</svg>
+								<div><b>Manrope et JetBrains Mono</b> <span>pour le site, comme pour la page d'options.</span></div>
+							</li>
+							<li>
+								<svg
+									width="16"
+									height="16"
+									viewBox="0 0 16 16"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									aria-hidden="true"
+								>
+									<path d="M3 8.5l3.2 3L13 4.5" />
+								</svg>
 								<div>
 									<b>Astro</b> <span>pour le site, avec une page par feature générée depuis un fichier Markdown.</span>
 								</div>
@@ -820,23 +838,6 @@
 					<div style="display: flex; flex-direction: column; gap: 14px">
 						<h2>À trancher</h2>
 						<ul class="list open-q">
-							<li>
-								<svg
-									width="16"
-									height="16"
-									viewBox="0 0 16 16"
-									fill="none"
-									stroke="currentColor"
-									stroke-width="2"
-									stroke-linecap="round"
-									aria-hidden="true"
-								>
-									<circle cx="8" cy="8" r="5.5" />
-								</svg>
-								<div>
-									<b>La police du site</b> <span>Funnel pour l'instant, à aligner sur l'identité choisie.</span>
-								</div>
-							</li>
 							<li>
 								<svg
 									width="16"
