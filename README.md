@@ -70,3 +70,7 @@ It runs the checks, bumps `package.json` and `manifest.json`, dates the changelo
 2. Add it to `source/features/index.ts`.
 
 `init` runs again after each in-app navigation: check the element isn't already there before injecting, and pass `signal` to listeners and `element-ready` so they stop on the next navigation. Use [`dom-chef`](https://github.com/vadimdemedes/dom-chef) JSX for small injections, a Svelte component for anything stateful.
+
+## License
+
+[MIT](LICENSE)
