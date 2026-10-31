@@ -7,7 +7,7 @@ export class GitHubApiError extends Error {
 async function request(path: string, init: RequestInit = {}): Promise<Response> {
 	const token = await getToken();
 	if (!token) {
-		throw new GitHubApiError('No GitHub token: set one in the github-power options');
+		throw new GitHubApiError('No GitHub token: set one in the Supercharged GitHub options');
 	}
 
 	const headers = new Headers(init.headers);
