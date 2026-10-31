@@ -7,11 +7,17 @@
 		"perf": "error"
 	},
 	"rules": {
-		"typescript/no-unsafe-type-assertion": "off"
+		"typescript/no-unsafe-type-assertion": "off",
+		"import/no-unassigned-import": [
+			"error",
+			{
+				"allow": ["**/*.css"]
+			}
+		]
 	},
 	"env": {
 		"browser": true,
 		"webextensions": true
 	},
-	"ignorePatterns": ["distribution", "web-ext-artifacts"]
+	"ignorePatterns": ["distribution", "web-ext-artifacts", "website/dist", "website/.astro"]
 }

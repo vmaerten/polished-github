@@ -1,0 +1,32 @@
+---
+const repo = 'https://github.com/vmaerten/supercharged-github';
+---
+
+<footer class="site-footer">
+	<div class="wrap footer-main">
+		<div class="footer-brand">
+			<a class="brand" href="/"
+				><img class="brand-mark" src="/logo.svg" alt="" width="28" height="28" />Supercharged
+				<span class="brand-light">GitHub</span></a
+			>
+			<p>Review pull requests faster, right on GitHub. For Chrome and Firefox.</p>
+		</div>
+		<nav class="footer-links" aria-label="Footer">
+			<div>
+				<h2>Product</h2>
+				<a href="/features/">All features</a>
+				<a href="/#install">Install</a>
+				<a href="/#privacy">Privacy</a>
+			</div>
+			<div>
+				<h2>Project</h2>
+				<a href={repo}>Source on GitHub</a>
+				<a href={`${repo}/blob/main/CHANGELOG.md`}>Changelog</a>
+				<a href={`${repo}/issues/new`}>Report an issue</a>
+			</div>
+		</nav>
+	</div>
+	<div class="footer-legal">
+		<p class="wrap">Not affiliated with, endorsed or sponsored by GitHub, Inc. GitHub is a trademark of GitHub, Inc.</p>
+	</div>
+</footer>
