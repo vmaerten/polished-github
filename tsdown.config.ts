@@ -27,6 +27,7 @@ export default defineConfig([
 		copy: [
 			{from: 'source/manifest.json', to: 'distribution'},
 			{from: 'source/options.html', to: 'distribution'},
+			{from: 'source/icons/*.png', to: 'distribution/icons'},
 		],
 	},
 	{
