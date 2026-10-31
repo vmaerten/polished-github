@@ -1,5 +1,9 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import {featureUrl, getFeatures, hasPage} from '../../features';
+
+const features = await getFeatures();
+const coming = features.filter((f) => f.data.soon).length;
 ---
 
 <Layout title="All features">
@@ -7,7 +11,7 @@ import Layout from '../../layouts/Layout.astro';
 		<section class="cat-head">
 			<div style="display: flex; flex-direction: column; gap: 8px">
 				<h1>All features</h1>
-				<p class="muted">6 available, 7 coming. Every one can be turned off in the options.</p>
+				<p class="muted">{features.length - coming} available, {coming} coming. Every one can be turned off in the options.</p>
 			</div>
 			<div class="filters">
 				<label for="feature-search" class="sr-only">Search features</label>
@@ -23,89 +27,24 @@ import Layout from '../../layouts/Layout.astro';
 		</section>
 
 		<section class="cat-grid" aria-label="Features" id="grid">
-			<a class="panel cat-card" href="/features/review-status/" data-group="Triage">
-				<span class="top">Review status</span>
-				<p>Where each PR stands for you, on every row of the list.</p>
-				<span class="tags"
-					><span class="tag">PR list</span><span class="tag tag-muted">Triage</span
-					><span class="tag tag-token">Needs token</span></span
-				>
-			</a>
-			<div class="panel cat-card" data-group="Triage">
-				<span class="top">Diff stats</span>
-				<p>Lines added and removed, files and a size label.</p>
-				<span class="tags"
-					><span class="tag">PR list</span><span class="tag tag-muted">Triage</span
-					><span class="tag tag-token">Needs token</span></span
-				>
-			</div>
-			<div class="panel cat-card" data-group="Triage">
-				<span class="top">Idle PRs</span>
-				<p>Days since the last activity, past a threshold you set.</p>
-				<span class="tags"
-					><span class="tag">PR list</span><span class="tag tag-muted">Triage</span
-					><span class="tag tag-token">Needs token</span></span
-				>
-			</div>
-			<div class="panel cat-card" data-group="Triage">
-				<span class="top">Reviewer load</span>
-				<p>Pending reviews per person, where you pick reviewers.</p>
-				<span class="tags"
-					><span class="tag">Reviewers picker</span><span class="tag tag-muted">Triage</span
-					><span class="tag tag-token">Needs token</span></span
-				>
-			</div>
-			<div class="panel cat-card" data-group="Reviewing code">
-				<span class="top">Collapse generated files <span class="soon">Soon</span></span>
-				<p>Lockfiles and generated code start collapsed in the diff.</p>
-				<span class="tags"
-					><span class="tag">Files changed</span><span class="tag tag-muted">Reviewing code</span></span
-				>
-			</div>
-			<div class="panel cat-card" data-group="Reviewing code">
-				<span class="top">Folder diff stats <span class="soon">Soon</span></span>
-				<p>Lines changed per folder in the file tree.</p>
-				<span class="tags"
-					><span class="tag">Files changed</span><span class="tag tag-muted">Reviewing code</span></span
-				>
-			</div>
-			<div class="panel cat-card" data-group="Reviewing code">
-				<span class="top">Weighted review progress <span class="soon">Soon</span></span>
-				<p>Progress by lines viewed, not by files.</p>
-				<span class="tags"
-					><span class="tag">Files changed</span><span class="tag tag-muted">Reviewing code</span></span
-				>
-			</div>
-			<div class="panel cat-card" data-group="Discussing">
-				<span class="top">Quick comments</span>
-				<p>Your usual replies as one-click buttons above the comment box.</p>
-				<span class="tags"><span class="tag">Comment box</span><span class="tag tag-muted">Discussing</span></span>
-			</div>
-			<div class="panel cat-card" data-group="Discussing">
-				<span class="top">Conventional Comments <span class="soon">Soon</span></span>
-				<p>Label a comment as praise, nit, issue or question.</p>
-				<span class="tags"><span class="tag">Comment box</span><span class="tag tag-muted">Discussing</span></span>
-			</div>
-			<div class="panel cat-card" data-group="Discussing">
-				<span class="top">Unresolved conversations <span class="soon">Soon</span></span>
-				<p>Count the open threads and jump between them.</p>
-				<span class="tags"><span class="tag">Conversation</span><span class="tag tag-muted">Discussing</span></span>
-			</div>
-			<div class="panel cat-card" data-group="Reading">
-				<span class="top">Ticket links <span class="soon">Soon</span></span>
-				<p>Ticket ids like ABC-123 link to your issue tracker.</p>
-				<span class="tags"><span class="tag">Conversation</span><span class="tag tag-muted">Reading</span></span>
-			</div>
-			<div class="panel cat-card" data-group="Reading">
-				<span class="top">Image modal</span>
-				<p>Zoom images in place, arrow keys between them.</p>
-				<span class="tags"><span class="tag">Images</span><span class="tag tag-muted">Reading</span></span>
-			</div>
-			<div class="panel cat-card" data-group="Reading">
-				<span class="top">Before/after slider <span class="soon">Soon</span></span>
-				<p>Two images labelled Before and After become a slider.</p>
-				<span class="tags"><span class="tag">Images</span><span class="tag tag-muted">Reading</span></span>
-			</div>
+			{
+				features.map((f) => {
+					const Card = hasPage(f) ? 'a' : 'div';
+					return (
+						<Card class="panel cat-card" href={hasPage(f) ? featureUrl(f) : undefined} data-group={f.data.group}>
+							<span class="top">
+								{f.data.title} {f.data.soon && <span class="soon">Soon</span>}
+							</span>
+							<p>{f.data.summary}</p>
+							<span class="tags">
+								<span class="tag">{f.data.appearsIn}</span>
+								<span class="tag tag-muted">{f.data.group}</span>
+								{f.data.needsToken && <span class="tag tag-token">Needs token</span>}
+							</span>
+						</Card>
+					);
+				})
+			}
 			<p class="empty" id="empty" hidden>
 				No feature matches. <a href="https://github.com/vmaerten/supercharged-github/issues/new">Suggest one</a>
 			</p>
