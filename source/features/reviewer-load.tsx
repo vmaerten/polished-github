@@ -7,7 +7,16 @@ import {observe} from '../helpers/observe.js';
 
 // The picker loads its rows when opened and again when filtering
 const usernames = '#reviewers-select-menu .select-menu-item .js-username';
+const dividers = '#reviewers-select-menu .select-menu-divider';
 const loadClass = 'github-power-reviewer-load';
+const headerClass = 'github-power-reviewer-load-header';
+
+// Up to 2 pending reviews is a normal load
+const loadLevels = [
+	{max: 2, color: 'var(--fgColor-muted, #59636e)', background: 'var(--bgColor-neutral-muted, #818b981f)'},
+	{max: 5, color: 'var(--fgColor-attention, #9a6700)', background: 'var(--bgColor-attention-muted, #d4a72c33)'},
+	{max: Infinity, color: 'var(--fgColor-severe, #bc4c00)', background: 'var(--bgColor-severe-muted, #fb8f4433)'},
+];
 
 function pendingQuery(reviewer: string, owner: string): string {
 	const qualifier = reviewer.includes('/') ? 'team-review-requested' : 'review-requested';
@@ -30,19 +39,52 @@ async function fetchPendingCounts(reviewers: string[], owner: string): Promise<n
 	return reviewers.map((_, index) => result[`r${index}`].issueCount);
 }
 
-function addCount(username: Element, count: number): void {
-	const heading = username.closest('.select-menu-item-heading');
-	if (!heading || heading.querySelector(`.${loadClass}`)) {
+function addCount(username: Element, count: number, owner: string): void {
+	const item = username.closest<HTMLElement>('.select-menu-item');
+	if (!item || item.querySelector(`.${loadClass}`)) {
 		return;
 	}
 
-	heading.append(
+	const {color, background} = loadLevels.find(({max}) => count <= max)!;
+	const description = `${count} open ${count === 1 ? 'PR' : 'PRs'} waiting for their review in ${owner}`;
+	// The item is a block layout: an absolute counter keeps it in a right-hand column without reflowing the name
+	item.style.position = 'relative';
+	item.querySelector<HTMLElement>('.select-menu-item-text')?.style.setProperty('padding-right', '36px');
+	item.append(
 		<span
-			className={`${loadClass} color-fg-muted text-small`}
-			title="Open PRs in this account waiting for their review"
-			style={{marginLeft: '6px'}}
+			className={loadClass}
+			title={description}
+			aria-label={description}
+			style={{
+				position: 'absolute',
+				top: '50%',
+				right: '16px',
+				transform: 'translateY(-50%)',
+				minWidth: '22px',
+				boxSizing: 'border-box',
+				padding: '0 7px',
+				borderRadius: '999px',
+				fontSize: '12px',
+				fontWeight: '600',
+				lineHeight: '20px',
+				textAlign: 'center',
+				color,
+				background,
+			}}
 		>
-			· {count} pending
+			{count}
+		</span>,
+	);
+}
+
+function addHeader(divider: Element): void {
+	if (divider.querySelector(`.${headerClass}`)) {
+		return;
+	}
+
+	divider.append(
+		<span className={headerClass} style={{float: 'right', fontWeight: '400', color: 'var(--fgColor-muted, #59636e)'}}>
+			Pending reviews
 		</span>,
 	);
 }
@@ -63,7 +105,7 @@ async function addCounts(elements: Element[], counts: Map<string, number>): Prom
 	}
 
 	for (const {element, reviewer} of rows) {
-		addCount(element, counts.get(reviewer)!);
+		addCount(element, counts.get(reviewer)!, owner);
 	}
 }
 
@@ -74,6 +116,7 @@ const reviewerLoad: Feature = {
 	requiresToken: true,
 	init(signal) {
 		const counts = new Map<string, number>();
+		observe(dividers, (elements) => elements.forEach(addHeader), {signal});
 		observe(
 			usernames,
 			(elements) => {
