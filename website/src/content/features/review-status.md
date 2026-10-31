@@ -12,8 +12,8 @@ featured: true
 <figure class="prlist" style="margin: 0; box-shadow: none" aria-label="PR rows with a review status badge">
 	<div class="pr-row" style="border-top: 0">
 		<div class="pr-main">
-			<span class="pr-title">feat: OpenTelemetry tracing for task execution</span
-			><span class="pr-meta">#3077 opened last week by caseycs</span>
+			<span class="pr-title">refactor(watch): detect filesystem changes with fsbroker</span
+			><span class="pr-meta">#3064 opened 3 weeks ago by andreynering</span>
 		</div>
 		<span class="status s-requested" style="width: 190px; font-size: 13px"
 			><span class="dot" aria-hidden="true"></span>Review requested</span
@@ -21,8 +21,8 @@ featured: true
 	</div>
 	<div class="pr-row">
 		<div class="pr-main">
-			<span class="pr-title">fix: preserve dotenv declaration order</span
-			><span class="pr-meta">#3078 opened last week by satya-sudo</span>
+			<span class="pr-title">feat(input): add search and scrolling to choice prompts</span
+			><span class="pr-meta">#3071 opened 2 weeks ago by vmaerten</span>
 		</div>
 		<span class="status s-rereview" style="width: 190px; font-size: 13px"
 			><span class="dot" aria-hidden="true"></span>Re-review</span
@@ -30,8 +30,8 @@ featured: true
 	</div>
 	<div class="pr-row">
 		<div class="pr-main">
-			<span class="pr-title">feat(input): add search and scrolling to choice prompts</span
-			><span class="pr-meta">#3071 opened 2 weeks ago by vmaerten</span>
+			<span class="pr-title">fix: resolve dynamic enum refs in interactive prompts</span
+			><span class="pr-meta">#3070 opened 2 weeks ago by vmaerten</span>
 		</div>
 		<span class="status s-changes" style="width: 190px; font-size: 13px"
 			><span class="dot" aria-hidden="true"></span>Changes requested</span
@@ -39,8 +39,8 @@ featured: true
 	</div>
 	<div class="pr-row">
 		<div class="pr-main">
-			<span class="pr-title">refactor(watch): detect filesystem changes with fsbroker</span
-			><span class="pr-meta">#3064 opened last month by andreynering</span>
+			<span class="pr-title">feat: support scoped dotenv in included taskfiles</span
+			><span class="pr-meta">#3029 opened on Sep 13 by vmaerten</span>
 		</div>
 		<span class="status s-outdated" style="width: 190px; font-size: 13px"
 			><span class="dot" aria-hidden="true"></span>Approved · new commits</span

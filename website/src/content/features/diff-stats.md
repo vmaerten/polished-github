@@ -12,24 +12,24 @@ featured: true
 <figure class="prlist" style="margin: 0; box-shadow: none" aria-label="PR rows with their diff stats">
 	<div class="pr-row" style="border-top: 0">
 		<div class="pr-main">
-			<span class="pr-title">golangci-lint: add prealloc as a linter</span
-			><span class="pr-meta">#3085 opened 2 days ago by christiandins</span>
+			<span class="pr-title">feat(cmd): add ask option to commands</span
+			><span class="pr-meta">#2701 opened on Feb 21 by vmaerten</span>
 		</div>
-		<span class="diff" style="font-size: 13px"><span class="a">+189</span> <span class="d">−8</span> <span class="f">· 4 files</span> <b>M</b></span>
+		<span class="diff" style="font-size: 13px"><span class="a">+61</span> <span class="d">−0</span> <span class="f">· 4 files</span> <b>S</b></span>
 	</div>
 	<div class="pr-row">
 		<div class="pr-main">
-			<span class="pr-title">feat: OpenTelemetry tracing for task execution</span
-			><span class="pr-meta">#3077 opened last week by caseycs</span>
+			<span class="pr-title">refactor(watch): detect filesystem changes with fsbroker</span
+			><span class="pr-meta">#3064 opened 3 weeks ago by andreynering</span>
 		</div>
-		<span class="diff" style="font-size: 13px"><span class="a">+643</span> <span class="d">−28</span> <span class="f">· 12 files</span> <b>L</b></span>
+		<span class="diff" style="font-size: 13px"><span class="a">+323</span> <span class="d">−103</span> <span class="f">· 11 files</span> <b>L</b></span>
 	</div>
 	<div class="pr-row">
 		<div class="pr-main">
-			<span class="pr-title">feat(input): add search and scrolling to choice prompts</span
-			><span class="pr-meta">#3071 opened 2 weeks ago by vmaerten</span>
+			<span class="pr-title">feat: split executor and reader</span
+			><span class="pr-meta">#2366 opened on Aug 11, 2025 by pd93</span>
 		</div>
-		<span class="diff" style="font-size: 13px"><span class="a">+125</span> <span class="d">−16</span> <span class="f">· 1 file</span> <b>M</b></span>
+		<span class="diff" style="font-size: 13px"><span class="a">+2,700</span> <span class="d">−2,645</span> <span class="f">· 27 files</span> <b>XL</b></span>
 	</div>
 </figure>
 
