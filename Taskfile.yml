@@ -28,6 +28,18 @@ tasks:
     cmds:
       - pnpm exec web-ext run --source-dir distribution --target {{.TARGET}} --start-url https://github.com/vmaerten/supercharged-github
 
+  website:dev:
+    desc: Serve the website with live reload
+    dir: website
+    cmds:
+      - pnpm exec astro dev
+
+  website:build:
+    desc: Build the website into website/dist/
+    dir: website
+    cmds:
+      - pnpm exec astro build
+
   lint:
     desc: Lint and check formatting
     cmds:
@@ -57,6 +69,7 @@ tasks:
     cmds:
       - task: build
       - pnpm exec web-ext lint --source-dir distribution
+      - task: website:build
 
   package:
     desc: Zip distribution/ into web-ext-artifacts/

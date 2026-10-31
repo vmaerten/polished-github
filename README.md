@@ -42,6 +42,8 @@ task start                # opens Chromium with the extension loaded; TARGET=fir
 
 To use your everyday browser instead, load `distribution/` as an unpacked extension (`chrome://extensions`, developer mode) or as a temporary add-on (`about:debugging` in Firefox). In Firefox, grant the github.com permission from the extension's page in `about:addons`: Manifest V3 makes host permissions opt-in.
 
+The website lives in `website/` (Astro, a pnpm workspace package): `task website:dev` serves it with live reload.
+
 Before pushing: `task check`, which runs what CI runs. `task format` fixes formatting.
 
 ## Releasing
