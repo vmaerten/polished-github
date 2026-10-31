@@ -1,5 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import {featureUrl, getFeatures, groups, hasPage} from '../features';
+
+const features = await getFeatures();
+const others = features.filter((f) => !f.data.featured);
 const nav = [
 	{href: '#demo', label: 'Demo'},
 	{href: '/features/', label: 'All features'},
@@ -376,50 +380,28 @@ const nav = [
 					<h2 id="more" class="section-title">And everything else</h2>
 					<p class="muted">Grouped by what you are doing. Each one can be turned off.</p>
 				</div>
-				<a class="btn btn-secondary" href="/features/">See all 13 features</a>
+				<a class="btn btn-secondary" href="/features/">See all {features.length} features</a>
 			</div>
 			<div class="groups">
-				<div class="group">
-					<h3>Reviewing code</h3>
-					<a class="item" href="/features/"
-						><span class="item-name">Collapse generated files <span class="soon">Soon</span></span
-						><span class="item-text">Lockfiles and generated code start collapsed.</span></a
-					>
-					<a class="item" href="/features/"
-						><span class="item-name">Folder diff stats <span class="soon">Soon</span></span
-						><span class="item-text">Lines changed per folder in the file tree.</span></a
-					>
-					<a class="item" href="/features/"
-						><span class="item-name">Weighted review progress <span class="soon">Soon</span></span
-						><span class="item-text">Progress by lines viewed, not by files.</span></a
-					>
-				</div>
-				<div class="group">
-					<h3>Discussing</h3>
-					<a class="item" href="/features/"
-						><span class="item-name">Conventional Comments <span class="soon">Soon</span></span
-						><span class="item-text">Label a comment as praise, nit, issue or question.</span></a
-					>
-					<a class="item" href="/features/"
-						><span class="item-name">Unresolved conversations <span class="soon">Soon</span></span
-						><span class="item-text">Count the open threads and jump between them.</span></a
-					>
-					<a class="item" href="/features/"
-						><span class="item-name">Ticket links <span class="soon">Soon</span></span
-						><span class="item-text">Ticket ids like ABC-123 link to your tracker.</span></a
-					>
-				</div>
-				<div class="group">
-					<h3>Reading</h3>
-					<a class="item" href="/features/"
-						><span class="item-name">Image modal</span
-						><span class="item-text">Zoom images in place, arrow keys between them.</span></a
-					>
-					<a class="item" href="/features/"
-						><span class="item-name">Before/after slider <span class="soon">Soon</span></span
-						><span class="item-text">Two images labelled Before and After become a slider.</span></a
-					>
-				</div>
+				{
+					groups
+						.filter((g) => others.some((f) => f.data.group === g))
+						.map((g) => (
+							<div class="group">
+								<h3>{g}</h3>
+								{others
+									.filter((f) => f.data.group === g)
+									.map((f) => (
+										<a class="item" href={hasPage(f) ? featureUrl(f) : '/features/'}>
+											<span class="item-name">
+												{f.data.title} {f.data.soon && <span class="soon">Soon</span>}
+											</span>
+											<span class="item-text">{f.data.summary}</span>
+										</a>
+									))}
+							</div>
+						))
+				}
 			</div>
 		</section>
 
