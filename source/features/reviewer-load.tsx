@@ -8,8 +8,8 @@ import {observe} from '../helpers/observe.js';
 // The picker loads its rows when opened and again when filtering
 const usernames = '#reviewers-select-menu .select-menu-item .js-username';
 const dividers = '#reviewers-select-menu .select-menu-divider';
-const loadClass = 'github-power-reviewer-load';
-const headerClass = 'github-power-reviewer-load-header';
+const loadClass = 'supercharged-github-reviewer-load';
+const headerClass = 'supercharged-github-reviewer-load-header';
 
 // Up to 2 pending reviews is a normal load
 const loadLevels = [
@@ -121,7 +121,7 @@ const reviewerLoad: Feature = {
 			usernames,
 			(elements) => {
 				addCounts(elements, counts).catch((error: unknown) => {
-					console.error('github-power: reviewer-load failed', error);
+					console.error('supercharged-github: reviewer-load failed', error);
 				});
 			},
 			{signal},

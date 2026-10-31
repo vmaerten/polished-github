@@ -12,7 +12,7 @@ function item(login: string): string {
 }
 
 function counts(): string[] {
-	return [...document.querySelectorAll('.github-power-reviewer-load')].map((count) => count.textContent);
+	return [...document.querySelectorAll('.supercharged-github-reviewer-load')].map((count) => count.textContent);
 }
 
 test('shows each reviewer’s pending reviews in the owner’s repositories, fetching each once', async () => {

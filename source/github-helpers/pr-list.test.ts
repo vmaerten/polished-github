@@ -22,23 +22,23 @@ function setUpRow(): HTMLElement {
 
 test('puts badges in their own column of the right column, once each', () => {
 	const title = setUpRow();
-	addPullRequestBadge(title, 'github-power-stale', badge('github-power-stale'), 'right');
-	addPullRequestBadge(title, 'github-power-review-status', badge('github-power-review-status'), 'right');
-	addPullRequestBadge(title, 'github-power-stale', badge('github-power-stale'), 'right');
+	addPullRequestBadge(title, 'supercharged-github-stale', badge('supercharged-github-stale'), 'right');
+	addPullRequestBadge(title, 'supercharged-github-review-status', badge('supercharged-github-review-status'), 'right');
+	addPullRequestBadge(title, 'supercharged-github-stale', badge('supercharged-github-stale'), 'right');
 
 	const rightColumn = document.querySelector('[style*="metadata"]')!;
 	const container = rightColumn.firstElementChild as HTMLElement;
-	expect(container.className).toBe('github-power-badges');
+	expect(container.className).toBe('supercharged-github-badges');
 	// A missing diff-stats badge leaves its column empty, so the next rows still line up
 	expect([...container.children].map((slot) => (slot as HTMLElement).style.gridArea)).toEqual(['1 / 3', '1 / 1']);
 });
 
 test('appends badges to the metadata line, in a fixed order', () => {
 	const title = setUpRow();
-	addPullRequestBadge(title, 'github-power-stale', badge('github-power-stale'), 'metadata');
-	addPullRequestBadge(title, 'github-power-diff-stats', badge('github-power-diff-stats'), 'metadata');
+	addPullRequestBadge(title, 'supercharged-github-stale', badge('supercharged-github-stale'), 'metadata');
+	addPullRequestBadge(title, 'supercharged-github-diff-stats', badge('supercharged-github-diff-stats'), 'metadata');
 
-	const container = document.querySelector('.metadata-line > .github-power-badges')!;
+	const container = document.querySelector('.metadata-line > .supercharged-github-badges')!;
 	expect([...container.children].map((slot) => [(slot as HTMLElement).style.order, slot.textContent])).toEqual([
 		['2', '· '],
 		['1', '· '],
@@ -48,7 +48,7 @@ test('appends badges to the metadata line, in a fixed order', () => {
 test('falls back to the title when the row layout is unknown', () => {
 	document.body.innerHTML = '<ul><li><div><h3>PR</h3></div></li></ul>';
 	const title = document.querySelector('h3')!;
-	addPullRequestBadge(title, 'github-power-diff-stats', badge('github-power-diff-stats'), 'right');
+	addPullRequestBadge(title, 'supercharged-github-diff-stats', badge('supercharged-github-diff-stats'), 'right');
 
-	expect(title.querySelector('.github-power-badges .github-power-diff-stats')).not.toBeNull();
+	expect(title.querySelector('.supercharged-github-badges .supercharged-github-diff-stats')).not.toBeNull();
 });
