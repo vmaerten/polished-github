@@ -1,14 +1,20 @@
 {
 	"$schema": "https://json.schemastore.org/chrome-manifest",
 	"manifest_version": 3,
-	"name": "github-power",
+	"name": "Supercharged GitHub",
 	"version": "0.0.0",
-	"description": "Adds superpowers to GitHub",
-	"homepage_url": "https://github.com/vmaerten/github-power",
+	"description": "Adds superpowers to GitHub. Not affiliated with GitHub, Inc.",
+	"homepage_url": "https://github.com/vmaerten/supercharged-github",
 	"minimum_chrome_version": "120",
+	"icons": {
+		"16": "icons/icon-16.png",
+		"32": "icons/icon-32.png",
+		"48": "icons/icon-48.png",
+		"128": "icons/icon-128.png"
+	},
 	"browser_specific_settings": {
 		"gecko": {
-			"id": "github-power@vmaerten",
+			"id": "supercharged-github@vmaerten",
 			"strict_min_version": "140.0",
 			"data_collection_permissions": {
 				"required": ["none"]

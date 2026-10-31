@@ -7,7 +7,7 @@ import {type BadgePlacement, type DiffStatsSettings, getOptions} from '../option
 
 type DiffStats = {additions: number; deletions: number; changedFiles: number};
 
-const badgeClass = 'github-power-diff-stats' as const;
+const badgeClass = 'supercharged-github-diff-stats' as const;
 
 const sizeLabels = ['XS', 'S', 'M', 'L', 'XL'];
 

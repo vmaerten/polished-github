@@ -62,13 +62,13 @@
 				<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z" /></svg>
 			</div>
 			<div>
-				<h1>github-power</h1>
+				<h1>Supercharged GitHub</h1>
 				<span class="muted small">Version {version} · Options</span>
 			</div>
 		</div>
 		<nav class="small">
-			<a href="https://github.com/vmaerten/github-power" target="_blank" rel="noopener noreferrer">Repository</a>
-			<a href="https://github.com/vmaerten/github-power/issues/new" target="_blank" rel="noopener noreferrer">Report a bug</a>
+			<a href="https://github.com/vmaerten/supercharged-github" target="_blank" rel="noopener noreferrer">Repository</a>
+			<a href="https://github.com/vmaerten/supercharged-github/issues/new" target="_blank" rel="noopener noreferrer">Report a bug</a>
 		</nav>
 	</header>
 
@@ -155,6 +155,8 @@
 			<button type="button" class="link danger" onclick={reset}>Reset to defaults</button>
 		</footer>
 	{/if}
+
+	<p class="small muted">Supercharged GitHub is not affiliated with, endorsed or sponsored by GitHub, Inc.</p>
 </main>
 
 <style>

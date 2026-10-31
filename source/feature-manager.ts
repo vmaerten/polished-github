@@ -58,6 +58,6 @@ async function runFeature(feature: Feature, signal: AbortSignal): Promise<void> 
 	try {
 		await feature.init(signal);
 	} catch (error) {
-		console.error(`github-power: ${feature.id} failed`, error);
+		console.error(`supercharged-github: ${feature.id} failed`, error);
 	}
 }

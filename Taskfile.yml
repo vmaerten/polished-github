@@ -26,7 +26,7 @@ tasks:
     vars:
       TARGET: '{{.TARGET | default "chromium"}}'
     cmds:
-      - pnpm exec web-ext run --source-dir distribution --target {{.TARGET}} --start-url https://github.com/vmaerten/github-power
+      - pnpm exec web-ext run --source-dir distribution --target {{.TARGET}} --start-url https://github.com/vmaerten/supercharged-github
 
   lint:
     desc: Lint and check formatting
@@ -65,7 +65,7 @@ tasks:
       VERSION:
         sh: jq -r .version package.json
     cmds:
-      - pnpm exec web-ext build --source-dir distribution --artifacts-dir web-ext-artifacts --filename github-power-{{.VERSION}}.zip --overwrite-dest
+      - pnpm exec web-ext build --source-dir distribution --artifacts-dir web-ext-artifacts --filename supercharged-github-{{.VERSION}}.zip --overwrite-dest
 
   release:
     desc: 'Release a version from main, e.g. task release VERSION=1.2.0'
