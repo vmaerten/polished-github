@@ -20,6 +20,8 @@
 		"text-field-edit": "^4.1.1"
 	},
 	"devDependencies": {
+		"@fontsource-variable/jetbrains-mono": "^5.3.0",
+		"@fontsource-variable/manrope": "^5.3.0",
 		"@types/chrome": "^0.3.7",
 		"@typescript/native": "npm:typescript@7",
 		"happy-dom": "^21.0.4",

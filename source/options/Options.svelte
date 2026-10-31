@@ -160,6 +160,21 @@
 </main>
 
 <style>
+	/* Bundled: extension pages must not fetch fonts from a third-party host */
+	@font-face {
+		font-family: 'Manrope';
+		font-weight: 200 800;
+		font-display: swap;
+		src: url('fonts/manrope-latin-wght-normal.woff2') format('woff2');
+	}
+
+	@font-face {
+		font-family: 'JetBrains Mono';
+		font-weight: 100 800;
+		font-display: swap;
+		src: url('fonts/jetbrains-mono-latin-wght-normal.woff2') format('woff2');
+	}
+
 	:global(:root) {
 		color-scheme: light dark;
 		--text: #0d1017;
@@ -198,7 +213,7 @@
 		background: var(--canvas);
 		color: var(--text);
 		accent-color: var(--accent-emphasis);
-		font: 14px/1.5 -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+		font: 14px/1.5 Manrope, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
 	}
 
 	:global(a) {
@@ -230,7 +245,7 @@
 	}
 
 	:global(.mono, code) {
-		font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+		font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 	}
 
 	:global(.card) {
