@@ -2,6 +2,8 @@
 
 Browser extension for Chrome and Firefox that makes reviewing pull requests on GitHub faster.
 
+Not affiliated with, endorsed or sponsored by GitHub, Inc. GitHub is a trademark of GitHub, Inc.
+
 ## Features
 
 **In the PR list**, a column on the right of each PR: lines added and removed with a size label, where it stands for you (review requested, re-review, changes requested, approved but changed since) and how long it has been idle. The badges can go in the grey line under the title instead.

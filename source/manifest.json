@@ -3,7 +3,7 @@
 	"manifest_version": 3,
 	"name": "Supercharged GitHub",
 	"version": "0.0.0",
-	"description": "Adds superpowers to GitHub",
+	"description": "Adds superpowers to GitHub. Not affiliated with GitHub, Inc.",
 	"homepage_url": "https://github.com/vmaerten/supercharged-github",
 	"minimum_chrome_version": "120",
 	"icons": {

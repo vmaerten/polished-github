@@ -155,6 +155,8 @@
 			<button type="button" class="link danger" onclick={reset}>Reset to defaults</button>
 		</footer>
 	{/if}
+
+	<p class="small muted">Supercharged GitHub is not affiliated with, endorsed or sponsored by GitHub, Inc.</p>
 </main>
 
 <style>
