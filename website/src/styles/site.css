@@ -801,20 +801,57 @@ a.item:hover .item-name {
 /* Footer */
 .site-footer {
 	border-top: 1px solid var(--line);
-}
-.site-footer .wrap {
-	padding-block: 32px;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	gap: 16px;
+	background: var(--soft);
 	font-size: 14px;
 	color: var(--muted);
 }
-.site-footer nav {
+.footer-main {
+	padding-block: 48px 40px;
 	display: flex;
 	flex-wrap: wrap;
-	gap: 24px;
+	justify-content: space-between;
+	gap: 32px 64px;
+}
+.footer-brand {
+	max-width: 320px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+.footer-links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 32px 80px;
+}
+.footer-links div {
+	display: flex;
+	flex-direction: column;
+}
+.footer-links h2 {
+	margin-bottom: 4px;
+	font-family: var(--font);
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	color: var(--ink);
+}
+.footer-links a {
+	display: inline-flex;
+	align-items: center;
+	min-height: 32px;
+	color: var(--muted);
+	text-decoration: none;
+}
+.footer-links a:hover {
+	color: var(--ink);
+}
+.footer-legal {
+	border-top: 1px solid var(--line);
+}
+.footer-legal p {
+	padding-block: 20px 28px;
+	font-size: 13px;
 }
 
 /* Catalog */
@@ -843,8 +880,13 @@ a.item:hover .item-name {
 	padding: 0 12px;
 	border: 1px solid var(--line);
 	border-radius: 8px;
+	background: var(--paper);
+	color: var(--ink);
 	font: inherit;
 	font-size: 15px;
+}
+.filters input::placeholder {
+	color: var(--muted);
 }
 .chips {
 	display: flex;
