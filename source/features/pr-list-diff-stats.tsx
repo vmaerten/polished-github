@@ -2,8 +2,8 @@ import React from 'dom-chef';
 import * as pageDetect from 'github-url-detection';
 
 import type {Feature} from '../feature-manager.js';
-import {addTitleBadge, forEachListedPullRequest} from '../github-helpers/pr-list.js';
-import {type DiffStatsSettings, getOptions} from '../options-storage.js';
+import {addPullRequestBadge, forEachListedPullRequest} from '../github-helpers/pr-list.js';
+import {type BadgePlacement, type DiffStatsSettings, getOptions} from '../options-storage.js';
 
 type DiffStats = {additions: number; deletions: number; changedFiles: number};
 
@@ -19,22 +19,16 @@ export function getSizeLabel(changedLines: number, thresholds: DiffStatsSettings
 // Kept for the life of the tab: lists are revisited often, and a reload refreshes stale numbers
 const cache = new Map<string, DiffStats>();
 
-function addBadge(title: HTMLElement, stats: DiffStats, settings: DiffStatsSettings): void {
+function addBadge(title: HTMLElement, stats: DiffStats, settings: DiffStatsSettings, placement: BadgePlacement): void {
 	const {additions, deletions, changedFiles} = stats;
 	const files = `${changedFiles} ${changedFiles === 1 ? 'file' : 'files'}`;
-	addTitleBadge(
+	addPullRequestBadge(
 		title,
 		badgeClass,
 		<span
 			className={badgeClass}
 			title={`${files} changed`}
-			style={{
-				marginLeft: '8px',
-				fontFamily: 'var(--fontStack-monospace, monospace)',
-				fontSize: '12px',
-				fontWeight: '600',
-				whiteSpace: 'nowrap',
-			}}
+			style={{fontFamily: 'var(--fontStack-monospace, monospace)', whiteSpace: 'nowrap'}}
 		>
 			<span style={{color: 'var(--fgColor-success, #1a7f37)'}}>+{additions.toLocaleString()}</span>{' '}
 			<span style={{color: 'var(--fgColor-danger, #d1242f)'}}>−{deletions.toLocaleString()}</span>
@@ -42,11 +36,13 @@ function addBadge(title: HTMLElement, stats: DiffStats, settings: DiffStatsSetti
 				<span style={{color: 'var(--fgColor-muted, #59636e)', fontWeight: '400'}}> · {files}</span>
 			)}
 			{settings.showSizeLabel && (
-				<span className="Label" style={{marginLeft: '6px'}}>
+				<span style={{color: 'var(--fgColor-muted, #59636e)', fontWeight: '600'}}>
+					{' '}
 					{getSizeLabel(additions + deletions, settings.sizeThresholds)}
 				</span>
 			)}
 		</span>,
+		placement,
 	);
 }
 
@@ -56,10 +52,10 @@ const prListDiffStats: Feature = {
 	include: [pageDetect.isRepoPRList],
 	requiresToken: true,
 	async init(signal) {
-		const {diffStats} = await getOptions();
+		const {diffStats, prListBadges} = await getOptions();
 		forEachListedPullRequest<DiffStats>(
 			'additions deletions changedFiles',
-			(title, stats) => addBadge(title, stats, diffStats),
+			(title, stats) => addBadge(title, stats, diffStats, prListBadges),
 			{signal, cache},
 		);
 	},

@@ -5,6 +5,8 @@ import prListReviewStatus, {getReviewStatus, type ReviewInfo} from './pr-list-re
 
 vi.mock('../github-helpers/api.js', () => ({v4: vi.fn<typeof v4>()}));
 
+vi.stubGlobal('chrome', {storage: {sync: {get: async (defaults: object) => defaults}}});
+
 const head = 'abc';
 
 function pr(changes: Partial<ReviewInfo>): ReviewInfo {
@@ -23,15 +25,21 @@ const request = {id: 'request'};
 test('derives the viewer review status', () => {
 	expect(getReviewStatus(pr({}))).toBeUndefined();
 	expect(getReviewStatus(pr({viewerLatestReviewRequest: request}))).toBe('requested');
-	expect(getReviewStatus(pr({viewerLatestReview: {state: 'APPROVED', commit: {oid: head}}}))).toBe('approved');
+	expect(getReviewStatus(pr({viewerLatestReview: {state: 'APPROVED', commit: {oid: head}}}))).toBeUndefined();
 	expect(getReviewStatus(pr({viewerLatestReview: {state: 'CHANGES_REQUESTED', commit: {oid: head}}}))).toBe(
 		'changes-requested',
 	);
 	expect(getReviewStatus(pr({viewerLatestReview: {state: 'COMMENTED', commit: {oid: head}}}))).toBeUndefined();
 });
 
-test('asks for a re-review after new commits or a new request', () => {
-	expect(getReviewStatus(pr({viewerLatestReview: {state: 'APPROVED', commit: {oid: 'old'}}}))).toBe('re-review');
+test('asks for a re-review after a new request, or new commits on a non-approving review', () => {
+	expect(getReviewStatus(pr({viewerLatestReview: {state: 'CHANGES_REQUESTED', commit: {oid: 'old'}}}))).toBe(
+		're-review',
+	);
+	// A push after an approval may be a mere rebase: the approval stands
+	expect(getReviewStatus(pr({viewerLatestReview: {state: 'APPROVED', commit: {oid: 'old'}}}))).toBe(
+		'approved-outdated',
+	);
 	expect(
 		getReviewStatus(
 			pr({viewerLatestReviewRequest: request, viewerLatestReview: {state: 'APPROVED', commit: {oid: head}}}),
@@ -53,9 +61,9 @@ test('ignores closed PRs and the viewer’s own', () => {
 	).toBeUndefined();
 });
 
-test('adds one badge per PR, after the diff stats, on every visit', async () => {
+test('adds one badge per PR, fetched again on every visit', async () => {
 	history.pushState({}, '', '/o/r/pulls');
-	document.body.innerHTML = `<ul role="list"><li><div><h3><a href="/o/r/pull/1">PR 1</a></h3><span class="github-power-diff-stats">+1 −1</span></div></li></ul>`;
+	document.body.innerHTML = `<ul role="list"><li><div><h3><a href="/o/r/pull/1">PR 1</a></h3></div></li></ul>`;
 	vi.mocked(v4).mockResolvedValue({repository: {pr1: pr({viewerLatestReviewRequest: request})}});
 
 	await prListReviewStatus.init(new AbortController().signal);
@@ -63,11 +71,6 @@ test('adds one badge per PR, after the diff stats, on every visit', async () => 
 	await prListReviewStatus.init(new AbortController().signal);
 	await new Promise((resolve) => setTimeout(resolve));
 
-	const container = document.querySelector('li > div')!;
-	expect([...container.children].map((child) => child.className)).toEqual([
-		'',
-		'github-power-diff-stats',
-		'Label Label--attention github-power-review-status',
-	]);
+	expect(document.querySelectorAll('.github-power-review-status')).toHaveLength(1);
 	expect(v4).toHaveBeenCalledTimes(2);
 });

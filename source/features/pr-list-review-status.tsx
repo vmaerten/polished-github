@@ -2,7 +2,8 @@ import React from 'dom-chef';
 import * as pageDetect from 'github-url-detection';
 
 import type {Feature} from '../feature-manager.js';
-import {addTitleBadge, forEachListedPullRequest} from '../github-helpers/pr-list.js';
+import {addPullRequestBadge, forEachListedPullRequest} from '../github-helpers/pr-list.js';
+import {type BadgePlacement, getOptions} from '../options-storage.js';
 
 export type ReviewInfo = {
 	state: 'OPEN' | 'CLOSED' | 'MERGED';
@@ -12,17 +13,28 @@ export type ReviewInfo = {
 	viewerLatestReview: {state: string; commit: {oid: string} | null} | null;
 };
 
-export type ReviewStatus = 'requested' | 're-review' | 'approved' | 'changes-requested';
+export type ReviewStatus = 'requested' | 're-review' | 'approved-outdated' | 'changes-requested';
 
 const badgeClass = 'github-power-review-status' as const;
 
-const badges: Record<ReviewStatus, {text: string; label: string; title: string}> = {
-	requested: {text: 'Review requested', label: 'Label--attention', title: 'Your review is requested'},
-	're-review': {text: 'Re-review', label: 'Label--accent', title: 'New commits or a new request since your review'},
-	approved: {text: 'Approved', label: 'Label--success', title: 'You approved the latest commit'},
+const muted = 'var(--fgColor-muted, #59636e)';
+
+const badges: Record<ReviewStatus, {text: string; color: string; dot?: string; title: string}> = {
+	requested: {text: 'Review requested', color: 'var(--fgColor-attention, #9a6700)', title: 'Your review is requested'},
+	're-review': {
+		text: 'Re-review',
+		color: 'var(--fgColor-accent, #0969da)',
+		title: 'Your review was requested again, or commits were pushed since you requested changes',
+	},
+	'approved-outdated': {
+		text: 'Approved · new commits',
+		color: muted,
+		dot: 'var(--fgColor-success, #1a7f37)',
+		title: 'Your approval still stands, but commits were pushed since, maybe only a rebase',
+	},
 	'changes-requested': {
 		text: 'Changes requested',
-		label: 'Label--danger',
+		color: 'var(--fgColor-danger, #d1242f)',
 		title: 'You requested changes on the latest commit',
 	},
 };
@@ -42,42 +54,52 @@ export function getReviewStatus(pr: ReviewInfo): ReviewStatus | undefined {
 		return undefined;
 	}
 
-	if (review.commit?.oid !== pr.headRefOid) {
-		return 're-review';
+	// A push after an approval is often only a rebase: the approval still stands, so it is not a call to action
+	const outdated = review.commit?.oid !== pr.headRefOid;
+	if (review.state === 'APPROVED') {
+		// Nothing to do, and GitHub's own review decision often says it already
+		return outdated ? 'approved-outdated' : undefined;
 	}
 
-	if (review.state === 'APPROVED') {
-		return 'approved';
+	if (outdated) {
+		return 're-review';
 	}
 
 	return review.state === 'CHANGES_REQUESTED' ? 'changes-requested' : undefined;
 }
 
-function addBadge(title: HTMLElement, status: ReviewStatus): void {
-	const {text, label, title: tooltip} = badges[status];
-	addTitleBadge(
+function addBadge(title: HTMLElement, status: ReviewStatus, placement: BadgePlacement): void {
+	const {text, color, dot = color, title: tooltip} = badges[status];
+	addPullRequestBadge(
 		title,
 		badgeClass,
-		<span className={`Label ${label} ${badgeClass}`} title={tooltip} style={{marginLeft: '8px'}}>
+		<span
+			className={badgeClass}
+			title={tooltip}
+			style={{display: 'inline-flex', alignItems: 'center', gap: '5px', color, fontWeight: '600', whiteSpace: 'nowrap'}}
+		>
+			<span style={{width: '7px', height: '7px', borderRadius: '50%', background: dot}} />
 			{text}
 		</span>,
+		placement,
 	);
 }
 
 const prListReviewStatus: Feature = {
 	id: 'pr-list-review-status',
 	description:
-		'Shows where each PR stands for you in the repository pull request list: review requested, re-review, approved or changes requested.',
+		'Shows where each PR stands for you in the repository pull request list: review requested, re-review, changes requested, or approved with commits pushed since.',
 	include: [pageDetect.isRepoPRList],
 	requiresToken: true,
-	init(signal) {
+	async init(signal) {
+		const {prListBadges} = await getOptions();
 		// Fetched again on every visit: a status goes stale as soon as you review or someone pushes
 		forEachListedPullRequest<ReviewInfo>(
 			'state viewerDidAuthor headRefOid viewerLatestReviewRequest {id} viewerLatestReview {state commit {oid}}',
 			(title, pr) => {
 				const status = getReviewStatus(pr);
 				if (status) {
-					addBadge(title, status);
+					addBadge(title, status, prListBadges);
 				}
 			},
 			{signal, cache: new Map()},
