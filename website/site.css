@@ -80,28 +80,6 @@ input:focus-visible {
 	white-space: nowrap;
 }
 
-/* Mockup bar */
-.mockbar {
-	background: var(--ink);
-	color: #d1d9e0;
-	font-size: 13px;
-}
-.mockbar .wrap {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	justify-content: space-between;
-	gap: 4px 16px;
-	min-height: 40px;
-}
-.mockbar a {
-	color: #ffffff;
-	font-weight: 600;
-	display: inline-flex;
-	align-items: center;
-	min-height: 40px;
-}
-
 /* Header */
 .site-header {
 	border-bottom: 1px solid var(--line);
