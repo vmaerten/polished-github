@@ -1,6 +1,32 @@
 # github-power
 
-Browser extension (Chrome & Firefox) that adds superpowers to GitHub. Architecture inspired by [Refined GitHub](https://github.com/refined-github/refined-github).
+Browser extension for Chrome and Firefox that makes reviewing pull requests on GitHub faster.
+
+## Features
+
+**In the PR list**, a column on the right of each PR: lines added and removed with a size label, where it stands for you (review requested, re-review, changes requested, approved but changed since) and how long it has been idle. The badges can go in the grey line under the title instead.
+
+![PR list with diff stats, review status and idle badges](docs/screenshots/pr-list.png)
+
+**In the reviewers picker**, how many reviews each person already has pending, to spread the load.
+
+![Reviewers picker with pending review counts](docs/screenshots/reviewer-load.png)
+
+**Quick comments**: buttons above the comment box post a predefined comment in one click.
+
+![Quick comment buttons above the comment box](docs/screenshots/quick-comments.png)
+
+**Image modal**: images in issues, PRs and READMEs open in a zoomable modal instead of a new tab, and ← → go through the comment's images.
+
+![Image opened in the modal](docs/screenshots/image-modal.png)
+
+Every feature can be turned off, and most have settings, in the options page.
+
+## Install
+
+Download the zip of the [latest release](https://github.com/vmaerten/github-power/releases/latest), unzip it, and load the folder as an unpacked extension (`chrome://extensions`, developer mode) or as a temporary add-on (`about:debugging` in Firefox).
+
+The PR list badges and the reviewer load call the GitHub API: add a [fine-grained token](https://github.com/settings/personal-access-tokens/new) with read access to _Pull requests_ in the options, or a classic token with the `repo` scope. It stays on your device.
 
 ## Development
 
