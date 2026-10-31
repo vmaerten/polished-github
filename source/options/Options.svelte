@@ -197,6 +197,7 @@
 		margin: 0;
 		background: var(--canvas);
 		color: var(--text);
+		accent-color: var(--accent-emphasis);
 		font: 14px/1.5 -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
 	}
 
