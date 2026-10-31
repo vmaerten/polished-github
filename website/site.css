@@ -1,13 +1,14 @@
-/* Site mockup: one deliberate light look, GitHub-adjacent neutrals, Funnel type. */
+/* Supercharged GitHub website in the Boost palette; the drawn GitHub UI keeps GitHub's own colors. */
 :root {
 	--ink: #1f2328;
 	--muted: #59636e;
 	--line: #d1d9e0;
 	--soft: #f6f8fa;
 	--paper: #ffffff;
-	--accent: #0969da;
-	--accent-ink: #0550ae;
-	--accent-soft: #ddf4ff;
+	--accent: #6d5bff;
+	--accent-ink: #5b48f2;
+	--accent-soft: #ece9ff;
+	--gh-blue: #0969da;
 	--add: #1a7f37;
 	--del: #d1242f;
 	--warn: #9a6700;
@@ -17,9 +18,9 @@
 	--token-fg: #7d4e00;
 	--ok-bg: #dafbe1;
 	--ok-fg: #116329;
-	--font: 'Funnel Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
-	--display: 'Funnel Display', 'Funnel Sans', system-ui, sans-serif;
-	--mono: 'Fragment Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+	--font: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+	--display: 'Manrope', system-ui, sans-serif;
+	--mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 	color-scheme: light;
 }
 * {
@@ -99,14 +100,18 @@ input:focus-visible {
 	color: var(--ink);
 	text-decoration: none;
 	font-family: var(--display);
-	font-weight: 700;
+	font-weight: 800;
 	font-size: 18px;
+	letter-spacing: -0.03em;
 }
 .brand-mark {
 	width: 28px;
 	height: 28px;
-	border-radius: 7px;
-	background: var(--accent);
+	display: block;
+}
+.brand-light {
+	font-weight: 400;
+	color: var(--muted);
 }
 .nav-links {
 	display: flex;
@@ -330,7 +335,7 @@ input:focus-visible {
 	flex: none;
 }
 .s-requested {
-	color: var(--accent);
+	color: var(--gh-blue);
 }
 .s-rereview {
 	color: var(--warn);
@@ -537,7 +542,7 @@ input:focus-visible {
 	font-weight: 600;
 }
 .quick span:first-child {
-	border-color: var(--accent);
+	border-color: var(--gh-blue);
 	background: var(--paper);
 	box-shadow: 0 0 0 3px rgba(9, 105, 218, 0.15);
 }
