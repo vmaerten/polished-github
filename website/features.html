@@ -9,6 +9,7 @@
 			href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
 		/>
 		<link rel="stylesheet" href="site.css" />
+		<script src="theme.js"></script>
 	</head>
 	<body>
 		<header class="site-header">
@@ -22,6 +23,59 @@
 					<a href="index.html#install">Install</a>
 				</div>
 				<a class="nav-source" href="https://github.com/vmaerten/supercharged-github">Source on GitHub</a>
+				<div class="theme-switch" role="group" aria-label="Theme">
+					<button
+						type="button"
+						data-theme-choice="auto"
+						aria-pressed="true"
+						aria-label="Match system"
+						title="Match system"
+					>
+						<svg
+							width="16"
+							height="16"
+							viewBox="0 0 16 16"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="1.5"
+							aria-hidden="true"
+						>
+							<rect x="1.75" y="2.75" width="12.5" height="8.5" rx="1.5" />
+							<path d="M5.5 14h5M8 11.25V14" />
+						</svg>
+					</button>
+					<button type="button" data-theme-choice="light" aria-pressed="false" aria-label="Light" title="Light">
+						<svg
+							width="16"
+							height="16"
+							viewBox="0 0 16 16"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							aria-hidden="true"
+						>
+							<circle cx="8" cy="8" r="3" />
+							<path
+								d="M8 1v1.5M8 13.5V15M1 8h1.5M13.5 8H15M3.05 3.05l1.06 1.06M11.89 11.89l1.06 1.06M3.05 12.95l1.06-1.06M11.89 4.11l1.06-1.06"
+							/>
+						</svg>
+					</button>
+					<button type="button" data-theme-choice="dark" aria-pressed="false" aria-label="Dark" title="Dark">
+						<svg
+							width="16"
+							height="16"
+							viewBox="0 0 16 16"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="1.5"
+							stroke-linejoin="round"
+							aria-hidden="true"
+						>
+							<path d="M13.5 9.5A5.75 5.75 0 0 1 6.5 2.5a5.75 5.75 0 1 0 7 7Z" />
+						</svg>
+					</button>
+				</div>
 			</nav>
 		</header>
 

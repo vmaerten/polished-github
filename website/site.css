@@ -1,54 +1,35 @@
 /* Supercharged GitHub website in the Boost palette, light and dark; the drawn GitHub UI keeps GitHub's own colors. */
 :root {
-	--ink: #1f2328;
-	--muted: #59636e;
-	--line: #d1d9e0;
-	--soft: #f6f8fa;
-	--paper: #ffffff;
-	--accent: #6d5bff;
+	--ink: light-dark(#1f2328, #eceef4);
+	--muted: light-dark(#59636e, #8b92a3);
+	--line: light-dark(#d1d9e0, #272c38);
+	--soft: light-dark(#f6f8fa, #161a23);
+	--paper: light-dark(#ffffff, #0d1017);
+	--accent: light-dark(#6d5bff, #b9b0ff);
 	--accent-fill: #6d5bff;
 	--accent-ink: #5b48f2;
-	--accent-soft: #ece9ff;
-	--shadow: rgba(31, 35, 40, 0.12);
-	--gh-blue: #0969da;
-	--add: #1a7f37;
-	--del: #d1242f;
-	--warn: #9a6700;
-	--severe: #bc4c00;
-	--merge: #1f883d;
-	--token-bg: #fff8c5;
-	--token-fg: #7d4e00;
-	--ok-bg: #dafbe1;
-	--ok-fg: #116329;
+	--accent-soft: light-dark(#ece9ff, #231f45);
+	--shadow: light-dark(rgba(31, 35, 40, 0.12), rgba(1, 4, 9, 0.5));
+	--gh-blue: light-dark(#0969da, #4493f8);
+	--add: light-dark(#1a7f37, #3fb950);
+	--del: light-dark(#d1242f, #f85149);
+	--warn: light-dark(#9a6700, #d29922);
+	--severe: light-dark(#bc4c00, #db6d28);
+	--merge: light-dark(#1f883d, #238636);
+	--token-bg: light-dark(#fff8c5, #3b2e05);
+	--token-fg: light-dark(#7d4e00, #e3b341);
+	--ok-bg: light-dark(#dafbe1, #12261e);
+	--ok-fg: light-dark(#116329, #3fb950);
 	--font: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
 	--display: 'Manrope', system-ui, sans-serif;
 	--mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+	color-scheme: light dark;
+}
+:root[data-theme='light'] {
 	color-scheme: light;
 }
-@media (prefers-color-scheme: dark) {
-	:root {
-		--ink: #eceef4;
-		--muted: #8b92a3;
-		--line: #272c38;
-		--soft: #161a23;
-		--paper: #0d1017;
-		--accent: #b9b0ff;
-		--accent-fill: #6d5bff;
-		--accent-ink: #5b48f2;
-		--accent-soft: #231f45;
-		--shadow: rgba(1, 4, 9, 0.5);
-		--gh-blue: #4493f8;
-		--add: #3fb950;
-		--del: #f85149;
-		--warn: #d29922;
-		--severe: #db6d28;
-		--merge: #238636;
-		--token-bg: #3b2e05;
-		--token-fg: #e3b341;
-		--ok-bg: #12261e;
-		--ok-fg: #3fb950;
-		color-scheme: dark;
-	}
+:root[data-theme='dark'] {
+	color-scheme: dark;
 }
 * {
 	box-sizing: border-box;
@@ -165,6 +146,32 @@ input:focus-visible {
 	color: var(--ink);
 	font-size: 14px;
 	font-weight: 600;
+}
+.theme-switch {
+	display: inline-flex;
+	gap: 2px;
+	padding: 2px;
+	border: 1px solid var(--line);
+	border-radius: 10px;
+}
+.theme-switch button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 36px;
+	height: 36px;
+	border: 0;
+	border-radius: 8px;
+	background: transparent;
+	color: var(--muted);
+	cursor: pointer;
+}
+.theme-switch button:hover {
+	color: var(--ink);
+}
+.theme-switch button[aria-pressed='true'] {
+	background: var(--accent-soft);
+	color: var(--accent);
 }
 
 /* Buttons */
