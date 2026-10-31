@@ -15,3 +15,4 @@ All notable changes to this project are documented here. The format follows [Kee
 - Options page with the GitHub token, feature switches and per-feature settings.
 - The PR list badges go in the right column, aligned from row to row, or in the grey line under the title, as set in the options.
 - The extension is named Supercharged GitHub and has its own icon.
+- The options page takes the Supercharged GitHub look: Boost palette, Manrope and JetBrains Mono, and the logo in the header.

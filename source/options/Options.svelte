@@ -58,11 +58,9 @@
 <main>
 	<header>
 		<div class="brand">
-			<div class="logo" aria-hidden="true">
-				<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z" /></svg>
-			</div>
+			<img class="logo" src="icons/icon-128.png" width="40" height="40" alt="">
 			<div>
-				<h1>Supercharged GitHub</h1>
+				<h1>Supercharged <span class="wordmark-light">GitHub</span></h1>
 				<span class="muted small">Version {version} · Options</span>
 			</div>
 		</div>
@@ -404,17 +402,19 @@
 	}
 
 	.logo {
-		width: 40px;
-		height: 40px;
-		border-radius: 10px;
-		background: #1f2328;
-		display: flex;
-		align-items: center;
-		justify-content: center;
+		display: block;
+		flex: none;
 	}
 
 	h1 {
 		font-size: 20px;
+		font-weight: 800;
+		letter-spacing: -0.03em;
+	}
+
+	.wordmark-light {
+		font-weight: 400;
+		color: var(--muted);
 	}
 
 	nav {
