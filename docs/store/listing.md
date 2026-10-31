@@ -69,11 +69,11 @@ Source code and issues: https://github.com/vmaerten/supercharged-github
 | Summary (250 characters max) | Review pull requests faster on GitHub: review status, PR size and idle time in the PR list, reviewer load in the reviewers picker, quick comments and an image modal. Not affiliated with GitHub, Inc. |
 | Categories                   | Web Development                                                                                                                                                                                        |
 | Support site                 | https://github.com/vmaerten/supercharged-github/issues                                                                                                                                                 |
+| License                      | MIT                                                                                                                                                                                                    |
 | Description                  | The long description above. AMO renders a subset of Markdown, so the bullets and capital headings can stay as they are.                                                                                |
 
 **Before submitting.**
 
-- **License.** AMO asks for one and the repository has none yet. Pick it first, it also decides whether the site can say "open source".
 - **Source code.** The package is bundled by tsdown, so AMO asks for the source and the build steps: `pnpm install --frozen-lockfile` then `pnpm exec tsdown`, with Node and pnpm versions from `package.json`.
 - **Data collection.** `manifest.json` declares `data_collection_permissions: none`. Check whether sending the token to api.github.com counts as `authenticationInfo` under Mozilla's current definition, and update the manifest if it does.
 - **Screenshots.** Same set as the Chrome Web Store, 1280 × 800.
