@@ -13,7 +13,7 @@ export type ReviewInfo = {
 	viewerLatestReview: {state: string; commit: {oid: string} | null} | null;
 };
 
-export type ReviewStatus = 'requested' | 're-review' | 'approved' | 'approved-outdated' | 'changes-requested';
+export type ReviewStatus = 'requested' | 're-review' | 'approved-outdated' | 'changes-requested';
 
 const badgeClass = 'github-power-review-status' as const;
 
@@ -26,7 +26,6 @@ const badges: Record<ReviewStatus, {text: string; color: string; dot?: string; t
 		color: 'var(--fgColor-accent, #0969da)',
 		title: 'Your review was requested again, or commits were pushed since you requested changes',
 	},
-	approved: {text: 'Approved', color: 'var(--fgColor-success, #1a7f37)', title: 'You approved the latest commit'},
 	'approved-outdated': {
 		text: 'Approved · new commits',
 		color: muted,
@@ -58,7 +57,8 @@ export function getReviewStatus(pr: ReviewInfo): ReviewStatus | undefined {
 	// A push after an approval is often only a rebase: the approval still stands, so it is not a call to action
 	const outdated = review.commit?.oid !== pr.headRefOid;
 	if (review.state === 'APPROVED') {
-		return outdated ? 'approved-outdated' : 'approved';
+		// Nothing to do, and GitHub's own review decision often says it already
+		return outdated ? 'approved-outdated' : undefined;
 	}
 
 	if (outdated) {
@@ -88,7 +88,7 @@ function addBadge(title: HTMLElement, status: ReviewStatus, placement: BadgePlac
 const prListReviewStatus: Feature = {
 	id: 'pr-list-review-status',
 	description:
-		'Shows where each PR stands for you in the repository pull request list: review requested, re-review, approved or changes requested.',
+		'Shows where each PR stands for you in the repository pull request list: review requested, re-review, changes requested, or approved with commits pushed since.',
 	include: [pageDetect.isRepoPRList],
 	requiresToken: true,
 	async init(signal) {

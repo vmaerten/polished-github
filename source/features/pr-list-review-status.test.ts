@@ -25,7 +25,7 @@ const request = {id: 'request'};
 test('derives the viewer review status', () => {
 	expect(getReviewStatus(pr({}))).toBeUndefined();
 	expect(getReviewStatus(pr({viewerLatestReviewRequest: request}))).toBe('requested');
-	expect(getReviewStatus(pr({viewerLatestReview: {state: 'APPROVED', commit: {oid: head}}}))).toBe('approved');
+	expect(getReviewStatus(pr({viewerLatestReview: {state: 'APPROVED', commit: {oid: head}}}))).toBeUndefined();
 	expect(getReviewStatus(pr({viewerLatestReview: {state: 'CHANGES_REQUESTED', commit: {oid: head}}}))).toBe(
 		'changes-requested',
 	);
