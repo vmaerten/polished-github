@@ -31,7 +31,7 @@
 		"svelte": "^5.57.3",
 		"svelte-check": "^4.7.7",
 		"tsdown": "^0.23.4",
-		"typescript": "~6.0.3",
+		"typescript": "~7.0.0",
 		"vitest": "^5.0.5",
 		"web-ext": "^10.8.0"
 	},
