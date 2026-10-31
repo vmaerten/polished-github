@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+		<title>Interface dans GitHub</title>
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@600;700&family=Funnel+Sans:wght@400;600&display=swap"
+		/>
+		<link rel="stylesheet" href="canvas.css" />
+	</head>
+	<body>
+		<header class="bar">
+			<a href="../index.html" target="_top">← Retour</a>
+			<h1>Interface dans GitHub</h1>
+			<p class="hint">
+				Glisser pour se déplacer · ⌘ ou Ctrl + molette pour zoomer · double-clic pour cadrer une maquette · clic sur un
+				titre pour l'ouvrir en pleine page
+			</p>
+			<div class="zoom">
+				<button type="button" id="zoom-out" aria-label="Dézoomer">−</button>
+				<output id="zoom-value">100 %</output>
+				<button type="button" id="zoom-in" aria-label="Zoomer">+</button>
+				<button type="button" id="zoom-fit">Tout voir</button>
+			</div>
+		</header>
+		<main class="viewport" id="viewport" aria-label="Canevas des maquettes">
+			<div class="world" id="world"></div>
+		</main>
+		<script>
+			window.CANVAS = {
+				boards: [
+					{
+						src: '../mockups/badges/Main.html',
+						title: '1 · Actuel, corrigé : tout après le titre',
+						x: 0,
+						y: 0,
+						w: 1040,
+						h: 520,
+					},
+					{
+						src: '../mockups/badges/Metadata.html',
+						title: '2 · Dans la ligne de métadonnées',
+						x: 1120,
+						y: 0,
+						w: 1040,
+						h: 520,
+					},
+					{
+						src: '../mockups/badges/RightColumn.html',
+						title: '3 · Dans la colonne de droite',
+						x: 0,
+						y: 640,
+						w: 1040,
+						h: 520,
+					},
+					{
+						src: '../mockups/badges/ActionOnly.html',
+						title: '4 · Seulement ce qui demande une action',
+						x: 1120,
+						y: 640,
+						w: 1040,
+						h: 520,
+					},
+					{
+						src: '../mockups/badges/DiffBar.html',
+						title: '5 · Barre de diff et pastilles',
+						x: 0,
+						y: 1280,
+						w: 1040,
+						h: 520,
+					},
+					{src: '../mockups/reviewers/Main.html', title: '1 · Compteur à droite', x: 0, y: 2320, w: 360, h: 440},
+					{src: '../mockups/reviewers/UnderName.html', title: '2 · Ligne sous le nom', x: 440, y: 2320, w: 360, h: 440},
+					{src: '../mockups/reviewers/Meter.html', title: '3 · Jauge de charge', x: 880, y: 2320, w: 360, h: 440},
+				],
+				notes: [
+					{x: 0, y: -300, text: 'Badges dans la liste des PR : 5 variantes'},
+					{x: 0, y: 2020, text: 'Charge des reviewers : 3 variantes'},
+				],
+			};
+		</script>
+		<script src="canvas.js"></script>
+	</body>
+</html>

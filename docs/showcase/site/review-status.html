@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+		<title>Review status · GitHub Power</title>
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@500;600;700&family=Funnel+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fragment+Mono&display=swap"
+		/>
+		<link rel="stylesheet" href="site.css" />
+	</head>
+	<body>
+		<div class="mockbar">
+			<div class="wrap">
+				<span>Website mockup · feature page template</span><a href="../index.html">← Back to the kit</a>
+			</div>
+		</div>
+
+		<header class="site-header">
+			<nav class="wrap nav" aria-label="Main">
+				<a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span>GitHub Power</a>
+				<div class="nav-links">
+					<a href="features.html">All features</a>
+					<a href="index.html#install">Install</a>
+				</div>
+				<a class="nav-source" href="https://github.com/vmaerten/github-power">Source on GitHub</a>
+			</nav>
+		</header>
+
+		<div class="wrap doc">
+			<nav class="sidebar" aria-label="Features">
+				<div>
+					<span class="side-group">Triage</span>
+					<a href="review-status.html" aria-current="page">Review status</a>
+					<span class="side-item">Diff stats</span>
+					<span class="side-item">Idle PRs</span>
+					<span class="side-item">Reviewer load</span>
+				</div>
+				<div>
+					<span class="side-group">Reviewing code</span>
+					<span class="side-item">Collapse generated files <small>Soon</small></span>
+					<span class="side-item">Folder diff stats <small>Soon</small></span>
+					<span class="side-item">Weighted review progress <small>Soon</small></span>
+				</div>
+				<div>
+					<span class="side-group">Discussing</span>
+					<span class="side-item">Quick comments</span>
+					<span class="side-item">Conventional Comments <small>Soon</small></span>
+					<span class="side-item">Unresolved conversations <small>Soon</small></span>
+				</div>
+				<div>
+					<span class="side-group">Reading</span>
+					<span class="side-item">Ticket links <small>Soon</small></span>
+					<span class="side-item">Image modal</span>
+					<span class="side-item">Before/after slider <small>Soon</small></span>
+				</div>
+			</nav>
+
+			<main class="doc-main">
+				<div class="doc-head">
+					<p class="crumbs"><a href="features.html">Features</a> / Triage</p>
+					<h1>Review status</h1>
+					<p class="lede">
+						Where each pull request stands for you, on every row of the PR list. You stop opening PRs just to find out
+						whether you already reviewed them.
+					</p>
+					<div class="tags" style="font-size: 13px">
+						<span class="tag">Appears in: PR list</span>
+						<span class="tag tag-token">Needs token</span>
+						<span class="tag tag-on">On by default</span>
+					</div>
+				</div>
+
+				<figure class="prlist" style="margin: 0; box-shadow: none" aria-label="PR rows with a review status badge">
+					<div class="pr-row" style="border-top: 0">
+						<div class="pr-main">
+							<span class="pr-title">feat: OpenTelemetry tracing for task execution</span
+							><span class="pr-meta">#3077 opened last week by caseycs</span>
+						</div>
+						<span class="status s-requested" style="width: 190px; font-size: 13px"
+							><span class="dot" aria-hidden="true"></span>Review requested</span
+						>
+					</div>
+					<div class="pr-row">
+						<div class="pr-main">
+							<span class="pr-title">fix: preserve dotenv declaration order</span
+							><span class="pr-meta">#3078 opened last week by satya-sudo</span>
+						</div>
+						<span class="status s-rereview" style="width: 190px; font-size: 13px"
+							><span class="dot" aria-hidden="true"></span>Re-review</span
+						>
+					</div>
+					<div class="pr-row">
+						<div class="pr-main">
+							<span class="pr-title">feat(input): add search and scrolling to choice prompts</span
+							><span class="pr-meta">#3071 opened 2 weeks ago by vmaerten</span>
+						</div>
+						<span class="status s-changes" style="width: 190px; font-size: 13px"
+							><span class="dot" aria-hidden="true"></span>Changes requested</span
+						>
+					</div>
+					<div class="pr-row">
+						<div class="pr-main">
+							<span class="pr-title">refactor(watch): detect filesystem changes with fsbroker</span
+							><span class="pr-meta">#3064 opened last month by andreynering</span>
+						</div>
+						<span class="status s-outdated" style="width: 190px; font-size: 13px"
+							><span class="dot" aria-hidden="true"></span>Approved · new commits</span
+						>
+					</div>
+				</figure>
+
+				<section class="doc-section">
+					<h2>What each status means</h2>
+					<dl class="meanings">
+						<dt class="s-requested">Review requested</dt>
+						<dd>You are asked and have not reviewed yet.</dd>
+						<dt class="s-rereview">Re-review</dt>
+						<dd>You reviewed, then the author pushed or asked you again.</dd>
+						<dt class="s-changes">Changes requested</dt>
+						<dd>You asked for changes and nothing has moved since.</dd>
+						<dt class="s-outdated">Approved · new commits</dt>
+						<dd>You approved, and commits landed after your approval.</dd>
+					</dl>
+					<p class="muted" style="font-size: 15px">A plain approval gets no badge: GitHub already shows it.</p>
+				</section>
+
+				<section class="doc-section">
+					<h2>Settings</h2>
+					<div class="panel settings">
+						<div>
+							<span style="font-weight: 600">Badge placement</span
+							><span>Right column (default) or the grey line under the title. Shared by all PR list badges.</span>
+						</div>
+						<div><span style="font-weight: 600">Turn off</span><span>Options › Features › Review status</span></div>
+					</div>
+				</section>
+
+				<section class="doc-section">
+					<h2>Good to know</h2>
+					<ul>
+						<li>Statuses are fetched again on every visit, so they are never stale.</li>
+						<li>A review you started but did not submit counts as no review.</li>
+						<li>Needs a token with read access to <i>Pull requests</i>.</li>
+					</ul>
+				</section>
+
+				<nav class="pager" aria-label="Next and previous feature">
+					<a class="panel" href="features.html"><small>Back to</small>All features</a>
+					<a class="panel" href="index.html#demo"><small>See it live</small>Demo on the home page</a>
+				</nav>
+			</main>
+		</div>
+
+		<footer class="site-footer">
+			<div class="wrap">
+				<span>GitHub Power · Not affiliated with GitHub</span>
+				<nav aria-label="Footer">
+					<a href="https://github.com/vmaerten/github-power/blob/main/CHANGELOG.md">Changelog</a>
+					<a href="https://github.com/vmaerten/github-power">Source</a>
+				</nav>
+			</div>
+		</footer>
+	</body>
+</html>

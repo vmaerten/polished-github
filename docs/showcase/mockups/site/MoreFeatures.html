@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Landing with highlights and the rest</title>
+		<style>
+			body {
+				margin: 0;
+				background: #ffffff;
+			}
+			a {
+				color: #0969da;
+			}
+			a:hover {
+				color: #0550ae;
+			}
+		</style>
+	</head>
+	<body>
+		<div
+			style="
+				width: 100%;
+				background: #ffffff;
+				color: #1f2328;
+				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+				font-size: 16px;
+				line-height: 1.5;
+			"
+		>
+			<header style="border-bottom: 1px solid #d1d9e0">
+				<nav
+					aria-label="Main"
+					style="
+						max-width: 1120px;
+						margin: 0 auto;
+						padding: 16px 24px;
+						display: flex;
+						flex-wrap: wrap;
+						align-items: center;
+						gap: 16px 32px;
+					"
+				>
+					<a
+						href="#top"
+						style="
+							display: inline-flex;
+							align-items: center;
+							gap: 10px;
+							color: #1f2328;
+							text-decoration: none;
+							font-weight: 700;
+							font-size: 18px;
+						"
+					>
+						<span aria-hidden="true" style="width: 28px; height: 28px; border-radius: 7px; background: #0969da"></span>
+						GitHub Power
+					</a>
+					<div style="display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 14px; flex: 1 1 auto">
+						<a href="FeatureCatalog.html" style="color: #59636e; text-decoration: none">All features</a>
+						<a href="#install" style="color: #59636e; text-decoration: none">Install</a>
+						<a href="#privacy" style="color: #59636e; text-decoration: none">Privacy</a>
+					</div>
+					<a
+						href="https://github.com/vmaerten/github-power"
+						style="font-size: 14px; color: #1f2328; text-decoration: none; font-weight: 600"
+						>Source on GitHub</a
+					>
+				</nav>
+			</header>
+
+			<section
+				id="top"
+				style="
+					max-width: 1120px;
+					margin: 0 auto;
+					padding: 72px 24px 48px;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					text-align: center;
+					gap: 16px;
+				"
+			>
+				<h1 style="margin: 0; max-width: 760px; font-size: 52px; line-height: 1.08; letter-spacing: -0.02em">
+					Review pull requests faster, right on GitHub.
+				</h1>
+				<p style="margin: 0; max-width: 600px; font-size: 19px; color: #59636e">
+					13 small additions to the pages you review on. Here are the three people install it for.
+				</p>
+			</section>
+
+			<section aria-labelledby="highlights" style="max-width: 1120px; margin: 0 auto; padding: 0 24px 88px">
+				<h2 id="highlights" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">
+					Highlights
+				</h2>
+				<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px">
+					<article
+						style="
+							border: 1px solid #d1d9e0;
+							border-radius: 12px;
+							overflow: hidden;
+							display: flex;
+							flex-direction: column;
+						"
+					>
+						<div
+							aria-hidden="true"
+							style="
+								height: 180px;
+								background: #f6f8fa;
+								border-bottom: 1px solid #d1d9e0;
+								padding: 20px;
+								box-sizing: border-box;
+								display: flex;
+								flex-direction: column;
+								justify-content: center;
+								gap: 10px;
+								font-size: 12px;
+							"
+						>
+							<div
+								style="
+									display: flex;
+									justify-content: space-between;
+									gap: 8px;
+									padding: 8px 10px;
+									background: #ffffff;
+									border: 1px solid #d1d9e0;
+									border-radius: 6px;
+								"
+							>
+								<span style="font-weight: 600; color: #0969da">● Review requested</span
+								><span style="font-family: ui-monospace, Menlo, monospace"
+									><span style="color: #1a7f37">+643</span> <span style="color: #d1242f">−28</span>
+									<b style="color: #59636e">L</b></span
+								>
+							</div>
+							<div
+								style="
+									display: flex;
+									justify-content: space-between;
+									gap: 8px;
+									padding: 8px 10px;
+									background: #ffffff;
+									border: 1px solid #d1d9e0;
+									border-radius: 6px;
+								"
+							>
+								<span style="font-weight: 600; color: #9a6700">● Re-review</span
+								><span style="color: #bc4c00; font-weight: 600">7d</span>
+							</div>
+							<div
+								style="
+									display: flex;
+									justify-content: space-between;
+									gap: 8px;
+									padding: 8px 10px;
+									background: #ffffff;
+									border: 1px solid #d1d9e0;
+									border-radius: 6px;
+								"
+							>
+								<span style="font-weight: 600; color: #d1242f">● Changes requested</span
+								><span style="font-family: ui-monospace, Menlo, monospace"
+									><span style="color: #1a7f37">+3</span> <span style="color: #d1242f">−3</span>
+									<b style="color: #59636e">XS</b></span
+								>
+							</div>
+						</div>
+						<div style="padding: 20px; display: flex; flex-direction: column; gap: 6px; flex: 1">
+							<h3 style="margin: 0; font-size: 19px">A PR list that answers back</h3>
+							<p style="margin: 0; color: #59636e">Your review status, the size and the idle days on every row.</p>
+							<a
+								href="FeatureDetail.html"
+								style="margin-top: auto; padding-top: 8px; font-size: 14px; font-weight: 600; text-decoration: none"
+								>Review status, diff stats, idle PRs →</a
+							>
+						</div>
+					</article>
+
+					<article
+						style="
+							border: 1px solid #d1d9e0;
+							border-radius: 12px;
+							overflow: hidden;
+							display: flex;
+							flex-direction: column;
+						"
+					>
+						<div
+							aria-hidden="true"
+							style="
+								height: 180px;
+								background: #f6f8fa;
+								border-bottom: 1px solid #d1d9e0;
+								padding: 20px 40px;
+								box-sizing: border-box;
+								display: flex;
+								flex-direction: column;
+								justify-content: center;
+								gap: 0;
+								font-size: 13px;
+							"
+						>
+							<div
+								style="
+									display: flex;
+									align-items: center;
+									gap: 8px;
+									padding: 8px 10px;
+									background: #ffffff;
+									border: 1px solid #d1d9e0;
+									border-radius: 6px 6px 0 0;
+								"
+							>
+								<span style="width: 16px; height: 16px; border-radius: 50%; background: #a5d6ff"></span
+								><b style="flex: 1">andreynering</b
+								><span
+									style="
+										padding: 0 7px;
+										border-radius: 999px;
+										background: rgba(188, 76, 0, 0.12);
+										color: #bc4c00;
+										font-weight: 600;
+									"
+									>8</span
+								>
+							</div>
+							<div
+								style="
+									display: flex;
+									align-items: center;
+									gap: 8px;
+									padding: 8px 10px;
+									background: #ffffff;
+									border: 1px solid #d1d9e0;
+									border-top: 0;
+								"
+							>
+								<span style="width: 16px; height: 16px; border-radius: 50%; background: #d2a8ff"></span
+								><b style="flex: 1">pd93</b
+								><span
+									style="
+										padding: 0 7px;
+										border-radius: 999px;
+										background: rgba(154, 103, 0, 0.12);
+										color: #9a6700;
+										font-weight: 600;
+									"
+									>5</span
+								>
+							</div>
+							<div
+								style="
+									display: flex;
+									align-items: center;
+									gap: 8px;
+									padding: 8px 10px;
+									background: #ffffff;
+									border: 1px solid #d1d9e0;
+									border-top: 0;
+									border-radius: 0 0 6px 6px;
+								"
+							>
+								<span style="width: 16px; height: 16px; border-radius: 50%; background: #ffa198"></span
+								><b style="flex: 1">vmaerten</b
+								><span
+									style="
+										padding: 0 7px;
+										border-radius: 999px;
+										background: rgba(89, 99, 110, 0.12);
+										color: #59636e;
+										font-weight: 600;
+									"
+									>2</span
+								>
+							</div>
+						</div>
+						<div style="padding: 20px; display: flex; flex-direction: column; gap: 6px; flex: 1">
+							<h3 style="margin: 0; font-size: 19px">Reviews spread fairly</h3>
+							<p style="margin: 0; color: #59636e">
+								How many reviews each person already has waiting, where you pick them.
+							</p>
+							<a
+								href="FeatureDetail.html"
+								style="margin-top: auto; padding-top: 8px; font-size: 14px; font-weight: 600; text-decoration: none"
+								>Reviewer load →</a
+							>
+						</div>
+					</article>
+
+					<article
+						style="
+							border: 1px solid #d1d9e0;
+							border-radius: 12px;
+							overflow: hidden;
+							display: flex;
+							flex-direction: column;
+						"
+					>
+						<div
+							aria-hidden="true"
+							style="
+								height: 180px;
+								background: #f6f8fa;
+								border-bottom: 1px solid #d1d9e0;
+								padding: 20px;
+								box-sizing: border-box;
+								display: flex;
+								flex-direction: column;
+								justify-content: center;
+								gap: 10px;
+								font-size: 13px;
+							"
+						>
+							<div style="display: flex; gap: 6px">
+								<span
+									style="
+										padding: 3px 10px;
+										border-radius: 6px;
+										border: 1px solid #0969da;
+										background: #ffffff;
+										font-weight: 600;
+									"
+									>LGTM</span
+								><span
+									style="
+										padding: 3px 10px;
+										border-radius: 6px;
+										border: 1px solid #d1d9e0;
+										background: #ffffff;
+										font-weight: 600;
+									"
+									>Rebase</span
+								><span
+									style="
+										padding: 3px 10px;
+										border-radius: 6px;
+										border: 1px solid #d1d9e0;
+										background: #ffffff;
+										font-weight: 600;
+									"
+									>Thanks</span
+								>
+							</div>
+							<div
+								style="
+									height: 64px;
+									padding: 10px;
+									background: #ffffff;
+									border: 1px solid #d1d9e0;
+									border-radius: 6px;
+									color: #1f2328;
+								"
+							>
+								LGTM :rocket:
+							</div>
+						</div>
+						<div style="padding: 20px; display: flex; flex-direction: column; gap: 6px; flex: 1">
+							<h3 style="margin: 0; font-size: 19px">Replies in one click</h3>
+							<p style="margin: 0; color: #59636e">Your usual comments as buttons above the comment box.</p>
+							<a
+								href="FeatureDetail.html"
+								style="margin-top: auto; padding-top: 8px; font-size: 14px; font-weight: 600; text-decoration: none"
+								>Quick comments →</a
+							>
+						</div>
+					</article>
+				</div>
+			</section>
+
+			<section
+				aria-labelledby="more"
+				style="background: #f6f8fa; border-top: 1px solid #d1d9e0; border-bottom: 1px solid #d1d9e0"
+			>
+				<div
+					style="
+						max-width: 1120px;
+						margin: 0 auto;
+						padding: 88px 24px;
+						display: flex;
+						flex-direction: column;
+						gap: 40px;
+					"
+				>
+					<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px">
+						<div style="display: flex; flex-direction: column; gap: 8px">
+							<h2 id="more" style="margin: 0; font-size: 32px">And everything else</h2>
+							<p style="margin: 0; color: #59636e">Grouped by what you are doing. Each one can be turned off.</p>
+						</div>
+						<a
+							href="FeatureCatalog.html"
+							style="
+								display: inline-flex;
+								align-items: center;
+								min-height: 44px;
+								padding: 0 18px;
+								border-radius: 8px;
+								border: 1px solid #d1d9e0;
+								background: #ffffff;
+								color: #1f2328;
+								font-weight: 600;
+								text-decoration: none;
+							"
+							>See all 13 features</a
+						>
+					</div>
+					<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 32px 40px">
+						<div style="display: flex; flex-direction: column; gap: 4px">
+							<h3
+								style="
+									margin: 0 0 8px;
+									font-size: 13px;
+									font-weight: 600;
+									color: #59636e;
+									text-transform: uppercase;
+									letter-spacing: 0.04em;
+								"
+							>
+								Reviewing code
+							</h3>
+
+							<a
+								href="FeatureDetail.html"
+								style="
+									display: flex;
+									flex-direction: column;
+									gap: 2px;
+									padding: 10px 0;
+									border-top: 1px solid #d1d9e0;
+									color: #1f2328;
+									text-decoration: none;
+								"
+							>
+								<span style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600"
+									>Collapse generated files<span
+										style="
+											padding: 0 6px;
+											border-radius: 999px;
+											border: 1px solid #d1d9e0;
+											font-size: 11px;
+											font-weight: 600;
+											color: #59636e;
+										"
+										>Soon</span
+									></span
+								>
+								<span style="font-size: 14px; color: #59636e">Lockfiles and generated code start collapsed.</span>
+							</a>
+
+							<a
+								href="FeatureDetail.html"
+								style="
+									display: flex;
+									flex-direction: column;
+									gap: 2px;
+									padding: 10px 0;
+									border-top: 1px solid #d1d9e0;
+									color: #1f2328;
+									text-decoration: none;
+								"
+							>
+								<span style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600"
+									>Folder diff stats<span
+										style="
+											padding: 0 6px;
+											border-radius: 999px;
+											border: 1px solid #d1d9e0;
+											font-size: 11px;
+											font-weight: 600;
+											color: #59636e;
+										"
+										>Soon</span
+									></span
+								>
+								<span style="font-size: 14px; color: #59636e">Lines changed per folder in the file tree.</span>
+							</a>
+
+							<a
+								href="FeatureDetail.html"
+								style="
+									display: flex;
+									flex-direction: column;
+									gap: 2px;
+									padding: 10px 0;
+									border-top: 1px solid #d1d9e0;
+									color: #1f2328;
+									text-decoration: none;
+								"
+							>
+								<span style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600"
+									>Weighted review progress<span
+										style="
+											padding: 0 6px;
+											border-radius: 999px;
+											border: 1px solid #d1d9e0;
+											font-size: 11px;
+											font-weight: 600;
+											color: #59636e;
+										"
+										>Soon</span
+									></span
+								>
+								<span style="font-size: 14px; color: #59636e">Progress by lines viewed, not by files.</span>
+							</a>
+						</div>
+
+						<div style="display: flex; flex-direction: column; gap: 4px">
+							<h3
+								style="
+									margin: 0 0 8px;
+									font-size: 13px;
+									font-weight: 600;
+									color: #59636e;
+									text-transform: uppercase;
+									letter-spacing: 0.04em;
+								"
+							>
+								Discussing
+							</h3>
+
+							<a
+								href="FeatureDetail.html"
+								style="
+									display: flex;
+									flex-direction: column;
+									gap: 2px;
+									padding: 10px 0;
+									border-top: 1px solid #d1d9e0;
+									color: #1f2328;
+									text-decoration: none;
+								"
+							>
+								<span style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600"
+									>Conventional Comments<span
+										style="
+											padding: 0 6px;
+											border-radius: 999px;
+											border: 1px solid #d1d9e0;
+											font-size: 11px;
+											font-weight: 600;
+											color: #59636e;
+										"
+										>Soon</span
+									></span
+								>
+								<span style="font-size: 14px; color: #59636e">Label a comment as praise, nit, issue or question.</span>
+							</a>
+
+							<a
+								href="FeatureDetail.html"
+								style="
+									display: flex;
+									flex-direction: column;
+									gap: 2px;
+									padding: 10px 0;
+									border-top: 1px solid #d1d9e0;
+									color: #1f2328;
+									text-decoration: none;
+								"
+							>
+								<span style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600"
+									>Unresolved conversations<span
+										style="
+											padding: 0 6px;
+											border-radius: 999px;
+											border: 1px solid #d1d9e0;
+											font-size: 11px;
+											font-weight: 600;
+											color: #59636e;
+										"
+										>Soon</span
+									></span
+								>
+								<span style="font-size: 14px; color: #59636e">Count the open threads and jump between them.</span>
+							</a>
+
+							<a
+								href="FeatureDetail.html"
+								style="
+									display: flex;
+									flex-direction: column;
+									gap: 2px;
+									padding: 10px 0;
+									border-top: 1px solid #d1d9e0;
+									color: #1f2328;
+									text-decoration: none;
+								"
+							>
+								<span style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600"
+									>Ticket links<span
+										style="
+											padding: 0 6px;
+											border-radius: 999px;
+											border: 1px solid #d1d9e0;
+											font-size: 11px;
+											font-weight: 600;
+											color: #59636e;
+										"
+										>Soon</span
+									></span
+								>
+								<span style="font-size: 14px; color: #59636e">Ticket ids like ABC-123 link to your tracker.</span>
+							</a>
+						</div>
+
+						<div style="display: flex; flex-direction: column; gap: 4px">
+							<h3
+								style="
+									margin: 0 0 8px;
+									font-size: 13px;
+									font-weight: 600;
+									color: #59636e;
+									text-transform: uppercase;
+									letter-spacing: 0.04em;
+								"
+							>
+								Reading
+							</h3>
+
+							<a
+								href="FeatureDetail.html"
+								style="
+									display: flex;
+									flex-direction: column;
+									gap: 2px;
+									padding: 10px 0;
+									border-top: 1px solid #d1d9e0;
+									color: #1f2328;
+									text-decoration: none;
+								"
+							>
+								<span style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600">Image modal</span>
+								<span style="font-size: 14px; color: #59636e">Zoom images in place, arrow keys between them.</span>
+							</a>
+
+							<a
+								href="FeatureDetail.html"
+								style="
+									display: flex;
+									flex-direction: column;
+									gap: 2px;
+									padding: 10px 0;
+									border-top: 1px solid #d1d9e0;
+									color: #1f2328;
+									text-decoration: none;
+								"
+							>
+								<span style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600"
+									>Before/after slider<span
+										style="
+											padding: 0 6px;
+											border-radius: 999px;
+											border: 1px solid #d1d9e0;
+											font-size: 11px;
+											font-weight: 600;
+											color: #59636e;
+										"
+										>Soon</span
+									></span
+								>
+								<span style="font-size: 14px; color: #59636e"
+									>Two images labelled Before and After become a slider.</span
+								>
+							</a>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section
+				id="install"
+				style="
+					max-width: 1120px;
+					margin: 0 auto;
+					padding: 72px 24px;
+					display: flex;
+					flex-wrap: wrap;
+					align-items: center;
+					justify-content: space-between;
+					gap: 24px;
+				"
+			>
+				<div style="display: flex; flex-direction: column; gap: 6px">
+					<h2 style="margin: 0; font-size: 28px">Ready in two minutes</h2>
+					<p id="privacy" style="margin: 0; color: #59636e">
+						Install, add a read-only token in the options. It stays in your browser.
+					</p>
+				</div>
+				<div style="display: flex; flex-wrap: wrap; gap: 12px">
+					<a
+						href="#install"
+						style="
+							display: inline-flex;
+							align-items: center;
+							min-height: 44px;
+							padding: 0 20px;
+							border-radius: 8px;
+							background: #0969da;
+							color: #ffffff;
+							font-weight: 600;
+							text-decoration: none;
+						"
+						>Add to Chrome</a
+					>
+					<a
+						href="#install"
+						style="
+							display: inline-flex;
+							align-items: center;
+							min-height: 44px;
+							padding: 0 20px;
+							border-radius: 8px;
+							border: 1px solid #d1d9e0;
+							color: #1f2328;
+							font-weight: 600;
+							text-decoration: none;
+						"
+						>Add to Firefox</a
+					>
+				</div>
+			</section>
+
+			<footer style="border-top: 1px solid #d1d9e0">
+				<div
+					style="
+						max-width: 1120px;
+						margin: 0 auto;
+						padding: 28px 24px;
+						display: flex;
+						flex-wrap: wrap;
+						justify-content: space-between;
+						gap: 16px;
+						font-size: 14px;
+						color: #59636e;
+					"
+				>
+					<span>GitHub Power · Not affiliated with GitHub</span>
+					<div style="display: flex; flex-wrap: wrap; gap: 24px">
+						<a href="FeatureCatalog.html">All features</a>
+						<a href="https://github.com/vmaerten/github-power/blob/main/CHANGELOG.md">Changelog</a>
+						<a href="https://github.com/vmaerten/github-power">Source</a>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</body>
+</html>

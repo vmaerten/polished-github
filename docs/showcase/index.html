@@ -1,0 +1,881 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+		<title>Kit github-power</title>
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@500;600;700&family=Funnel+Sans:wght@400;500;600;700&family=Fragment+Mono&display=swap"
+		/>
+		<style>
+			/* Layout: one index column; identity rounds as logo strips, then site and extension UI mockups as link grids, then decisions. */
+			:root {
+				--bg: #f7f8fa;
+				--surface: #ffffff;
+				--ink: #1a1e24;
+				--muted: #5a6270;
+				--line: #d9dde3;
+				--accent: #0b5fcf;
+				--ok: #1a7f37;
+				--todo: #9a5b00;
+				--display: 'Funnel Display', 'Funnel Sans', system-ui, sans-serif;
+				--body: 'Funnel Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+				--mono: 'Fragment Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+			}
+			@media (prefers-color-scheme: dark) {
+				:root:not([data-theme='light']) {
+					--bg: #0f1216;
+					--surface: #171b21;
+					--ink: #e8ebf0;
+					--muted: #9aa2af;
+					--line: #2a303a;
+					--accent: #6aa8ff;
+					--ok: #57c77e;
+					--todo: #e2a64a;
+					color-scheme: dark;
+				}
+			}
+			:root[data-theme='dark'] {
+				--bg: #0f1216;
+				--surface: #171b21;
+				--ink: #e8ebf0;
+				--muted: #9aa2af;
+				--line: #2a303a;
+				--accent: #6aa8ff;
+				--ok: #57c77e;
+				--todo: #e2a64a;
+				color-scheme: dark;
+			}
+			body {
+				margin: 0;
+				background: var(--bg);
+				color: var(--ink);
+				font-family: var(--body);
+				font-size: 16px;
+				line-height: 1.55;
+			}
+			.wrap {
+				max-width: 1040px;
+				margin: 0 auto;
+				padding-left: max(16px, env(safe-area-inset-left, 0px));
+				padding-right: max(16px, env(safe-area-inset-right, 0px));
+			}
+			h1,
+			h2,
+			h3 {
+				margin: 0;
+				font-family: var(--display);
+				text-wrap: balance;
+			}
+			p {
+				margin: 0;
+				text-wrap: pretty;
+			}
+			a {
+				color: var(--accent);
+			}
+			a:focus-visible {
+				outline: 2px solid var(--accent);
+				outline-offset: 3px;
+				border-radius: 4px;
+			}
+			.label {
+				font-family: var(--mono);
+				font-size: 12px;
+				letter-spacing: 0.06em;
+				text-transform: uppercase;
+				color: var(--muted);
+			}
+			header.wrap {
+				padding-block: 56px 32px;
+				display: flex;
+				flex-direction: column;
+				gap: 12px;
+			}
+			header h1 {
+				font-size: clamp(34px, 5.5vw, 52px);
+				line-height: 1.05;
+				letter-spacing: -0.02em;
+			}
+			header p {
+				max-width: 62ch;
+				color: var(--muted);
+				font-size: 18px;
+			}
+			.toc {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0 20px;
+				font-size: 15px;
+			}
+			.toc a {
+				display: inline-flex;
+				align-items: center;
+				min-height: 44px;
+				font-weight: 600;
+				text-decoration: none;
+			}
+			section.wrap {
+				padding-block: 40px;
+				display: flex;
+				flex-direction: column;
+				gap: 24px;
+				border-top: 1px solid var(--line);
+			}
+			.section-head {
+				display: flex;
+				flex-direction: column;
+				gap: 6px;
+			}
+			.section-head h2 {
+				font-size: 30px;
+				letter-spacing: -0.01em;
+			}
+			.section-head p {
+				color: var(--muted);
+				max-width: 64ch;
+			}
+			.round {
+				display: flex;
+				flex-direction: column;
+				gap: 12px;
+			}
+			.round-head {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: baseline;
+				justify-content: space-between;
+				gap: 4px 16px;
+			}
+			.round-head h3 {
+				font-size: 20px;
+			}
+			.round-head p {
+				color: var(--muted);
+				font-size: 15px;
+				flex: 1 1 100%;
+			}
+			.open {
+				display: inline-flex;
+				align-items: center;
+				min-height: 44px;
+				font-weight: 600;
+				text-decoration: none;
+			}
+			.open:hover {
+				text-decoration: underline;
+			}
+			.logos {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(min(150px, 100%), 1fr));
+				gap: 12px;
+			}
+			.logo {
+				display: flex;
+				flex-direction: column;
+				gap: 10px;
+				padding: 16px;
+				background: var(--surface);
+				border: 1px solid var(--line);
+				border-radius: 10px;
+				color: var(--ink);
+				text-decoration: none;
+			}
+			.logo:hover,
+			.card:hover {
+				border-color: var(--accent);
+			}
+			.logo svg {
+				width: 48px;
+				height: 48px;
+			}
+			.logo b {
+				font-family: var(--display);
+				font-weight: 600;
+				font-size: 16px;
+				line-height: 1.2;
+			}
+			.logo span {
+				font-size: 13px;
+				color: var(--muted);
+			}
+			.dropped {
+				opacity: 0.72;
+			}
+			.cards {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(min(230px, 100%), 1fr));
+				gap: 12px;
+			}
+			.card {
+				display: flex;
+				flex-direction: column;
+				gap: 6px;
+				padding: 16px;
+				background: var(--surface);
+				border: 1px solid var(--line);
+				border-radius: 10px;
+				color: var(--ink);
+				text-decoration: none;
+			}
+			.card .id {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 8px;
+				font-family: var(--mono);
+				font-size: 13px;
+				color: var(--muted);
+			}
+			.card b {
+				font-family: var(--display);
+				font-weight: 600;
+				font-size: 17px;
+				line-height: 1.25;
+			}
+			.card p {
+				color: var(--muted);
+				font-size: 14px;
+			}
+			.pick {
+				font-family: var(--body);
+				font-size: 12px;
+				font-weight: 600;
+				color: var(--ok);
+				border: 1px solid currentColor;
+				border-radius: 999px;
+				padding: 0 8px;
+			}
+			.featured {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+				gap: 12px;
+			}
+			.featured .card {
+				border-color: var(--accent);
+				padding: 20px;
+			}
+			.featured .card b {
+				font-size: 20px;
+			}
+			.split {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr));
+				gap: 32px 48px;
+			}
+			.split h2 {
+				font-size: 24px;
+			}
+			.list {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+				display: flex;
+				flex-direction: column;
+			}
+			.list li {
+				display: grid;
+				grid-template-columns: 18px 1fr;
+				gap: 10px;
+				padding-block: 12px;
+				border-top: 1px solid var(--line);
+			}
+			.list li:last-child {
+				border-bottom: 1px solid var(--line);
+			}
+			.list svg {
+				margin-top: 4px;
+			}
+			.list span {
+				color: var(--muted);
+			}
+			.done svg {
+				color: var(--ok);
+			}
+			.open-q svg {
+				color: var(--todo);
+			}
+			footer.wrap {
+				padding-block: 32px 56px;
+				display: flex;
+				flex-wrap: wrap;
+				gap: 8px 24px;
+				font-size: 14px;
+				color: var(--muted);
+				border-top: 1px solid var(--line);
+			}
+			footer a {
+				display: inline-flex;
+				align-items: center;
+				min-height: 44px;
+			}
+			.embed {
+				display: flex;
+				flex-direction: column;
+				gap: 8px;
+			}
+			.embed iframe {
+				display: block;
+				width: 100%;
+				height: min(78vh, 760px);
+				border: 1px solid var(--line);
+				border-radius: 12px;
+				background: var(--surface);
+			}
+			.embed-head {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: baseline;
+				justify-content: space-between;
+				gap: 4px 16px;
+			}
+			.embed-head h3 {
+				font-size: 20px;
+			}
+			.embed-head p {
+				color: var(--muted);
+				font-size: 15px;
+				flex: 1 1 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+			<symbol id="logo-a1" viewBox="0 0 48 48">
+				<rect width="48" height="48" rx="10" fill="#0F4C5C" />
+				<path
+					d="M12.7 35.3 A16 16 0 1 1 35.3 35.3"
+					fill="none"
+					stroke="#3CC4D6"
+					stroke-width="6"
+					stroke-linecap="round"
+				/>
+				<path d="M24 24 L35 16.5" stroke="#E9EEF2" stroke-width="4.5" stroke-linecap="round" />
+				<circle cx="24" cy="24" r="4" fill="#E9EEF2" />
+			</symbol>
+			<symbol id="logo-d1" viewBox="0 0 48 48">
+				<rect width="48" height="48" rx="11" fill="#2747D9" />
+				<g fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round">
+					<path d="M24 24 C24 17 28 12 34 11" />
+					<path d="M24 24 C24 17 28 12 34 11" transform="rotate(72 24 24)" />
+					<path d="M24 24 C24 17 28 12 34 11" transform="rotate(144 24 24)" />
+					<path d="M24 24 C24 17 28 12 34 11" transform="rotate(216 24 24)" />
+					<path d="M24 24 C24 17 28 12 34 11" transform="rotate(288 24 24)" />
+				</g>
+				<circle cx="24" cy="24" r="5" fill="#FFFFFF" />
+			</symbol>
+			<symbol id="logo-d2" viewBox="0 0 48 48">
+				<rect width="48" height="48" rx="12" fill="#6D5BFF" />
+				<g fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M14 26 L24 16 L34 26" />
+					<path d="M14 36 L24 26 L34 36" opacity=".55" />
+				</g>
+			</symbol>
+			<symbol id="logo-e1" viewBox="0 0 48 48">
+				<rect width="48" height="48" rx="10" fill="#127A55" />
+				<g fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M6 24 H14" />
+					<path d="M14 11 L37 24 L14 37 Z" />
+					<path d="M37 24 H42" />
+				</g>
+				<path d="M18.5 19 H23.5 M21 16.5 V21.5" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" />
+			</symbol>
+			<symbol id="logo-e2" viewBox="0 0 48 48">
+				<rect width="48" height="48" rx="12" fill="#FF5C8A" />
+				<path
+					d="M5 24 Q8 21 11 24 T17 24 Q21.5 15 26 24 T35 24 Q39 6 43 24"
+					fill="none"
+					stroke="#0E1116"
+					stroke-width="4"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				/>
+			</symbol>
+			<symbol id="logo-e3" viewBox="0 0 48 48">
+				<rect width="48" height="48" rx="8" fill="#15171C" />
+				<rect x="9" y="30" width="5.5" height="9" rx="1.5" fill="#FFFFFF" />
+				<rect x="17" y="24" width="5.5" height="15" rx="1.5" fill="#FFFFFF" />
+				<rect x="25" y="17" width="5.5" height="22" rx="1.5" fill="#FFFFFF" />
+				<rect x="33" y="9" width="5.5" height="30" rx="1.5" fill="#E5484D" />
+			</symbol>
+			<symbol id="t2-logo-a1" viewBox="0 0 48 48">
+				<rect width="48" height="48" rx="10" fill="#0F4C5C" />
+				<path
+					d="M12.7 35.3 A16 16 0 1 1 35.3 35.3"
+					fill="none"
+					stroke="#3CC4D6"
+					stroke-width="6"
+					stroke-linecap="round"
+				/>
+				<path d="M24 24 L35 16.5" stroke="#E9EEF2" stroke-width="4.5" stroke-linecap="round" />
+				<circle cx="24" cy="24" r="4" fill="#E9EEF2" />
+			</symbol>
+			<symbol id="t2-logo-a2" viewBox="0 0 48 48">
+				<rect width="48" height="48" rx="8" fill="#0B0B0C" />
+				<polygon
+					points="37.9,29.7 29.7,37.9 18.3,37.9 10.1,29.7 10.1,18.3 18.3,10.1 29.7,10.1 37.9,18.3"
+					fill="none"
+					stroke="#FAFAFA"
+					stroke-width="3.5"
+					stroke-linejoin="round"
+				/>
+				<path d="M24 24 L31 17" stroke="#FAFAFA" stroke-width="3.5" stroke-linecap="round" />
+				<circle cx="24" cy="24" r="3.2" fill="#FAFAFA" />
+			</symbol>
+			<symbol id="t2-logo-a3" viewBox="0 0 48 48">
+				<rect width="48" height="48" rx="9" fill="#0E1B3D" />
+				<rect x="9" y="8" width="30" height="5" rx="2.5" fill="#A9C7FF" />
+				<text
+					x="24"
+					y="40"
+					text-anchor="middle"
+					font-family="Barlow Condensed, Arial Narrow, sans-serif"
+					font-weight="700"
+					font-size="29"
+					fill="#F4F7FC"
+				>
+					98
+				</text>
+			</symbol>
+			<symbol id="t2-logo-d1" viewBox="0 0 48 48">
+				<rect width="48" height="48" rx="11" fill="#2747D9" />
+				<g fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round">
+					<path d="M24 24 C24 17 28 12 34 11" />
+					<path d="M24 24 C24 17 28 12 34 11" transform="rotate(72 24 24)" />
+					<path d="M24 24 C24 17 28 12 34 11" transform="rotate(144 24 24)" />
+					<path d="M24 24 C24 17 28 12 34 11" transform="rotate(216 24 24)" />
+					<path d="M24 24 C24 17 28 12 34 11" transform="rotate(288 24 24)" />
+				</g>
+				<circle cx="24" cy="24" r="5" fill="#FFFFFF" />
+			</symbol>
+			<symbol id="t2-logo-d2" viewBox="0 0 48 48">
+				<rect width="48" height="48" rx="12" fill="#6D5BFF" />
+				<g fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M14 26 L24 16 L34 26" />
+					<path d="M14 36 L24 26 L34 36" opacity=".55" />
+				</g>
+			</symbol>
+			<symbol id="t2-logo-d3" viewBox="0 0 48 48">
+				<rect width="48" height="48" rx="10" fill="#111214" />
+				<text
+					x="21"
+					y="37"
+					text-anchor="middle"
+					font-family="Hanken Grotesk, system-ui, sans-serif"
+					font-weight="800"
+					font-size="32"
+					fill="#FFFFFF"
+				>
+					S
+				</text>
+				<path d="M36 9 V19 M31 14 H41" stroke="#E0483C" stroke-width="3.5" stroke-linecap="round" />
+			</symbol>
+			<symbol id="t2-logo-b" viewBox="0 0 48 48">
+				<rect width="48" height="48" rx="14" fill="#121833" />
+				<path d="M13 31 C13 18 17 9 24 9 C31 9 35 18 35 31 Z" fill="#7FD6BE" />
+				<g fill="none" stroke="#7FD6BE" stroke-width="4" stroke-linecap="round">
+					<path d="M15 30 C13 35 11 37 8 38" />
+					<path d="M21 31 C21 36 19 39 17 41" />
+					<path d="M27 31 C27 36 29 39 31 41" />
+				</g>
+				<path
+					d="M33 30 C38 32 42 36 39 40 C37 42 34 41 35 38"
+					fill="none"
+					stroke="#E8457E"
+					stroke-width="4.5"
+					stroke-linecap="round"
+				/>
+				<circle cx="20" cy="20" r="2.4" fill="#121833" />
+				<circle cx="28" cy="20" r="2.4" fill="#121833" />
+			</symbol>
+			<symbol id="t1-logo-octane" viewBox="0 0 48 48">
+				<rect width="48" height="48" rx="10" fill="#0F4C5C" />
+				<path
+					d="M12.7 35.3 A16 16 0 1 1 35.3 35.3"
+					fill="none"
+					stroke="#3CC4D6"
+					stroke-width="6"
+					stroke-linecap="round"
+				/>
+				<path d="M24 24 L35 16.5" stroke="#E9EEF2" stroke-width="4.5" stroke-linecap="round" />
+				<circle cx="24" cy="24" r="4" fill="#E9EEF2" />
+			</symbol>
+			<symbol id="t1-logo-super" viewBox="0 0 48 48">
+				<rect width="48" height="48" rx="11" fill="#2747D9" />
+				<g fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round">
+					<path d="M24 24 C24 17 28 12 34 11" />
+					<path d="M24 24 C24 17 28 12 34 11" transform="rotate(72 24 24)" />
+					<path d="M24 24 C24 17 28 12 34 11" transform="rotate(144 24 24)" />
+					<path d="M24 24 C24 17 28 12 34 11" transform="rotate(216 24 24)" />
+					<path d="M24 24 C24 17 28 12 34 11" transform="rotate(288 24 24)" />
+				</g>
+				<circle cx="24" cy="24" r="5" fill="#FFFFFF" />
+			</symbol>
+			<symbol id="t1-logo-ninth" viewBox="0 0 48 48">
+				<rect width="48" height="48" rx="14" fill="#121833" />
+				<path d="M13 31 C13 18 17 9 24 9 C31 9 35 18 35 31 Z" fill="#7FD6BE" />
+				<g fill="none" stroke="#7FD6BE" stroke-width="4" stroke-linecap="round">
+					<path d="M15 30 C13 35 11 37 8 38" />
+					<path d="M21 31 C21 36 19 39 17 41" />
+					<path d="M27 31 C27 36 29 39 31 41" />
+				</g>
+				<path
+					d="M33 30 C38 32 42 36 39 40 C37 42 34 41 35 38"
+					fill="none"
+					stroke="#E8457E"
+					stroke-width="4.5"
+					stroke-linecap="round"
+				/>
+				<circle cx="20" cy="20" r="2.4" fill="#121833" />
+				<circle cx="28" cy="20" r="2.4" fill="#121833" />
+			</symbol>
+			<symbol id="t1-logo-whet" viewBox="0 0 48 48">
+				<rect width="48" height="48" rx="6" fill="#E3E6E9" />
+				<path d="M5 27 L15 19 L43 19 L33 27 Z" fill="#8A94A3" />
+				<path d="M5 27 L33 27 L33 36 L5 36 Z" fill="#2B2F36" />
+				<path d="M33 27 L43 19 L43 28 L33 36 Z" fill="#4A515C" />
+				<path d="M15 19 L43 19" stroke="#F3F4F5" stroke-width="2" stroke-linecap="round" />
+				<path d="M37 4 L39 10 L45 12 L39 14 L37 20 L35 14 L29 12 L35 10 Z" fill="#D9801E" />
+			</symbol>
+		</svg>
+
+		<header class="wrap">
+			<span class="label">github-power · état au 31 oct. 2026</span>
+			<h1>Toutes les propositions</h1>
+			<p>
+				Une extension Chrome et Firefox qui accélère les reviews de pull requests sur GitHub. Ici, tout ce qui a été
+				proposé : les noms et logos des trois tours, les douze maquettes du site, et les variantes d'interface dans
+				GitHub.
+			</p>
+			<nav class="toc" aria-label="Sommaire">
+				<a href="#identite">Identité</a>
+				<a href="#site">Site web</a>
+				<a href="#ui">Interface dans GitHub</a>
+				<a href="#etat">Décidé et à trancher</a>
+			</nav>
+		</header>
+
+		<main>
+			<section id="identite" class="wrap" aria-labelledby="identite-t">
+				<div class="section-head">
+					<h2 id="identite-t">Identité</h2>
+					<p>
+						Trois tours de propositions. Chaque planche montre pour chaque design le logo, la palette, la typo, l'icône
+						dans la barre d'outils, la vignette du store et la page d'options.
+					</p>
+				</div>
+
+				<div class="round">
+					<div class="round-head">
+						<h3>Version finale · short list et choix</h3>
+						<a class="open" href="branding/final.html">Ouvrir la planche →</a>
+						<p>
+							Choix : Supercharged GitHub, palette Boost, logo P3 (trois bras à ventouses). La planche montre aussi la
+							short list, les pistes poulpe en Cobalt et en Boost, et leur comparaison en situation.
+						</p>
+					</div>
+					<div class="logos">
+						<a class="logo" href="branding/final.html"
+							><svg aria-hidden="true"><use href="#logo-a1" /></svg><b>Octane for GitHub</b
+							><span>Pétrole · plan B</span></a
+						>
+						<a class="logo" href="branding/final.html"
+							><svg aria-hidden="true"><use href="#logo-d1" /></svg><b>Supercharged GitHub</b><span>Cobalt</span></a
+						>
+						<a class="logo" href="branding/final.html"
+							><svg aria-hidden="true"><use href="#logo-d2" /></svg><b>Supercharged GitHub</b><span>Boost</span></a
+						>
+						<a class="logo" href="branding/final.html"
+							><svg aria-hidden="true"><use href="#logo-e1" /></svg><b>Amplified GitHub</b><span>Circuit</span></a
+						>
+						<a class="logo" href="branding/final.html"
+							><svg aria-hidden="true"><use href="#logo-e2" /></svg><b>Amplified GitHub</b><span>Onde</span></a
+						>
+						<a class="logo" href="branding/final.html"
+							><svg aria-hidden="true"><use href="#logo-e3" /></svg><b>Amplified GitHub</b><span>VU-mètre</span></a
+						>
+					</div>
+				</div>
+
+				<div class="round">
+					<div class="round-head">
+						<h3>Tour 2 · trois designs par nom</h3>
+						<a class="open" href="branding/tour-2.html">Ouvrir la planche →</a>
+						<p>
+							Octane et Supercharged déclinés en trois designs chacun, plus Ninth Arm. Pétrole, Cobalt et Boost sont
+							passés en finale.
+						</p>
+					</div>
+					<div class="logos dropped">
+						<a class="logo" href="branding/tour-2.html"
+							><svg aria-hidden="true"><use href="#t2-logo-a1" /></svg><b>Octane</b><span>Pétrole</span></a
+						>
+						<a class="logo" href="branding/tour-2.html"
+							><svg aria-hidden="true"><use href="#t2-logo-a2" /></svg><b>Octane</b><span>Octogone</span></a
+						>
+						<a class="logo" href="branding/tour-2.html"
+							><svg aria-hidden="true"><use href="#t2-logo-a3" /></svg><b>Octane</b><span>Indice 98</span></a
+						>
+						<a class="logo" href="branding/tour-2.html"
+							><svg aria-hidden="true"><use href="#t2-logo-d1" /></svg><b>Supercharged</b><span>Cobalt</span></a
+						>
+						<a class="logo" href="branding/tour-2.html"
+							><svg aria-hidden="true"><use href="#t2-logo-d2" /></svg><b>Supercharged</b><span>Boost</span></a
+						>
+						<a class="logo" href="branding/tour-2.html"
+							><svg aria-hidden="true"><use href="#t2-logo-d3" /></svg><b>Supercharged</b><span>Monogramme</span></a
+						>
+						<a class="logo" href="branding/tour-2.html"
+							><svg aria-hidden="true"><use href="#t2-logo-b" /></svg><b>Ninth Arm</b><span>Autre piste</span></a
+						>
+					</div>
+				</div>
+
+				<div class="round">
+					<div class="round-head">
+						<h3>Tour 1 · quatre directions</h3>
+						<a class="open" href="branding/tour-1.html">Ouvrir la planche →</a>
+						<p>Les premières pistes. L'Octane orange et jaune a été repeint, Whetstone et Ninth Arm ont été écartés.</p>
+					</div>
+					<div class="logos dropped">
+						<a class="logo" href="branding/tour-1.html"
+							><svg aria-hidden="true"><use href="#t1-logo-octane" /></svg><b>Octane</b
+							><span>Énergie · technique</span></a
+						>
+						<a class="logo" href="branding/tour-1.html"
+							><svg aria-hidden="true"><use href="#t1-logo-ninth" /></svg><b>Ninth Arm</b
+							><span>Pieuvre · ludique</span></a
+						>
+						<a class="logo" href="branding/tour-1.html"
+							><svg aria-hidden="true"><use href="#t1-logo-whet" /></svg><b>Whetstone</b><span>Atelier · sobre</span></a
+						>
+						<a class="logo" href="branding/tour-1.html"
+							><svg aria-hidden="true"><use href="#t1-logo-super" /></svg><b>Supercharged</b
+							><span>Puissance · pro</span></a
+						>
+					</div>
+				</div>
+			</section>
+
+			<section id="site" class="wrap" aria-labelledby="site-t">
+				<div class="section-head">
+					<h2 id="site-t">Site web</h2>
+					<p>
+						En anglais, pour les stores. Nom provisoire « GitHub Power » et charte neutre en attendant le choix de
+						l'identité. Toutes les données de PR viennent du repo go-task/task.
+					</p>
+				</div>
+
+				<div class="round">
+					<div class="round-head">
+						<h3>Version retenue, cliquable</h3>
+						<p>
+							La structure L montée en vrai site de trois pages. Le bouton de comparaison et les filtres fonctionnent.
+						</p>
+					</div>
+					<div class="featured">
+						<a class="card" href="site/index.html"
+							><span class="id">site/index.html <span class="pick">retenue</span></span
+							><b>Accueil</b>
+							<p>
+								Démo de la liste de PR avec et sans l'extension, trois features en vedette, le reste en liste,
+								installation et FAQ.
+							</p></a
+						>
+						<a class="card" href="site/features.html"
+							><span class="id">site/features.html</span><b>Toutes les features</b>
+							<p>Les 13 features en cartes, avec recherche et filtres par moment.</p></a
+						>
+						<a class="card" href="site/review-status.html"
+							><span class="id">site/review-status.html</span><b>Page d'une feature</b>
+							<p>Le gabarit, avec Review status en exemple.</p></a
+						>
+					</div>
+				</div>
+
+				<div class="embed">
+					<div class="embed-head">
+						<h3>Les 12 maquettes, de A à L</h3>
+						<a class="open" href="canvas/site.html">Plein écran →</a>
+						<p>
+							Toutes sur le même canevas, comme dans l'outil de design. Glisser pour se déplacer, ⌘ ou Ctrl + molette
+							pour zoomer, double-clic pour cadrer une maquette, clic sur un titre pour l'ouvrir.
+						</p>
+					</div>
+					<iframe src="canvas/site.html" title="Canevas des maquettes du site"></iframe>
+				</div>
+			</section>
+
+			<section id="ui" class="wrap" aria-labelledby="ui-t">
+				<div class="section-head">
+					<h2 id="ui-t">Interface dans GitHub</h2>
+					<p>
+						Les variantes étudiées avant d'écrire le code des features. Dans GitHub, l'extension garde les couleurs de
+						GitHub, pas celles de la marque.
+					</p>
+				</div>
+				<div class="embed">
+					<div class="embed-head">
+						<h3>Badges de la liste des PR et charge des reviewers</h3>
+						<a class="open" href="canvas/interface.html">Plein écran →</a>
+						<p>
+							Retenus : la colonne de droite pour les badges, avec la ligne grise en option, et le compteur à droite
+							pour les reviewers.
+						</p>
+					</div>
+					<iframe src="canvas/interface.html" title="Canevas des variantes d'interface"></iframe>
+				</div>
+			</section>
+
+			<section id="etat" class="wrap">
+				<div class="split">
+					<div style="display: flex; flex-direction: column; gap: 14px">
+						<h2>Décidé</h2>
+						<ul class="list done">
+							<li>
+								<svg
+									width="16"
+									height="16"
+									viewBox="0 0 16 16"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									aria-hidden="true"
+								>
+									<path d="M3 8.5l3.2 3L13 4.5" />
+								</svg>
+								<div><b>Supercharged GitHub</b> <span>en palette Boost, avec le logo P3.</span></div>
+							</li>
+							<li>
+								<svg
+									width="16"
+									height="16"
+									viewBox="0 0 16 16"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									aria-hidden="true"
+								>
+									<path d="M3 8.5l3.2 3L13 4.5" />
+								</svg>
+								<div>
+									<b>Astro</b> <span>pour le site, avec une page par feature générée depuis un fichier Markdown.</span>
+								</div>
+							</li>
+							<li>
+								<svg
+									width="16"
+									height="16"
+									viewBox="0 0 16 16"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									aria-hidden="true"
+								>
+									<path d="M3 8.5l3.2 3L13 4.5" />
+								</svg>
+								<div><b>Structure L</b> <span>pour l'accueil, plus le catalogue et les pages par feature.</span></div>
+							</li>
+							<li>
+								<svg
+									width="16"
+									height="16"
+									viewBox="0 0 16 16"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									aria-hidden="true"
+								>
+									<path d="M3 8.5l3.2 3L13 4.5" />
+								</svg>
+								<div><b>Badges en colonne de droite</b> <span>par défaut, la ligne grise en option.</span></div>
+							</li>
+							<li>
+								<svg
+									width="16"
+									height="16"
+									viewBox="0 0 16 16"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									aria-hidden="true"
+								>
+									<path d="M3 8.5l3.2 3L13 4.5" />
+								</svg>
+								<div><b>Compteur à droite</b> <span>pour la charge des reviewers.</span></div>
+							</li>
+						</ul>
+					</div>
+					<div style="display: flex; flex-direction: column; gap: 14px">
+						<h2>À trancher</h2>
+						<ul class="list open-q">
+							<li>
+								<svg
+									width="16"
+									height="16"
+									viewBox="0 0 16 16"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									aria-hidden="true"
+								>
+									<circle cx="8" cy="8" r="5.5" />
+								</svg>
+								<div>
+									<b>La police du site</b> <span>Funnel pour l'instant, à aligner sur l'identité choisie.</span>
+								</div>
+							</li>
+							<li>
+								<svg
+									width="16"
+									height="16"
+									viewBox="0 0 16 16"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									aria-hidden="true"
+								>
+									<circle cx="8" cy="8" r="5.5" />
+								</svg>
+								<div><b>Un seul bouton Install</b> <span>qui détecte le navigateur.</span></div>
+							</li>
+							<li>
+								<svg
+									width="16"
+									height="16"
+									viewBox="0 0 16 16"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									aria-hidden="true"
+								>
+									<circle cx="8" cy="8" r="5.5" />
+								</svg>
+								<div><b>La licence</b> <span>le repo n'en a pas encore.</span></div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<footer class="wrap">
+			<span>Repo :</span>
+			<a href="https://github.com/vmaerten/github-power">github.com/vmaerten/github-power</a>
+		</footer>
+	</body>
+</html>

@@ -1,0 +1,1421 @@
+<!doctype html>
+<html lang="fr">
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<style>
+		body {
+			margin: 0;
+		}
+	</style>
+	<title>Identité github-power</title>
+	<meta name="claude:viewport-fit-sides" content="cover" />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Figtree:wght@400;600&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans+Condensed:wght@400;600;700&family=JetBrains+Mono:wght@400;700&family=Red+Hat+Display:wght@400;800&family=Red+Hat+Mono:wght@400&family=Red+Hat+Text:wght@400;600&family=Schibsted+Grotesk:wght@400;600;800&display=swap"
+	/>
+	<style>
+		/* Planche de spécimens : chrome neutre et sobre, chaque direction rendue dans sa propre bande à ses couleurs. */
+		:root {
+			--paper: #f4f5f7;
+			--card: #ffffff;
+			--ink: #15181e;
+			--muted: #5a6170;
+			--line: #d9dce2;
+			--pick: #a4500c;
+			--low: #1f7a4d;
+			--mid: #9a6a00;
+			--high: #b42318;
+			--font-ui: 'Schibsted Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+			--font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+		}
+		@media (prefers-color-scheme: dark) {
+			:root:not([data-theme='light']) {
+				--paper: #101217;
+				--card: #181b21;
+				--ink: #e7e9ee;
+				--muted: #9aa1ae;
+				--line: #2a2e37;
+				--pick: #f2a541;
+				--low: #5fd39a;
+				--mid: #e8b84a;
+				--high: #ff7b6e;
+				color-scheme: dark;
+			}
+		}
+		:root[data-theme='dark'] {
+			--paper: #101217;
+			--card: #181b21;
+			--ink: #e7e9ee;
+			--muted: #9aa1ae;
+			--line: #2a2e37;
+			--pick: #f2a541;
+			--low: #5fd39a;
+			--mid: #e8b84a;
+			--high: #ff7b6e;
+			color-scheme: dark;
+		}
+
+		body {
+			background: var(--paper);
+			color: var(--ink);
+			font-family: var(--font-ui);
+			font-size: 15px;
+			line-height: 1.55;
+		}
+		.wrap {
+			max-width: 1080px;
+			margin: 0 auto;
+			padding-left: max(16px, env(safe-area-inset-left, 0px));
+			padding-right: max(16px, env(safe-area-inset-right, 0px));
+		}
+		h1,
+		h2,
+		h3 {
+			text-wrap: balance;
+			margin: 0;
+		}
+		p {
+			margin: 0;
+		}
+
+		/* Intro */
+		.intro {
+			padding-block: 48px 32px;
+			display: grid;
+			gap: 12px;
+		}
+		.eyebrow {
+			font-family: var(--font-mono);
+			font-size: 12px;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			color: var(--muted);
+		}
+		.intro h1 {
+			font-size: clamp(30px, 5vw, 44px);
+			line-height: 1.1;
+			font-weight: 800;
+			letter-spacing: -0.02em;
+		}
+		.intro p {
+			max-width: 64ch;
+			color: var(--muted);
+		}
+		.intro code,
+		.note code {
+			font-family: var(--font-mono);
+			font-size: 0.9em;
+		}
+
+		/* Noms */
+		.section {
+			padding-block: 24px 40px;
+			display: grid;
+			gap: 16px;
+		}
+		.section > h2 {
+			font-size: 22px;
+			font-weight: 800;
+			letter-spacing: -0.01em;
+		}
+		.section > .lede {
+			color: var(--muted);
+			max-width: 64ch;
+		}
+		.table-scroll {
+			overflow-x: auto;
+			border: 1px solid var(--line);
+			border-radius: 10px;
+			background: var(--card);
+		}
+		table {
+			border-collapse: collapse;
+			width: 100%;
+			min-width: 640px;
+		}
+		th,
+		td {
+			text-align: left;
+			padding: 10px 14px;
+			border-bottom: 1px solid var(--line);
+			vertical-align: top;
+		}
+		tr:last-child td {
+			border-bottom: 0;
+		}
+		th {
+			font-family: var(--font-mono);
+			font-size: 11px;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			color: var(--muted);
+			font-weight: 400;
+		}
+		td.name {
+			font-weight: 600;
+			white-space: nowrap;
+		}
+		td.pattern {
+			font-family: var(--font-mono);
+			font-size: 13px;
+			color: var(--muted);
+			white-space: nowrap;
+		}
+		tr.group td {
+			background: var(--paper);
+			font-family: var(--font-mono);
+			font-size: 11px;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			color: var(--muted);
+			padding-block: 6px;
+		}
+		.risk {
+			display: inline-block;
+			font-size: 12px;
+			font-weight: 600;
+			padding: 1px 8px;
+			border-radius: 999px;
+			border: 1px solid currentColor;
+			white-space: nowrap;
+		}
+		.risk.low {
+			color: var(--low);
+		}
+		.risk.mid {
+			color: var(--mid);
+		}
+		.risk.high {
+			color: var(--high);
+		}
+		.star {
+			color: var(--pick);
+			font-weight: 800;
+		}
+
+		.verdict {
+			border-left: 3px solid var(--pick);
+			padding: 4px 0 4px 16px;
+			display: grid;
+			gap: 4px;
+			max-width: 70ch;
+		}
+		.verdict strong {
+			color: var(--pick);
+		}
+
+		/* Bandes de direction */
+		.dir {
+			padding-block: 48px;
+			background: var(--b-bg);
+			color: var(--b-fg);
+		}
+		.dir-inner {
+			display: grid;
+			gap: 32px;
+		}
+		.dir-head {
+			display: grid;
+			gap: 8px;
+			max-width: 68ch;
+		}
+		.dir-tag {
+			font-family: var(--font-mono);
+			font-size: 12px;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			color: var(--b-muted);
+		}
+		.dir-head .pitch {
+			color: var(--b-muted);
+		}
+		.dir-head .tagline {
+			font-size: 18px;
+		}
+		.dir-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+			gap: 20px;
+		}
+		.block {
+			background: var(--b-surface);
+			border-radius: var(--b-radius);
+			padding: 20px;
+			display: grid;
+			gap: 14px;
+			align-content: start;
+			min-width: 0;
+		}
+		.block h3 {
+			font-family: var(--font-mono);
+			font-size: 11px;
+			font-weight: 400;
+			letter-spacing: 0.1em;
+			text-transform: uppercase;
+			color: var(--b-muted);
+		}
+		.block.wide {
+			grid-column: 1 / -1;
+		}
+
+		.swatches {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+			gap: 10px;
+		}
+		.swatch {
+			all: unset;
+			cursor: pointer;
+			display: grid;
+			gap: 6px;
+			font-family: var(--font-mono);
+			font-size: 11px;
+			color: var(--b-fg);
+		}
+		.swatch:focus-visible {
+			outline: 2px solid var(--b-accent);
+			outline-offset: 3px;
+			border-radius: 4px;
+		}
+		.chip {
+			height: 56px;
+			border-radius: calc(var(--b-radius) / 2);
+			box-shadow: inset 0 0 0 1px rgba(127, 127, 127, 0.25);
+		}
+		.swatch span {
+			color: var(--b-muted);
+		}
+		.swatch b {
+			font-weight: 400;
+			color: var(--b-fg);
+		}
+
+		.specimen {
+			display: grid;
+			gap: 10px;
+		}
+		.specimen .display {
+			font-size: 34px;
+			line-height: 1.05;
+		}
+		.specimen .body {
+			font-size: 15px;
+		}
+		.specimen .mono {
+			font-size: 13px;
+			color: var(--b-muted);
+		}
+		.specimen .meta {
+			font-family: var(--font-mono);
+			font-size: 11px;
+			color: var(--b-muted);
+		}
+
+		.toolbars {
+			display: grid;
+			gap: 8px;
+		}
+		.toolbar {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			height: 34px;
+			padding-inline: 12px;
+			border-radius: 8px;
+		}
+		.toolbar.light {
+			background: #f1f3f4;
+		}
+		.toolbar.dark {
+			background: #35363a;
+		}
+		.toolbar .url {
+			flex: 1;
+			height: 22px;
+			border-radius: 11px;
+			min-width: 0;
+		}
+		.toolbar.light .url {
+			background: #ffffff;
+		}
+		.toolbar.dark .url {
+			background: #202124;
+		}
+		.toolbar .ghost {
+			width: 16px;
+			height: 16px;
+			border-radius: 4px;
+		}
+		.toolbar.light .ghost {
+			background: #c4c7cc;
+		}
+		.toolbar.dark .ghost {
+			background: #5f6368;
+		}
+		.sizes {
+			display: flex;
+			align-items: flex-end;
+			gap: 18px;
+			flex-wrap: wrap;
+		}
+		.sizes figure {
+			margin: 0;
+			display: grid;
+			gap: 6px;
+			justify-items: center;
+			font-family: var(--font-mono);
+			font-size: 11px;
+			color: var(--b-muted);
+		}
+
+		.mocks {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+			gap: 20px;
+			align-items: start;
+		}
+		.tile {
+			aspect-ratio: 440 / 280;
+			max-width: 100%;
+			border-radius: 6px;
+			background: var(--b-tile);
+			color: var(--b-tile-fg);
+			display: grid;
+			place-content: center;
+			justify-items: center;
+			gap: 10px;
+			padding: 16px;
+			text-align: center;
+			overflow: hidden;
+		}
+		.tile .t-name {
+			font-size: 28px;
+			line-height: 1;
+		}
+		.tile .t-tag {
+			font-size: 13px;
+			opacity: 0.8;
+		}
+		.cap {
+			font-family: var(--font-mono);
+			font-size: 11px;
+			color: var(--b-muted);
+			margin-top: 6px;
+		}
+
+		.opts {
+			border-radius: 8px;
+			background: var(--b-bg);
+			border: 1px solid var(--b-line);
+			overflow: hidden;
+		}
+		.opts-bar {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			padding: 12px 14px;
+			border-bottom: 1px solid var(--b-line);
+		}
+		.opts-bar .o-name {
+			font-size: 16px;
+		}
+		.opts-bar .o-sub {
+			margin-left: auto;
+			font-family: var(--font-mono);
+			font-size: 11px;
+			color: var(--b-muted);
+		}
+		.opts-row {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			padding: 10px 14px;
+			font-size: 13px;
+			border-bottom: 1px solid var(--b-line);
+		}
+		.opts-row:last-child {
+			border-bottom: 0;
+		}
+		.opts-row code {
+			font-family: var(--font-mono);
+			font-size: 12px;
+		}
+		.opts-row .desc {
+			color: var(--b-muted);
+			font-size: 12px;
+		}
+		.opts-row > div {
+			min-width: 0;
+			flex: 1;
+			display: grid;
+		}
+		.toggle {
+			width: 30px;
+			height: 18px;
+			border-radius: 9px;
+			background: var(--b-accent);
+			position: relative;
+			flex: none;
+		}
+		.toggle::after {
+			content: '';
+			position: absolute;
+			top: 3px;
+			right: 3px;
+			width: 12px;
+			height: 12px;
+			border-radius: 50%;
+			background: var(--b-bg);
+		}
+		.toggle.off {
+			background: var(--b-line);
+		}
+		.toggle.off::after {
+			right: auto;
+			left: 3px;
+		}
+
+		/* A — Octane */
+		.dir-octane {
+			--b-bg: #12161b;
+			--b-surface: #1b2129;
+			--b-fg: #e9eef2;
+			--b-muted: #8d99a6;
+			--b-line: #2c3440;
+			--b-accent: #3cc4d6;
+			--b-tile: #0f4c5c;
+			--b-tile-fg: #e9eef2;
+			--b-radius: 4px;
+			color-scheme: dark;
+		}
+		.octane-word {
+			font-family: 'Archivo', 'Arial Narrow', sans-serif;
+			font-style: italic;
+			font-weight: 900;
+			font-stretch: 125%;
+			font-variation-settings: 'wdth' 125;
+			text-transform: uppercase;
+			letter-spacing: -0.01em;
+		}
+		.dir-octane .wordmark {
+			font-size: clamp(44px, 9vw, 84px);
+			line-height: 0.95;
+		}
+		.dir-octane .wordmark em {
+			font-style: inherit;
+			color: #3cc4d6;
+		}
+		.dir-octane .body-font {
+			font-family: 'Archivo', system-ui, sans-serif;
+			font-stretch: 100%;
+		}
+		.dir-octane .mono-font {
+			font-family: 'JetBrains Mono', ui-monospace, monospace;
+		}
+
+		/* B — Ninth Arm */
+		.dir-ninth {
+			--b-bg: #121833;
+			--b-surface: #1c2447;
+			--b-fg: #eceafb;
+			--b-muted: #929ac0;
+			--b-line: #2f3864;
+			--b-accent: #e8457e;
+			--b-tile: #121833;
+			--b-tile-fg: #eceafb;
+			--b-radius: 18px;
+			color-scheme: dark;
+		}
+		.ninth-word {
+			font-family: 'Bricolage Grotesque', 'Trebuchet MS', sans-serif;
+			font-weight: 800;
+			font-variation-settings: 'opsz' 96;
+			letter-spacing: -0.03em;
+		}
+		.dir-ninth .wordmark {
+			font-size: clamp(44px, 9vw, 84px);
+			line-height: 0.95;
+		}
+		.dir-ninth .wordmark em {
+			font-style: normal;
+			color: #e8457e;
+		}
+		.dir-ninth .body-font {
+			font-family: 'Figtree', system-ui, sans-serif;
+		}
+		.dir-ninth .mono-font {
+			font-family: 'JetBrains Mono', ui-monospace, monospace;
+		}
+
+		/* C — Whetstone */
+		.dir-whet {
+			--b-bg: #e3e6e9;
+			--b-surface: #f3f4f5;
+			--b-fg: #22262c;
+			--b-muted: #5c6470;
+			--b-line: #c9ced4;
+			--b-accent: #d9801e;
+			--b-tile: #2b2f36;
+			--b-tile-fg: #f3f4f5;
+			--b-radius: 2px;
+			color-scheme: light;
+		}
+		.whet-word {
+			font-family: 'IBM Plex Sans Condensed', 'Arial Narrow', sans-serif;
+			font-weight: 700;
+			text-transform: uppercase;
+			letter-spacing: 0.06em;
+		}
+		.dir-whet .wordmark {
+			font-size: clamp(40px, 8vw, 76px);
+			line-height: 1;
+		}
+		.dir-whet .wordmark em {
+			font-style: normal;
+			color: #d9801e;
+		}
+		.dir-whet .body-font {
+			font-family: 'IBM Plex Sans Condensed', system-ui, sans-serif;
+		}
+		.dir-whet .mono-font {
+			font-family: 'IBM Plex Mono', ui-monospace, monospace;
+		}
+
+		/* D — Supercharged GitHub */
+		.dir-super {
+			--b-bg: #f5f6f8;
+			--b-surface: #ffffff;
+			--b-fg: #10131a;
+			--b-muted: #5d6575;
+			--b-line: #d8dce3;
+			--b-accent: #2747d9;
+			--b-tile: #10131a;
+			--b-tile-fg: #f5f6f8;
+			--b-radius: 8px;
+			color-scheme: light;
+		}
+		.super-word {
+			font-family: 'Red Hat Display', system-ui, sans-serif;
+			font-weight: 800;
+			letter-spacing: -0.02em;
+		}
+		.super-word .gh {
+			font-weight: 400;
+			color: var(--b-muted);
+		}
+		.tile .super-word .gh {
+			color: inherit;
+			opacity: 0.7;
+		}
+		.dir-super .wordmark {
+			font-size: clamp(36px, 7vw, 68px);
+			line-height: 1;
+		}
+		.dir-super .body-font {
+			font-family: 'Red Hat Text', system-ui, sans-serif;
+		}
+		.dir-super .mono-font {
+			font-family: 'Red Hat Mono', ui-monospace, monospace;
+		}
+
+		.logo-big {
+			display: grid;
+			place-items: center;
+			min-height: 220px;
+		}
+		.logo-big svg {
+			width: min(180px, 60%);
+			height: auto;
+		}
+
+		/* Règles + suite */
+		.rules {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+			gap: 16px;
+		}
+		.rule {
+			background: var(--card);
+			border: 1px solid var(--line);
+			border-radius: 10px;
+			padding: 18px;
+			display: grid;
+			gap: 6px;
+			align-content: start;
+		}
+		.rule h3 {
+			font-size: 16px;
+			font-weight: 600;
+		}
+		.rule p {
+			color: var(--muted);
+		}
+		.questions {
+			display: grid;
+			gap: 10px;
+			padding-left: 20px;
+			margin: 0;
+			max-width: 70ch;
+		}
+		footer {
+			padding-block: 32px 56px;
+			color: var(--muted);
+			font-size: 13px;
+		}
+
+		.toast {
+			position: fixed;
+			left: 50%;
+			bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+			transform: translateX(-50%);
+			background: var(--ink);
+			color: var(--paper);
+			font-family: var(--font-mono);
+			font-size: 12px;
+			padding: 8px 14px;
+			border-radius: 6px;
+		}
+		@media (prefers-reduced-motion: no-preference) {
+			.swatch .chip {
+				transition: transform 0.15s;
+			}
+			.swatch:hover .chip {
+				transform: translateY(-2px);
+			}
+		}
+	</style>
+
+	<!-- Logos, réutilisés à toutes les tailles -->
+	<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+		<symbol id="logo-octane" viewBox="0 0 48 48">
+			<rect width="48" height="48" rx="10" fill="#0F4C5C" />
+			<path
+				d="M12.7 35.3 A16 16 0 1 1 35.3 35.3"
+				fill="none"
+				stroke="#3CC4D6"
+				stroke-width="6"
+				stroke-linecap="round"
+			/>
+			<path d="M24 24 L35 16.5" stroke="#E9EEF2" stroke-width="4.5" stroke-linecap="round" />
+			<circle cx="24" cy="24" r="4" fill="#E9EEF2" />
+		</symbol>
+		<symbol id="logo-super" viewBox="0 0 48 48">
+			<rect width="48" height="48" rx="11" fill="#2747D9" />
+			<g fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round">
+				<path d="M24 24 C24 17 28 12 34 11" />
+				<path d="M24 24 C24 17 28 12 34 11" transform="rotate(72 24 24)" />
+				<path d="M24 24 C24 17 28 12 34 11" transform="rotate(144 24 24)" />
+				<path d="M24 24 C24 17 28 12 34 11" transform="rotate(216 24 24)" />
+				<path d="M24 24 C24 17 28 12 34 11" transform="rotate(288 24 24)" />
+			</g>
+			<circle cx="24" cy="24" r="5" fill="#FFFFFF" />
+		</symbol>
+		<symbol id="logo-ninth" viewBox="0 0 48 48">
+			<rect width="48" height="48" rx="14" fill="#121833" />
+			<path d="M13 31 C13 18 17 9 24 9 C31 9 35 18 35 31 Z" fill="#7FD6BE" />
+			<g fill="none" stroke="#7FD6BE" stroke-width="4" stroke-linecap="round">
+				<path d="M15 30 C13 35 11 37 8 38" />
+				<path d="M21 31 C21 36 19 39 17 41" />
+				<path d="M27 31 C27 36 29 39 31 41" />
+			</g>
+			<path
+				d="M33 30 C38 32 42 36 39 40 C37 42 34 41 35 38"
+				fill="none"
+				stroke="#E8457E"
+				stroke-width="4.5"
+				stroke-linecap="round"
+			/>
+			<circle cx="20" cy="20" r="2.4" fill="#121833" />
+			<circle cx="28" cy="20" r="2.4" fill="#121833" />
+		</symbol>
+		<symbol id="logo-whet" viewBox="0 0 48 48">
+			<rect width="48" height="48" rx="6" fill="#E3E6E9" />
+			<path d="M5 27 L15 19 L43 19 L33 27 Z" fill="#8A94A3" />
+			<path d="M5 27 L33 27 L33 36 L5 36 Z" fill="#2B2F36" />
+			<path d="M33 27 L43 19 L43 28 L33 36 Z" fill="#4A515C" />
+			<path d="M15 19 L43 19" stroke="#F3F4F5" stroke-width="2" stroke-linecap="round" />
+			<path d="M37 4 L39 10 L45 12 L39 14 L37 20 L35 14 L29 12 L35 10 Z" fill="#D9801E" />
+		</symbol>
+	</svg>
+
+	<div
+		style="
+			position: sticky;
+			top: 0;
+			z-index: 10;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			gap: 4px 16px;
+			align-items: center;
+			min-height: 40px;
+			padding: 0 16px;
+			background: #1f2328;
+			color: #d1d9e0;
+			font:
+				13px/1.4 system-ui,
+				sans-serif;
+		"
+	>
+		<span>Identité · Tour 1 · quatre directions (historique)</span
+		><a
+			href="../index.html"
+			style="color: #ffffff; font-weight: 600; display: inline-flex; align-items: center; min-height: 40px"
+			>← Retour au kit</a
+		>
+	</div>
+	<header class="wrap intro">
+		<span class="eyebrow">github-power · nom et charte · brouillon du 30 oct. 2026</span>
+		<h1>Trouver un nom et une identité à l'extension</h1>
+		<p>
+			Quatre directions, chacune avec son nom, son logo, sa palette, sa typo, et un aperçu de l'icône dans la barre
+			d'outils, de la fiche store et de la page d'options. « GitHub » est autorisé dans le nom ; le risque est noté pour
+			chaque candidat.
+		</p>
+	</header>
+
+	<section class="wrap section" aria-labelledby="noms">
+		<h2 id="noms">Les noms</h2>
+		<p class="lede">
+			Avec « GitHub » autorisé, trois schémas sont possibles. Le risque mesure la probabilité qu'une revue du Chrome Web
+			Store ou d'AMO bloque la fiche parce que le nom laisse croire à un produit officiel.
+		</p>
+		<div class="table-scroll">
+			<table>
+				<thead>
+					<tr>
+						<th>Nom</th>
+						<th>Schéma</th>
+						<th>Risque store</th>
+						<th>Pourquoi</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="group">
+						<td colspan="4">Nom propre + for GitHub</td>
+					</tr>
+					<tr>
+						<td class="name">Octane for GitHub</td>
+						<td class="pattern">X for GitHub</td>
+						<td><span class="risk low">faible</span></td>
+						<td>
+							Le carburant, avec « octo » en clin d'œil à l'Octocat. Court, se prononce pareil en français et en
+							anglais.
+						</td>
+					</tr>
+					<tr>
+						<td class="name">Ninth Arm for GitHub</td>
+						<td class="pattern">X for GitHub</td>
+						<td><span class="risk low">faible</span></td>
+						<td>
+							Le neuvième bras de la pieuvre, celui qu'elle n'a pas de série. Le plus mémorable, mais il faut
+							l'expliquer.
+						</td>
+					</tr>
+					<tr>
+						<td class="name"><span class="star">★</span> Whetstone for GitHub</td>
+						<td class="pattern">X for GitHub</td>
+						<td><span class="risk low">faible</span></td>
+						<td>La pierre à aiguiser. Sobre et outillé, mais moins drôle.</td>
+					</tr>
+					<tr class="group">
+						<td colspan="4">Adjectif + GitHub (comme Refined GitHub)</td>
+					</tr>
+					<tr>
+						<td class="name">Supercharged GitHub</td>
+						<td class="pattern">Adj. GitHub</td>
+						<td><span class="risk mid">moyen</span></td>
+						<td>
+							« Suralimenté » : on garde l'idée de puissance du nom actuel. Refined GitHub est publié sous ce schéma
+							depuis des années sur les deux stores, ce qui le rend plausible. Charte : direction D.
+						</td>
+					</tr>
+					<tr>
+						<td class="name">Overclocked GitHub</td>
+						<td class="pattern">Adj. GitHub</td>
+						<td><span class="risk mid">moyen</span></td>
+						<td>GitHub poussé au-delà de ses réglages d'usine. Un peu long à taper.</td>
+					</tr>
+					<tr>
+						<td class="name">Sharpened GitHub</td>
+						<td class="pattern">Adj. GitHub</td>
+						<td><span class="risk mid">moyen</span></td>
+						<td>Va bien avec la direction Whetstone si on préfère ce schéma.</td>
+					</tr>
+					<tr class="group">
+						<td colspan="4">GitHub + nom</td>
+					</tr>
+					<tr>
+						<td class="name">GitHub Power</td>
+						<td class="pattern">GitHub X</td>
+						<td><span class="risk high">élevé</span></td>
+						<td>Le nom actuel. Ressemble à une fonctionnalité officielle, comme GitHub Copilot ou GitHub Actions.</td>
+					</tr>
+					<tr>
+						<td class="name">GitHub Octane</td>
+						<td class="pattern">GitHub X</td>
+						<td><span class="risk high">élevé</span></td>
+						<td>Même problème : on dirait un produit GitHub.</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="verdict">
+			<p>
+				<strong>Mon choix : Whetstone for GitHub, direction C.</strong> Tu veux un outil pro et sobre, publié sur les
+				stores : c'est la direction la plus calme, et le schéma « X for GitHub » est le moins exposé à un refus. Le nom
+				tient seul (repo <code>whetstone</code>, id Gecko <code>whetstone@vmaerten</code>), donc « for GitHub » se
+				retire sans rien renommer si un store bloque.
+			</p>
+			<p>
+				Si tu tiens à l'idée de puissance du nom actuel : Supercharged GitHub, direction D, avec un risque store moyen.
+			</p>
+		</div>
+	</section>
+
+	<!-- A -->
+	<section class="dir dir-octane" aria-labelledby="dir-a">
+		<div class="wrap dir-inner">
+			<div class="dir-head">
+				<span class="dir-tag">Direction A · Énergie · technique</span>
+				<h2 id="dir-a" class="wordmark octane-word"><em>O</em>ctane</h2>
+				<p class="tagline body-font">High-octane GitHub.</p>
+				<p class="pitch">
+					Un tableau de bord de nuit : carbone, bleu pétrole, arc cyan. Le logo est un compte-tours dont l'aiguille est
+					presque à fond. Les angles sont vifs et le titre en italique large, pour la vitesse, sans couleur criarde.
+				</p>
+			</div>
+			<div class="dir-grid">
+				<div class="block logo-big">
+					<svg viewBox="0 0 48 48" role="img" aria-label="Logo Octane"><use href="#logo-octane" /></svg>
+				</div>
+				<div class="block">
+					<h3>Palette</h3>
+					<div class="swatches">
+						<button class="swatch" data-hex="#12161B">
+							<div class="chip" style="background: #12161b"></div>
+							<b>Carbone</b><span>#12161B</span>
+						</button>
+						<button class="swatch" data-hex="#0F4C5C">
+							<div class="chip" style="background: #0f4c5c"></div>
+							<b>Pétrole</b><span>#0F4C5C</span>
+						</button>
+						<button class="swatch" data-hex="#3CC4D6">
+							<div class="chip" style="background: #3cc4d6"></div>
+							<b>Indice</b><span>#3CC4D6</span>
+						</button>
+						<button class="swatch" data-hex="#1B2129">
+							<div class="chip" style="background: #1b2129"></div>
+							<b>Carter</b><span>#1B2129</span>
+						</button>
+						<button class="swatch" data-hex="#E9EEF2">
+							<div class="chip" style="background: #e9eef2"></div>
+							<b>Chrome</b><span>#E9EEF2</span>
+						</button>
+						<button class="swatch" data-hex="#8D99A6">
+							<div class="chip" style="background: #8d99a6"></div>
+							<b>Gris piste</b><span>#8D99A6</span>
+						</button>
+					</div>
+				</div>
+				<div class="block">
+					<h3>Typographie</h3>
+					<div class="specimen">
+						<div class="display octane-word">Review faster</div>
+						<p class="body body-font">Images zoomables, commentaires en un clic, taille de chaque PR dans la liste.</p>
+						<p class="mono mono-font">+128 −42 · 7 files · size/M</p>
+						<p class="meta">Archivo Expanded Black Italic · Archivo · JetBrains Mono</p>
+					</div>
+				</div>
+				<div class="block">
+					<h3>Icône</h3>
+					<div class="toolbars">
+						<div class="toolbar light">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16"><use href="#logo-octane" /></svg><span class="ghost"></span>
+						</div>
+						<div class="toolbar dark">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16"><use href="#logo-octane" /></svg><span class="ghost"></span>
+						</div>
+					</div>
+					<div class="sizes">
+						<figure>
+							<svg width="16" height="16"><use href="#logo-octane" /></svg>16
+						</figure>
+						<figure>
+							<svg width="32" height="32"><use href="#logo-octane" /></svg>32
+						</figure>
+						<figure>
+							<svg width="48" height="48"><use href="#logo-octane" /></svg>48
+						</figure>
+						<figure>
+							<svg width="96" height="96"><use href="#logo-octane" /></svg>128
+						</figure>
+					</div>
+				</div>
+				<div class="block wide">
+					<h3>Store et page d'options</h3>
+					<div class="mocks">
+						<div>
+							<div class="tile">
+								<svg width="64" height="64"><use href="#logo-octane" /></svg>
+								<div class="t-name octane-word">Octane</div>
+								<div class="t-tag body-font">for GitHub · High-octane GitHub.</div>
+							</div>
+							<p class="cap">Petite vignette promo Chrome Web Store, 440 × 280</p>
+						</div>
+						<div class="opts body-font">
+							<div class="opts-bar">
+								<svg width="22" height="22"><use href="#logo-octane" /></svg
+								><span class="o-name octane-word">Octane</span><span class="o-sub">options</span>
+							</div>
+							<div class="opts-row">
+								<span class="toggle"></span>
+								<div><code>image-modal</code><span class="desc">Ouvre les images dans une modale zoomable</span></div>
+							</div>
+							<div class="opts-row">
+								<span class="toggle"></span>
+								<div>
+									<code>pr-list-diff-stats</code
+									><span class="desc">Lignes ajoutées et supprimées dans la liste des PR</span>
+								</div>
+							</div>
+							<div class="opts-row">
+								<span class="toggle off"></span>
+								<div><code>quick-comments</code><span class="desc">Commentaires prédéfinis en un clic</span></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- B -->
+	<section class="dir dir-ninth" aria-labelledby="dir-b">
+		<div class="wrap dir-inner">
+			<div class="dir-head">
+				<span class="dir-tag">Direction B · Pieuvre · ludique</span>
+				<h2 id="dir-b" class="wordmark ninth-word">ninth arm<em>.</em></h2>
+				<p class="tagline body-font">The arm GitHub forgot to grow.</p>
+				<p class="pitch">
+					Une pieuvre des grands fonds : bleu abysse, vert d'eau bioluminescent, et un seul bras magenta, celui que
+					l'extension ajoute. Les formes sont rondes et le titre en minuscules, pour un ton complice.
+				</p>
+			</div>
+			<div class="dir-grid">
+				<div class="block logo-big">
+					<svg viewBox="0 0 48 48" role="img" aria-label="Logo Ninth Arm"><use href="#logo-ninth" /></svg>
+				</div>
+				<div class="block">
+					<h3>Palette</h3>
+					<div class="swatches">
+						<button class="swatch" data-hex="#121833">
+							<div class="chip" style="background: #121833"></div>
+							<b>Abysse</b><span>#121833</span>
+						</button>
+						<button class="swatch" data-hex="#7FD6BE">
+							<div class="chip" style="background: #7fd6be"></div>
+							<b>Lueur</b><span>#7FD6BE</span>
+						</button>
+						<button class="swatch" data-hex="#E8457E">
+							<div class="chip" style="background: #e8457e"></div>
+							<b>9ᵉ bras</b><span>#E8457E</span>
+						</button>
+						<button class="swatch" data-hex="#1C2447">
+							<div class="chip" style="background: #1c2447"></div>
+							<b>Fosse</b><span>#1C2447</span>
+						</button>
+						<button class="swatch" data-hex="#ECEAFB">
+							<div class="chip" style="background: #eceafb"></div>
+							<b>Écume</b><span>#ECEAFB</span>
+						</button>
+						<button class="swatch" data-hex="#929AC0">
+							<div class="chip" style="background: #929ac0"></div>
+							<b>Brume</b><span>#929AC0</span>
+						</button>
+					</div>
+				</div>
+				<div class="block">
+					<h3>Typographie</h3>
+					<div class="specimen">
+						<div class="display ninth-word">review faster</div>
+						<p class="body body-font">Images zoomables, commentaires en un clic, taille de chaque PR dans la liste.</p>
+						<p class="mono mono-font">+128 −42 · 7 files · size/M</p>
+						<p class="meta">Bricolage Grotesque ExtraBold · Figtree · JetBrains Mono</p>
+					</div>
+				</div>
+				<div class="block">
+					<h3>Icône</h3>
+					<div class="toolbars">
+						<div class="toolbar light">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16"><use href="#logo-ninth" /></svg><span class="ghost"></span>
+						</div>
+						<div class="toolbar dark">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16"><use href="#logo-ninth" /></svg><span class="ghost"></span>
+						</div>
+					</div>
+					<div class="sizes">
+						<figure>
+							<svg width="16" height="16"><use href="#logo-ninth" /></svg>16
+						</figure>
+						<figure>
+							<svg width="32" height="32"><use href="#logo-ninth" /></svg>32
+						</figure>
+						<figure>
+							<svg width="48" height="48"><use href="#logo-ninth" /></svg>48
+						</figure>
+						<figure>
+							<svg width="96" height="96"><use href="#logo-ninth" /></svg>128
+						</figure>
+					</div>
+				</div>
+				<div class="block wide">
+					<h3>Store et page d'options</h3>
+					<div class="mocks">
+						<div>
+							<div class="tile">
+								<svg width="64" height="64"><use href="#logo-ninth" /></svg>
+								<div class="t-name ninth-word">ninth arm<span style="color: #e8457e">.</span></div>
+								<div class="t-tag body-font">for GitHub · The arm GitHub forgot to grow.</div>
+							</div>
+							<p class="cap">Petite vignette promo Chrome Web Store, 440 × 280</p>
+						</div>
+						<div class="opts body-font">
+							<div class="opts-bar">
+								<svg width="22" height="22"><use href="#logo-ninth" /></svg
+								><span class="o-name ninth-word">ninth arm</span><span class="o-sub">options</span>
+							</div>
+							<div class="opts-row">
+								<span class="toggle"></span>
+								<div><code>image-modal</code><span class="desc">Ouvre les images dans une modale zoomable</span></div>
+							</div>
+							<div class="opts-row">
+								<span class="toggle"></span>
+								<div>
+									<code>pr-list-diff-stats</code
+									><span class="desc">Lignes ajoutées et supprimées dans la liste des PR</span>
+								</div>
+							</div>
+							<div class="opts-row">
+								<span class="toggle off"></span>
+								<div><code>quick-comments</code><span class="desc">Commentaires prédéfinis en un clic</span></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- C -->
+	<section class="dir dir-whet" aria-labelledby="dir-c">
+		<div class="wrap dir-inner">
+			<div class="dir-head">
+				<span class="dir-tag">Direction C · Atelier · sobre</span>
+				<h2 id="dir-c" class="wordmark whet-word">Whetstone<em>/</em></h2>
+				<p class="tagline body-font">GitHub, sharpened.</p>
+				<p class="pitch">
+					Un établi propre : gris acier, une pierre à aiguiser en volume, une étincelle ambre. Les angles sont presque
+					droits et le titre en capitales condensées, comme une plaque d'outillage. Fond clair pour trancher avec les
+					deux autres.
+				</p>
+			</div>
+			<div class="dir-grid">
+				<div class="block logo-big">
+					<svg viewBox="0 0 48 48" role="img" aria-label="Logo Whetstone"><use href="#logo-whet" /></svg>
+				</div>
+				<div class="block">
+					<h3>Palette</h3>
+					<div class="swatches">
+						<button class="swatch" data-hex="#2B2F36">
+							<div class="chip" style="background: #2b2f36"></div>
+							<b>Ardoise</b><span>#2B2F36</span>
+						</button>
+						<button class="swatch" data-hex="#8A94A3">
+							<div class="chip" style="background: #8a94a3"></div>
+							<b>Acier</b><span>#8A94A3</span>
+						</button>
+						<button class="swatch" data-hex="#D9801E">
+							<div class="chip" style="background: #d9801e"></div>
+							<b>Étincelle</b><span>#D9801E</span>
+						</button>
+						<button class="swatch" data-hex="#4A515C">
+							<div class="chip" style="background: #4a515c"></div>
+							<b>Grain</b><span>#4A515C</span>
+						</button>
+						<button class="swatch" data-hex="#E3E6E9">
+							<div class="chip" style="background: #e3e6e9"></div>
+							<b>Établi</b><span>#E3E6E9</span>
+						</button>
+						<button class="swatch" data-hex="#F3F4F5">
+							<div class="chip" style="background: #f3f4f5"></div>
+							<b>Fil</b><span>#F3F4F5</span>
+						</button>
+					</div>
+				</div>
+				<div class="block">
+					<h3>Typographie</h3>
+					<div class="specimen">
+						<div class="display whet-word">Review faster</div>
+						<p class="body body-font">Images zoomables, commentaires en un clic, taille de chaque PR dans la liste.</p>
+						<p class="mono mono-font">+128 −42 · 7 files · size/M</p>
+						<p class="meta">IBM Plex Sans Condensed Bold · Plex Sans Condensed · Plex Mono</p>
+					</div>
+				</div>
+				<div class="block">
+					<h3>Icône</h3>
+					<div class="toolbars">
+						<div class="toolbar light">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16"><use href="#logo-whet" /></svg><span class="ghost"></span>
+						</div>
+						<div class="toolbar dark">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16"><use href="#logo-whet" /></svg><span class="ghost"></span>
+						</div>
+					</div>
+					<div class="sizes">
+						<figure>
+							<svg width="16" height="16"><use href="#logo-whet" /></svg>16
+						</figure>
+						<figure>
+							<svg width="32" height="32"><use href="#logo-whet" /></svg>32
+						</figure>
+						<figure>
+							<svg width="48" height="48"><use href="#logo-whet" /></svg>48
+						</figure>
+						<figure>
+							<svg width="96" height="96"><use href="#logo-whet" /></svg>128
+						</figure>
+					</div>
+				</div>
+				<div class="block wide">
+					<h3>Store et page d'options</h3>
+					<div class="mocks">
+						<div>
+							<div class="tile">
+								<svg width="64" height="64"><use href="#logo-whet" /></svg>
+								<div class="t-name whet-word">Whetstone</div>
+								<div class="t-tag body-font">for GitHub · GitHub, sharpened.</div>
+							</div>
+							<p class="cap">Petite vignette promo Chrome Web Store, 440 × 280</p>
+						</div>
+						<div class="opts body-font">
+							<div class="opts-bar">
+								<svg width="22" height="22"><use href="#logo-whet" /></svg
+								><span class="o-name whet-word">Whetstone</span><span class="o-sub">options</span>
+							</div>
+							<div class="opts-row">
+								<span class="toggle"></span>
+								<div><code>image-modal</code><span class="desc">Ouvre les images dans une modale zoomable</span></div>
+							</div>
+							<div class="opts-row">
+								<span class="toggle"></span>
+								<div>
+									<code>pr-list-diff-stats</code
+									><span class="desc">Lignes ajoutées et supprimées dans la liste des PR</span>
+								</div>
+							</div>
+							<div class="opts-row">
+								<span class="toggle off"></span>
+								<div><code>quick-comments</code><span class="desc">Commentaires prédéfinis en un clic</span></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- D -->
+	<section class="dir dir-super" aria-labelledby="dir-d">
+		<div class="wrap dir-inner">
+			<div class="dir-head">
+				<span class="dir-tag">Direction D · Puissance · pro</span>
+				<h2 id="dir-d" class="wordmark super-word">Supercharged <span class="gh">GitHub</span></h2>
+				<p class="tagline body-font">More power to your pull requests.</p>
+				<p class="pitch">
+					Le compresseur qui suralimente un moteur : une roue de turbine cobalt sur fond encre et papier, rien d'autre.
+					« Supercharged » porte la marque et « GitHub » est composé plus léger, pour qu'on lise d'abord le nom de
+					l'extension. Ni pieuvre ni Octocat : la marque GitHub n'apparaît que dans le texte.
+				</p>
+			</div>
+			<div class="dir-grid">
+				<div class="block logo-big">
+					<svg viewBox="0 0 48 48" role="img" aria-label="Logo Supercharged GitHub"><use href="#logo-super" /></svg>
+				</div>
+				<div class="block">
+					<h3>Palette</h3>
+					<div class="swatches">
+						<button class="swatch" data-hex="#2747D9">
+							<div class="chip" style="background: #2747d9"></div>
+							<b>Cobalt</b><span>#2747D9</span>
+						</button>
+						<button class="swatch" data-hex="#10131A">
+							<div class="chip" style="background: #10131a"></div>
+							<b>Encre</b><span>#10131A</span>
+						</button>
+						<button class="swatch" data-hex="#2A303C">
+							<div class="chip" style="background: #2a303c"></div>
+							<b>Graphite</b><span>#2A303C</span>
+						</button>
+						<button class="swatch" data-hex="#5D6575">
+							<div class="chip" style="background: #5d6575"></div>
+							<b>Acier</b><span>#5D6575</span>
+						</button>
+						<button class="swatch" data-hex="#D8DCE3">
+							<div class="chip" style="background: #d8dce3"></div>
+							<b>Brume</b><span>#D8DCE3</span>
+						</button>
+						<button class="swatch" data-hex="#F5F6F8">
+							<div class="chip" style="background: #f5f6f8"></div>
+							<b>Papier</b><span>#F5F6F8</span>
+						</button>
+					</div>
+				</div>
+				<div class="block">
+					<h3>Typographie</h3>
+					<div class="specimen">
+						<div class="display super-word">Review faster</div>
+						<p class="body body-font">Images zoomables, commentaires en un clic, taille de chaque PR dans la liste.</p>
+						<p class="mono mono-font">+128 −42 · 7 files · size/M</p>
+						<p class="meta">Red Hat Display ExtraBold · Red Hat Text · Red Hat Mono</p>
+					</div>
+				</div>
+				<div class="block">
+					<h3>Icône</h3>
+					<div class="toolbars">
+						<div class="toolbar light">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16"><use href="#logo-super" /></svg><span class="ghost"></span>
+						</div>
+						<div class="toolbar dark">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16"><use href="#logo-super" /></svg><span class="ghost"></span>
+						</div>
+					</div>
+					<div class="sizes">
+						<figure>
+							<svg width="16" height="16"><use href="#logo-super" /></svg>16
+						</figure>
+						<figure>
+							<svg width="32" height="32"><use href="#logo-super" /></svg>32
+						</figure>
+						<figure>
+							<svg width="48" height="48"><use href="#logo-super" /></svg>48
+						</figure>
+						<figure>
+							<svg width="96" height="96"><use href="#logo-super" /></svg>128
+						</figure>
+					</div>
+				</div>
+				<div class="block wide">
+					<h3>Store et page d'options</h3>
+					<div class="mocks">
+						<div>
+							<div class="tile">
+								<svg width="64" height="64"><use href="#logo-super" /></svg>
+								<div class="t-name super-word">Supercharged <span class="gh">GitHub</span></div>
+								<div class="t-tag body-font">More power to your pull requests.</div>
+							</div>
+							<p class="cap">Petite vignette promo Chrome Web Store, 440 × 280</p>
+						</div>
+						<div class="opts body-font">
+							<div class="opts-bar">
+								<svg width="22" height="22"><use href="#logo-super" /></svg
+								><span class="o-name super-word">Supercharged <span class="gh">GitHub</span></span
+								><span class="o-sub">options</span>
+							</div>
+							<div class="opts-row">
+								<span class="toggle"></span>
+								<div><code>image-modal</code><span class="desc">Ouvre les images dans une modale zoomable</span></div>
+							</div>
+							<div class="opts-row">
+								<span class="toggle"></span>
+								<div>
+									<code>pr-list-diff-stats</code
+									><span class="desc">Lignes ajoutées et supprimées dans la liste des PR</span>
+								</div>
+							</div>
+							<div class="opts-row">
+								<span class="toggle off"></span>
+								<div><code>quick-comments</code><span class="desc">Commentaires prédéfinis en un clic</span></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="wrap section" aria-labelledby="regles">
+		<h2 id="regles">Où la charte s'applique</h2>
+		<div class="rules">
+			<div class="rule">
+				<h3>Icône, options, stores, README</h3>
+				<p>Toute la charte : logo, palette, typos. C'est là qu'on reconnaît l'extension.</p>
+			</div>
+			<div class="rule">
+				<h3>UI injectée dans GitHub</h3>
+				<p>
+					Primer uniquement : variables CSS de GitHub, octicons, police système. Un bouton aux couleurs de la marque
+					dans une PR détonnerait et casserait les thèmes de GitHub.
+				</p>
+			</div>
+			<div class="rule">
+				<h3>Manifest</h3>
+				<p>
+					Icônes PNG en 16, 32, 48 et 128 générées depuis le SVG. Le 16 px doit rester lisible sur les barres d'outils
+					claires comme sombres.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="wrap section" aria-labelledby="trancher">
+		<h2 id="trancher">À trancher</h2>
+		<ol class="questions">
+			<li>
+				Quelle direction : A, B, C ou D ? On peut aussi en mélanger deux, par exemple un nom avec la palette d'une autre
+				direction.
+			</li>
+			<li>Quel schéma de nom : « X for GitHub », ou un adjectif à la Refined GitHub ?</li>
+			<li>
+				Une fois le choix fait : renommer le repo, le manifest et l'id Gecko, générer les icônes PNG et habiller la page
+				d'options.
+			</li>
+		</ol>
+	</section>
+
+	<footer class="wrap">Cliquer sur une couleur copie son code hexadécimal.</footer>
+
+	<div class="toast" id="toast" hidden></div>
+
+	<script>
+		const toast = document.getElementById('toast');
+		let toastTimer;
+		function show(msg) {
+			toast.textContent = msg;
+			toast.hidden = false;
+			clearTimeout(toastTimer);
+			toastTimer = setTimeout(() => {
+				toast.hidden = true;
+			}, 1400);
+		}
+		document.querySelectorAll('.swatch').forEach((btn) => {
+			btn.addEventListener('click', () => {
+				const hex = btn.dataset.hex;
+				navigator.clipboard
+					.writeText(hex)
+					.then(() => show(hex + ' copié'))
+					.catch(() => show(hex));
+			});
+		});
+	</script>
+</html>

@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Feature map</title>
+		<style>
+			body {
+				margin: 0;
+				background: #ffffff;
+			}
+			a {
+				color: #0969da;
+			}
+			a:hover {
+				color: #0550ae;
+			}
+		</style>
+	</head>
+	<body>
+		<div
+			style="
+				width: 100%;
+				background: #ffffff;
+				color: #1f2328;
+				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+				font-size: 16px;
+				line-height: 1.5;
+			"
+		>
+			<header style="border-bottom: 1px solid #d1d9e0">
+				<nav
+					aria-label="Main"
+					style="
+						max-width: 1120px;
+						margin: 0 auto;
+						padding: 16px 24px;
+						display: flex;
+						flex-wrap: wrap;
+						align-items: center;
+						gap: 16px 32px;
+					"
+				>
+					<a
+						href="MoreFeatures.html"
+						style="
+							display: inline-flex;
+							align-items: center;
+							gap: 10px;
+							color: #1f2328;
+							text-decoration: none;
+							font-weight: 700;
+							font-size: 18px;
+						"
+					>
+						<span aria-hidden="true" style="width: 28px; height: 28px; border-radius: 7px; background: #0969da"></span>
+						GitHub Power
+					</a>
+					<div style="display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 14px; flex: 1 1 auto">
+						<a
+							href="FeatureMap.html"
+							aria-current="page"
+							style="color: #1f2328; font-weight: 600; text-decoration: none"
+							>Features</a
+						>
+						<a href="MoreFeatures.html#install" style="color: #59636e; text-decoration: none">Install</a>
+					</div>
+					<a
+						href="https://github.com/vmaerten/github-power"
+						style="font-size: 14px; color: #1f2328; text-decoration: none; font-weight: 600"
+						>Source on GitHub</a
+					>
+				</nav>
+			</header>
+
+			<section
+				style="
+					max-width: 1120px;
+					margin: 0 auto;
+					padding: 56px 24px 32px;
+					display: flex;
+					flex-direction: column;
+					gap: 8px;
+				"
+			>
+				<h1 style="margin: 0; font-size: 40px; letter-spacing: -0.015em">What changes, and where</h1>
+				<p style="margin: 0; color: #59636e; max-width: 640px">
+					Every feature lives on a GitHub page you already use. Pick one to see what it does.
+				</p>
+			</section>
+
+			<section
+				aria-label="Feature map"
+				style="
+					max-width: 1120px;
+					margin: 0 auto;
+					padding: 0 24px 96px;
+					display: flex;
+					flex-wrap: wrap;
+					align-items: flex-start;
+					gap: 24px;
+				"
+			>
+				<div
+					style="
+						flex: 999 1 600px;
+						min-width: 0;
+						display: grid;
+						grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+						gap: 16px;
+					"
+				>
+					<div style="border: 1px solid #d1d9e0; border-radius: 12px; overflow: hidden; background: #ffffff">
+						<div
+							style="
+								padding: 10px 14px;
+								background: #f6f8fa;
+								border-bottom: 1px solid #d1d9e0;
+								display: flex;
+								flex-direction: column;
+								gap: 6px;
+							"
+						>
+							<span style="font-size: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: #59636e"
+								>/pulls</span
+							>
+							<span style="font-weight: 600">PR list</span>
+						</div>
+						<div aria-hidden="true" style="padding: 12px 14px 0; display: flex; flex-direction: column; gap: 6px">
+							<span style="height: 6px; width: 80%; border-radius: 3px; background: #eaeef2"></span>
+							<span style="height: 6px; width: 55%; border-radius: 3px; background: #eaeef2"></span>
+						</div>
+						<div style="padding: 12px 14px 14px; display: flex; flex-wrap: wrap; gap: 6px">
+							<button
+								type="button"
+								aria-pressed="true"
+								style="
+									min-height: 32px;
+									padding: 0 10px;
+									border-radius: 6px;
+									border: 1px solid #0969da;
+									background: #0969da;
+									color: #ffffff;
+									font: inherit;
+									font-size: 13px;
+									font-weight: 600;
+									cursor: pointer;
+								"
+							>
+								Review status
+							</button>
+
+							<button
+								type="button"
+								aria-pressed="false"
+								style="
+									min-height: 32px;
+									padding: 0 10px;
+									border-radius: 6px;
+									border: 1px solid #b6e3ff;
+									background: #ddf4ff;
+									color: #0550ae;
+									font: inherit;
+									font-size: 13px;
+									font-weight: 600;
+									cursor: pointer;
+								"
+							>
+								Diff stats
+							</button>
+
+							<button
+								type="button"
+								aria-pressed="false"
+								style="
+									min-height: 32px;
+									padding: 0 10px;
+									border-radius: 6px;
+									border: 1px solid #b6e3ff;
+									background: #ddf4ff;
+									color: #0550ae;
+									font: inherit;
+									font-size: 13px;
+									font-weight: 600;
+									cursor: pointer;
+								"
+							>
+								Idle PRs
+							</button>
+						</div>
+					</div>
+
+					<div style="border: 1px solid #d1d9e0; border-radius: 12px; overflow: hidden; background: #ffffff">
+						<div
+							style="
+								padding: 10px 14px;
+								background: #f6f8fa;
+								border-bottom: 1px solid #d1d9e0;
+								display: flex;
+								flex-direction: column;
+								gap: 6px;
+							"
+						>
+							<span style="font-size: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: #59636e"
+								>/pull/123</span
+							>
+							<span style="font-weight: 600">Reviewers picker</span>
+						</div>
+						<div aria-hidden="true" style="padding: 12px 14px 0; display: flex; flex-direction: column; gap: 6px">
+							<span style="height: 6px; width: 80%; border-radius: 3px; background: #eaeef2"></span>
+							<span style="height: 6px; width: 55%; border-radius: 3px; background: #eaeef2"></span>
+						</div>
+						<div style="padding: 12px 14px 14px; display: flex; flex-wrap: wrap; gap: 6px">
+							<button
+								type="button"
+								aria-pressed="false"
+								style="
+									min-height: 32px;
+									padding: 0 10px;
+									border-radius: 6px;
+									border: 1px solid #b6e3ff;
+									background: #ddf4ff;
+									color: #0550ae;
+									font: inherit;
+									font-size: 13px;
+									font-weight: 600;
+									cursor: pointer;
+								"
+							>
+								Reviewer load
+							</button>
+						</div>
+					</div>
+
+					<div style="border: 1px solid #d1d9e0; border-radius: 12px; overflow: hidden; background: #ffffff">
+						<div
+							style="
+								padding: 10px 14px;
+								background: #f6f8fa;
+								border-bottom: 1px solid #d1d9e0;
+								display: flex;
+								flex-direction: column;
+								gap: 6px;
+							"
+						>
+							<span style="font-size: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: #59636e"
+								>/pull/123/files</span
+							>
+							<span style="font-weight: 600">Files changed</span>
+						</div>
+						<div aria-hidden="true" style="padding: 12px 14px 0; display: flex; flex-direction: column; gap: 6px">
+							<span style="height: 6px; width: 80%; border-radius: 3px; background: #eaeef2"></span>
+							<span style="height: 6px; width: 55%; border-radius: 3px; background: #eaeef2"></span>
+						</div>
+						<div style="padding: 12px 14px 14px; display: flex; flex-wrap: wrap; gap: 6px">
+							<button
+								type="button"
+								aria-pressed="false"
+								style="
+									min-height: 32px;
+									padding: 0 10px;
+									border-radius: 6px;
+									border: 1px solid #d1d9e0;
+									background: #ffffff;
+									color: #59636e;
+									font: inherit;
+									font-size: 13px;
+									font-weight: 600;
+									cursor: pointer;
+								"
+							>
+								Collapse generated files
+							</button>
+
+							<button
+								type="button"
+								aria-pressed="false"
+								style="
+									min-height: 32px;
+									padding: 0 10px;
+									border-radius: 6px;
+									border: 1px solid #d1d9e0;
+									background: #ffffff;
+									color: #59636e;
+									font: inherit;
+									font-size: 13px;
+									font-weight: 600;
+									cursor: pointer;
+								"
+							>
+								Folder diff stats
+							</button>
+
+							<button
+								type="button"
+								aria-pressed="false"
+								style="
+									min-height: 32px;
+									padding: 0 10px;
+									border-radius: 6px;
+									border: 1px solid #d1d9e0;
+									background: #ffffff;
+									color: #59636e;
+									font: inherit;
+									font-size: 13px;
+									font-weight: 600;
+									cursor: pointer;
+								"
+							>
+								Weighted review progress
+							</button>
+						</div>
+					</div>
+
+					<div style="border: 1px solid #d1d9e0; border-radius: 12px; overflow: hidden; background: #ffffff">
+						<div
+							style="
+								padding: 10px 14px;
+								background: #f6f8fa;
+								border-bottom: 1px solid #d1d9e0;
+								display: flex;
+								flex-direction: column;
+								gap: 6px;
+							"
+						>
+							<span style="font-size: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: #59636e"
+								>/pull/123</span
+							>
+							<span style="font-weight: 600">Comment box</span>
+						</div>
+						<div aria-hidden="true" style="padding: 12px 14px 0; display: flex; flex-direction: column; gap: 6px">
+							<span style="height: 6px; width: 80%; border-radius: 3px; background: #eaeef2"></span>
+							<span style="height: 6px; width: 55%; border-radius: 3px; background: #eaeef2"></span>
+						</div>
+						<div style="padding: 12px 14px 14px; display: flex; flex-wrap: wrap; gap: 6px">
+							<button
+								type="button"
+								aria-pressed="false"
+								style="
+									min-height: 32px;
+									padding: 0 10px;
+									border-radius: 6px;
+									border: 1px solid #b6e3ff;
+									background: #ddf4ff;
+									color: #0550ae;
+									font: inherit;
+									font-size: 13px;
+									font-weight: 600;
+									cursor: pointer;
+								"
+							>
+								Quick comments
+							</button>
+
+							<button
+								type="button"
+								aria-pressed="false"
+								style="
+									min-height: 32px;
+									padding: 0 10px;
+									border-radius: 6px;
+									border: 1px solid #d1d9e0;
+									background: #ffffff;
+									color: #59636e;
+									font: inherit;
+									font-size: 13px;
+									font-weight: 600;
+									cursor: pointer;
+								"
+							>
+								Conventional Comments
+							</button>
+						</div>
+					</div>
+
+					<div style="border: 1px solid #d1d9e0; border-radius: 12px; overflow: hidden; background: #ffffff">
+						<div
+							style="
+								padding: 10px 14px;
+								background: #f6f8fa;
+								border-bottom: 1px solid #d1d9e0;
+								display: flex;
+								flex-direction: column;
+								gap: 6px;
+							"
+						>
+							<span style="font-size: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: #59636e"
+								>/pull/123</span
+							>
+							<span style="font-weight: 600">Conversation</span>
+						</div>
+						<div aria-hidden="true" style="padding: 12px 14px 0; display: flex; flex-direction: column; gap: 6px">
+							<span style="height: 6px; width: 80%; border-radius: 3px; background: #eaeef2"></span>
+							<span style="height: 6px; width: 55%; border-radius: 3px; background: #eaeef2"></span>
+						</div>
+						<div style="padding: 12px 14px 14px; display: flex; flex-wrap: wrap; gap: 6px">
+							<button
+								type="button"
+								aria-pressed="false"
+								style="
+									min-height: 32px;
+									padding: 0 10px;
+									border-radius: 6px;
+									border: 1px solid #d1d9e0;
+									background: #ffffff;
+									color: #59636e;
+									font: inherit;
+									font-size: 13px;
+									font-weight: 600;
+									cursor: pointer;
+								"
+							>
+								Unresolved conversations
+							</button>
+
+							<button
+								type="button"
+								aria-pressed="false"
+								style="
+									min-height: 32px;
+									padding: 0 10px;
+									border-radius: 6px;
+									border: 1px solid #d1d9e0;
+									background: #ffffff;
+									color: #59636e;
+									font: inherit;
+									font-size: 13px;
+									font-weight: 600;
+									cursor: pointer;
+								"
+							>
+								Ticket links
+							</button>
+						</div>
+					</div>
+
+					<div style="border: 1px solid #d1d9e0; border-radius: 12px; overflow: hidden; background: #ffffff">
+						<div
+							style="
+								padding: 10px 14px;
+								background: #f6f8fa;
+								border-bottom: 1px solid #d1d9e0;
+								display: flex;
+								flex-direction: column;
+								gap: 6px;
+							"
+						>
+							<span style="font-size: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: #59636e"
+								>issues, PRs, READMEs</span
+							>
+							<span style="font-weight: 600">Images</span>
+						</div>
+						<div aria-hidden="true" style="padding: 12px 14px 0; display: flex; flex-direction: column; gap: 6px">
+							<span style="height: 6px; width: 80%; border-radius: 3px; background: #eaeef2"></span>
+							<span style="height: 6px; width: 55%; border-radius: 3px; background: #eaeef2"></span>
+						</div>
+						<div style="padding: 12px 14px 14px; display: flex; flex-wrap: wrap; gap: 6px">
+							<button
+								type="button"
+								aria-pressed="false"
+								style="
+									min-height: 32px;
+									padding: 0 10px;
+									border-radius: 6px;
+									border: 1px solid #b6e3ff;
+									background: #ddf4ff;
+									color: #0550ae;
+									font: inherit;
+									font-size: 13px;
+									font-weight: 600;
+									cursor: pointer;
+								"
+							>
+								Image modal
+							</button>
+
+							<button
+								type="button"
+								aria-pressed="false"
+								style="
+									min-height: 32px;
+									padding: 0 10px;
+									border-radius: 6px;
+									border: 1px solid #d1d9e0;
+									background: #ffffff;
+									color: #59636e;
+									font: inherit;
+									font-size: 13px;
+									font-weight: 600;
+									cursor: pointer;
+								"
+							>
+								Before/after slider
+							</button>
+						</div>
+					</div>
+				</div>
+
+				<aside
+					aria-live="polite"
+					style="
+						flex: 1 1 280px;
+						padding: 24px;
+						border: 1px solid #d1d9e0;
+						border-radius: 12px;
+						background: #f6f8fa;
+						display: flex;
+						flex-direction: column;
+						gap: 12px;
+					"
+				>
+					<span style="font-size: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: #59636e"
+						>PR list · /pulls</span
+					>
+					<h2 style="margin: 0; font-size: 24px; line-height: 1.2">Review status</h2>
+					<p style="margin: 0; color: #1f2328">Where each PR stands for you, on every row of the list.</p>
+					<div style="display: flex; flex-wrap: wrap; gap: 6px; font-size: 12px">
+						<span style="padding: 2px 8px; border-radius: 6px; background: #ffffff; border: 1px solid #d1d9e0"
+							>Triage</span
+						>
+						<span style="padding: 2px 8px; border-radius: 6px; background: #dafbe1; color: #116329">Available</span>
+					</div>
+					<a href="FeatureDetail.html" style="font-weight: 600; text-decoration: none">Read more →</a>
+				</aside>
+			</section>
+
+			<footer style="border-top: 1px solid #d1d9e0">
+				<div
+					style="
+						max-width: 1120px;
+						margin: 0 auto;
+						padding: 28px 24px;
+						display: flex;
+						flex-wrap: wrap;
+						justify-content: space-between;
+						gap: 16px;
+						font-size: 14px;
+						color: #59636e;
+					"
+				>
+					<span>GitHub Power · Not affiliated with GitHub</span>
+					<a href="FeatureCatalog.html">Plain list of all features</a>
+				</div>
+			</footer>
+		</div>
+	</body>
+</html>

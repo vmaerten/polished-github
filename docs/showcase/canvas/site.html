@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+		<title>Maquettes du site</title>
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@600;700&family=Funnel+Sans:wght@400;600&display=swap"
+		/>
+		<link rel="stylesheet" href="canvas.css" />
+	</head>
+	<body>
+		<header class="bar">
+			<a href="../index.html" target="_top">← Retour</a>
+			<h1>Maquettes du site</h1>
+			<p class="hint">
+				Glisser pour se déplacer · ⌘ ou Ctrl + molette pour zoomer · double-clic pour cadrer une maquette · clic sur un
+				titre pour l'ouvrir en pleine page
+			</p>
+			<div class="zoom">
+				<button type="button" id="zoom-out" aria-label="Dézoomer">−</button>
+				<output id="zoom-value">100 %</output>
+				<button type="button" id="zoom-in" aria-label="Zoomer">+</button>
+				<button type="button" id="zoom-fit">Tout voir</button>
+			</div>
+		</header>
+		<main class="viewport" id="viewport" aria-label="Canevas des maquettes">
+			<div class="world" id="world"></div>
+		</main>
+		<script>
+			window.CANVAS = {
+				boards: [
+					{src: '../mockups/site/Main.html', title: 'A · Vitrine classique', x: 0, y: 0, w: 1280, h: 3600},
+					{src: '../mockups/site/Demo.html', title: "B · Démo interactive d'abord", x: 1360, y: 0, w: 1280, h: 2900},
+					{src: '../mockups/site/Workflow.html', title: 'C · Une journée de review', x: 2720, y: 0, w: 1280, h: 3900},
+					{
+						src: '../mockups/site/DemoShowcase.html',
+						title: "D · B avec l'en-tête de A",
+						x: 4080,
+						y: 0,
+						w: 1280,
+						h: 3000,
+					},
+					{
+						src: '../mockups/site/ShowcaseRebuilt.html',
+						title: 'E · A avec visuels générés',
+						x: 5440,
+						y: 0,
+						w: 1280,
+						h: 3700,
+					},
+					{
+						src: '../mockups/site/MoreFeatures.html',
+						title: 'F · Landing : 3 vedettes + « And 10 more »',
+						x: 0,
+						y: 4320,
+						w: 1280,
+						h: 2500,
+					},
+					{
+						src: '../mockups/site/FeatureCatalog.html',
+						title: 'G · Page /features filtrable',
+						x: 1360,
+						y: 4320,
+						w: 1280,
+						h: 1900,
+					},
+					{
+						src: '../mockups/site/FeatureDetail.html',
+						title: "H · Page d'une feature, sidebar façon doc",
+						x: 2720,
+						y: 4320,
+						w: 1280,
+						h: 2300,
+					},
+					{
+						src: '../mockups/site/FeatureMap.html',
+						title: 'I · Carte : où ça agit sur GitHub',
+						x: 4080,
+						y: 4320,
+						w: 1280,
+						h: 1500,
+					},
+					{
+						src: '../mockups/site/DemoPlusMore.html',
+						title: 'J · D + F + FAQ : démo, 2 vedettes, le reste en liste',
+						x: 0,
+						y: 7240,
+						w: 1280,
+						h: 3650,
+					},
+					{
+						src: '../mockups/site/ShowcasePlusMore.html',
+						title: 'K · E + F : visuels générés, 3 vedettes, le reste en liste',
+						x: 1360,
+						y: 7240,
+						w: 1280,
+						h: 3500,
+					},
+					{
+						src: '../mockups/site/ShowcaseToggle.html',
+						title: 'L · K avec le bouton de J',
+						x: 2720,
+						y: 7240,
+						w: 1280,
+						h: 3650,
+					},
+				],
+				notes: [
+					{x: 0, y: -300, text: 'Site de présentation : 5 structures de contenu'},
+					{x: 0, y: 4020, text: 'Passer à 10–20 features : 4 propositions'},
+					{x: 0, y: 6940, text: 'Combinaisons : F avec D, F avec E, puis L'},
+				],
+			};
+		</script>
+		<script src="canvas.js"></script>
+	</body>
+</html>
