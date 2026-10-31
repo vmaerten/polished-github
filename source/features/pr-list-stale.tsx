@@ -24,11 +24,7 @@ function addBadge(title: HTMLElement, days: number): void {
 	addTitleBadge(
 		title,
 		badgeClass,
-		<span
-			className={`Label Label--severe ${badgeClass}`}
-			title={`No activity for ${days} days`}
-			style={{marginLeft: '8px'}}
-		>
+		<span className={`Label Label--severe ${badgeClass}`} title={`No activity for ${days} days`}>
 			Idle {days}d
 		</span>,
 	);

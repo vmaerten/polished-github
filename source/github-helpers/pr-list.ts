@@ -72,10 +72,33 @@ export function forEachListedPullRequest<T>(
 	);
 }
 
-/** Adds `badge`, which carries `className`, after a PR title unless that title already has one. */
+const badgesClass = 'github-power-title-badges';
+
+// Inside the title: its siblings are cells of the row's CSS grid, where extra elements land in random cells
+function getBadgesContainer(title: HTMLElement): HTMLElement {
+	const existing = title.querySelector<HTMLElement>(`:scope > .${badgesClass}`);
+	if (existing) {
+		return existing;
+	}
+
+	const container = document.createElement('span');
+	container.className = badgesClass;
+	Object.assign(container.style, {
+		display: 'inline-flex',
+		flexWrap: 'wrap',
+		alignItems: 'center',
+		gap: '6px',
+		marginLeft: '8px',
+		verticalAlign: 'middle',
+	});
+	title.append(container);
+	return container;
+}
+
+/** Adds `badge`, which carries `className`, next to a PR title unless that title already has one. */
 export function addTitleBadge(title: HTMLElement, className: TitleBadgeClass, badge: Element): void {
-	const container = title.parentElement;
-	if (!container || container.querySelector(`:scope > .${className}`)) {
+	const container = getBadgesContainer(title);
+	if (container.querySelector(`:scope > .${className}`)) {
 		return;
 	}
 
@@ -84,5 +107,9 @@ export function addTitleBadge(title: HTMLElement, className: TitleBadgeClass, ba
 		.toReversed()
 		.map((previousClass) => container.querySelector(`:scope > .${previousClass}`))
 		.find((element) => element !== null);
-	(previous ?? title).after(badge);
+	if (previous) {
+		previous.after(badge);
+	} else {
+		container.prepend(badge);
+	}
 }

@@ -29,7 +29,6 @@ function addBadge(title: HTMLElement, stats: DiffStats, settings: DiffStatsSetti
 			className={badgeClass}
 			title={`${files} changed`}
 			style={{
-				marginLeft: '8px',
 				fontFamily: 'var(--fontStack-monospace, monospace)',
 				fontSize: '12px',
 				fontWeight: '600',

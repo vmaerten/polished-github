@@ -17,8 +17,7 @@ test('keeps badges in a fixed order whichever arrives first, once each', () => {
 	addTitleBadge(title, 'github-power-review-status', badge('github-power-review-status'));
 	addTitleBadge(title, 'github-power-diff-stats', badge('github-power-diff-stats'));
 
-	expect([...title.parentElement!.children].map((child) => child.className)).toEqual([
-		'',
+	expect([...title.querySelector('.github-power-title-badges')!.children].map((child) => child.className)).toEqual([
 		'github-power-diff-stats',
 		'github-power-review-status',
 		'github-power-stale',

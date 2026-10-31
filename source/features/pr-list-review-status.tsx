@@ -58,7 +58,7 @@ function addBadge(title: HTMLElement, status: ReviewStatus): void {
 	addTitleBadge(
 		title,
 		badgeClass,
-		<span className={`Label ${label} ${badgeClass}`} title={tooltip} style={{marginLeft: '8px'}}>
+		<span className={`Label ${label} ${badgeClass}`} title={tooltip}>
 			{text}
 		</span>,
 	);
