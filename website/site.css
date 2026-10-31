@@ -424,6 +424,10 @@ input:focus-visible {
 	gap: 20px;
 	overflow-x: auto;
 }
+/* .pr-main grows along the row in the list; in this column it would take 320px of height */
+.closeup .pr-main {
+	flex: none;
+}
 .closeup-grid {
 	display: grid;
 	grid-template-columns: 210px 200px 56px;
