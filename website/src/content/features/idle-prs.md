@@ -12,24 +12,24 @@ featured: true
 <figure class="prlist" style="margin: 0; box-shadow: none" aria-label="PR rows flagged as idle">
 	<div class="pr-row" style="border-top: 0">
 		<div class="pr-main">
-			<span class="pr-title">feat: OpenTelemetry tracing for task execution</span
-			><span class="pr-meta">#3077 opened last week by caseycs</span>
-		</div>
-		<span class="idle" style="font-size: 13px"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="6.25"></circle><path d="M8 4.5V8l2.5 1.5"></path></svg>9d</span>
-	</div>
-	<div class="pr-row">
-		<div class="pr-main">
-			<span class="pr-title">feat(input): add search and scrolling to choice prompts</span
-			><span class="pr-meta">#3071 opened 2 weeks ago by vmaerten</span>
-		</div>
-		<span class="idle" style="font-size: 13px"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="6.25"></circle><path d="M8 4.5V8l2.5 1.5"></path></svg>16d</span>
-	</div>
-	<div class="pr-row">
-		<div class="pr-main">
 			<span class="pr-title">refactor(watch): detect filesystem changes with fsbroker</span
-			><span class="pr-meta">#3064 opened last month by andreynering</span>
+			><span class="pr-meta">#3064 opened 3 weeks ago by andreynering</span>
 		</div>
-		<span class="idle" style="font-size: 13px"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="6.25"></circle><path d="M8 4.5V8l2.5 1.5"></path></svg>17d</span>
+		<span class="idle" style="font-size: 13px"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="6.25"></circle><path d="M8 4.5V8l2.5 1.5"></path></svg>18d</span>
+	</div>
+	<div class="pr-row">
+		<div class="pr-main">
+			<span class="pr-title">feat: support scoped dotenv in included taskfiles</span
+			><span class="pr-meta">#3029 opened on Sep 13 by vmaerten</span>
+		</div>
+		<span class="idle" style="font-size: 13px"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="6.25"></circle><path d="M8 4.5V8l2.5 1.5"></path></svg>42d</span>
+	</div>
+	<div class="pr-row">
+		<div class="pr-main">
+			<span class="pr-title">feat: split executor and reader</span
+			><span class="pr-meta">#2366 opened on Aug 11, 2025 by pd93</span>
+		</div>
+		<span class="idle" style="font-size: 13px"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="6.25"></circle><path d="M8 4.5V8l2.5 1.5"></path></svg>87d</span>
 	</div>
 </figure>
 
