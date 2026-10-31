@@ -1,0 +1,1746 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Showcase with live comparison</title>
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@500;600;700&family=Funnel+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fragment+Mono&display=swap"
+		/>
+		<style>
+			body {
+				margin: 0;
+				background: #ffffff;
+			}
+			h1,
+			h2,
+			h3 {
+				font-family: 'Funnel Display', 'Funnel Sans', system-ui, sans-serif;
+				text-wrap: balance;
+			}
+			p {
+				text-wrap: pretty;
+			}
+			a {
+				color: #0969da;
+			}
+			a:hover {
+				color: #0550ae;
+			}
+		</style>
+	</head>
+	<body>
+		<div
+			style="
+				width: 100%;
+				background: #ffffff;
+				color: #1f2328;
+				font-family:
+					'Funnel Sans',
+					system-ui,
+					-apple-system,
+					'Segoe UI',
+					sans-serif;
+				font-size: 16px;
+				line-height: 1.5;
+			"
+		>
+			<header style="border-bottom: 1px solid #d1d9e0">
+				<nav
+					aria-label="Main"
+					style="
+						max-width: 1120px;
+						margin: 0 auto;
+						padding: 16px 24px;
+						display: flex;
+						flex-wrap: wrap;
+						align-items: center;
+						gap: 16px 32px;
+					"
+				>
+					<a
+						href="#top"
+						style="
+							display: inline-flex;
+							align-items: center;
+							gap: 10px;
+							color: #1f2328;
+							text-decoration: none;
+							font-weight: 700;
+							font-size: 18px;
+							min-height: 44px;
+						"
+					>
+						<span aria-hidden="true" style="width: 28px; height: 28px; border-radius: 7px; background: #0969da"></span>
+						GitHub Power
+					</a>
+					<div style="display: flex; flex-wrap: wrap; gap: 0 24px; font-size: 14px; flex: 1 1 auto">
+						<a
+							href="#demo"
+							style="display: inline-flex; align-items: center; min-height: 44px; color: #59636e; text-decoration: none"
+							>Demo</a
+						>
+						<a
+							href="FeatureCatalog.html"
+							style="display: inline-flex; align-items: center; min-height: 44px; color: #59636e; text-decoration: none"
+							>All features</a
+						>
+						<a
+							href="#install"
+							style="display: inline-flex; align-items: center; min-height: 44px; color: #59636e; text-decoration: none"
+							>Install</a
+						>
+						<a
+							href="#privacy"
+							style="display: inline-flex; align-items: center; min-height: 44px; color: #59636e; text-decoration: none"
+							>Privacy</a
+						>
+						<a
+							href="#faq"
+							style="display: inline-flex; align-items: center; min-height: 44px; color: #59636e; text-decoration: none"
+							>FAQ</a
+						>
+					</div>
+					<a
+						href="https://github.com/vmaerten/supercharged-github"
+						style="
+							display: inline-flex;
+							align-items: center;
+							min-height: 44px;
+							font-size: 14px;
+							color: #1f2328;
+							text-decoration: none;
+							font-weight: 600;
+						"
+						>Source on GitHub</a
+					>
+				</nav>
+			</header>
+
+			<section
+				id="top"
+				style="
+					max-width: 1120px;
+					margin: 0 auto;
+					padding: 88px 24px 56px;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					text-align: center;
+					gap: 20px;
+				"
+			>
+				<p style="margin: 0; font-size: 14px; font-weight: 600; color: #59636e">
+					Browser extension for Chrome and Firefox
+				</p>
+				<h1
+					style="
+						margin: 0;
+						max-width: 760px;
+						font-size: clamp(36px, 6vw, 56px);
+						line-height: 1.08;
+						letter-spacing: -0.02em;
+					"
+				>
+					Review pull requests faster, right on GitHub.
+				</h1>
+				<p style="margin: 0; max-width: 620px; font-size: 20px; color: #59636e">
+					See where every PR stands for you, pick the reviewer who has room, and answer in one click. No new tab, no new
+					tool.
+				</p>
+				<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 8px">
+					<a
+						href="#install"
+						style="
+							display: inline-flex;
+							align-items: center;
+							min-height: 44px;
+							padding: 0 20px;
+							border-radius: 8px;
+							background: #0969da;
+							color: #ffffff;
+							font-weight: 600;
+							text-decoration: none;
+						"
+						>Add to Chrome</a
+					>
+					<a
+						href="#install"
+						style="
+							display: inline-flex;
+							align-items: center;
+							min-height: 44px;
+							padding: 0 20px;
+							border-radius: 8px;
+							border: 1px solid #d1d9e0;
+							color: #1f2328;
+							font-weight: 600;
+							text-decoration: none;
+						"
+						>Add to Firefox</a
+					>
+				</div>
+				<p style="margin: 0; font-size: 13px; color: #59636e">
+					Every feature can be turned off · Your token stays in your browser
+				</p>
+			</section>
+
+			<section
+				id="demo"
+				aria-label="Live comparison"
+				style="
+					max-width: 1120px;
+					margin: 0 auto;
+					padding: 0 24px 96px;
+					display: flex;
+					flex-direction: column;
+					gap: 16px;
+				"
+			>
+				<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+					<div
+						role="group"
+						aria-label="Compare"
+						style="
+							display: inline-flex;
+							padding: 3px;
+							border-radius: 10px;
+							background: #f6f8fa;
+							border: 1px solid #d1d9e0;
+						"
+					>
+						<button
+							type="button"
+							aria-pressed="false"
+							style="
+								min-height: 44px;
+								padding: 0 16px;
+								border: 0;
+								border-radius: 7px;
+								font: inherit;
+								font-size: 14px;
+								font-weight: 600;
+								cursor: pointer;
+								background: transparent;
+								color: #59636e;
+								box-shadow: none;
+							"
+						>
+							Plain GitHub
+						</button>
+						<button
+							type="button"
+							aria-pressed="true"
+							style="
+								min-height: 44px;
+								padding: 0 16px;
+								border: 0;
+								border-radius: 7px;
+								font: inherit;
+								font-size: 14px;
+								font-weight: 600;
+								cursor: pointer;
+								background: #ffffff;
+								color: #1f2328;
+								box-shadow: 0 1px 3px rgba(31, 35, 40, 0.15);
+							"
+						>
+							With GitHub Power
+						</button>
+					</div>
+					<span style="font-size: 13px; color: #59636e">Real PRs from go-task/task, statuses for illustration</span>
+				</div>
+				<figure
+					aria-label="Pull request list, with or without GitHub Power"
+					style="
+						margin: 0;
+						border: 1px solid #d1d9e0;
+						border-radius: 12px;
+						overflow: hidden;
+						box-shadow: 0 24px 48px rgba(31, 35, 40, 0.12);
+					"
+				>
+					<div
+						style="
+							display: flex;
+							align-items: center;
+							gap: 12px;
+							padding: 10px 16px;
+							background: #f6f8fa;
+							border-bottom: 1px solid #d1d9e0;
+						"
+					>
+						<span
+							style="
+								flex: 1;
+								max-width: 420px;
+								padding: 4px 12px;
+								border-radius: 6px;
+								background: #ffffff;
+								border: 1px solid #d1d9e0;
+								font-size: 13px;
+								color: #59636e;
+							"
+							>github.com/go-task/task/pulls</span
+						>
+					</div>
+
+					<div
+						style="
+							display: flex;
+							flex-wrap: wrap;
+							align-items: center;
+							gap: 8px 16px;
+							padding: 12px 16px;
+							border-top: 1px solid #d1d9e0;
+							margin-top: -1px;
+						"
+					>
+						<svg
+							width="16"
+							height="16"
+							viewBox="0 0 16 16"
+							fill="none"
+							stroke="#1a7f37"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							aria-hidden="true"
+							style="flex: none; align-self: flex-start; margin-top: 4px"
+						>
+							<circle cx="4" cy="3.5" r="1.75"></circle>
+							<circle cx="4" cy="12.5" r="1.75"></circle>
+							<circle cx="12" cy="12.5" r="1.75"></circle>
+							<path d="M4 5.25v5.5M12 10.75V6a2 2 0 0 0-2-2H7.5"></path>
+						</svg>
+						<div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+							<span style="font-weight: 600">golangci-lint: add prealloc as a linter</span>
+							<span style="font-size: 12px; color: #59636e">#3085 opened 2 days ago by christiandins</span>
+						</div>
+
+						<div
+							style="
+								flex: none;
+								display: grid;
+								grid-template-columns: minmax(0, 176px) minmax(0, 168px) 44px;
+								max-width: 100%;
+								gap: 12px;
+								align-items: center;
+								font-size: 12px;
+							"
+						>
+							<span style="display: inline-flex; align-items: center; gap: 6px; font-weight: 600; color: #59636e">
+							</span>
+							<span
+								style="
+									font-family:
+										Fragment Mono,
+										ui-monospace,
+										SFMono-Regular,
+										Menlo,
+										monospace;
+									white-space: nowrap;
+								"
+								><span style="color: #1a7f37">+189</span> <span style="color: #d1242f">−8</span>
+								<span style="color: #59636e">· 4 files</span> <b style="color: #59636e">M</b></span
+							>
+							<span style="display: inline-flex; align-items: center; gap: 3px; color: #bc4c00; font-weight: 600">
+							</span>
+						</div>
+					</div>
+
+					<div
+						style="
+							display: flex;
+							flex-wrap: wrap;
+							align-items: center;
+							gap: 8px 16px;
+							padding: 12px 16px;
+							border-top: 1px solid #d1d9e0;
+							margin-top: -1px;
+						"
+					>
+						<svg
+							width="16"
+							height="16"
+							viewBox="0 0 16 16"
+							fill="none"
+							stroke="#1a7f37"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							aria-hidden="true"
+							style="flex: none; align-self: flex-start; margin-top: 4px"
+						>
+							<circle cx="4" cy="3.5" r="1.75"></circle>
+							<circle cx="4" cy="12.5" r="1.75"></circle>
+							<circle cx="12" cy="12.5" r="1.75"></circle>
+							<path d="M4 5.25v5.5M12 10.75V6a2 2 0 0 0-2-2H7.5"></path>
+						</svg>
+						<div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+							<span style="font-weight: 600">feat: OpenTelemetry tracing for task execution</span>
+							<span style="font-size: 12px; color: #59636e">#3077 opened last week by caseycs</span>
+						</div>
+
+						<div
+							style="
+								flex: none;
+								display: grid;
+								grid-template-columns: minmax(0, 176px) minmax(0, 168px) 44px;
+								max-width: 100%;
+								gap: 12px;
+								align-items: center;
+								font-size: 12px;
+							"
+						>
+							<span style="display: inline-flex; align-items: center; gap: 6px; font-weight: 600; color: #0969da">
+								<span
+									aria-hidden="true"
+									style="width: 8px; height: 8px; border-radius: 50%; background: #0969da"
+								></span>
+								Review requested
+							</span>
+							<span
+								style="
+									font-family:
+										Fragment Mono,
+										ui-monospace,
+										SFMono-Regular,
+										Menlo,
+										monospace;
+									white-space: nowrap;
+								"
+								><span style="color: #1a7f37">+643</span> <span style="color: #d1242f">−28</span>
+								<span style="color: #59636e">· 12 files</span> <b style="color: #59636e">L</b></span
+							>
+							<span style="display: inline-flex; align-items: center; gap: 3px; color: #bc4c00; font-weight: 600">
+								<svg
+									width="12"
+									height="12"
+									viewBox="0 0 16 16"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="1.5"
+									stroke-linecap="round"
+									aria-hidden="true"
+								>
+									<circle cx="8" cy="8" r="6.25"></circle>
+									<path d="M8 4.5V8l2.5 1.5"></path>
+								</svg>
+								9d
+							</span>
+						</div>
+					</div>
+
+					<div
+						style="
+							display: flex;
+							flex-wrap: wrap;
+							align-items: center;
+							gap: 8px 16px;
+							padding: 12px 16px;
+							border-top: 1px solid #d1d9e0;
+							margin-top: -1px;
+						"
+					>
+						<svg
+							width="16"
+							height="16"
+							viewBox="0 0 16 16"
+							fill="none"
+							stroke="#1a7f37"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							aria-hidden="true"
+							style="flex: none; align-self: flex-start; margin-top: 4px"
+						>
+							<circle cx="4" cy="3.5" r="1.75"></circle>
+							<circle cx="4" cy="12.5" r="1.75"></circle>
+							<circle cx="12" cy="12.5" r="1.75"></circle>
+							<path d="M4 5.25v5.5M12 10.75V6a2 2 0 0 0-2-2H7.5"></path>
+						</svg>
+						<div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+							<span style="font-weight: 600">fix: preserve dotenv declaration order</span>
+							<span style="font-size: 12px; color: #59636e">#3078 opened last week by satya-sudo</span>
+						</div>
+
+						<div
+							style="
+								flex: none;
+								display: grid;
+								grid-template-columns: minmax(0, 176px) minmax(0, 168px) 44px;
+								max-width: 100%;
+								gap: 12px;
+								align-items: center;
+								font-size: 12px;
+							"
+						>
+							<span style="display: inline-flex; align-items: center; gap: 6px; font-weight: 600; color: #9a6700">
+								<span
+									aria-hidden="true"
+									style="width: 8px; height: 8px; border-radius: 50%; background: #9a6700"
+								></span>
+								Re-review
+							</span>
+							<span
+								style="
+									font-family:
+										Fragment Mono,
+										ui-monospace,
+										SFMono-Regular,
+										Menlo,
+										monospace;
+									white-space: nowrap;
+								"
+								><span style="color: #1a7f37">+436</span> <span style="color: #d1242f">−8</span>
+								<span style="color: #59636e">· 11 files</span> <b style="color: #59636e">L</b></span
+							>
+							<span style="display: inline-flex; align-items: center; gap: 3px; color: #bc4c00; font-weight: 600">
+								<svg
+									width="12"
+									height="12"
+									viewBox="0 0 16 16"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="1.5"
+									stroke-linecap="round"
+									aria-hidden="true"
+								>
+									<circle cx="8" cy="8" r="6.25"></circle>
+									<path d="M8 4.5V8l2.5 1.5"></path>
+								</svg>
+								7d
+							</span>
+						</div>
+					</div>
+
+					<div
+						style="
+							display: flex;
+							flex-wrap: wrap;
+							align-items: center;
+							gap: 8px 16px;
+							padding: 12px 16px;
+							border-top: 1px solid #d1d9e0;
+							margin-top: -1px;
+						"
+					>
+						<svg
+							width="16"
+							height="16"
+							viewBox="0 0 16 16"
+							fill="none"
+							stroke="#1a7f37"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							aria-hidden="true"
+							style="flex: none; align-self: flex-start; margin-top: 4px"
+						>
+							<circle cx="4" cy="3.5" r="1.75"></circle>
+							<circle cx="4" cy="12.5" r="1.75"></circle>
+							<circle cx="12" cy="12.5" r="1.75"></circle>
+							<path d="M4 5.25v5.5M12 10.75V6a2 2 0 0 0-2-2H7.5"></path>
+						</svg>
+						<div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+							<span style="font-weight: 600">feat(input): add search and scrolling to choice prompts</span>
+							<span style="font-size: 12px; color: #59636e">#3071 opened 2 weeks ago by vmaerten</span>
+						</div>
+
+						<div
+							style="
+								flex: none;
+								display: grid;
+								grid-template-columns: minmax(0, 176px) minmax(0, 168px) 44px;
+								max-width: 100%;
+								gap: 12px;
+								align-items: center;
+								font-size: 12px;
+							"
+						>
+							<span style="display: inline-flex; align-items: center; gap: 6px; font-weight: 600; color: #d1242f">
+								<span
+									aria-hidden="true"
+									style="width: 8px; height: 8px; border-radius: 50%; background: #d1242f"
+								></span>
+								Changes requested
+							</span>
+							<span
+								style="
+									font-family:
+										Fragment Mono,
+										ui-monospace,
+										SFMono-Regular,
+										Menlo,
+										monospace;
+									white-space: nowrap;
+								"
+								><span style="color: #1a7f37">+125</span> <span style="color: #d1242f">−16</span>
+								<span style="color: #59636e">· 1 file</span> <b style="color: #59636e">M</b></span
+							>
+							<span style="display: inline-flex; align-items: center; gap: 3px; color: #bc4c00; font-weight: 600">
+								<svg
+									width="12"
+									height="12"
+									viewBox="0 0 16 16"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="1.5"
+									stroke-linecap="round"
+									aria-hidden="true"
+								>
+									<circle cx="8" cy="8" r="6.25"></circle>
+									<path d="M8 4.5V8l2.5 1.5"></path>
+								</svg>
+								16d
+							</span>
+						</div>
+					</div>
+
+					<div
+						style="
+							display: flex;
+							flex-wrap: wrap;
+							align-items: center;
+							gap: 8px 16px;
+							padding: 12px 16px;
+							border-top: 1px solid #d1d9e0;
+							margin-top: -1px;
+						"
+					>
+						<svg
+							width="16"
+							height="16"
+							viewBox="0 0 16 16"
+							fill="none"
+							stroke="#1a7f37"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							aria-hidden="true"
+							style="flex: none; align-self: flex-start; margin-top: 4px"
+						>
+							<circle cx="4" cy="3.5" r="1.75"></circle>
+							<circle cx="4" cy="12.5" r="1.75"></circle>
+							<circle cx="12" cy="12.5" r="1.75"></circle>
+							<path d="M4 5.25v5.5M12 10.75V6a2 2 0 0 0-2-2H7.5"></path>
+						</svg>
+						<div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+							<span style="font-weight: 600">refactor(watch): detect filesystem changes with fsbroker</span>
+							<span style="font-size: 12px; color: #59636e">#3064 opened last month by andreynering</span>
+						</div>
+
+						<div
+							style="
+								flex: none;
+								display: grid;
+								grid-template-columns: minmax(0, 176px) minmax(0, 168px) 44px;
+								max-width: 100%;
+								gap: 12px;
+								align-items: center;
+								font-size: 12px;
+							"
+						>
+							<span style="display: inline-flex; align-items: center; gap: 6px; font-weight: 600; color: #59636e">
+								<span
+									aria-hidden="true"
+									style="width: 8px; height: 8px; border-radius: 50%; background: #1a7f37"
+								></span>
+								Approved · new commits
+							</span>
+							<span
+								style="
+									font-family:
+										Fragment Mono,
+										ui-monospace,
+										SFMono-Regular,
+										Menlo,
+										monospace;
+									white-space: nowrap;
+								"
+								><span style="color: #1a7f37">+323</span> <span style="color: #d1242f">−103</span>
+								<span style="color: #59636e">· 11 files</span> <b style="color: #59636e">L</b></span
+							>
+							<span style="display: inline-flex; align-items: center; gap: 3px; color: #bc4c00; font-weight: 600">
+								<svg
+									width="12"
+									height="12"
+									viewBox="0 0 16 16"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="1.5"
+									stroke-linecap="round"
+									aria-hidden="true"
+								>
+									<circle cx="8" cy="8" r="6.25"></circle>
+									<path d="M8 4.5V8l2.5 1.5"></path>
+								</svg>
+								17d
+							</span>
+						</div>
+					</div>
+				</figure>
+				<div
+					aria-label="Badge legend"
+					style="display: flex; flex-wrap: wrap; gap: 8px 28px; font-size: 14px; color: #59636e"
+				>
+					<span style="display: inline-flex; align-items: center; gap: 6px">
+						<span
+							style="
+								display: inline-flex;
+								align-items: center;
+								gap: 6px;
+								font-weight: 600;
+								color: #0969da;
+								font-family: inherit;
+							"
+							><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 50%; background: #0969da"></span
+							>Review requested</span
+						>
+						waiting for you
+					</span>
+
+					<span style="display: inline-flex; align-items: center; gap: 6px">
+						<span
+							style="
+								display: inline-flex;
+								align-items: center;
+								gap: 6px;
+								font-weight: 600;
+								color: #9a6700;
+								font-family: inherit;
+							"
+							><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 50%; background: #9a6700"></span
+							>Re-review</span
+						>
+						changed since your review
+					</span>
+
+					<span style="display: inline-flex; align-items: center; gap: 6px">
+						<span
+							style="
+								display: inline-flex;
+								align-items: center;
+								gap: 6px;
+								font-weight: 600;
+								color: #d1242f;
+								font-family: inherit;
+							"
+							><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 50%; background: #d1242f"></span
+							>Changes requested</span
+						>
+						waiting for the author
+					</span>
+
+					<span style="display: inline-flex; align-items: center; gap: 6px">
+						<span
+							style="
+								display: inline-flex;
+								align-items: center;
+								gap: 6px;
+								font-weight: 600;
+								color: #59636e;
+								font-family: inherit;
+							"
+							><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 50%; background: #1a7f37"></span
+							>Approved · new commits</span
+						>
+						pushed after your approval
+					</span>
+
+					<span style="display: inline-flex; align-items: center; gap: 6px">
+						<span
+							style="
+								display: inline-flex;
+								align-items: center;
+								gap: 6px;
+								font-weight: 600;
+								color: #59636e;
+								font-family:
+									Fragment Mono,
+									ui-monospace,
+									SFMono-Regular,
+									Menlo,
+									monospace;
+							"
+							>L</span
+						>
+						size, XS to XL
+					</span>
+
+					<span style="display: inline-flex; align-items: center; gap: 6px">
+						<span
+							style="
+								display: inline-flex;
+								align-items: center;
+								gap: 6px;
+								font-weight: 600;
+								color: #bc4c00;
+								font-family: inherit;
+							"
+							>9d</span
+						>
+						idle for 9 days
+					</span>
+				</div>
+			</section>
+
+			<section
+				aria-label="Highlights"
+				style="background: #f6f8fa; border-top: 1px solid #d1d9e0; border-bottom: 1px solid #d1d9e0"
+			>
+				<div
+					style="
+						max-width: 1120px;
+						margin: 0 auto;
+						padding: 96px 24px;
+						display: flex;
+						flex-direction: column;
+						gap: 96px;
+					"
+				>
+					<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 48px">
+						<div style="flex: 1 1 340px; display: flex; flex-direction: column; gap: 14px">
+							<p style="margin: 0; font-size: 13px; font-weight: 600; color: #0969da">In the PR list</p>
+							<h2 style="margin: 0; font-size: 32px; line-height: 1.2">Know what needs you before opening a PR</h2>
+							<p style="margin: 0; color: #59636e">
+								A quiet column on each row: where the PR stands for you, how big it is, and how long it has been idle.
+								In the right column or the grey line under the title.
+							</p>
+						</div>
+						<figure
+							aria-label="One PR row with each badge labelled"
+							style="
+								flex: 1.4 1 420px;
+								min-width: 0;
+								margin: 0;
+								padding: 32px 28px;
+								background: #ffffff;
+								border: 1px solid #d1d9e0;
+								border-radius: 12px;
+								display: flex;
+								flex-direction: column;
+								gap: 20px;
+								overflow-x: auto;
+							"
+						>
+							<div style="display: flex; flex-direction: column; gap: 2px">
+								<span style="font-weight: 600; font-size: 17px">feat: OpenTelemetry tracing for task execution</span>
+								<span style="font-size: 13px; color: #59636e">#3077 opened last week by caseycs</span>
+							</div>
+							<div style="display: grid; grid-template-columns: 210px 200px 56px; gap: 16px; font-size: 15px">
+								<span style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: #0969da"
+									><span
+										aria-hidden="true"
+										style="width: 10px; height: 10px; border-radius: 50%; background: #0969da"
+									></span
+									>Review requested</span
+								>
+								<span
+									style="
+										font-family:
+											Fragment Mono,
+											ui-monospace,
+											SFMono-Regular,
+											Menlo,
+											monospace;
+										white-space: nowrap;
+									"
+									><span style="color: #1a7f37">+643</span> <span style="color: #d1242f">−28</span>
+									<span style="color: #59636e">· 12 files</span> <b style="color: #59636e">L</b></span
+								>
+								<span style="display: inline-flex; align-items: center; gap: 4px; color: #bc4c00; font-weight: 600"
+									><svg
+										width="14"
+										height="14"
+										viewBox="0 0 16 16"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="1.5"
+										stroke-linecap="round"
+										aria-hidden="true"
+									>
+										<circle cx="8" cy="8" r="6.25"></circle>
+										<path d="M8 4.5V8l2.5 1.5"></path></svg
+									>9d</span
+								>
+								<span style="border-top: 1px solid #d1d9e0; padding-top: 8px; font-size: 12px; color: #59636e"
+									>Where it stands for you</span
+								>
+								<span style="border-top: 1px solid #d1d9e0; padding-top: 8px; font-size: 12px; color: #59636e"
+									>How big it is</span
+								>
+								<span style="border-top: 1px solid #d1d9e0; padding-top: 8px; font-size: 12px; color: #59636e"
+									>Idle</span
+								>
+							</div>
+						</figure>
+					</div>
+
+					<div
+						style="display: flex; flex-wrap: wrap-reverse; flex-direction: row-reverse; align-items: center; gap: 48px"
+					>
+						<div style="flex: 1 1 340px; display: flex; flex-direction: column; gap: 14px">
+							<p style="margin: 0; font-size: 13px; font-weight: 600; color: #0969da">In the reviewers picker</p>
+							<h2 style="margin: 0; font-size: 32px; line-height: 1.2">Pick the reviewer who has room</h2>
+							<p style="margin: 0; color: #59636e">
+								Next to each name, how many reviews that person already has waiting in this organization. Amber at 3,
+								orange past 5.
+							</p>
+						</div>
+						<div style="flex: 1.4 1 420px; min-width: 0; display: flex; justify-content: center">
+							<figure
+								aria-label="Reviewers picker with a pending review count next to each person"
+								style="
+									margin: 0;
+									width: 320px;
+									max-width: 100%;
+									background: #ffffff;
+									border: 1px solid #d1d9e0;
+									border-radius: 12px;
+									overflow: hidden;
+									box-shadow: 0 8px 24px rgba(31, 35, 40, 0.12);
+									font-size: 14px;
+								"
+							>
+								<div style="padding: 10px 16px; font-size: 12px; font-weight: 600">Request up to 15 reviewers</div>
+								<div style="padding: 0 16px 10px">
+									<div
+										style="
+											height: 32px;
+											box-sizing: border-box;
+											padding: 0 10px;
+											border: 1px solid #d1d9e0;
+											border-radius: 6px;
+											display: flex;
+											align-items: center;
+											color: #59636e;
+										"
+									>
+										Find a user
+									</div>
+								</div>
+
+								<div
+									style="
+										display: flex;
+										justify-content: space-between;
+										padding: 6px 16px;
+										border-top: 1px solid #d1d9e0;
+										background: #f6f8fa;
+										font-size: 12px;
+										font-weight: 600;
+									"
+								>
+									<span>Suggestions</span><span style="color: #59636e; font-weight: 400">Pending reviews</span>
+								</div>
+
+								<div
+									style="display: flex; align-items: center; gap: 8px; padding: 9px 16px; border-top: 1px solid #d1d9e0"
+								>
+									<span
+										aria-hidden="true"
+										style="
+											flex: none;
+											width: 20px;
+											height: 20px;
+											border-radius: 50%;
+											background: #a5d6ff;
+											color: #1f2328;
+											font-size: 9px;
+											font-weight: 700;
+											display: flex;
+											align-items: center;
+											justify-content: center;
+										"
+										>AN</span
+									>
+									<span style="flex: 1; min-width: 0"
+										><b>andreynering</b> <span style="color: #59636e; font-size: 12px">Andrey Nering</span></span
+									>
+									<span
+										style="
+											min-width: 22px;
+											box-sizing: border-box;
+											padding: 0 7px;
+											border-radius: 999px;
+											font-size: 12px;
+											font-weight: 600;
+											line-height: 20px;
+											text-align: center;
+											color: #bc4c00;
+											background: rgba(188, 76, 0, 0.12);
+										"
+										>8</span
+									>
+								</div>
+
+								<div
+									style="display: flex; align-items: center; gap: 8px; padding: 9px 16px; border-top: 1px solid #d1d9e0"
+								>
+									<span
+										aria-hidden="true"
+										style="
+											flex: none;
+											width: 20px;
+											height: 20px;
+											border-radius: 50%;
+											background: #d2a8ff;
+											color: #1f2328;
+											font-size: 9px;
+											font-weight: 700;
+											display: flex;
+											align-items: center;
+											justify-content: center;
+										"
+										>PD</span
+									>
+									<span style="flex: 1; min-width: 0"
+										><b>pd93</b> <span style="color: #59636e; font-size: 12px">Pete Davison</span></span
+									>
+									<span
+										style="
+											min-width: 22px;
+											box-sizing: border-box;
+											padding: 0 7px;
+											border-radius: 999px;
+											font-size: 12px;
+											font-weight: 600;
+											line-height: 20px;
+											text-align: center;
+											color: #9a6700;
+											background: rgba(154, 103, 0, 0.12);
+										"
+										>5</span
+									>
+								</div>
+
+								<div
+									style="
+										display: flex;
+										justify-content: space-between;
+										padding: 6px 16px;
+										border-top: 1px solid #d1d9e0;
+										background: #f6f8fa;
+										font-size: 12px;
+										font-weight: 600;
+									"
+								>
+									<span>Everyone else</span><span style="color: #59636e; font-weight: 400">Pending reviews</span>
+								</div>
+
+								<div
+									style="display: flex; align-items: center; gap: 8px; padding: 9px 16px; border-top: 1px solid #d1d9e0"
+								>
+									<span
+										aria-hidden="true"
+										style="
+											flex: none;
+											width: 20px;
+											height: 20px;
+											border-radius: 50%;
+											background: #ffa198;
+											color: #1f2328;
+											font-size: 9px;
+											font-weight: 700;
+											display: flex;
+											align-items: center;
+											justify-content: center;
+										"
+										>VM</span
+									>
+									<span style="flex: 1; min-width: 0"
+										><b>vmaerten</b> <span style="color: #59636e; font-size: 12px">Valentin Maerten</span></span
+									>
+									<span
+										style="
+											min-width: 22px;
+											box-sizing: border-box;
+											padding: 0 7px;
+											border-radius: 999px;
+											font-size: 12px;
+											font-weight: 600;
+											line-height: 20px;
+											text-align: center;
+											color: #59636e;
+											background: rgba(89, 99, 110, 0.12);
+										"
+										>2</span
+									>
+								</div>
+
+								<div
+									style="display: flex; align-items: center; gap: 8px; padding: 9px 16px; border-top: 1px solid #d1d9e0"
+								>
+									<span
+										aria-hidden="true"
+										style="
+											flex: none;
+											width: 20px;
+											height: 20px;
+											border-radius: 50%;
+											background: #7ee2b8;
+											color: #1f2328;
+											font-size: 9px;
+											font-weight: 700;
+											display: flex;
+											align-items: center;
+											justify-content: center;
+										"
+										>TB</span
+									>
+									<span style="flex: 1; min-width: 0"
+										><b>task-bot</b> <span style="color: #59636e; font-size: 12px"></span
+									></span>
+									<span
+										style="
+											min-width: 22px;
+											box-sizing: border-box;
+											padding: 0 7px;
+											border-radius: 999px;
+											font-size: 12px;
+											font-weight: 600;
+											line-height: 20px;
+											text-align: center;
+											color: #59636e;
+											background: rgba(89, 99, 110, 0.12);
+										"
+										>0</span
+									>
+								</div>
+							</figure>
+						</div>
+					</div>
+
+					<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 48px">
+						<div style="flex: 1 1 340px; display: flex; flex-direction: column; gap: 14px">
+							<p style="margin: 0; font-size: 13px; font-weight: 600; color: #0969da">Quick comments</p>
+							<h2 style="margin: 0; font-size: 32px; line-height: 1.2">Answer in one click</h2>
+							<p style="margin: 0; color: #59636e">
+								Buttons above the comment box post the replies you write ten times a day. LGTM, ask a bot to rebase, say
+								thanks: the list is yours to edit.
+							</p>
+						</div>
+						<figure
+							aria-label="Quick comment buttons above the comment box"
+							style="
+								flex: 1.4 1 420px;
+								min-width: 0;
+								margin: 0;
+								padding: 24px;
+								background: #ffffff;
+								border: 1px solid #d1d9e0;
+								border-radius: 12px;
+								display: flex;
+								flex-direction: column;
+								gap: 12px;
+							"
+						>
+							<div aria-hidden="true" style="display: flex; flex-wrap: wrap; gap: 8px">
+								<span
+									style="
+										padding: 4px 12px;
+										border-radius: 6px;
+										border: 1px solid #0969da;
+										box-shadow: 0 0 0 3px rgba(9, 105, 218, 0.15);
+										font-size: 13px;
+										font-weight: 600;
+									"
+									>LGTM</span
+								>
+								<span
+									style="
+										padding: 4px 12px;
+										border-radius: 6px;
+										border: 1px solid #d1d9e0;
+										background: #f6f8fa;
+										font-size: 13px;
+										font-weight: 600;
+									"
+									>Rebase</span
+								>
+								<span
+									style="
+										padding: 4px 12px;
+										border-radius: 6px;
+										border: 1px solid #d1d9e0;
+										background: #f6f8fa;
+										font-size: 13px;
+										font-weight: 600;
+									"
+									>Thanks</span
+								>
+							</div>
+							<span style="font-weight: 600">Add a comment</span>
+							<div style="border: 1px solid #d1d9e0; border-radius: 8px; overflow: hidden">
+								<div
+									style="
+										display: flex;
+										gap: 4px;
+										padding: 6px 8px 0;
+										background: #f6f8fa;
+										border-bottom: 1px solid #d1d9e0;
+										font-size: 14px;
+									"
+								>
+									<span
+										style="
+											padding: 6px 12px;
+											background: #ffffff;
+											border: 1px solid #d1d9e0;
+											border-bottom: 0;
+											border-radius: 6px 6px 0 0;
+											margin-bottom: -1px;
+										"
+										>Write</span
+									>
+									<span style="padding: 6px 12px; color: #59636e">Preview</span>
+								</div>
+								<div style="height: 96px; padding: 12px; font-size: 14px; color: #1f2328">LGTM :rocket:</div>
+							</div>
+							<div aria-hidden="true" style="display: flex; justify-content: flex-end; gap: 8px">
+								<span
+									style="
+										padding: 6px 14px;
+										border-radius: 6px;
+										border: 1px solid #d1d9e0;
+										background: #f6f8fa;
+										font-size: 14px;
+										font-weight: 600;
+									"
+									>Close pull request</span
+								>
+								<span
+									style="
+										padding: 6px 14px;
+										border-radius: 6px;
+										background: #1f883d;
+										color: #ffffff;
+										font-size: 14px;
+										font-weight: 600;
+									"
+									>Comment</span
+								>
+							</div>
+						</figure>
+					</div>
+				</div>
+			</section>
+
+			<section
+				aria-labelledby="more"
+				style="max-width: 1120px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 40px"
+			>
+				<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px">
+					<div style="display: flex; flex-direction: column; gap: 8px">
+						<h2 id="more" style="margin: 0; font-size: 32px">And everything else</h2>
+						<p style="margin: 0; color: #59636e">Grouped by what you are doing. Each one can be turned off.</p>
+					</div>
+					<a
+						href="FeatureCatalog.html"
+						style="
+							display: inline-flex;
+							align-items: center;
+							min-height: 44px;
+							padding: 0 18px;
+							border-radius: 8px;
+							border: 1px solid #d1d9e0;
+							color: #1f2328;
+							font-weight: 600;
+							text-decoration: none;
+						"
+						>See all 13 features</a
+					>
+				</div>
+				<div
+					style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 32px 40px"
+				>
+					<div style="display: flex; flex-direction: column; gap: 4px">
+						<h3
+							style="
+								margin: 0 0 8px;
+								font-size: 13px;
+								font-weight: 600;
+								color: #59636e;
+								text-transform: uppercase;
+								letter-spacing: 0.04em;
+							"
+						>
+							Reviewing code
+						</h3>
+
+						<a
+							href="FeatureDetail.html"
+							style="
+								display: flex;
+								flex-direction: column;
+								gap: 2px;
+								padding: 10px 0;
+								border-top: 1px solid #d1d9e0;
+								color: #1f2328;
+								text-decoration: none;
+							"
+						>
+							<span style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600"
+								>Collapse generated files<span
+									style="
+										padding: 0 6px;
+										border-radius: 999px;
+										border: 1px solid #d1d9e0;
+										font-size: 11px;
+										font-weight: 600;
+										color: #59636e;
+									"
+									>Soon</span
+								></span
+							>
+							<span style="font-size: 14px; color: #59636e">Lockfiles and generated code start collapsed.</span>
+						</a>
+
+						<a
+							href="FeatureDetail.html"
+							style="
+								display: flex;
+								flex-direction: column;
+								gap: 2px;
+								padding: 10px 0;
+								border-top: 1px solid #d1d9e0;
+								color: #1f2328;
+								text-decoration: none;
+							"
+						>
+							<span style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600"
+								>Folder diff stats<span
+									style="
+										padding: 0 6px;
+										border-radius: 999px;
+										border: 1px solid #d1d9e0;
+										font-size: 11px;
+										font-weight: 600;
+										color: #59636e;
+									"
+									>Soon</span
+								></span
+							>
+							<span style="font-size: 14px; color: #59636e">Lines changed per folder in the file tree.</span>
+						</a>
+
+						<a
+							href="FeatureDetail.html"
+							style="
+								display: flex;
+								flex-direction: column;
+								gap: 2px;
+								padding: 10px 0;
+								border-top: 1px solid #d1d9e0;
+								color: #1f2328;
+								text-decoration: none;
+							"
+						>
+							<span style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600"
+								>Weighted review progress<span
+									style="
+										padding: 0 6px;
+										border-radius: 999px;
+										border: 1px solid #d1d9e0;
+										font-size: 11px;
+										font-weight: 600;
+										color: #59636e;
+									"
+									>Soon</span
+								></span
+							>
+							<span style="font-size: 14px; color: #59636e">Progress by lines viewed, not by files.</span>
+						</a>
+					</div>
+
+					<div style="display: flex; flex-direction: column; gap: 4px">
+						<h3
+							style="
+								margin: 0 0 8px;
+								font-size: 13px;
+								font-weight: 600;
+								color: #59636e;
+								text-transform: uppercase;
+								letter-spacing: 0.04em;
+							"
+						>
+							Discussing
+						</h3>
+
+						<a
+							href="FeatureDetail.html"
+							style="
+								display: flex;
+								flex-direction: column;
+								gap: 2px;
+								padding: 10px 0;
+								border-top: 1px solid #d1d9e0;
+								color: #1f2328;
+								text-decoration: none;
+							"
+						>
+							<span style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600"
+								>Conventional Comments<span
+									style="
+										padding: 0 6px;
+										border-radius: 999px;
+										border: 1px solid #d1d9e0;
+										font-size: 11px;
+										font-weight: 600;
+										color: #59636e;
+									"
+									>Soon</span
+								></span
+							>
+							<span style="font-size: 14px; color: #59636e">Label a comment as praise, nit, issue or question.</span>
+						</a>
+
+						<a
+							href="FeatureDetail.html"
+							style="
+								display: flex;
+								flex-direction: column;
+								gap: 2px;
+								padding: 10px 0;
+								border-top: 1px solid #d1d9e0;
+								color: #1f2328;
+								text-decoration: none;
+							"
+						>
+							<span style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600"
+								>Unresolved conversations<span
+									style="
+										padding: 0 6px;
+										border-radius: 999px;
+										border: 1px solid #d1d9e0;
+										font-size: 11px;
+										font-weight: 600;
+										color: #59636e;
+									"
+									>Soon</span
+								></span
+							>
+							<span style="font-size: 14px; color: #59636e">Count the open threads and jump between them.</span>
+						</a>
+
+						<a
+							href="FeatureDetail.html"
+							style="
+								display: flex;
+								flex-direction: column;
+								gap: 2px;
+								padding: 10px 0;
+								border-top: 1px solid #d1d9e0;
+								color: #1f2328;
+								text-decoration: none;
+							"
+						>
+							<span style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600"
+								>Ticket links<span
+									style="
+										padding: 0 6px;
+										border-radius: 999px;
+										border: 1px solid #d1d9e0;
+										font-size: 11px;
+										font-weight: 600;
+										color: #59636e;
+									"
+									>Soon</span
+								></span
+							>
+							<span style="font-size: 14px; color: #59636e">Ticket ids like ABC-123 link to your tracker.</span>
+						</a>
+					</div>
+
+					<div style="display: flex; flex-direction: column; gap: 4px">
+						<h3
+							style="
+								margin: 0 0 8px;
+								font-size: 13px;
+								font-weight: 600;
+								color: #59636e;
+								text-transform: uppercase;
+								letter-spacing: 0.04em;
+							"
+						>
+							Reading
+						</h3>
+
+						<a
+							href="FeatureDetail.html"
+							style="
+								display: flex;
+								flex-direction: column;
+								gap: 2px;
+								padding: 10px 0;
+								border-top: 1px solid #d1d9e0;
+								color: #1f2328;
+								text-decoration: none;
+							"
+						>
+							<span style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600">Image modal</span>
+							<span style="font-size: 14px; color: #59636e">Zoom images in place, arrow keys between them.</span>
+						</a>
+
+						<a
+							href="FeatureDetail.html"
+							style="
+								display: flex;
+								flex-direction: column;
+								gap: 2px;
+								padding: 10px 0;
+								border-top: 1px solid #d1d9e0;
+								color: #1f2328;
+								text-decoration: none;
+							"
+						>
+							<span style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600"
+								>Before/after slider<span
+									style="
+										padding: 0 6px;
+										border-radius: 999px;
+										border: 1px solid #d1d9e0;
+										font-size: 11px;
+										font-weight: 600;
+										color: #59636e;
+									"
+									>Soon</span
+								></span
+							>
+							<span style="font-size: 14px; color: #59636e">Two images labelled Before and After become a slider.</span>
+						</a>
+					</div>
+				</div>
+			</section>
+
+			<section
+				id="privacy"
+				style="background: #f6f8fa; border-top: 1px solid #d1d9e0; border-bottom: 1px solid #d1d9e0"
+			>
+				<div
+					style="
+						max-width: 1120px;
+						margin: 0 auto;
+						padding: 88px 24px;
+						display: flex;
+						flex-direction: column;
+						gap: 40px;
+					"
+				>
+					<h2 style="margin: 0; font-size: 32px; text-align: center">Built to stay out of the way</h2>
+					<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 24px">
+						<div
+							style="
+								padding: 24px;
+								background: #ffffff;
+								border: 1px solid #d1d9e0;
+								border-radius: 12px;
+								display: flex;
+								flex-direction: column;
+								gap: 10px;
+							"
+						>
+							<svg
+								width="24"
+								height="24"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="#0969da"
+								stroke-width="1.75"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								aria-hidden="true"
+							>
+								<rect x="2" y="7" width="20" height="10" rx="5"></rect>
+								<circle cx="16" cy="12" r="3"></circle>
+							</svg>
+							<h3 style="margin: 0; font-size: 18px">Everything is optional</h3>
+							<p style="margin: 0; color: #59636e">
+								Each feature has its own switch, and most have settings, in the options page.
+							</p>
+						</div>
+						<div
+							style="
+								padding: 24px;
+								background: #ffffff;
+								border: 1px solid #d1d9e0;
+								border-radius: 12px;
+								display: flex;
+								flex-direction: column;
+								gap: 10px;
+							"
+						>
+							<svg
+								width="24"
+								height="24"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="#0969da"
+								stroke-width="1.75"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								aria-hidden="true"
+							>
+								<rect x="4" y="11" width="16" height="10" rx="2"></rect>
+								<path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
+							</svg>
+							<h3 style="margin: 0; font-size: 18px">Your token stays local</h3>
+							<p style="margin: 0; color: #59636e">
+								A read-only token, kept in your browser and sent only to the GitHub API.
+							</p>
+						</div>
+						<div
+							style="
+								padding: 24px;
+								background: #ffffff;
+								border: 1px solid #d1d9e0;
+								border-radius: 12px;
+								display: flex;
+								flex-direction: column;
+								gap: 10px;
+							"
+						>
+							<svg
+								width="24"
+								height="24"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="#0969da"
+								stroke-width="1.75"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								aria-hidden="true"
+							>
+								<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path>
+								<circle cx="12" cy="12" r="3"></circle>
+							</svg>
+							<h3 style="margin: 0; font-size: 18px">Looks like GitHub</h3>
+							<p style="margin: 0; color: #59636e">
+								GitHub's own colors, light and dark themes, and nothing that moves the page around.
+							</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section
+				id="install"
+				style="max-width: 1120px; margin: 0 auto; padding: 88px 24px; display: flex; flex-direction: column; gap: 40px"
+			>
+				<h2 style="margin: 0; font-size: 32px; text-align: center">Ready in two minutes</h2>
+				<ol
+					style="
+						margin: 0;
+						padding: 0;
+						list-style: none;
+						display: grid;
+						grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+						gap: 24px;
+					"
+				>
+					<li style="display: flex; flex-direction: column; gap: 8px">
+						<span
+							style="
+								font-family:
+									Fragment Mono,
+									ui-monospace,
+									SFMono-Regular,
+									Menlo,
+									monospace;
+								font-size: 14px;
+								color: #0969da;
+								font-weight: 600;
+							"
+							>01</span
+						>
+						<h3 style="margin: 0; font-size: 18px">Install the extension</h3>
+						<p style="margin: 0; color: #59636e">From the Chrome Web Store or Firefox Add-ons.</p>
+					</li>
+					<li style="display: flex; flex-direction: column; gap: 8px">
+						<span
+							style="
+								font-family:
+									Fragment Mono,
+									ui-monospace,
+									SFMono-Regular,
+									Menlo,
+									monospace;
+								font-size: 14px;
+								color: #0969da;
+								font-weight: 600;
+							"
+							>02</span
+						>
+						<h3 style="margin: 0; font-size: 18px">Add a token</h3>
+						<p style="margin: 0; color: #59636e">
+							A fine-grained token with read access to <i>Pull requests</i>, pasted in the options.
+						</p>
+					</li>
+					<li style="display: flex; flex-direction: column; gap: 8px">
+						<span
+							style="
+								font-family:
+									Fragment Mono,
+									ui-monospace,
+									SFMono-Regular,
+									Menlo,
+									monospace;
+								font-size: 14px;
+								color: #0969da;
+								font-weight: 600;
+							"
+							>03</span
+						>
+						<h3 style="margin: 0; font-size: 18px">Open a PR list</h3>
+						<p style="margin: 0; color: #59636e">The badges appear on the next page load.</p>
+					</li>
+				</ol>
+			</section>
+
+			<section
+				id="faq"
+				style="max-width: 1120px; margin: 0 auto; padding: 0 24px 96px; display: flex; flex-wrap: wrap; gap: 24px 40px"
+			>
+				<h2 style="flex: 1 1 240px; margin: 0; font-size: 32px">Questions</h2>
+				<div style="flex: 3 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+					<div
+						style="border-top: 1px solid #d1d9e0; padding-top: 20px; display: flex; flex-direction: column; gap: 6px"
+					>
+						<h3 style="margin: 0; font-size: 17px">Why does it need a token?</h3>
+						<p style="margin: 0; color: #59636e">
+							The PR list badges and the reviewer load ask the GitHub API for data the page does not show. Quick
+							comments and the image modal work without one.
+						</p>
+					</div>
+					<div
+						style="border-top: 1px solid #d1d9e0; padding-top: 20px; display: flex; flex-direction: column; gap: 6px"
+					>
+						<h3 style="margin: 0; font-size: 17px">Does it work alongside Refined GitHub?</h3>
+						<p style="margin: 0; color: #59636e">Yes. The two run side by side.</p>
+					</div>
+				</div>
+			</section>
+
+			<footer style="border-top: 1px solid #d1d9e0">
+				<div
+					style="
+						max-width: 1120px;
+						margin: 0 auto;
+						padding: 32px 24px;
+						display: flex;
+						flex-wrap: wrap;
+						justify-content: space-between;
+						gap: 16px;
+						font-size: 14px;
+						color: #59636e;
+					"
+				>
+					<span>GitHub Power · Not affiliated with GitHub, Inc.</span>
+					<div style="display: flex; flex-wrap: wrap; gap: 24px">
+						<a href="FeatureCatalog.html">All features</a>
+						<a href="https://github.com/vmaerten/supercharged-github/blob/main/CHANGELOG.md">Changelog</a>
+						<a href="https://github.com/vmaerten/supercharged-github">Source</a>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</body>
+</html>

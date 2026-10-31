@@ -1,0 +1,2228 @@
+<!doctype html>
+<html lang="fr">
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Identité github-power</title>
+	<meta name="claude:viewport-fit-sides" content="cover" />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Albert+Sans:wght@400;600;800&family=Martian+Mono:wght@400&family=Sora:wght@400;700&family=Onest:wght@400;800&family=Geist+Mono:wght@400&family=JetBrains+Mono:wght@400;700&family=Manrope:wght@400;600;800&family=Red+Hat+Display:wght@400;800&family=Red+Hat+Mono:wght@400&family=Red+Hat+Text:wght@400;600&family=Schibsted+Grotesk:wght@400;600;800&display=swap"
+	/>
+	<style>
+		/* Planche de spécimens : chrome neutre et sobre, chaque variante rendue dans sa propre bande à ses couleurs. */
+		:root {
+			--paper: #f4f5f7;
+			--card: #ffffff;
+			--ink: #15181e;
+			--muted: #5a6170;
+			--line: #d9dce2;
+			--pick: #1f5fbf;
+			--low: #1f7a4d;
+			--mid: #9a6a00;
+			--high: #b42318;
+			--font-ui: 'Schibsted Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+			--font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+		}
+		@media (prefers-color-scheme: dark) {
+			:root:not([data-theme='light']) {
+				--paper: #101217;
+				--card: #181b21;
+				--ink: #e7e9ee;
+				--muted: #9aa1ae;
+				--line: #2a2e37;
+				--pick: #7fb0ff;
+				--low: #5fd39a;
+				--mid: #e8b84a;
+				--high: #ff7b6e;
+				color-scheme: dark;
+			}
+		}
+		:root[data-theme='dark'] {
+			--paper: #101217;
+			--card: #181b21;
+			--ink: #e7e9ee;
+			--muted: #9aa1ae;
+			--line: #2a2e37;
+			--pick: #7fb0ff;
+			--low: #5fd39a;
+			--mid: #e8b84a;
+			--high: #ff7b6e;
+			color-scheme: dark;
+		}
+
+		body {
+			background: var(--paper);
+			color: var(--ink);
+			font-family: var(--font-ui);
+			font-size: 15px;
+			line-height: 1.55;
+		}
+		.wrap {
+			max-width: 1080px;
+			margin: 0 auto;
+			padding-left: max(16px, env(safe-area-inset-left, 0px));
+			padding-right: max(16px, env(safe-area-inset-right, 0px));
+		}
+		h1,
+		h2,
+		h3 {
+			text-wrap: balance;
+			margin: 0;
+		}
+		p {
+			margin: 0;
+		}
+		code {
+			font-family: var(--font-mono);
+			font-size: 0.9em;
+		}
+
+		.intro {
+			padding-block: 48px 32px;
+			display: grid;
+			gap: 12px;
+		}
+		.eyebrow {
+			font-family: var(--font-mono);
+			font-size: 12px;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			color: var(--muted);
+		}
+		.intro h1 {
+			font-size: clamp(30px, 5vw, 44px);
+			line-height: 1.1;
+			font-weight: 800;
+			letter-spacing: -0.02em;
+		}
+		.intro p {
+			max-width: 64ch;
+			color: var(--muted);
+		}
+
+		.section {
+			padding-block: 24px 40px;
+			display: grid;
+			gap: 16px;
+		}
+		.section > h2 {
+			font-size: 22px;
+			font-weight: 800;
+			letter-spacing: -0.01em;
+		}
+		.section > .lede {
+			color: var(--muted);
+			max-width: 64ch;
+		}
+		.table-scroll {
+			overflow-x: auto;
+			border: 1px solid var(--line);
+			border-radius: 10px;
+			background: var(--card);
+		}
+		table {
+			border-collapse: collapse;
+			width: 100%;
+			min-width: 640px;
+		}
+		th,
+		td {
+			text-align: left;
+			padding: 10px 14px;
+			border-bottom: 1px solid var(--line);
+			vertical-align: top;
+		}
+		tr:last-child td {
+			border-bottom: 0;
+		}
+		th {
+			font-family: var(--font-mono);
+			font-size: 11px;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			color: var(--muted);
+			font-weight: 400;
+		}
+		td.name {
+			font-weight: 600;
+			white-space: nowrap;
+		}
+		td.pattern {
+			font-family: var(--font-mono);
+			font-size: 13px;
+			color: var(--muted);
+			white-space: nowrap;
+		}
+		tr.group td {
+			background: var(--paper);
+			font-family: var(--font-mono);
+			font-size: 11px;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			color: var(--muted);
+			padding-block: 6px;
+		}
+		.risk,
+		.new {
+			display: inline-block;
+			font-size: 12px;
+			font-weight: 600;
+			padding: 1px 8px;
+			border-radius: 999px;
+			border: 1px solid currentColor;
+			white-space: nowrap;
+		}
+		.risk.low {
+			color: var(--low);
+		}
+		.risk.mid {
+			color: var(--mid);
+		}
+		.risk.high {
+			color: var(--high);
+		}
+		.new {
+			color: var(--pick);
+			margin-left: 6px;
+			font-size: 11px;
+		}
+		.star {
+			color: var(--pick);
+			font-weight: 800;
+		}
+
+		.verdict {
+			border-left: 3px solid var(--pick);
+			padding: 4px 0 4px 16px;
+			display: grid;
+			gap: 6px;
+			max-width: 70ch;
+		}
+		.verdict strong {
+			color: var(--pick);
+		}
+
+		.family {
+			padding-block: 40px 20px;
+			display: grid;
+			gap: 8px;
+		}
+		.family h2 {
+			font-size: 28px;
+			font-weight: 800;
+			letter-spacing: -0.02em;
+		}
+		.family p {
+			color: var(--muted);
+			max-width: 64ch;
+		}
+
+		/* Bandes */
+		.dir {
+			padding-block: 44px;
+			background: var(--b-bg);
+			color: var(--b-fg);
+			color-scheme: var(--b-scheme);
+		}
+		.dir-inner {
+			display: grid;
+			gap: 28px;
+		}
+		.dir-head {
+			display: grid;
+			gap: 8px;
+			max-width: 68ch;
+		}
+		.dir-tag {
+			font-family: var(--font-mono);
+			font-size: 12px;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			color: var(--b-muted);
+		}
+		.dir-head .pitch {
+			color: var(--b-muted);
+		}
+		.dir-head .tagline {
+			font-size: 18px;
+		}
+		.dir-head .wordmark {
+			font-size: clamp(36px, 7.5vw, 72px);
+			line-height: 1;
+			overflow-wrap: anywhere;
+		}
+		.word em {
+			font-style: inherit;
+			color: var(--b-accent);
+		}
+		.word .gh {
+			font-weight: 400;
+			color: var(--b-muted);
+		}
+		.tile .word .gh {
+			color: inherit;
+			opacity: 0.7;
+		}
+		.dir-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+			gap: 20px;
+		}
+		.block {
+			background: var(--b-surface);
+			border-radius: var(--b-radius);
+			padding: 20px;
+			display: grid;
+			gap: 14px;
+			align-content: start;
+			min-width: 0;
+		}
+		.block h3 {
+			font-family: var(--font-mono);
+			font-size: 11px;
+			font-weight: 400;
+			letter-spacing: 0.1em;
+			text-transform: uppercase;
+			color: var(--b-muted);
+		}
+		.block.wide {
+			grid-column: 1 / -1;
+		}
+		.logo-big {
+			display: grid;
+			place-items: center;
+			min-height: 200px;
+		}
+		.logo-big svg {
+			width: min(160px, 60%);
+			height: auto;
+		}
+
+		.swatches {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+			gap: 10px;
+		}
+		.swatch {
+			all: unset;
+			cursor: pointer;
+			display: grid;
+			gap: 6px;
+			font-family: var(--font-mono);
+			font-size: 11px;
+			color: var(--b-fg);
+		}
+		.swatch:focus-visible {
+			outline: 2px solid var(--b-accent);
+			outline-offset: 3px;
+			border-radius: 4px;
+		}
+		.chip {
+			height: 52px;
+			border-radius: 4px;
+			box-shadow: inset 0 0 0 1px rgba(127, 127, 127, 0.3);
+		}
+		.swatch span {
+			color: var(--b-muted);
+		}
+		.swatch b {
+			font-weight: 400;
+		}
+
+		.specimen {
+			display: grid;
+			gap: 10px;
+		}
+		.specimen .display {
+			font-size: 32px;
+			line-height: 1.05;
+		}
+		.specimen .mono {
+			font-size: 13px;
+			color: var(--b-muted);
+		}
+		.specimen .meta {
+			font-family: var(--font-mono);
+			font-size: 11px;
+			color: var(--b-muted);
+		}
+
+		.toolbars {
+			display: grid;
+			gap: 8px;
+		}
+		.toolbar {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			height: 34px;
+			padding-inline: 12px;
+			border-radius: 8px;
+		}
+		.toolbar.light {
+			background: #f1f3f4;
+		}
+		.toolbar.dark {
+			background: #35363a;
+		}
+		.toolbar .url {
+			flex: 1;
+			height: 22px;
+			border-radius: 11px;
+			min-width: 0;
+		}
+		.toolbar.light .url {
+			background: #ffffff;
+		}
+		.toolbar.dark .url {
+			background: #202124;
+		}
+		.toolbar .ghost {
+			width: 16px;
+			height: 16px;
+			border-radius: 4px;
+		}
+		.toolbar.light .ghost {
+			background: #c4c7cc;
+		}
+		.toolbar.dark .ghost {
+			background: #5f6368;
+		}
+		.sizes {
+			display: flex;
+			align-items: flex-end;
+			gap: 18px;
+			flex-wrap: wrap;
+		}
+		.sizes figure {
+			margin: 0;
+			display: grid;
+			gap: 6px;
+			justify-items: center;
+			font-family: var(--font-mono);
+			font-size: 11px;
+			color: var(--b-muted);
+		}
+
+		.mocks {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+			gap: 20px;
+			align-items: start;
+		}
+		.tile {
+			aspect-ratio: 440 / 280;
+			max-width: 100%;
+			border-radius: 6px;
+			background: var(--b-tile);
+			color: var(--b-tile-fg);
+			display: grid;
+			place-content: center;
+			justify-items: center;
+			gap: 10px;
+			padding: 16px;
+			text-align: center;
+			overflow: hidden;
+		}
+		.tile .t-name {
+			font-size: 26px;
+			line-height: 1.05;
+		}
+		.tile .t-tag {
+			font-size: 13px;
+			opacity: 0.8;
+		}
+		.cap {
+			font-family: var(--font-mono);
+			font-size: 11px;
+			color: var(--b-muted);
+			margin-top: 6px;
+		}
+		.opts {
+			border-radius: 8px;
+			background: var(--b-bg);
+			border: 1px solid var(--b-line);
+			overflow: hidden;
+		}
+		.opts-bar {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			padding: 12px 14px;
+			border-bottom: 1px solid var(--b-line);
+		}
+		.opts-bar .o-name {
+			font-size: 16px;
+		}
+		.opts-bar .o-sub {
+			margin-left: auto;
+			font-family: var(--font-mono);
+			font-size: 11px;
+			color: var(--b-muted);
+		}
+		.opts-row {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			padding: 10px 14px;
+			font-size: 13px;
+			border-bottom: 1px solid var(--b-line);
+		}
+		.opts-row:last-child {
+			border-bottom: 0;
+		}
+		.opts-row code {
+			font-size: 12px;
+		}
+		.opts-row .desc {
+			color: var(--b-muted);
+			font-size: 12px;
+		}
+		.opts-row > div {
+			min-width: 0;
+			flex: 1;
+			display: grid;
+		}
+		.toggle {
+			width: 30px;
+			height: 18px;
+			border-radius: 9px;
+			background: var(--b-accent);
+			position: relative;
+			flex: none;
+		}
+		.toggle::after {
+			content: '';
+			position: absolute;
+			top: 3px;
+			right: 3px;
+			width: 12px;
+			height: 12px;
+			border-radius: 50%;
+			background: var(--b-bg);
+		}
+		.toggle.off {
+			background: var(--b-line);
+		}
+		.toggle.off::after {
+			right: auto;
+			left: 3px;
+		}
+
+		/* Typo par variante */
+		.v-a1 .word {
+			font-family: 'Archivo', 'Arial Narrow', sans-serif;
+			font-style: italic;
+			font-weight: 900;
+			font-stretch: 125%;
+			font-variation-settings: 'wdth' 125;
+			text-transform: uppercase;
+			letter-spacing: -0.01em;
+		}
+		.v-a1 .body-font {
+			font-family: 'Archivo', system-ui, sans-serif;
+		}
+		.v-a1 .mono-font {
+			font-family: 'JetBrains Mono', ui-monospace, monospace;
+		}
+		.v-d1 .word {
+			font-family: 'Red Hat Display', system-ui, sans-serif;
+			font-weight: 800;
+			letter-spacing: -0.02em;
+		}
+		.v-d1 .body-font {
+			font-family: 'Red Hat Text', system-ui, sans-serif;
+		}
+		.v-d1 .mono-font {
+			font-family: 'Red Hat Mono', ui-monospace, monospace;
+		}
+		.v-d2 .word {
+			font-family: 'Manrope', system-ui, sans-serif;
+			font-weight: 800;
+			letter-spacing: -0.03em;
+		}
+		.v-d2 .body-font {
+			font-family: 'Manrope', system-ui, sans-serif;
+		}
+		.v-d2 .mono-font {
+			font-family: 'JetBrains Mono', ui-monospace, monospace;
+		}
+		.v-e1 .word {
+			font-family: 'Albert Sans', system-ui, sans-serif;
+			font-weight: 800;
+			letter-spacing: -0.025em;
+		}
+		.v-e1 .body-font {
+			font-family: 'Albert Sans', system-ui, sans-serif;
+		}
+		.v-e1 .mono-font {
+			font-family: 'Martian Mono', ui-monospace, monospace;
+			font-size: 12px;
+		}
+		.v-e2 .word {
+			font-family: 'Sora', system-ui, sans-serif;
+			font-weight: 700;
+			letter-spacing: -0.03em;
+		}
+		.v-e2 .body-font {
+			font-family: 'Sora', system-ui, sans-serif;
+		}
+		.v-e2 .mono-font {
+			font-family: 'JetBrains Mono', ui-monospace, monospace;
+		}
+		.v-e3 .word {
+			font-family: 'Onest', system-ui, sans-serif;
+			font-weight: 800;
+			letter-spacing: -0.03em;
+		}
+		.v-e3 .body-font {
+			font-family: 'Onest', system-ui, sans-serif;
+		}
+		.v-e3 .mono-font {
+			font-family: 'Geist Mono', ui-monospace, monospace;
+		}
+
+		.rules {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+			gap: 16px;
+		}
+		.rule {
+			background: var(--card);
+			border: 1px solid var(--line);
+			border-radius: 10px;
+			padding: 18px;
+			display: grid;
+			gap: 6px;
+			align-content: start;
+		}
+		.rule h3 {
+			font-size: 16px;
+			font-weight: 600;
+		}
+		.rule p {
+			color: var(--muted);
+		}
+		.questions {
+			display: grid;
+			gap: 10px;
+			padding-left: 20px;
+			margin: 0;
+			max-width: 70ch;
+		}
+		footer {
+			padding-block: 32px 56px;
+			color: var(--muted);
+			font-size: 13px;
+		}
+		.toast {
+			position: fixed;
+			left: 50%;
+			bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+			transform: translateX(-50%);
+			background: var(--ink);
+			color: var(--paper);
+			font-family: var(--font-mono);
+			font-size: 12px;
+			padding: 8px 14px;
+			border-radius: 6px;
+		}
+		@media (prefers-reduced-motion: no-preference) {
+			.swatch .chip {
+				transition: transform 0.15s;
+			}
+			.swatch:hover .chip {
+				transform: translateY(-2px);
+			}
+		}
+	</style>
+
+	<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+		<symbol id="logo-a1" viewBox="0 0 48 48">
+			<rect width="48" height="48" rx="10" fill="#0F4C5C" />
+			<path
+				d="M12.7 35.3 A16 16 0 1 1 35.3 35.3"
+				fill="none"
+				stroke="#3CC4D6"
+				stroke-width="6"
+				stroke-linecap="round"
+			/>
+			<path d="M24 24 L35 16.5" stroke="#E9EEF2" stroke-width="4.5" stroke-linecap="round" />
+			<circle cx="24" cy="24" r="4" fill="#E9EEF2" />
+		</symbol>
+		<symbol id="logo-d1" viewBox="0 0 48 48">
+			<rect width="48" height="48" rx="11" fill="#2747D9" />
+			<g fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round">
+				<path d="M24 24 C24 17 28 12 34 11" />
+				<path d="M24 24 C24 17 28 12 34 11" transform="rotate(72 24 24)" />
+				<path d="M24 24 C24 17 28 12 34 11" transform="rotate(144 24 24)" />
+				<path d="M24 24 C24 17 28 12 34 11" transform="rotate(216 24 24)" />
+				<path d="M24 24 C24 17 28 12 34 11" transform="rotate(288 24 24)" />
+			</g>
+			<circle cx="24" cy="24" r="5" fill="#FFFFFF" />
+		</symbol>
+		<symbol id="logo-d2" viewBox="0 0 48 48">
+			<rect width="48" height="48" rx="12" fill="#6D5BFF" />
+			<g fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+				<path d="M14 26 L24 16 L34 26" />
+				<path d="M14 36 L24 26 L34 36" opacity=".55" />
+			</g>
+		</symbol>
+		<symbol id="logo-p1" viewBox="0 0 48 48">
+			<rect width="48" height="48" rx="11" fill="#2747D9" />
+			<g fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round">
+				<path d="M24 24 C24 18 27 13.5 32 12.5 C34.5 12 35.5 14.5 33.5 15.5" />
+				<path d="M24 24 C24 18 27 13.5 32 12.5 C34.5 12 35.5 14.5 33.5 15.5" transform="rotate(45 24 24)" />
+				<path d="M24 24 C24 18 27 13.5 32 12.5 C34.5 12 35.5 14.5 33.5 15.5" transform="rotate(90 24 24)" />
+				<path d="M24 24 C24 18 27 13.5 32 12.5 C34.5 12 35.5 14.5 33.5 15.5" transform="rotate(135 24 24)" />
+				<path d="M24 24 C24 18 27 13.5 32 12.5 C34.5 12 35.5 14.5 33.5 15.5" transform="rotate(180 24 24)" />
+				<path d="M24 24 C24 18 27 13.5 32 12.5 C34.5 12 35.5 14.5 33.5 15.5" transform="rotate(225 24 24)" />
+				<path d="M24 24 C24 18 27 13.5 32 12.5 C34.5 12 35.5 14.5 33.5 15.5" transform="rotate(270 24 24)" />
+				<path d="M24 24 C24 18 27 13.5 32 12.5 C34.5 12 35.5 14.5 33.5 15.5" transform="rotate(315 24 24)" />
+			</g>
+			<circle cx="24" cy="24" r="5" fill="#FFFFFF" />
+		</symbol>
+		<symbol id="logo-p2" viewBox="0 0 48 48">
+			<rect width="48" height="48" rx="11" fill="#2747D9" />
+			<path d="M14 23 A10 10 0 0 1 34 23 V26 H14 Z" fill="#FFFFFF" />
+			<circle cx="20" cy="20.5" r="1.8" fill="#2747D9" />
+			<circle cx="28" cy="20.5" r="1.8" fill="#2747D9" />
+			<g fill="none" stroke="#FFFFFF" stroke-width="3.2" stroke-linecap="round">
+				<path d="M16 25 C16 30 12 31 10 35" />
+				<path d="M21 25 C21 31 19 34 16 37" />
+				<path d="M27 25 C27 31 29 34 32 37" />
+				<path d="M32 25 C32 30 36 31 38 35" />
+			</g>
+		</symbol>
+		<symbol id="logo-p3" viewBox="0 0 48 48">
+			<rect width="48" height="48" rx="11" fill="#2747D9" />
+			<g>
+				<path d="M24 24 C24 15 31 10 37 13" fill="none" stroke="#FFFFFF" stroke-width="5.5" stroke-linecap="round" />
+				<circle cx="27.5" cy="14.6" r="1.1" fill="#2747D9" />
+				<circle cx="30.7" cy="12.6" r="1.1" fill="#2747D9" />
+				<circle cx="33.9" cy="12.1" r="1.1" fill="#2747D9" />
+			</g>
+			<g transform="rotate(120 24 24)">
+				<path d="M24 24 C24 15 31 10 37 13" fill="none" stroke="#FFFFFF" stroke-width="5.5" stroke-linecap="round" />
+				<circle cx="27.5" cy="14.6" r="1.1" fill="#2747D9" />
+				<circle cx="30.7" cy="12.6" r="1.1" fill="#2747D9" />
+				<circle cx="33.9" cy="12.1" r="1.1" fill="#2747D9" />
+			</g>
+			<g transform="rotate(240 24 24)">
+				<path d="M24 24 C24 15 31 10 37 13" fill="none" stroke="#FFFFFF" stroke-width="5.5" stroke-linecap="round" />
+				<circle cx="27.5" cy="14.6" r="1.1" fill="#2747D9" />
+				<circle cx="30.7" cy="12.6" r="1.1" fill="#2747D9" />
+				<circle cx="33.9" cy="12.1" r="1.1" fill="#2747D9" />
+			</g>
+			<circle cx="24" cy="24" r="5" fill="#FFFFFF" />
+		</symbol>
+		<symbol id="logo-p4" viewBox="0 0 48 48">
+			<rect width="48" height="48" rx="11" fill="#2747D9" />
+			<path
+				d="M31 14 C31 9 17 9 17 16.5 C17 24 31 23 31 31 C31 38.5 17 39 16.5 33.5"
+				fill="none"
+				stroke="#FFFFFF"
+				stroke-width="6"
+				stroke-linecap="round"
+			/>
+			<g fill="#2747D9">
+				<circle cx="27.1" cy="10.7" r="1.2" />
+				<circle cx="20" cy="11.7" r="1.2" />
+				<circle cx="20.9" cy="22" r="1.2" />
+				<circle cx="28" cy="25.8" r="1.2" />
+				<circle cx="27" cy="36.3" r="1.2" />
+				<circle cx="19.9" cy="36.8" r="1.2" />
+			</g>
+		</symbol>
+		<symbol id="logo-q1" viewBox="0 0 48 48">
+			<rect width="48" height="48" rx="12" fill="#6D5BFF" />
+			<g fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round">
+				<path d="M24 24 C24 18 27 13.5 32 12.5 C34.5 12 35.5 14.5 33.5 15.5" />
+				<path d="M24 24 C24 18 27 13.5 32 12.5 C34.5 12 35.5 14.5 33.5 15.5" transform="rotate(45 24 24)" />
+				<path d="M24 24 C24 18 27 13.5 32 12.5 C34.5 12 35.5 14.5 33.5 15.5" transform="rotate(90 24 24)" />
+				<path d="M24 24 C24 18 27 13.5 32 12.5 C34.5 12 35.5 14.5 33.5 15.5" transform="rotate(135 24 24)" />
+				<path d="M24 24 C24 18 27 13.5 32 12.5 C34.5 12 35.5 14.5 33.5 15.5" transform="rotate(180 24 24)" />
+				<path d="M24 24 C24 18 27 13.5 32 12.5 C34.5 12 35.5 14.5 33.5 15.5" transform="rotate(225 24 24)" />
+				<path d="M24 24 C24 18 27 13.5 32 12.5 C34.5 12 35.5 14.5 33.5 15.5" transform="rotate(270 24 24)" />
+				<path d="M24 24 C24 18 27 13.5 32 12.5 C34.5 12 35.5 14.5 33.5 15.5" transform="rotate(315 24 24)" />
+			</g>
+			<circle cx="24" cy="24" r="5" fill="#FFFFFF" />
+		</symbol>
+		<symbol id="logo-q2" viewBox="0 0 48 48">
+			<rect width="48" height="48" rx="12" fill="#6D5BFF" />
+			<path d="M14 23 A10 10 0 0 1 34 23 V26 H14 Z" fill="#FFFFFF" />
+			<circle cx="20" cy="20.5" r="1.8" fill="#6D5BFF" />
+			<circle cx="28" cy="20.5" r="1.8" fill="#6D5BFF" />
+			<g fill="none" stroke="#FFFFFF" stroke-width="3.2" stroke-linecap="round">
+				<path d="M16 25 C16 30 12 31 10 35" />
+				<path d="M21 25 C21 31 19 34 16 37" />
+				<path d="M27 25 C27 31 29 34 32 37" />
+				<path d="M32 25 C32 30 36 31 38 35" />
+			</g>
+		</symbol>
+		<symbol id="logo-q3" viewBox="0 0 48 48">
+			<rect width="48" height="48" rx="12" fill="#6D5BFF" />
+			<g>
+				<path d="M24 24 C24 15 31 10 37 13" fill="none" stroke="#FFFFFF" stroke-width="5.5" stroke-linecap="round" />
+				<circle cx="27.5" cy="14.6" r="1.1" fill="#6D5BFF" />
+				<circle cx="30.7" cy="12.6" r="1.1" fill="#6D5BFF" />
+				<circle cx="33.9" cy="12.1" r="1.1" fill="#6D5BFF" />
+			</g>
+			<g transform="rotate(120 24 24)">
+				<path d="M24 24 C24 15 31 10 37 13" fill="none" stroke="#FFFFFF" stroke-width="5.5" stroke-linecap="round" />
+				<circle cx="27.5" cy="14.6" r="1.1" fill="#6D5BFF" />
+				<circle cx="30.7" cy="12.6" r="1.1" fill="#6D5BFF" />
+				<circle cx="33.9" cy="12.1" r="1.1" fill="#6D5BFF" />
+			</g>
+			<g transform="rotate(240 24 24)">
+				<path d="M24 24 C24 15 31 10 37 13" fill="none" stroke="#FFFFFF" stroke-width="5.5" stroke-linecap="round" />
+				<circle cx="27.5" cy="14.6" r="1.1" fill="#6D5BFF" />
+				<circle cx="30.7" cy="12.6" r="1.1" fill="#6D5BFF" />
+				<circle cx="33.9" cy="12.1" r="1.1" fill="#6D5BFF" />
+			</g>
+			<circle cx="24" cy="24" r="5" fill="#FFFFFF" />
+		</symbol>
+		<symbol id="logo-q4" viewBox="0 0 48 48">
+			<rect width="48" height="48" rx="12" fill="#6D5BFF" />
+			<path
+				d="M31 14 C31 9 17 9 17 16.5 C17 24 31 23 31 31 C31 38.5 17 39 16.5 33.5"
+				fill="none"
+				stroke="#FFFFFF"
+				stroke-width="6"
+				stroke-linecap="round"
+			/>
+			<g fill="#6D5BFF">
+				<circle cx="27.1" cy="10.7" r="1.2" />
+				<circle cx="20" cy="11.7" r="1.2" />
+				<circle cx="20.9" cy="22" r="1.2" />
+				<circle cx="28" cy="25.8" r="1.2" />
+				<circle cx="27" cy="36.3" r="1.2" />
+				<circle cx="19.9" cy="36.8" r="1.2" />
+			</g>
+		</symbol>
+	</svg>
+
+	<header class="wrap intro">
+		<a href="../index.html" style="color: var(--pick); font-weight: 600">← Retour au kit</a>
+		<span class="eyebrow">github-power · nom et charte · brouillon du 30 oct. 2026</span>
+		<h1>Trouver un nom et une identité à l'extension</h1>
+		<p>
+			La short list : Octane en Pétrole, Supercharged GitHub en Cobalt et en Boost. Chacun avec logo, palette, typo,
+			icône dans la barre d'outils, vignette du store et page d'options. Choix final : Supercharged GitHub en Boost,
+			avec le logo P3 des pistes poulpe.
+		</p>
+	</header>
+
+	<section class="wrap section" aria-labelledby="noms">
+		<h2 id="noms">Les noms</h2>
+		<p class="lede">
+			Le risque mesure la probabilité qu'une revue du Chrome Web Store ou d'AMO bloque la fiche parce que le nom laisse
+			croire à un produit officiel de GitHub.
+		</p>
+		<div class="table-scroll">
+			<table>
+				<thead>
+					<tr>
+						<th>Nom</th>
+						<th>Schéma</th>
+						<th>Risque store</th>
+						<th>Pourquoi</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="name">Octane for GitHub</td>
+						<td class="pattern">X for GitHub</td>
+						<td><span class="risk low">faible</span></td>
+						<td>
+							Le carburant, avec « octo » en clin d'œil à l'Octocat. Court, se prononce pareil en français et en
+							anglais.
+						</td>
+					</tr>
+					<tr>
+						<td class="name">Supercharged GitHub</td>
+						<td class="pattern">Adj. GitHub</td>
+						<td><span class="risk mid">moyen</span></td>
+						<td>
+							« Suralimenté » : garde l'idée de puissance du nom actuel. Refined GitHub est publié sous ce schéma depuis
+							des années.
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="verdict">
+			<p>
+				<strong>Choix : Supercharged GitHub, palette Boost, logo P3 (trois bras à ventouses).</strong> Risque moyen au
+				passage des stores, le même schéma que Refined GitHub. Si un store bloque le nom, Octane for GitHub en Pétrole
+				reste le plan B.
+			</p>
+		</div>
+	</section>
+
+	<div class="wrap family">
+		<h2>Octane for GitHub</h2>
+		<p>Le carburant.</p>
+	</div>
+
+	<section
+		class="dir v-a1"
+		style="
+			--b-bg: #12161b;
+			--b-surface: #1b2129;
+			--b-fg: #e9eef2;
+			--b-muted: #8d99a6;
+			--b-line: #2c3440;
+			--b-accent: #3cc4d6;
+			--b-tile: #0f4c5c;
+			--b-tile-fg: #e9eef2;
+			--b-radius: 4px;
+			--b-scheme: dark;
+		"
+		aria-labelledby="h-a1"
+	>
+		<div class="wrap dir-inner">
+			<div class="dir-head">
+				<span class="dir-tag">Octane · Pétrole</span>
+				<h3 id="h-a1" class="wordmark word"><em>O</em>ctane</h3>
+				<p class="tagline body-font">High-octane GitHub.</p>
+				<p class="pitch">
+					Un tableau de bord de nuit : carbone, bleu pétrole, arc cyan. Le logo est un compte-tours dont l'aiguille est
+					presque à fond. Titre en italique large pour la vitesse.
+				</p>
+			</div>
+			<div class="dir-grid">
+				<div class="block logo-big">
+					<svg viewBox="0 0 48 48" role="img" aria-label="Logo"><use href="#logo-a1" /></svg>
+				</div>
+				<div class="block">
+					<h3>Palette</h3>
+					<div class="swatches">
+						<button class="swatch" data-hex="#12161B">
+							<div class="chip" style="background: #12161b"></div>
+							<b>Carbone</b><span>#12161B</span>
+						</button>
+						<button class="swatch" data-hex="#0F4C5C">
+							<div class="chip" style="background: #0f4c5c"></div>
+							<b>Pétrole</b><span>#0F4C5C</span>
+						</button>
+						<button class="swatch" data-hex="#3CC4D6">
+							<div class="chip" style="background: #3cc4d6"></div>
+							<b>Indice</b><span>#3CC4D6</span>
+						</button>
+						<button class="swatch" data-hex="#1B2129">
+							<div class="chip" style="background: #1b2129"></div>
+							<b>Carter</b><span>#1B2129</span>
+						</button>
+						<button class="swatch" data-hex="#E9EEF2">
+							<div class="chip" style="background: #e9eef2"></div>
+							<b>Chrome</b><span>#E9EEF2</span>
+						</button>
+						<button class="swatch" data-hex="#8D99A6">
+							<div class="chip" style="background: #8d99a6"></div>
+							<b>Gris piste</b><span>#8D99A6</span>
+						</button>
+					</div>
+				</div>
+				<div class="block">
+					<h3>Typographie</h3>
+					<div class="specimen">
+						<div class="display word">Review faster</div>
+						<p class="body-font">Images zoomables, commentaires en un clic, taille de chaque PR dans la liste.</p>
+						<p class="mono mono-font">+128 −42 · 7 files · size/M</p>
+						<p class="meta">Archivo Expanded Black Italic · Archivo · JetBrains Mono</p>
+					</div>
+				</div>
+				<div class="block">
+					<h3>Icône</h3>
+					<div class="toolbars">
+						<div class="toolbar light">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16" aria-hidden="true"><use href="#logo-a1" /></svg><span class="ghost"></span>
+						</div>
+						<div class="toolbar dark">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16" aria-hidden="true"><use href="#logo-a1" /></svg><span class="ghost"></span>
+						</div>
+					</div>
+					<div class="sizes">
+						<figure>
+							<svg width="16" height="16" aria-hidden="true"><use href="#logo-a1" /></svg>16
+						</figure>
+						<figure>
+							<svg width="32" height="32" aria-hidden="true"><use href="#logo-a1" /></svg>32
+						</figure>
+						<figure>
+							<svg width="48" height="48" aria-hidden="true"><use href="#logo-a1" /></svg>48
+						</figure>
+						<figure>
+							<svg width="96" height="96" aria-hidden="true"><use href="#logo-a1" /></svg>128
+						</figure>
+					</div>
+				</div>
+				<div class="block wide">
+					<h3>Store et page d'options</h3>
+					<div class="mocks">
+						<div>
+							<div class="tile">
+								<svg width="64" height="64" aria-hidden="true"><use href="#logo-a1" /></svg>
+								<div class="t-name word"><em>O</em>ctane</div>
+								<div class="t-tag body-font">for GitHub · High-octane GitHub.</div>
+							</div>
+							<p class="cap">Petite vignette promo Chrome Web Store, 440 × 280</p>
+						</div>
+						<div class="opts body-font">
+							<div class="opts-bar">
+								<svg width="22" height="22" aria-hidden="true"><use href="#logo-a1" /></svg
+								><span class="o-name word"><em>O</em>ctane</span><span class="o-sub">options</span>
+							</div>
+							<div class="opts-row">
+								<span class="toggle"></span>
+								<div><code>image-modal</code><span class="desc">Ouvre les images dans une modale zoomable</span></div>
+							</div>
+							<div class="opts-row">
+								<span class="toggle"></span>
+								<div>
+									<code>pr-list-diff-stats</code
+									><span class="desc">Lignes ajoutées et supprimées dans la liste des PR</span>
+								</div>
+							</div>
+							<div class="opts-row">
+								<span class="toggle off"></span>
+								<div><code>quick-comments</code><span class="desc">Commentaires prédéfinis en un clic</span></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div class="wrap family">
+		<h2>Supercharged GitHub</h2>
+		<p>Le compresseur qui suralimente un moteur.</p>
+	</div>
+
+	<section
+		class="dir v-d1"
+		style="
+			--b-bg: #f5f6f8;
+			--b-surface: #ffffff;
+			--b-fg: #10131a;
+			--b-muted: #5d6575;
+			--b-line: #d8dce3;
+			--b-accent: #2747d9;
+			--b-tile: #10131a;
+			--b-tile-fg: #f5f6f8;
+			--b-radius: 8px;
+			--b-scheme: light;
+		"
+		aria-labelledby="h-d1"
+	>
+		<div class="wrap dir-inner">
+			<div class="dir-head">
+				<span class="dir-tag">Supercharged · Cobalt</span>
+				<h3 id="h-d1" class="wordmark word">Supercharged <span class="gh">GitHub</span></h3>
+				<p class="tagline body-font">More power to your pull requests.</p>
+				<p class="pitch">
+					La roue de turbine du compresseur, en blanc sur cobalt. Encre et papier pour le reste. « Supercharged » porte
+					la marque, « GitHub » est composé plus léger.
+				</p>
+			</div>
+			<div class="dir-grid">
+				<div class="block logo-big">
+					<svg viewBox="0 0 48 48" role="img" aria-label="Logo"><use href="#logo-d1" /></svg>
+				</div>
+				<div class="block">
+					<h3>Palette</h3>
+					<div class="swatches">
+						<button class="swatch" data-hex="#2747D9">
+							<div class="chip" style="background: #2747d9"></div>
+							<b>Cobalt</b><span>#2747D9</span>
+						</button>
+						<button class="swatch" data-hex="#10131A">
+							<div class="chip" style="background: #10131a"></div>
+							<b>Encre</b><span>#10131A</span>
+						</button>
+						<button class="swatch" data-hex="#2A303C">
+							<div class="chip" style="background: #2a303c"></div>
+							<b>Graphite</b><span>#2A303C</span>
+						</button>
+						<button class="swatch" data-hex="#5D6575">
+							<div class="chip" style="background: #5d6575"></div>
+							<b>Acier</b><span>#5D6575</span>
+						</button>
+						<button class="swatch" data-hex="#D8DCE3">
+							<div class="chip" style="background: #d8dce3"></div>
+							<b>Brume</b><span>#D8DCE3</span>
+						</button>
+						<button class="swatch" data-hex="#F5F6F8">
+							<div class="chip" style="background: #f5f6f8"></div>
+							<b>Papier</b><span>#F5F6F8</span>
+						</button>
+					</div>
+				</div>
+				<div class="block">
+					<h3>Typographie</h3>
+					<div class="specimen">
+						<div class="display word">Review faster</div>
+						<p class="body-font">Images zoomables, commentaires en un clic, taille de chaque PR dans la liste.</p>
+						<p class="mono mono-font">+128 −42 · 7 files · size/M</p>
+						<p class="meta">Red Hat Display ExtraBold · Red Hat Text · Red Hat Mono</p>
+					</div>
+				</div>
+				<div class="block">
+					<h3>Icône</h3>
+					<div class="toolbars">
+						<div class="toolbar light">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16" aria-hidden="true"><use href="#logo-d1" /></svg><span class="ghost"></span>
+						</div>
+						<div class="toolbar dark">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16" aria-hidden="true"><use href="#logo-d1" /></svg><span class="ghost"></span>
+						</div>
+					</div>
+					<div class="sizes">
+						<figure>
+							<svg width="16" height="16" aria-hidden="true"><use href="#logo-d1" /></svg>16
+						</figure>
+						<figure>
+							<svg width="32" height="32" aria-hidden="true"><use href="#logo-d1" /></svg>32
+						</figure>
+						<figure>
+							<svg width="48" height="48" aria-hidden="true"><use href="#logo-d1" /></svg>48
+						</figure>
+						<figure>
+							<svg width="96" height="96" aria-hidden="true"><use href="#logo-d1" /></svg>128
+						</figure>
+					</div>
+				</div>
+				<div class="block wide">
+					<h3>Store et page d'options</h3>
+					<div class="mocks">
+						<div>
+							<div class="tile">
+								<svg width="64" height="64" aria-hidden="true"><use href="#logo-d1" /></svg>
+								<div class="t-name word">Supercharged <span class="gh">GitHub</span></div>
+								<div class="t-tag body-font">More power to your pull requests.</div>
+							</div>
+							<p class="cap">Petite vignette promo Chrome Web Store, 440 × 280</p>
+						</div>
+						<div class="opts body-font">
+							<div class="opts-bar">
+								<svg width="22" height="22" aria-hidden="true"><use href="#logo-d1" /></svg
+								><span class="o-name word">Supercharged <span class="gh">GitHub</span></span
+								><span class="o-sub">options</span>
+							</div>
+							<div class="opts-row">
+								<span class="toggle"></span>
+								<div><code>image-modal</code><span class="desc">Ouvre les images dans une modale zoomable</span></div>
+							</div>
+							<div class="opts-row">
+								<span class="toggle"></span>
+								<div>
+									<code>pr-list-diff-stats</code
+									><span class="desc">Lignes ajoutées et supprimées dans la liste des PR</span>
+								</div>
+							</div>
+							<div class="opts-row">
+								<span class="toggle off"></span>
+								<div><code>quick-comments</code><span class="desc">Commentaires prédéfinis en un clic</span></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section
+		class="dir v-d2"
+		style="
+			--b-bg: #0d1017;
+			--b-surface: #161a23;
+			--b-fg: #eceef4;
+			--b-muted: #8b92a3;
+			--b-line: #272c38;
+			--b-accent: #7c6cff;
+			--b-tile: #6d5bff;
+			--b-tile-fg: #ffffff;
+			--b-radius: 12px;
+			--b-scheme: dark;
+		"
+		aria-labelledby="h-d2"
+	>
+		<div class="wrap dir-inner">
+			<div class="dir-head">
+				<span class="dir-tag">Supercharged · Boost</span>
+				<h3 id="h-d2" class="wordmark word">Supercharged <span class="gh">GitHub</span></h3>
+				<p class="tagline body-font">Boost every review.</p>
+				<p class="pitch">
+					La pression qui monte : deux chevrons, le second en retrait. Fond de nuit et violet, un clin d'œil au violet «
+					merged » de GitHub sans le copier. Formes arrondies, ton plus produit.
+				</p>
+			</div>
+			<div class="dir-grid">
+				<div class="block logo-big">
+					<svg viewBox="0 0 48 48" role="img" aria-label="Logo"><use href="#logo-d2" /></svg>
+				</div>
+				<div class="block">
+					<h3>Palette</h3>
+					<div class="swatches">
+						<button class="swatch" data-hex="#0D1017">
+							<div class="chip" style="background: #0d1017"></div>
+							<b>Nuit</b><span>#0D1017</span>
+						</button>
+						<button class="swatch" data-hex="#6D5BFF">
+							<div class="chip" style="background: #6d5bff"></div>
+							<b>Boost</b><span>#6D5BFF</span>
+						</button>
+						<button class="swatch" data-hex="#B9B0FF">
+							<div class="chip" style="background: #b9b0ff"></div>
+							<b>Lavande</b><span>#B9B0FF</span>
+						</button>
+						<button class="swatch" data-hex="#161A23">
+							<div class="chip" style="background: #161a23"></div>
+							<b>Ardoise</b><span>#161A23</span>
+						</button>
+						<button class="swatch" data-hex="#ECEEF4">
+							<div class="chip" style="background: #eceef4"></div>
+							<b>Neige</b><span>#ECEEF4</span>
+						</button>
+					</div>
+				</div>
+				<div class="block">
+					<h3>Typographie</h3>
+					<div class="specimen">
+						<div class="display word">Review faster</div>
+						<p class="body-font">Images zoomables, commentaires en un clic, taille de chaque PR dans la liste.</p>
+						<p class="mono mono-font">+128 −42 · 7 files · size/M</p>
+						<p class="meta">Manrope ExtraBold · Manrope · JetBrains Mono</p>
+					</div>
+				</div>
+				<div class="block">
+					<h3>Icône</h3>
+					<div class="toolbars">
+						<div class="toolbar light">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16" aria-hidden="true"><use href="#logo-d2" /></svg><span class="ghost"></span>
+						</div>
+						<div class="toolbar dark">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16" aria-hidden="true"><use href="#logo-d2" /></svg><span class="ghost"></span>
+						</div>
+					</div>
+					<div class="sizes">
+						<figure>
+							<svg width="16" height="16" aria-hidden="true"><use href="#logo-d2" /></svg>16
+						</figure>
+						<figure>
+							<svg width="32" height="32" aria-hidden="true"><use href="#logo-d2" /></svg>32
+						</figure>
+						<figure>
+							<svg width="48" height="48" aria-hidden="true"><use href="#logo-d2" /></svg>48
+						</figure>
+						<figure>
+							<svg width="96" height="96" aria-hidden="true"><use href="#logo-d2" /></svg>128
+						</figure>
+					</div>
+				</div>
+				<div class="block wide">
+					<h3>Store et page d'options</h3>
+					<div class="mocks">
+						<div>
+							<div class="tile">
+								<svg width="64" height="64" aria-hidden="true"><use href="#logo-d2" /></svg>
+								<div class="t-name word">Supercharged <span class="gh">GitHub</span></div>
+								<div class="t-tag body-font">Boost every review.</div>
+							</div>
+							<p class="cap">Petite vignette promo Chrome Web Store, 440 × 280</p>
+						</div>
+						<div class="opts body-font">
+							<div class="opts-bar">
+								<svg width="22" height="22" aria-hidden="true"><use href="#logo-d2" /></svg
+								><span class="o-name word">Supercharged <span class="gh">GitHub</span></span
+								><span class="o-sub">options</span>
+							</div>
+							<div class="opts-row">
+								<span class="toggle"></span>
+								<div><code>image-modal</code><span class="desc">Ouvre les images dans une modale zoomable</span></div>
+							</div>
+							<div class="opts-row">
+								<span class="toggle"></span>
+								<div>
+									<code>pr-list-diff-stats</code
+									><span class="desc">Lignes ajoutées et supprimées dans la liste des PR</span>
+								</div>
+							</div>
+							<div class="opts-row">
+								<span class="toggle off"></span>
+								<div><code>quick-comments</code><span class="desc">Commentaires prédéfinis en un clic</span></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div class="wrap family">
+		<h2>Supercharged GitHub · Cobalt, pistes poulpe</h2>
+		<p>
+			Un clin d'œil à la pieuvre de GitHub sans reprendre l'Octocat : les règles d'usage des marques GitHub interdisent
+			de l'utiliser ou de le modifier dans le logo d'un autre produit, et une revue de store peut le refuser. Les quatre
+			pistes gardent la palette Cobalt et se jugent surtout à 16 px, dans la barre d'outils.
+		</p>
+	</div>
+
+	<section
+		class="dir v-d1"
+		style="
+			--b-bg: #f5f6f8;
+			--b-surface: #ffffff;
+			--b-fg: #10131a;
+			--b-muted: #5d6575;
+			--b-line: #d8dce3;
+			--b-accent: #2747d9;
+			--b-tile: #10131a;
+			--b-tile-fg: #f5f6f8;
+			--b-radius: 8px;
+			--b-scheme: light;
+		"
+		aria-label="Pistes de logo poulpe"
+	>
+		<div class="wrap dir-inner">
+			<div class="dir-grid">
+				<div class="block">
+					<h3>Référence · turbine actuelle</h3>
+					<div class="logo-big">
+						<svg viewBox="0 0 48 48" role="img" aria-label="Logo Référence · turbine actuelle">
+							<use href="#logo-d1" />
+						</svg>
+					</div>
+					<p style="color: var(--b-muted)">La roue de turbine à cinq pales du design Cobalt, pour comparer.</p>
+					<div class="toolbars">
+						<div class="toolbar light">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16" aria-hidden="true"><use href="#logo-d1" /></svg><span class="ghost"></span>
+						</div>
+						<div class="toolbar dark">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16" aria-hidden="true"><use href="#logo-d1" /></svg><span class="ghost"></span>
+						</div>
+					</div>
+					<div class="sizes">
+						<figure>
+							<svg width="16" height="16" aria-hidden="true"><use href="#logo-d1" /></svg>16
+						</figure>
+						<figure>
+							<svg width="32" height="32" aria-hidden="true"><use href="#logo-d1" /></svg>32
+						</figure>
+						<figure>
+							<svg width="48" height="48" aria-hidden="true"><use href="#logo-d1" /></svg>48
+						</figure>
+						<figure>
+							<svg width="96" height="96" aria-hidden="true"><use href="#logo-d1" /></svg>128
+						</figure>
+					</div>
+				</div>
+				<div class="block">
+					<h3>P1 · Turbine à huit bras</h3>
+					<div class="logo-big">
+						<svg viewBox="0 0 48 48" role="img" aria-label="Logo P1 · Turbine à huit bras"><use href="#logo-p1" /></svg>
+					</div>
+					<p style="color: var(--b-muted)">
+						Huit pales, comme les huit bras, chacune terminée par une petite boucle de tentacule. Reste une turbine de
+						loin.
+					</p>
+					<div class="toolbars">
+						<div class="toolbar light">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16" aria-hidden="true"><use href="#logo-p1" /></svg><span class="ghost"></span>
+						</div>
+						<div class="toolbar dark">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16" aria-hidden="true"><use href="#logo-p1" /></svg><span class="ghost"></span>
+						</div>
+					</div>
+					<div class="sizes">
+						<figure>
+							<svg width="16" height="16" aria-hidden="true"><use href="#logo-p1" /></svg>16
+						</figure>
+						<figure>
+							<svg width="32" height="32" aria-hidden="true"><use href="#logo-p1" /></svg>32
+						</figure>
+						<figure>
+							<svg width="48" height="48" aria-hidden="true"><use href="#logo-p1" /></svg>48
+						</figure>
+						<figure>
+							<svg width="96" height="96" aria-hidden="true"><use href="#logo-p1" /></svg>128
+						</figure>
+					</div>
+				</div>
+				<div class="block">
+					<h3>P2 · Poulpe</h3>
+					<div class="logo-big">
+						<svg viewBox="0 0 48 48" role="img" aria-label="Logo P2 · Poulpe"><use href="#logo-p2" /></svg>
+					</div>
+					<p style="color: var(--b-muted)">
+						Une tête ronde, deux yeux et quatre bras. Le plus lisible comme poulpe, le plus ludique aussi.
+					</p>
+					<div class="toolbars">
+						<div class="toolbar light">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16" aria-hidden="true"><use href="#logo-p2" /></svg><span class="ghost"></span>
+						</div>
+						<div class="toolbar dark">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16" aria-hidden="true"><use href="#logo-p2" /></svg><span class="ghost"></span>
+						</div>
+					</div>
+					<div class="sizes">
+						<figure>
+							<svg width="16" height="16" aria-hidden="true"><use href="#logo-p2" /></svg>16
+						</figure>
+						<figure>
+							<svg width="32" height="32" aria-hidden="true"><use href="#logo-p2" /></svg>32
+						</figure>
+						<figure>
+							<svg width="48" height="48" aria-hidden="true"><use href="#logo-p2" /></svg>48
+						</figure>
+						<figure>
+							<svg width="96" height="96" aria-hidden="true"><use href="#logo-p2" /></svg>128
+						</figure>
+					</div>
+				</div>
+				<div class="block">
+					<h3>P3 · Trois bras à ventouses</h3>
+					<div class="logo-big">
+						<svg viewBox="0 0 48 48" role="img" aria-label="Logo P3 · Trois bras à ventouses">
+							<use href="#logo-p3" />
+						</svg>
+					</div>
+					<p style="color: var(--b-muted)">
+						Trois bras épais en spirale, comme une hélice, avec des ventouses. Le plus lisible à 16 px.
+					</p>
+					<div class="toolbars">
+						<div class="toolbar light">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16" aria-hidden="true"><use href="#logo-p3" /></svg><span class="ghost"></span>
+						</div>
+						<div class="toolbar dark">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16" aria-hidden="true"><use href="#logo-p3" /></svg><span class="ghost"></span>
+						</div>
+					</div>
+					<div class="sizes">
+						<figure>
+							<svg width="16" height="16" aria-hidden="true"><use href="#logo-p3" /></svg>16
+						</figure>
+						<figure>
+							<svg width="32" height="32" aria-hidden="true"><use href="#logo-p3" /></svg>32
+						</figure>
+						<figure>
+							<svg width="48" height="48" aria-hidden="true"><use href="#logo-p3" /></svg>48
+						</figure>
+						<figure>
+							<svg width="96" height="96" aria-hidden="true"><use href="#logo-p3" /></svg>128
+						</figure>
+					</div>
+				</div>
+				<div class="block">
+					<h3>P4 · S tentacule</h3>
+					<div class="logo-big">
+						<svg viewBox="0 0 48 48" role="img" aria-label="Logo P4 · S tentacule"><use href="#logo-p4" /></svg>
+					</div>
+					<p style="color: var(--b-muted)">
+						Le S de Supercharged dessiné comme un bras avec ses ventouses, la pointe enroulée.
+					</p>
+					<div class="toolbars">
+						<div class="toolbar light">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16" aria-hidden="true"><use href="#logo-p4" /></svg><span class="ghost"></span>
+						</div>
+						<div class="toolbar dark">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16" aria-hidden="true"><use href="#logo-p4" /></svg><span class="ghost"></span>
+						</div>
+					</div>
+					<div class="sizes">
+						<figure>
+							<svg width="16" height="16" aria-hidden="true"><use href="#logo-p4" /></svg>16
+						</figure>
+						<figure>
+							<svg width="32" height="32" aria-hidden="true"><use href="#logo-p4" /></svg>32
+						</figure>
+						<figure>
+							<svg width="48" height="48" aria-hidden="true"><use href="#logo-p4" /></svg>48
+						</figure>
+						<figure>
+							<svg width="96" height="96" aria-hidden="true"><use href="#logo-p4" /></svg>128
+						</figure>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div class="wrap family">
+		<h2>Supercharged GitHub · Boost, pistes poulpe</h2>
+		<p>Les mêmes quatre pistes avec la palette Boost : violet sur fond de nuit, coins plus arrondis.</p>
+	</div>
+
+	<section
+		class="dir v-d2"
+		style="
+			--b-bg: #0d1017;
+			--b-surface: #161a23;
+			--b-fg: #eceef4;
+			--b-muted: #8b92a3;
+			--b-line: #272c38;
+			--b-accent: #7c6cff;
+			--b-tile: #6d5bff;
+			--b-tile-fg: #ffffff;
+			--b-radius: 12px;
+			--b-scheme: dark;
+		"
+		aria-label="Pistes de logo poulpe, palette Boost"
+	>
+		<div class="wrap dir-inner">
+			<div class="dir-grid">
+				<div class="block">
+					<h3>Référence · chevrons Boost</h3>
+					<div class="logo-big">
+						<svg viewBox="0 0 48 48" role="img" aria-label="Logo Référence · chevrons Boost">
+							<use href="#logo-d2" />
+						</svg>
+					</div>
+					<p style="color: var(--b-muted)">Les deux chevrons du design Boost, pour comparer.</p>
+					<div class="toolbars">
+						<div class="toolbar light">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16" aria-hidden="true"><use href="#logo-d2" /></svg><span class="ghost"></span>
+						</div>
+						<div class="toolbar dark">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16" aria-hidden="true"><use href="#logo-d2" /></svg><span class="ghost"></span>
+						</div>
+					</div>
+					<div class="sizes">
+						<figure>
+							<svg width="16" height="16" aria-hidden="true"><use href="#logo-d2" /></svg>16
+						</figure>
+						<figure>
+							<svg width="32" height="32" aria-hidden="true"><use href="#logo-d2" /></svg>32
+						</figure>
+						<figure>
+							<svg width="48" height="48" aria-hidden="true"><use href="#logo-d2" /></svg>48
+						</figure>
+						<figure>
+							<svg width="96" height="96" aria-hidden="true"><use href="#logo-d2" /></svg>128
+						</figure>
+					</div>
+				</div>
+				<div class="block">
+					<h3>P1 · Turbine à huit bras</h3>
+					<div class="logo-big">
+						<svg viewBox="0 0 48 48" role="img" aria-label="Logo P1 · Turbine à huit bras"><use href="#logo-q1" /></svg>
+					</div>
+					<p style="color: var(--b-muted)">
+						Huit pales, comme les huit bras, chacune terminée par une petite boucle de tentacule. Reste une turbine de
+						loin.
+					</p>
+					<div class="toolbars">
+						<div class="toolbar light">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16" aria-hidden="true"><use href="#logo-q1" /></svg><span class="ghost"></span>
+						</div>
+						<div class="toolbar dark">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16" aria-hidden="true"><use href="#logo-q1" /></svg><span class="ghost"></span>
+						</div>
+					</div>
+					<div class="sizes">
+						<figure>
+							<svg width="16" height="16" aria-hidden="true"><use href="#logo-q1" /></svg>16
+						</figure>
+						<figure>
+							<svg width="32" height="32" aria-hidden="true"><use href="#logo-q1" /></svg>32
+						</figure>
+						<figure>
+							<svg width="48" height="48" aria-hidden="true"><use href="#logo-q1" /></svg>48
+						</figure>
+						<figure>
+							<svg width="96" height="96" aria-hidden="true"><use href="#logo-q1" /></svg>128
+						</figure>
+					</div>
+				</div>
+				<div class="block">
+					<h3>P2 · Poulpe</h3>
+					<div class="logo-big">
+						<svg viewBox="0 0 48 48" role="img" aria-label="Logo P2 · Poulpe"><use href="#logo-q2" /></svg>
+					</div>
+					<p style="color: var(--b-muted)">
+						Une tête ronde, deux yeux et quatre bras. Le plus lisible comme poulpe, le plus ludique aussi.
+					</p>
+					<div class="toolbars">
+						<div class="toolbar light">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16" aria-hidden="true"><use href="#logo-q2" /></svg><span class="ghost"></span>
+						</div>
+						<div class="toolbar dark">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16" aria-hidden="true"><use href="#logo-q2" /></svg><span class="ghost"></span>
+						</div>
+					</div>
+					<div class="sizes">
+						<figure>
+							<svg width="16" height="16" aria-hidden="true"><use href="#logo-q2" /></svg>16
+						</figure>
+						<figure>
+							<svg width="32" height="32" aria-hidden="true"><use href="#logo-q2" /></svg>32
+						</figure>
+						<figure>
+							<svg width="48" height="48" aria-hidden="true"><use href="#logo-q2" /></svg>48
+						</figure>
+						<figure>
+							<svg width="96" height="96" aria-hidden="true"><use href="#logo-q2" /></svg>128
+						</figure>
+					</div>
+				</div>
+				<div class="block">
+					<h3>P3 · Trois bras à ventouses</h3>
+					<div class="logo-big">
+						<svg viewBox="0 0 48 48" role="img" aria-label="Logo P3 · Trois bras à ventouses">
+							<use href="#logo-q3" />
+						</svg>
+					</div>
+					<p style="color: var(--b-muted)">
+						Trois bras épais en spirale, comme une hélice, avec des ventouses. Le plus lisible à 16 px.
+					</p>
+					<div class="toolbars">
+						<div class="toolbar light">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16" aria-hidden="true"><use href="#logo-q3" /></svg><span class="ghost"></span>
+						</div>
+						<div class="toolbar dark">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16" aria-hidden="true"><use href="#logo-q3" /></svg><span class="ghost"></span>
+						</div>
+					</div>
+					<div class="sizes">
+						<figure>
+							<svg width="16" height="16" aria-hidden="true"><use href="#logo-q3" /></svg>16
+						</figure>
+						<figure>
+							<svg width="32" height="32" aria-hidden="true"><use href="#logo-q3" /></svg>32
+						</figure>
+						<figure>
+							<svg width="48" height="48" aria-hidden="true"><use href="#logo-q3" /></svg>48
+						</figure>
+						<figure>
+							<svg width="96" height="96" aria-hidden="true"><use href="#logo-q3" /></svg>128
+						</figure>
+					</div>
+				</div>
+				<div class="block">
+					<h3>P4 · S tentacule</h3>
+					<div class="logo-big">
+						<svg viewBox="0 0 48 48" role="img" aria-label="Logo P4 · S tentacule"><use href="#logo-q4" /></svg>
+					</div>
+					<p style="color: var(--b-muted)">
+						Le S de Supercharged dessiné comme un bras avec ses ventouses, la pointe enroulée.
+					</p>
+					<div class="toolbars">
+						<div class="toolbar light">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16" aria-hidden="true"><use href="#logo-q4" /></svg><span class="ghost"></span>
+						</div>
+						<div class="toolbar dark">
+							<span class="url"></span><span class="ghost"></span
+							><svg width="16" height="16" aria-hidden="true"><use href="#logo-q4" /></svg><span class="ghost"></span>
+						</div>
+					</div>
+					<div class="sizes">
+						<figure>
+							<svg width="16" height="16" aria-hidden="true"><use href="#logo-q4" /></svg>16
+						</figure>
+						<figure>
+							<svg width="32" height="32" aria-hidden="true"><use href="#logo-q4" /></svg>32
+						</figure>
+						<figure>
+							<svg width="48" height="48" aria-hidden="true"><use href="#logo-q4" /></svg>48
+						</figure>
+						<figure>
+							<svg width="96" height="96" aria-hidden="true"><use href="#logo-q4" /></svg>128
+						</figure>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div class="wrap family">
+		<h2>Comparaison en situation · P2, P3, P4 en Boost</h2>
+		<p>
+			Les trois finalistes là où on les verra vraiment. La barre d'outils et l'onglet comptent le plus : c'est la taille
+			qu'on voit tous les jours.
+		</p>
+	</div>
+
+	<section
+		class="dir v-d2"
+		style="
+			--b-bg: #0d1017;
+			--b-surface: #161a23;
+			--b-fg: #eceef4;
+			--b-muted: #8b92a3;
+			--b-line: #272c38;
+			--b-accent: #7c6cff;
+			--b-tile: #6d5bff;
+			--b-tile-fg: #ffffff;
+			--b-radius: 12px;
+			--b-scheme: dark;
+		"
+		aria-label="Comparaison en situation"
+	>
+		<style>
+			.cmp-row {
+				display: grid;
+				gap: 12px;
+			}
+			.cmp-label {
+				font-family: var(--font-mono);
+				font-size: 11px;
+				font-weight: 400;
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
+				color: var(--b-muted);
+			}
+			.cmp-cells {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+				gap: 16px;
+			}
+			.cmp-cell {
+				margin: 0;
+				display: grid;
+				gap: 8px;
+				align-content: start;
+				min-width: 0;
+			}
+			.cmp-stage {
+				background: var(--b-surface);
+				border-radius: var(--b-radius);
+				padding: 16px;
+				display: grid;
+				gap: 8px;
+				min-width: 0;
+				overflow: hidden;
+			}
+			.cmp-cell figcaption {
+				font-family: var(--font-mono);
+				font-size: 11px;
+				color: var(--b-muted);
+			}
+			.tabstrip {
+				display: flex;
+				gap: 2px;
+				padding: 6px 6px 0;
+				border-radius: 8px 8px 0 0;
+			}
+			.tabstrip.light {
+				background: #dee1e6;
+			}
+			.tabstrip.dark {
+				background: #202124;
+			}
+			.tab {
+				display: flex;
+				align-items: center;
+				gap: 8px;
+				flex: 1;
+				min-width: 0;
+				height: 32px;
+				padding: 0 10px;
+				border-radius: 8px 8px 0 0;
+				font:
+					12px system-ui,
+					sans-serif;
+			}
+			.tab > span:last-child {
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+			}
+			.tab svg,
+			.tab .ghost {
+				flex: none;
+			}
+			.tab .ghost {
+				width: 16px;
+				height: 16px;
+				border-radius: 4px;
+				background: #9aa0a6;
+			}
+			.tabstrip.light .tab {
+				color: #3c4043;
+			}
+			.tabstrip.light .tab.active {
+				background: #ffffff;
+				color: #202124;
+			}
+			.tabstrip.dark .tab {
+				color: #9aa0a6;
+			}
+			.tabstrip.dark .tab.active {
+				background: #35363a;
+				color: #e8eaed;
+			}
+			.extmenu {
+				background: #ffffff;
+				color: #202124;
+				border-radius: 8px;
+				padding: 6px 0;
+				font:
+					13px system-ui,
+					sans-serif;
+			}
+			.ext-row {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				padding: 8px 12px;
+			}
+			.ext-row .ghost {
+				width: 16px;
+				height: 16px;
+				border-radius: 4px;
+				background: #c4c7cc;
+			}
+			.ext-row.other {
+				color: #5f6368;
+			}
+			.ext-row .pin {
+				margin-left: auto;
+				color: #1a73e8;
+			}
+			.listing {
+				display: flex;
+				align-items: center;
+				gap: 14px;
+				background: #ffffff;
+				color: #202124;
+				border-radius: 8px;
+				padding: 14px;
+				font:
+					13px system-ui,
+					sans-serif;
+			}
+			.listing > div {
+				display: grid;
+				gap: 2px;
+				min-width: 0;
+			}
+			.listing b {
+				font-size: 16px;
+			}
+			.listing span {
+				color: #5f6368;
+			}
+			.sitenav {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				gap: 10px;
+			}
+			.sitenav .word {
+				font-size: 17px;
+			}
+			.sitenav .links {
+				margin-left: auto;
+				font-size: 12px;
+				color: var(--b-muted);
+			}
+		</style>
+		<div class="wrap dir-inner">
+			<div class="cmp-row">
+				<h3 class="cmp-label">Barre d'outils, 16 px</h3>
+				<div class="cmp-cells">
+					<figure class="cmp-cell">
+						<div class="cmp-stage">
+							<div class="toolbar light">
+								<span class="url"></span><span class="ghost"></span><span class="ghost"></span
+								><svg width="16" height="16" aria-hidden="true"><use href="#logo-q2" /></svg><span class="ghost"></span>
+							</div>
+							<div class="toolbar dark">
+								<span class="url"></span><span class="ghost"></span><span class="ghost"></span
+								><svg width="16" height="16" aria-hidden="true"><use href="#logo-q2" /></svg><span class="ghost"></span>
+							</div>
+						</div>
+						<figcaption>P2 · Poulpe</figcaption>
+					</figure>
+					<figure class="cmp-cell">
+						<div class="cmp-stage">
+							<div class="toolbar light">
+								<span class="url"></span><span class="ghost"></span><span class="ghost"></span
+								><svg width="16" height="16" aria-hidden="true"><use href="#logo-q3" /></svg><span class="ghost"></span>
+							</div>
+							<div class="toolbar dark">
+								<span class="url"></span><span class="ghost"></span><span class="ghost"></span
+								><svg width="16" height="16" aria-hidden="true"><use href="#logo-q3" /></svg><span class="ghost"></span>
+							</div>
+						</div>
+						<figcaption>P3 · Trois bras</figcaption>
+					</figure>
+					<figure class="cmp-cell">
+						<div class="cmp-stage">
+							<div class="toolbar light">
+								<span class="url"></span><span class="ghost"></span><span class="ghost"></span
+								><svg width="16" height="16" aria-hidden="true"><use href="#logo-q4" /></svg><span class="ghost"></span>
+							</div>
+							<div class="toolbar dark">
+								<span class="url"></span><span class="ghost"></span><span class="ghost"></span
+								><svg width="16" height="16" aria-hidden="true"><use href="#logo-q4" /></svg><span class="ghost"></span>
+							</div>
+						</div>
+						<figcaption>P4 · S tentacule</figcaption>
+					</figure>
+				</div>
+			</div>
+			<div class="cmp-row">
+				<h3 class="cmp-label">Onglet du navigateur, 16 px</h3>
+				<div class="cmp-cells">
+					<figure class="cmp-cell">
+						<div class="cmp-stage">
+							<div class="tabstrip light">
+								<div class="tab active">
+									<svg width="16" height="16" aria-hidden="true"><use href="#logo-q2" /></svg
+									><span>Supercharged GitHub · Options</span>
+								</div>
+								<div class="tab"><span class="ghost"></span><span>Pull requests · go-task/task</span></div>
+							</div>
+							<div class="tabstrip dark">
+								<div class="tab active">
+									<svg width="16" height="16" aria-hidden="true"><use href="#logo-q2" /></svg
+									><span>Supercharged GitHub · Options</span>
+								</div>
+								<div class="tab"><span class="ghost"></span><span>Pull requests · go-task/task</span></div>
+							</div>
+						</div>
+						<figcaption>P2 · Poulpe</figcaption>
+					</figure>
+					<figure class="cmp-cell">
+						<div class="cmp-stage">
+							<div class="tabstrip light">
+								<div class="tab active">
+									<svg width="16" height="16" aria-hidden="true"><use href="#logo-q3" /></svg
+									><span>Supercharged GitHub · Options</span>
+								</div>
+								<div class="tab"><span class="ghost"></span><span>Pull requests · go-task/task</span></div>
+							</div>
+							<div class="tabstrip dark">
+								<div class="tab active">
+									<svg width="16" height="16" aria-hidden="true"><use href="#logo-q3" /></svg
+									><span>Supercharged GitHub · Options</span>
+								</div>
+								<div class="tab"><span class="ghost"></span><span>Pull requests · go-task/task</span></div>
+							</div>
+						</div>
+						<figcaption>P3 · Trois bras</figcaption>
+					</figure>
+					<figure class="cmp-cell">
+						<div class="cmp-stage">
+							<div class="tabstrip light">
+								<div class="tab active">
+									<svg width="16" height="16" aria-hidden="true"><use href="#logo-q4" /></svg
+									><span>Supercharged GitHub · Options</span>
+								</div>
+								<div class="tab"><span class="ghost"></span><span>Pull requests · go-task/task</span></div>
+							</div>
+							<div class="tabstrip dark">
+								<div class="tab active">
+									<svg width="16" height="16" aria-hidden="true"><use href="#logo-q4" /></svg
+									><span>Supercharged GitHub · Options</span>
+								</div>
+								<div class="tab"><span class="ghost"></span><span>Pull requests · go-task/task</span></div>
+							</div>
+						</div>
+						<figcaption>P4 · S tentacule</figcaption>
+					</figure>
+				</div>
+			</div>
+			<div class="cmp-row">
+				<h3 class="cmp-label">Menu des extensions, 16 px</h3>
+				<div class="cmp-cells">
+					<figure class="cmp-cell">
+						<div class="cmp-stage">
+							<div class="extmenu">
+								<div class="ext-row">
+									<svg width="16" height="16" aria-hidden="true"><use href="#logo-q2" /></svg
+									><span>Supercharged GitHub</span
+									><svg class="pin" width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+										<path
+											d="M10 1.5 14.5 6 12.6 6.6 9.7 9.5 9.9 12.6 8.6 13.9 5.8 11.1 2.4 14.5 1.5 13.6 4.9 10.2 2.1 7.4 3.4 6.1 6.5 6.3 9.4 3.4Z"
+										/>
+									</svg>
+								</div>
+								<div class="ext-row other"><span class="ghost"></span><span>Autre extension</span></div>
+							</div>
+						</div>
+						<figcaption>P2 · Poulpe</figcaption>
+					</figure>
+					<figure class="cmp-cell">
+						<div class="cmp-stage">
+							<div class="extmenu">
+								<div class="ext-row">
+									<svg width="16" height="16" aria-hidden="true"><use href="#logo-q3" /></svg
+									><span>Supercharged GitHub</span
+									><svg class="pin" width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+										<path
+											d="M10 1.5 14.5 6 12.6 6.6 9.7 9.5 9.9 12.6 8.6 13.9 5.8 11.1 2.4 14.5 1.5 13.6 4.9 10.2 2.1 7.4 3.4 6.1 6.5 6.3 9.4 3.4Z"
+										/>
+									</svg>
+								</div>
+								<div class="ext-row other"><span class="ghost"></span><span>Autre extension</span></div>
+							</div>
+						</div>
+						<figcaption>P3 · Trois bras</figcaption>
+					</figure>
+					<figure class="cmp-cell">
+						<div class="cmp-stage">
+							<div class="extmenu">
+								<div class="ext-row">
+									<svg width="16" height="16" aria-hidden="true"><use href="#logo-q4" /></svg
+									><span>Supercharged GitHub</span
+									><svg class="pin" width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+										<path
+											d="M10 1.5 14.5 6 12.6 6.6 9.7 9.5 9.9 12.6 8.6 13.9 5.8 11.1 2.4 14.5 1.5 13.6 4.9 10.2 2.1 7.4 3.4 6.1 6.5 6.3 9.4 3.4Z"
+										/>
+									</svg>
+								</div>
+								<div class="ext-row other"><span class="ghost"></span><span>Autre extension</span></div>
+							</div>
+						</div>
+						<figcaption>P4 · S tentacule</figcaption>
+					</figure>
+				</div>
+			</div>
+			<div class="cmp-row">
+				<h3 class="cmp-label">Fiche du Chrome Web Store, 128 px</h3>
+				<div class="cmp-cells">
+					<figure class="cmp-cell">
+						<div class="cmp-stage">
+							<div class="listing">
+								<svg width="64" height="64" aria-hidden="true"><use href="#logo-q2" /></svg>
+								<div><b>Supercharged GitHub</b><span>Extension · Outils de développement</span></div>
+							</div>
+						</div>
+						<figcaption>P2 · Poulpe</figcaption>
+					</figure>
+					<figure class="cmp-cell">
+						<div class="cmp-stage">
+							<div class="listing">
+								<svg width="64" height="64" aria-hidden="true"><use href="#logo-q3" /></svg>
+								<div><b>Supercharged GitHub</b><span>Extension · Outils de développement</span></div>
+							</div>
+						</div>
+						<figcaption>P3 · Trois bras</figcaption>
+					</figure>
+					<figure class="cmp-cell">
+						<div class="cmp-stage">
+							<div class="listing">
+								<svg width="64" height="64" aria-hidden="true"><use href="#logo-q4" /></svg>
+								<div><b>Supercharged GitHub</b><span>Extension · Outils de développement</span></div>
+							</div>
+						</div>
+						<figcaption>P4 · S tentacule</figcaption>
+					</figure>
+				</div>
+			</div>
+			<div class="cmp-row">
+				<h3 class="cmp-label">Vignette promo du store, 440 × 280</h3>
+				<div class="cmp-cells">
+					<figure class="cmp-cell">
+						<div class="cmp-stage">
+							<div class="tile">
+								<svg width="64" height="64" aria-hidden="true"><use href="#logo-q2" /></svg>
+								<div class="t-name word">Supercharged <span class="gh">GitHub</span></div>
+								<div class="t-tag body-font">Boost every review.</div>
+							</div>
+						</div>
+						<figcaption>P2 · Poulpe</figcaption>
+					</figure>
+					<figure class="cmp-cell">
+						<div class="cmp-stage">
+							<div class="tile">
+								<svg width="64" height="64" aria-hidden="true"><use href="#logo-q3" /></svg>
+								<div class="t-name word">Supercharged <span class="gh">GitHub</span></div>
+								<div class="t-tag body-font">Boost every review.</div>
+							</div>
+						</div>
+						<figcaption>P3 · Trois bras</figcaption>
+					</figure>
+					<figure class="cmp-cell">
+						<div class="cmp-stage">
+							<div class="tile">
+								<svg width="64" height="64" aria-hidden="true"><use href="#logo-q4" /></svg>
+								<div class="t-name word">Supercharged <span class="gh">GitHub</span></div>
+								<div class="t-tag body-font">Boost every review.</div>
+							</div>
+						</div>
+						<figcaption>P4 · S tentacule</figcaption>
+					</figure>
+				</div>
+			</div>
+			<div class="cmp-row">
+				<h3 class="cmp-label">En-tête de la page d'options</h3>
+				<div class="cmp-cells">
+					<figure class="cmp-cell">
+						<div class="cmp-stage">
+							<div class="opts body-font">
+								<div class="opts-bar">
+									<svg width="22" height="22" aria-hidden="true"><use href="#logo-q2" /></svg
+									><span class="o-name word">Supercharged <span class="gh">GitHub</span></span
+									><span class="o-sub">options</span>
+								</div>
+								<div class="opts-row">
+									<span class="toggle"></span>
+									<div><code>pr-list-review-status</code><span class="desc">Où en est chaque PR pour toi</span></div>
+								</div>
+							</div>
+						</div>
+						<figcaption>P2 · Poulpe</figcaption>
+					</figure>
+					<figure class="cmp-cell">
+						<div class="cmp-stage">
+							<div class="opts body-font">
+								<div class="opts-bar">
+									<svg width="22" height="22" aria-hidden="true"><use href="#logo-q3" /></svg
+									><span class="o-name word">Supercharged <span class="gh">GitHub</span></span
+									><span class="o-sub">options</span>
+								</div>
+								<div class="opts-row">
+									<span class="toggle"></span>
+									<div><code>pr-list-review-status</code><span class="desc">Où en est chaque PR pour toi</span></div>
+								</div>
+							</div>
+						</div>
+						<figcaption>P3 · Trois bras</figcaption>
+					</figure>
+					<figure class="cmp-cell">
+						<div class="cmp-stage">
+							<div class="opts body-font">
+								<div class="opts-bar">
+									<svg width="22" height="22" aria-hidden="true"><use href="#logo-q4" /></svg
+									><span class="o-name word">Supercharged <span class="gh">GitHub</span></span
+									><span class="o-sub">options</span>
+								</div>
+								<div class="opts-row">
+									<span class="toggle"></span>
+									<div><code>pr-list-review-status</code><span class="desc">Où en est chaque PR pour toi</span></div>
+								</div>
+							</div>
+						</div>
+						<figcaption>P4 · S tentacule</figcaption>
+					</figure>
+				</div>
+			</div>
+			<div class="cmp-row">
+				<h3 class="cmp-label">En-tête du site</h3>
+				<div class="cmp-cells">
+					<figure class="cmp-cell">
+						<div class="cmp-stage">
+							<div class="sitenav">
+								<svg width="28" height="28" aria-hidden="true"><use href="#logo-q2" /></svg
+								><span class="word">Supercharged <span class="gh">GitHub</span></span
+								><span class="links body-font">Features · Install</span>
+							</div>
+						</div>
+						<figcaption>P2 · Poulpe</figcaption>
+					</figure>
+					<figure class="cmp-cell">
+						<div class="cmp-stage">
+							<div class="sitenav">
+								<svg width="28" height="28" aria-hidden="true"><use href="#logo-q3" /></svg
+								><span class="word">Supercharged <span class="gh">GitHub</span></span
+								><span class="links body-font">Features · Install</span>
+							</div>
+						</div>
+						<figcaption>P3 · Trois bras</figcaption>
+					</figure>
+					<figure class="cmp-cell">
+						<div class="cmp-stage">
+							<div class="sitenav">
+								<svg width="28" height="28" aria-hidden="true"><use href="#logo-q4" /></svg
+								><span class="word">Supercharged <span class="gh">GitHub</span></span
+								><span class="links body-font">Features · Install</span>
+							</div>
+						</div>
+						<figcaption>P4 · S tentacule</figcaption>
+					</figure>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="wrap section" aria-labelledby="regles">
+		<h2 id="regles">Où la charte s'applique</h2>
+		<div class="rules">
+			<div class="rule">
+				<h3>Icône, options, stores, README</h3>
+				<p>Toute la charte : logo, palette, typos. C'est là qu'on reconnaît l'extension.</p>
+			</div>
+			<div class="rule">
+				<h3>UI injectée dans GitHub</h3>
+				<p>
+					Primer uniquement : variables CSS de GitHub, octicons, police système. Un bouton aux couleurs de la marque
+					dans une PR détonnerait et casserait les thèmes de GitHub.
+				</p>
+			</div>
+			<div class="rule">
+				<h3>Manifest</h3>
+				<p>
+					Icônes PNG en 16, 32, 48 et 128 générées depuis le SVG. Le 16 px doit rester lisible sur les barres d'outils
+					claires comme sombres.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="wrap section" aria-labelledby="trancher">
+		<h2 id="trancher">Prochaines étapes</h2>
+		<ol class="questions">
+			<li>
+				Renommer le repo, le manifest et l'id Gecko, générer les icônes PNG 16, 32, 48 et 128 depuis P3 en Boost, et
+				habiller la page d'options et le site.
+			</li>
+		</ol>
+	</section>
+
+	<footer class="wrap">
+		Cliquer sur une couleur copie son code hexadécimal. Supercharged GitHub n'est ni affilié à GitHub, Inc., ni approuvé
+		ou sponsorisé par GitHub, Inc.
+	</footer>
+	<div class="toast" id="toast" hidden></div>
+
+	<script>
+		const toast = document.getElementById('toast');
+		let toastTimer;
+		function show(msg) {
+			toast.textContent = msg;
+			toast.hidden = false;
+			clearTimeout(toastTimer);
+			toastTimer = setTimeout(() => {
+				toast.hidden = true;
+			}, 1400);
+		}
+		document.querySelectorAll('.swatch').forEach((btn) => {
+			btn.addEventListener('click', () => {
+				const hex = btn.dataset.hex;
+				navigator.clipboard
+					.writeText(hex)
+					.then(() => show(hex + ' copié'))
+					.catch(() => show(hex));
+			});
+		});
+	</script>
+</html>

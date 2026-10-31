@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Showcase landing</title>
+		<style>
+			body {
+				margin: 0;
+				background: #ffffff;
+			}
+			a {
+				color: #0969da;
+			}
+			a:hover {
+				color: #0550ae;
+			}
+		</style>
+	</head>
+	<body>
+		<div
+			style="
+				width: 100%;
+				background: #ffffff;
+				color: #1f2328;
+				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+				font-size: 16px;
+				line-height: 1.5;
+			"
+		>
+			<header style="border-bottom: 1px solid #d1d9e0">
+				<nav
+					aria-label="Main"
+					style="
+						max-width: 1120px;
+						margin: 0 auto;
+						padding: 16px 24px;
+						display: flex;
+						flex-wrap: wrap;
+						align-items: center;
+						gap: 16px 32px;
+					"
+				>
+					<a
+						href="#top"
+						style="
+							display: inline-flex;
+							align-items: center;
+							gap: 10px;
+							color: #1f2328;
+							text-decoration: none;
+							font-weight: 700;
+							font-size: 18px;
+						"
+					>
+						<span aria-hidden="true" style="width: 28px; height: 28px; border-radius: 7px; background: #0969da"></span>
+						GitHub Power
+					</a>
+					<div style="display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 14px; flex: 1 1 auto">
+						<a href="#features" style="color: #59636e; text-decoration: none">Features</a>
+						<a href="#install" style="color: #59636e; text-decoration: none">Install</a>
+						<a href="#privacy" style="color: #59636e; text-decoration: none">Privacy</a>
+						<a href="#faq" style="color: #59636e; text-decoration: none">FAQ</a>
+					</div>
+					<a
+						href="https://github.com/vmaerten/supercharged-github"
+						style="font-size: 14px; color: #1f2328; text-decoration: none; font-weight: 600"
+						>Source on GitHub</a
+					>
+				</nav>
+			</header>
+
+			<section
+				id="top"
+				style="
+					max-width: 1120px;
+					margin: 0 auto;
+					padding: 88px 24px 56px;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					text-align: center;
+					gap: 20px;
+				"
+			>
+				<p style="margin: 0; font-size: 14px; font-weight: 600; color: #59636e">
+					Browser extension for Chrome and Firefox
+				</p>
+				<h1 style="margin: 0; max-width: 760px; font-size: 56px; line-height: 1.08; letter-spacing: -0.02em">
+					Review pull requests faster, right on GitHub.
+				</h1>
+				<p style="margin: 0; max-width: 620px; font-size: 20px; color: #59636e">
+					See where every PR stands for you, pick the reviewer who has room, and answer in one click. No new tab, no new
+					tool.
+				</p>
+				<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 8px">
+					<a
+						href="#install"
+						style="
+							display: inline-flex;
+							align-items: center;
+							min-height: 44px;
+							padding: 0 20px;
+							border-radius: 8px;
+							background: #0969da;
+							color: #ffffff;
+							font-weight: 600;
+							text-decoration: none;
+						"
+						>Add to Chrome</a
+					>
+					<a
+						href="#install"
+						style="
+							display: inline-flex;
+							align-items: center;
+							min-height: 44px;
+							padding: 0 20px;
+							border-radius: 8px;
+							border: 1px solid #d1d9e0;
+							color: #1f2328;
+							font-weight: 600;
+							text-decoration: none;
+						"
+						>Add to Firefox</a
+					>
+				</div>
+				<p style="margin: 0; font-size: 13px; color: #59636e">
+					Every feature can be turned off · Your token stays in your browser
+				</p>
+			</section>
+
+			<div style="max-width: 1120px; margin: 0 auto; padding: 0 24px 96px">
+				<img
+					src="../img/pr-list.png"
+					alt="GitHub pull request list with diff size, review status and idle time on each row"
+					style="
+						display: block;
+						width: 100%;
+						height: auto;
+						border-radius: 12px;
+						border: 1px solid #d1d9e0;
+						box-shadow: 0 24px 48px rgba(31, 35, 40, 0.12);
+					"
+				/>
+			</div>
+
+			<section
+				id="features"
+				aria-label="Features"
+				style="background: #f6f8fa; border-top: 1px solid #d1d9e0; border-bottom: 1px solid #d1d9e0"
+			>
+				<div
+					style="
+						max-width: 1120px;
+						margin: 0 auto;
+						padding: 96px 24px;
+						display: flex;
+						flex-direction: column;
+						gap: 96px;
+					"
+				>
+					<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 48px">
+						<div style="flex: 1 1 340px; display: flex; flex-direction: column; gap: 14px">
+							<p style="margin: 0; font-size: 13px; font-weight: 600; color: #0969da">In the PR list</p>
+							<h2 style="margin: 0; font-size: 32px; line-height: 1.2">Know what needs you before opening a PR</h2>
+							<p style="margin: 0; color: #59636e">
+								A quiet column on each row: lines added and removed with a size label, where the PR stands for you, and
+								how long it has been idle.
+							</p>
+							<ul
+								style="margin: 0; padding-left: 20px; color: #1f2328; display: flex; flex-direction: column; gap: 6px"
+							>
+								<li>Review requested, re-review, changes requested, approved but changed since</li>
+								<li>Idle for N days, threshold of your choice, drafts optional</li>
+								<li>In the right column or in the grey line under the title</li>
+							</ul>
+						</div>
+						<img
+							src="../img/pr-list.png"
+							alt="PR list badges"
+							style="
+								flex: 1.4 1 420px;
+								min-width: 0;
+								width: 100%;
+								height: auto;
+								border-radius: 10px;
+								border: 1px solid #d1d9e0;
+							"
+						/>
+					</div>
+
+					<div
+						style="display: flex; flex-wrap: wrap-reverse; flex-direction: row-reverse; align-items: center; gap: 48px"
+					>
+						<div style="flex: 1 1 340px; display: flex; flex-direction: column; gap: 14px">
+							<p style="margin: 0; font-size: 13px; font-weight: 600; color: #0969da">In the reviewers picker</p>
+							<h2 style="margin: 0; font-size: 32px; line-height: 1.2">Pick the reviewer who has room</h2>
+							<p style="margin: 0; color: #59636e">
+								Next to each name, how many reviews that person already has waiting in this organization. The counter
+								turns amber at 3 and orange past 5.
+							</p>
+						</div>
+						<div style="flex: 1.4 1 420px; min-width: 0; display: flex; justify-content: center">
+							<img
+								src="../img/reviewer-load.png"
+								alt="Reviewers picker with a pending review count next to each person"
+								style="width: 345px; max-width: 100%; height: auto; border-radius: 10px; border: 1px solid #d1d9e0"
+							/>
+						</div>
+					</div>
+
+					<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 48px">
+						<div style="flex: 1 1 340px; display: flex; flex-direction: column; gap: 14px">
+							<p style="margin: 0; font-size: 13px; font-weight: 600; color: #0969da">Quick comments</p>
+							<h2 style="margin: 0; font-size: 32px; line-height: 1.2">Answer in one click</h2>
+							<p style="margin: 0; color: #59636e">
+								Buttons above the comment box post the replies you write ten times a day. LGTM, ask a bot to rebase, say
+								thanks: the list is yours to edit.
+							</p>
+						</div>
+						<img
+							src="../img/quick-comments.png"
+							alt="Quick comment buttons above the comment box"
+							style="
+								flex: 1.4 1 420px;
+								min-width: 0;
+								width: 100%;
+								height: auto;
+								border-radius: 10px;
+								border: 1px solid #d1d9e0;
+							"
+						/>
+					</div>
+
+					<div
+						style="display: flex; flex-wrap: wrap-reverse; flex-direction: row-reverse; align-items: center; gap: 48px"
+					>
+						<div style="flex: 1 1 340px; display: flex; flex-direction: column; gap: 14px">
+							<p style="margin: 0; font-size: 13px; font-weight: 600; color: #0969da">Image modal</p>
+							<h2 style="margin: 0; font-size: 32px; line-height: 1.2">
+								Look at screenshots without losing your place
+							</h2>
+							<p style="margin: 0; color: #59636e">
+								Images in issues, PRs and READMEs open in a zoomable modal instead of a new tab. Arrow keys go through
+								the comment's images.
+							</p>
+						</div>
+						<img
+							src="../img/image-modal.png"
+							alt="An image opened in the zoomable modal"
+							style="
+								flex: 1.4 1 420px;
+								min-width: 0;
+								width: 100%;
+								height: auto;
+								border-radius: 10px;
+								border: 1px solid #d1d9e0;
+							"
+						/>
+					</div>
+				</div>
+			</section>
+
+			<section
+				id="privacy"
+				style="max-width: 1120px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 40px"
+			>
+				<h2 style="margin: 0; font-size: 32px; text-align: center">Built to stay out of the way</h2>
+				<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px">
+					<div
+						style="
+							padding: 24px;
+							border: 1px solid #d1d9e0;
+							border-radius: 12px;
+							display: flex;
+							flex-direction: column;
+							gap: 10px;
+						"
+					>
+						<svg
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="#0969da"
+							stroke-width="1.75"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							aria-hidden="true"
+						>
+							<rect x="2" y="7" width="20" height="10" rx="5"></rect>
+							<circle cx="16" cy="12" r="3"></circle>
+						</svg>
+						<h3 style="margin: 0; font-size: 18px">Everything is optional</h3>
+						<p style="margin: 0; color: #59636e">
+							Each feature has its own switch, and most have settings, in the options page.
+						</p>
+					</div>
+					<div
+						style="
+							padding: 24px;
+							border: 1px solid #d1d9e0;
+							border-radius: 12px;
+							display: flex;
+							flex-direction: column;
+							gap: 10px;
+						"
+					>
+						<svg
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="#0969da"
+							stroke-width="1.75"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							aria-hidden="true"
+						>
+							<rect x="4" y="11" width="16" height="10" rx="2"></rect>
+							<path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
+						</svg>
+						<h3 style="margin: 0; font-size: 18px">Your token stays local</h3>
+						<p style="margin: 0; color: #59636e">
+							A read-only token, kept in your browser and sent only to the GitHub API.
+						</p>
+					</div>
+					<div
+						style="
+							padding: 24px;
+							border: 1px solid #d1d9e0;
+							border-radius: 12px;
+							display: flex;
+							flex-direction: column;
+							gap: 10px;
+						"
+					>
+						<svg
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="#0969da"
+							stroke-width="1.75"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							aria-hidden="true"
+						>
+							<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path>
+							<circle cx="12" cy="12" r="3"></circle>
+						</svg>
+						<h3 style="margin: 0; font-size: 18px">Looks like GitHub</h3>
+						<p style="margin: 0; color: #59636e">
+							GitHub's own colors, light and dark themes, and nothing that moves the page around.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section
+				id="install"
+				style="background: #f6f8fa; border-top: 1px solid #d1d9e0; border-bottom: 1px solid #d1d9e0"
+			>
+				<div
+					style="
+						max-width: 1120px;
+						margin: 0 auto;
+						padding: 96px 24px;
+						display: flex;
+						flex-direction: column;
+						gap: 40px;
+					"
+				>
+					<h2 style="margin: 0; font-size: 32px; text-align: center">Ready in two minutes</h2>
+					<ol
+						style="
+							margin: 0;
+							padding: 0;
+							list-style: none;
+							display: grid;
+							grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+							gap: 24px;
+						"
+					>
+						<li style="display: flex; flex-direction: column; gap: 8px">
+							<span
+								style="
+									font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+									font-size: 14px;
+									color: #0969da;
+									font-weight: 600;
+								"
+								>01</span
+							>
+							<h3 style="margin: 0; font-size: 18px">Install the extension</h3>
+							<p style="margin: 0; color: #59636e">From the Chrome Web Store or Firefox Add-ons.</p>
+						</li>
+						<li style="display: flex; flex-direction: column; gap: 8px">
+							<span
+								style="
+									font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+									font-size: 14px;
+									color: #0969da;
+									font-weight: 600;
+								"
+								>02</span
+							>
+							<h3 style="margin: 0; font-size: 18px">Add a token</h3>
+							<p style="margin: 0; color: #59636e">
+								A fine-grained token with read access to <i>Pull requests</i>, pasted in the options.
+							</p>
+						</li>
+						<li style="display: flex; flex-direction: column; gap: 8px">
+							<span
+								style="
+									font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+									font-size: 14px;
+									color: #0969da;
+									font-weight: 600;
+								"
+								>03</span
+							>
+							<h3 style="margin: 0; font-size: 18px">Open a PR list</h3>
+							<p style="margin: 0; color: #59636e">The badges appear on the next page load.</p>
+						</li>
+					</ol>
+				</div>
+			</section>
+
+			<section
+				id="faq"
+				style="max-width: 760px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 24px"
+			>
+				<h2 style="margin: 0; font-size: 32px">Questions</h2>
+				<div style="border-top: 1px solid #d1d9e0; padding-top: 20px; display: flex; flex-direction: column; gap: 6px">
+					<h3 style="margin: 0; font-size: 17px">Why does it need a token?</h3>
+					<p style="margin: 0; color: #59636e">
+						The PR list badges and the reviewer load ask the GitHub API for data the page does not show. Quick comments
+						and the image modal work without one.
+					</p>
+				</div>
+				<div style="border-top: 1px solid #d1d9e0; padding-top: 20px; display: flex; flex-direction: column; gap: 6px">
+					<h3 style="margin: 0; font-size: 17px">Does it work alongside Refined GitHub?</h3>
+					<p style="margin: 0; color: #59636e">Yes. The two run side by side.</p>
+				</div>
+				<div style="border-top: 1px solid #d1d9e0; padding-top: 20px; display: flex; flex-direction: column; gap: 6px">
+					<h3 style="margin: 0; font-size: 17px">Does it work on GitHub Enterprise?</h3>
+					<p style="margin: 0; color: #59636e">[TO CONFIRM]</p>
+				</div>
+			</section>
+
+			<footer style="border-top: 1px solid #d1d9e0">
+				<div
+					style="
+						max-width: 1120px;
+						margin: 0 auto;
+						padding: 32px 24px;
+						display: flex;
+						flex-wrap: wrap;
+						justify-content: space-between;
+						gap: 16px;
+						font-size: 14px;
+						color: #59636e;
+					"
+				>
+					<span>GitHub Power · Not affiliated with GitHub, Inc.</span>
+					<div style="display: flex; flex-wrap: wrap; gap: 24px">
+						<a href="https://github.com/vmaerten/supercharged-github">Source</a>
+						<a href="https://github.com/vmaerten/supercharged-github/blob/main/CHANGELOG.md">Changelog</a>
+						<a href="#privacy">Privacy</a>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</body>
+</html>

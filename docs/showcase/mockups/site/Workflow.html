@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>A reviewer's day</title>
+		<style>
+			body {
+				margin: 0;
+				background: #ffffff;
+			}
+			a {
+				color: #0969da;
+			}
+			a:hover {
+				color: #0550ae;
+			}
+		</style>
+	</head>
+	<body>
+		<div
+			style="
+				width: 100%;
+				background: #ffffff;
+				color: #1f2328;
+				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+				font-size: 17px;
+				line-height: 1.55;
+			"
+		>
+			<header
+				style="
+					max-width: 1120px;
+					margin: 0 auto;
+					padding: 16px 24px;
+					display: flex;
+					flex-wrap: wrap;
+					align-items: center;
+					gap: 16px 32px;
+				"
+			>
+				<a
+					href="#top"
+					style="
+						display: inline-flex;
+						align-items: center;
+						gap: 10px;
+						color: #1f2328;
+						text-decoration: none;
+						font-weight: 700;
+						font-size: 18px;
+					"
+				>
+					<span aria-hidden="true" style="width: 28px; height: 28px; border-radius: 7px; background: #0969da"></span>
+					GitHub Power
+				</a>
+				<nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 14px; flex: 1 1 auto">
+					<a href="#triage" style="color: #59636e; text-decoration: none">Triage</a>
+					<a href="#assign" style="color: #59636e; text-decoration: none">Assign</a>
+					<a href="#reply" style="color: #59636e; text-decoration: none">Reply</a>
+					<a href="#read" style="color: #59636e; text-decoration: none">Read</a>
+					<a href="#privacy" style="color: #59636e; text-decoration: none">Privacy</a>
+				</nav>
+				<a
+					href="#install"
+					style="
+						display: inline-flex;
+						align-items: center;
+						min-height: 40px;
+						padding: 0 16px;
+						border-radius: 8px;
+						background: #0969da;
+						color: #ffffff;
+						font-size: 14px;
+						font-weight: 600;
+						text-decoration: none;
+					"
+					>Install</a
+				>
+			</header>
+
+			<section
+				id="top"
+				style="
+					max-width: 1120px;
+					margin: 0 auto;
+					padding: 96px 24px 72px;
+					display: flex;
+					flex-direction: column;
+					gap: 24px;
+				"
+			>
+				<p
+					style="
+						margin: 0;
+						font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+						font-size: 14px;
+						color: #59636e;
+					"
+				>
+					A browser extension for people who review code on GitHub
+				</p>
+				<h1 style="margin: 0; max-width: 900px; font-size: 64px; line-height: 1.04; letter-spacing: -0.025em">
+					Four moments of a review day, each one a few clicks shorter.
+				</h1>
+				<p style="margin: 0; max-width: 640px; font-size: 20px; color: #59636e">
+					Triage, assign, reply, read. GitHub Power adds what is missing at each step, in GitHub's own look, and nothing
+					else.
+				</p>
+				<div
+					aria-hidden="true"
+					style="
+						display: grid;
+						grid-template-columns: repeat(4, minmax(0, 1fr));
+						gap: 8px;
+						margin-top: 24px;
+						max-width: 720px;
+					"
+				>
+					<span style="border-top: 3px solid #1f2328; padding-top: 8px; font-size: 13px; font-weight: 600"
+						>01 Triage</span
+					>
+					<span style="border-top: 3px solid #d1d9e0; padding-top: 8px; font-size: 13px; color: #59636e"
+						>02 Assign</span
+					>
+					<span style="border-top: 3px solid #d1d9e0; padding-top: 8px; font-size: 13px; color: #59636e">03 Reply</span>
+					<span style="border-top: 3px solid #d1d9e0; padding-top: 8px; font-size: 13px; color: #59636e">04 Read</span>
+				</div>
+			</section>
+
+			<section id="triage" style="border-top: 1px solid #d1d9e0">
+				<div style="max-width: 1120px; margin: 0 auto; padding: 80px 24px; display: flex; flex-wrap: wrap; gap: 48px">
+					<div style="flex: 1 1 300px; display: flex; flex-direction: column; gap: 16px">
+						<span
+							style="
+								font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+								font-size: 14px;
+								font-weight: 600;
+								color: #0969da;
+							"
+							>01 · Triage</span
+						>
+						<h2 style="margin: 0; font-size: 36px; line-height: 1.15">“What needs me today?”</h2>
+						<p style="margin: 0; color: #59636e">
+							Today you open each PR to find out whether you already reviewed it, how big it is, and whether anyone
+							touched it this week.
+						</p>
+						<p style="margin: 0">
+							Now the list answers it: your review status, the size, and the idle days, on every row.
+						</p>
+						<dl
+							style="
+								margin: 8px 0 0;
+								padding: 16px;
+								background: #f6f8fa;
+								border-radius: 10px;
+								font-size: 14px;
+								display: grid;
+								grid-template-columns: auto 1fr;
+								gap: 6px 16px;
+							"
+						>
+							<dt style="color: #59636e">Placement</dt>
+							<dd style="margin: 0">Right column or grey line</dd>
+							<dt style="color: #59636e">Idle after</dt>
+							<dd style="margin: 0">7 days, adjustable</dd>
+							<dt style="color: #59636e">Drafts</dt>
+							<dd style="margin: 0">Counted or ignored</dd>
+						</dl>
+					</div>
+					<img
+						src="../img/pr-list.png"
+						alt="PR list with diff size, review status and idle time on each row"
+						style="
+							flex: 2 1 520px;
+							min-width: 0;
+							width: 100%;
+							height: auto;
+							align-self: flex-start;
+							border-radius: 10px;
+							border: 1px solid #d1d9e0;
+						"
+					/>
+				</div>
+			</section>
+
+			<section id="assign" style="border-top: 1px solid #d1d9e0">
+				<div style="max-width: 1120px; margin: 0 auto; padding: 80px 24px; display: flex; flex-wrap: wrap; gap: 48px">
+					<div style="flex: 1 1 300px; display: flex; flex-direction: column; gap: 16px">
+						<span
+							style="
+								font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+								font-size: 14px;
+								font-weight: 600;
+								color: #0969da;
+							"
+							>02 · Assign</span
+						>
+						<h2 style="margin: 0; font-size: 36px; line-height: 1.15">“Who has room for this one?”</h2>
+						<p style="margin: 0; color: #59636e">
+							Today you pick the usual suspect, and the same two people end up with every review.
+						</p>
+						<p style="margin: 0">
+							Now the reviewers picker shows how many reviews each person already has waiting in the organization.
+						</p>
+						<dl
+							style="
+								margin: 8px 0 0;
+								padding: 16px;
+								background: #f6f8fa;
+								border-radius: 10px;
+								font-size: 14px;
+								display: grid;
+								grid-template-columns: auto 1fr;
+								gap: 6px 16px;
+							"
+						>
+							<dt style="color: #59636e">Grey</dt>
+							<dd style="margin: 0">0 to 2 waiting</dd>
+							<dt style="color: #9a6700">Amber</dt>
+							<dd style="margin: 0">3 to 5 waiting</dd>
+							<dt style="color: #bc4c00">Orange</dt>
+							<dd style="margin: 0">More than 5</dd>
+						</dl>
+					</div>
+					<div
+						style="
+							flex: 2 1 520px;
+							min-width: 0;
+							display: flex;
+							justify-content: center;
+							align-items: flex-start;
+							padding: 32px;
+							background: #f6f8fa;
+							border-radius: 10px;
+						"
+					>
+						<img
+							src="../img/reviewer-load.png"
+							alt="Reviewers picker with a pending review count next to each person"
+							style="width: 345px; max-width: 100%; height: auto; border-radius: 10px; border: 1px solid #d1d9e0"
+						/>
+					</div>
+				</div>
+			</section>
+
+			<section id="reply" style="border-top: 1px solid #d1d9e0">
+				<div style="max-width: 1120px; margin: 0 auto; padding: 80px 24px; display: flex; flex-wrap: wrap; gap: 48px">
+					<div style="flex: 1 1 300px; display: flex; flex-direction: column; gap: 16px">
+						<span
+							style="
+								font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+								font-size: 14px;
+								font-weight: 600;
+								color: #0969da;
+							"
+							>03 · Reply</span
+						>
+						<h2 style="margin: 0; font-size: 36px; line-height: 1.15">“LGTM.” Again.</h2>
+						<p style="margin: 0; color: #59636e">Today you type the same three replies a dozen times a week.</p>
+						<p style="margin: 0">
+							Now they are buttons above the comment box. One click posts. Edit the list, and choose whether each one
+							shows on PRs, issues or both.
+						</p>
+					</div>
+					<img
+						src="../img/quick-comments.png"
+						alt="Quick comment buttons above the comment box"
+						style="
+							flex: 2 1 520px;
+							min-width: 0;
+							width: 100%;
+							height: auto;
+							align-self: flex-start;
+							border-radius: 10px;
+							border: 1px solid #d1d9e0;
+						"
+					/>
+				</div>
+			</section>
+
+			<section id="read" style="border-top: 1px solid #d1d9e0">
+				<div style="max-width: 1120px; margin: 0 auto; padding: 80px 24px; display: flex; flex-wrap: wrap; gap: 48px">
+					<div style="flex: 1 1 300px; display: flex; flex-direction: column; gap: 16px">
+						<span
+							style="
+								font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+								font-size: 14px;
+								font-weight: 600;
+								color: #0969da;
+							"
+							>04 · Read</span
+						>
+						<h2 style="margin: 0; font-size: 36px; line-height: 1.15">“What does that screenshot show?”</h2>
+						<p style="margin: 0; color: #59636e">
+							Today a click opens a new tab, and you lose your place in the review.
+						</p>
+						<p style="margin: 0">
+							Now images open in a zoomable modal on top of the page. Arrow keys go through the comment's images.
+						</p>
+					</div>
+					<img
+						src="../img/image-modal.png"
+						alt="An image opened in the zoomable modal"
+						style="
+							flex: 2 1 520px;
+							min-width: 0;
+							width: 100%;
+							height: auto;
+							align-self: flex-start;
+							border-radius: 10px;
+							border: 1px solid #d1d9e0;
+						"
+					/>
+				</div>
+			</section>
+
+			<section
+				id="privacy"
+				style="background: #f6f8fa; border-top: 1px solid #d1d9e0; border-bottom: 1px solid #d1d9e0"
+			>
+				<div
+					style="
+						max-width: 1120px;
+						margin: 0 auto;
+						padding: 88px 24px;
+						display: flex;
+						flex-direction: column;
+						gap: 32px;
+					"
+				>
+					<div style="display: flex; flex-direction: column; gap: 8px">
+						<h2 style="margin: 0; font-size: 36px">What it touches, plainly</h2>
+						<p style="margin: 0; color: #59636e; max-width: 620px">The extension talks to GitHub and nothing else.</p>
+					</div>
+					<div style="overflow-x: auto; border: 1px solid #d1d9e0; border-radius: 10px; background: #ffffff">
+						<table style="width: 100%; min-width: 560px; border-collapse: collapse; font-size: 15px">
+							<thead>
+								<tr style="text-align: left; background: #f6f8fa">
+									<th scope="col" style="padding: 12px 16px; border-bottom: 1px solid #d1d9e0">What</th>
+									<th scope="col" style="padding: 12px 16px; border-bottom: 1px solid #d1d9e0">Where it goes</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th
+										scope="row"
+										style="padding: 12px 16px; border-bottom: 1px solid #d1d9e0; text-align: left; font-weight: 600"
+									>
+										Your token
+									</th>
+									<td style="padding: 12px 16px; border-bottom: 1px solid #d1d9e0; color: #59636e">
+										Stored on this device only, sent to api.github.com only
+									</td>
+								</tr>
+								<tr>
+									<th
+										scope="row"
+										style="padding: 12px 16px; border-bottom: 1px solid #d1d9e0; text-align: left; font-weight: 600"
+									>
+										Your settings
+									</th>
+									<td style="padding: 12px 16px; border-bottom: 1px solid #d1d9e0; color: #59636e">
+										Your browser's sync storage
+									</td>
+								</tr>
+								<tr>
+									<th
+										scope="row"
+										style="padding: 12px 16px; border-bottom: 1px solid #d1d9e0; text-align: left; font-weight: 600"
+									>
+										Sites it runs on
+									</th>
+									<td style="padding: 12px 16px; border-bottom: 1px solid #d1d9e0; color: #59636e">
+										github.com and api.github.com
+									</td>
+								</tr>
+								<tr>
+									<th scope="row" style="padding: 12px 16px; text-align: left; font-weight: 600">Analytics</th>
+									<td style="padding: 12px 16px; color: #59636e">None</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</section>
+
+			<section
+				id="install"
+				style="
+					max-width: 1120px;
+					margin: 0 auto;
+					padding: 96px 24px;
+					display: flex;
+					flex-wrap: wrap;
+					align-items: flex-end;
+					justify-content: space-between;
+					gap: 32px;
+				"
+			>
+				<div style="display: flex; flex-direction: column; gap: 12px; max-width: 560px">
+					<h2 style="margin: 0; font-size: 44px; line-height: 1.1; letter-spacing: -0.02em">
+						Start with tomorrow's triage.
+					</h2>
+					<p style="margin: 0; color: #59636e">Install, paste a read-only token in the options, open your PR list.</p>
+				</div>
+				<div style="display: flex; flex-wrap: wrap; gap: 12px">
+					<a
+						href="#install"
+						style="
+							display: inline-flex;
+							align-items: center;
+							min-height: 44px;
+							padding: 0 20px;
+							border-radius: 8px;
+							background: #0969da;
+							color: #ffffff;
+							font-weight: 600;
+							text-decoration: none;
+						"
+						>Add to Chrome</a
+					>
+					<a
+						href="#install"
+						style="
+							display: inline-flex;
+							align-items: center;
+							min-height: 44px;
+							padding: 0 20px;
+							border-radius: 8px;
+							border: 1px solid #d1d9e0;
+							color: #1f2328;
+							font-weight: 600;
+							text-decoration: none;
+						"
+						>Add to Firefox</a
+					>
+				</div>
+			</section>
+
+			<footer style="border-top: 1px solid #d1d9e0">
+				<div
+					style="
+						max-width: 1120px;
+						margin: 0 auto;
+						padding: 28px 24px;
+						display: flex;
+						flex-wrap: wrap;
+						justify-content: space-between;
+						gap: 16px;
+						font-size: 14px;
+						color: #59636e;
+					"
+				>
+					<span>GitHub Power · Not affiliated with GitHub, Inc.</span>
+					<div style="display: flex; flex-wrap: wrap; gap: 24px">
+						<a href="https://github.com/vmaerten/supercharged-github">Source</a>
+						<a href="https://github.com/vmaerten/supercharged-github/blob/main/CHANGELOG.md">Changelog</a>
+						<a href="https://github.com/vmaerten/supercharged-github/issues">Ideas and bugs</a>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,682 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Review status feature</title>
+		<style>
+			body {
+				margin: 0;
+				background: #ffffff;
+			}
+			a {
+				color: #0969da;
+			}
+			a:hover {
+				color: #0550ae;
+			}
+		</style>
+	</head>
+	<body>
+		<div
+			style="
+				width: 100%;
+				background: #ffffff;
+				color: #1f2328;
+				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+				font-size: 16px;
+				line-height: 1.55;
+			"
+		>
+			<header style="border-bottom: 1px solid #d1d9e0">
+				<nav
+					aria-label="Main"
+					style="
+						max-width: 1280px;
+						margin: 0 auto;
+						padding: 16px 24px;
+						display: flex;
+						flex-wrap: wrap;
+						align-items: center;
+						gap: 16px 32px;
+					"
+				>
+					<a
+						href="MoreFeatures.html"
+						style="
+							display: inline-flex;
+							align-items: center;
+							gap: 10px;
+							color: #1f2328;
+							text-decoration: none;
+							font-weight: 700;
+							font-size: 18px;
+						"
+					>
+						<span aria-hidden="true" style="width: 28px; height: 28px; border-radius: 7px; background: #0969da"></span>
+						GitHub Power
+					</a>
+					<div style="display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 14px; flex: 1 1 auto">
+						<a href="FeatureCatalog.html" style="color: #1f2328; font-weight: 600; text-decoration: none"
+							>All features</a
+						>
+						<a href="MoreFeatures.html#install" style="color: #59636e; text-decoration: none">Install</a>
+					</div>
+					<a
+						href="https://github.com/vmaerten/supercharged-github"
+						style="font-size: 14px; color: #1f2328; text-decoration: none; font-weight: 600"
+						>Source on GitHub</a
+					>
+				</nav>
+			</header>
+
+			<div style="max-width: 1280px; margin: 0 auto; padding: 0 24px; display: flex; flex-wrap: wrap; gap: 0 56px">
+				<nav
+					aria-label="Features"
+					style="
+						flex: 1 1 220px;
+						max-width: 260px;
+						padding: 40px 0;
+						display: flex;
+						flex-direction: column;
+						gap: 24px;
+						font-size: 14px;
+					"
+				>
+					<div style="display: flex; flex-direction: column; gap: 2px">
+						<span
+							style="
+								padding: 0 10px 6px;
+								font-size: 12px;
+								font-weight: 600;
+								color: #59636e;
+								text-transform: uppercase;
+								letter-spacing: 0.04em;
+							"
+							>Triage</span
+						>
+
+						<a
+							href="FeatureDetail.html"
+							aria-current="page"
+							style="
+								display: flex;
+								justify-content: space-between;
+								align-items: center;
+								gap: 8px;
+								padding: 6px 10px;
+								border-radius: 6px;
+								text-decoration: none;
+								color: #1f2328;
+								background: #f6f8fa;
+								font-weight: 600;
+							"
+							>Review status</a
+						>
+
+						<a
+							href="FeatureDetail.html"
+							aria-current="false"
+							style="
+								display: flex;
+								justify-content: space-between;
+								align-items: center;
+								gap: 8px;
+								padding: 6px 10px;
+								border-radius: 6px;
+								text-decoration: none;
+								color: #59636e;
+								background: transparent;
+								font-weight: 400;
+							"
+							>Diff stats</a
+						>
+
+						<a
+							href="FeatureDetail.html"
+							aria-current="false"
+							style="
+								display: flex;
+								justify-content: space-between;
+								align-items: center;
+								gap: 8px;
+								padding: 6px 10px;
+								border-radius: 6px;
+								text-decoration: none;
+								color: #59636e;
+								background: transparent;
+								font-weight: 400;
+							"
+							>Idle PRs</a
+						>
+
+						<a
+							href="FeatureDetail.html"
+							aria-current="false"
+							style="
+								display: flex;
+								justify-content: space-between;
+								align-items: center;
+								gap: 8px;
+								padding: 6px 10px;
+								border-radius: 6px;
+								text-decoration: none;
+								color: #59636e;
+								background: transparent;
+								font-weight: 400;
+							"
+							>Reviewer load</a
+						>
+					</div>
+
+					<div style="display: flex; flex-direction: column; gap: 2px">
+						<span
+							style="
+								padding: 0 10px 6px;
+								font-size: 12px;
+								font-weight: 600;
+								color: #59636e;
+								text-transform: uppercase;
+								letter-spacing: 0.04em;
+							"
+							>Reviewing code</span
+						>
+
+						<a
+							href="FeatureDetail.html"
+							aria-current="false"
+							style="
+								display: flex;
+								justify-content: space-between;
+								align-items: center;
+								gap: 8px;
+								padding: 6px 10px;
+								border-radius: 6px;
+								text-decoration: none;
+								color: #59636e;
+								background: transparent;
+								font-weight: 400;
+							"
+							>Collapse generated files<span style="font-size: 11px; color: #59636e; font-weight: 400">Soon</span></a
+						>
+
+						<a
+							href="FeatureDetail.html"
+							aria-current="false"
+							style="
+								display: flex;
+								justify-content: space-between;
+								align-items: center;
+								gap: 8px;
+								padding: 6px 10px;
+								border-radius: 6px;
+								text-decoration: none;
+								color: #59636e;
+								background: transparent;
+								font-weight: 400;
+							"
+							>Folder diff stats<span style="font-size: 11px; color: #59636e; font-weight: 400">Soon</span></a
+						>
+
+						<a
+							href="FeatureDetail.html"
+							aria-current="false"
+							style="
+								display: flex;
+								justify-content: space-between;
+								align-items: center;
+								gap: 8px;
+								padding: 6px 10px;
+								border-radius: 6px;
+								text-decoration: none;
+								color: #59636e;
+								background: transparent;
+								font-weight: 400;
+							"
+							>Weighted review progress<span style="font-size: 11px; color: #59636e; font-weight: 400">Soon</span></a
+						>
+					</div>
+
+					<div style="display: flex; flex-direction: column; gap: 2px">
+						<span
+							style="
+								padding: 0 10px 6px;
+								font-size: 12px;
+								font-weight: 600;
+								color: #59636e;
+								text-transform: uppercase;
+								letter-spacing: 0.04em;
+							"
+							>Discussing</span
+						>
+
+						<a
+							href="FeatureDetail.html"
+							aria-current="false"
+							style="
+								display: flex;
+								justify-content: space-between;
+								align-items: center;
+								gap: 8px;
+								padding: 6px 10px;
+								border-radius: 6px;
+								text-decoration: none;
+								color: #59636e;
+								background: transparent;
+								font-weight: 400;
+							"
+							>Quick comments</a
+						>
+
+						<a
+							href="FeatureDetail.html"
+							aria-current="false"
+							style="
+								display: flex;
+								justify-content: space-between;
+								align-items: center;
+								gap: 8px;
+								padding: 6px 10px;
+								border-radius: 6px;
+								text-decoration: none;
+								color: #59636e;
+								background: transparent;
+								font-weight: 400;
+							"
+							>Conventional Comments<span style="font-size: 11px; color: #59636e; font-weight: 400">Soon</span></a
+						>
+
+						<a
+							href="FeatureDetail.html"
+							aria-current="false"
+							style="
+								display: flex;
+								justify-content: space-between;
+								align-items: center;
+								gap: 8px;
+								padding: 6px 10px;
+								border-radius: 6px;
+								text-decoration: none;
+								color: #59636e;
+								background: transparent;
+								font-weight: 400;
+							"
+							>Unresolved conversations<span style="font-size: 11px; color: #59636e; font-weight: 400">Soon</span></a
+						>
+					</div>
+
+					<div style="display: flex; flex-direction: column; gap: 2px">
+						<span
+							style="
+								padding: 0 10px 6px;
+								font-size: 12px;
+								font-weight: 600;
+								color: #59636e;
+								text-transform: uppercase;
+								letter-spacing: 0.04em;
+							"
+							>Reading</span
+						>
+
+						<a
+							href="FeatureDetail.html"
+							aria-current="false"
+							style="
+								display: flex;
+								justify-content: space-between;
+								align-items: center;
+								gap: 8px;
+								padding: 6px 10px;
+								border-radius: 6px;
+								text-decoration: none;
+								color: #59636e;
+								background: transparent;
+								font-weight: 400;
+							"
+							>Ticket links<span style="font-size: 11px; color: #59636e; font-weight: 400">Soon</span></a
+						>
+
+						<a
+							href="FeatureDetail.html"
+							aria-current="false"
+							style="
+								display: flex;
+								justify-content: space-between;
+								align-items: center;
+								gap: 8px;
+								padding: 6px 10px;
+								border-radius: 6px;
+								text-decoration: none;
+								color: #59636e;
+								background: transparent;
+								font-weight: 400;
+							"
+							>Image modal</a
+						>
+
+						<a
+							href="FeatureDetail.html"
+							aria-current="false"
+							style="
+								display: flex;
+								justify-content: space-between;
+								align-items: center;
+								gap: 8px;
+								padding: 6px 10px;
+								border-radius: 6px;
+								text-decoration: none;
+								color: #59636e;
+								background: transparent;
+								font-weight: 400;
+							"
+							>Before/after slider<span style="font-size: 11px; color: #59636e; font-weight: 400">Soon</span></a
+						>
+					</div>
+				</nav>
+
+				<main
+					style="
+						flex: 999 1 560px;
+						min-width: 0;
+						padding: 40px 0 96px;
+						display: flex;
+						flex-direction: column;
+						gap: 40px;
+						max-width: 820px;
+					"
+				>
+					<div style="display: flex; flex-direction: column; gap: 14px">
+						<p style="margin: 0; font-size: 14px; color: #59636e">
+							<a href="FeatureCatalog.html">Features</a> / Triage
+						</p>
+						<h1 style="margin: 0; font-size: 40px; line-height: 1.15; letter-spacing: -0.015em">Review status</h1>
+						<p style="margin: 0; font-size: 19px; color: #59636e">
+							Where each pull request stands for you, on every row of the PR list. You stop opening PRs just to find out
+							whether you already reviewed them.
+						</p>
+						<div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px">
+							<span style="padding: 2px 10px; border-radius: 6px; background: #f6f8fa">Appears in: PR list</span>
+							<span style="padding: 2px 10px; border-radius: 6px; background: #fff8c5; color: #7d4e00"
+								>Needs token</span
+							>
+							<span style="padding: 2px 10px; border-radius: 6px; background: #dafbe1; color: #116329"
+								>On by default</span
+							>
+						</div>
+					</div>
+
+					<figure
+						aria-label="PR rows with a review status badge"
+						style="margin: 0; border: 1px solid #d1d9e0; border-radius: 12px; overflow: hidden"
+					>
+						<div
+							style="
+								display: flex;
+								flex-wrap: wrap;
+								align-items: center;
+								gap: 6px 16px;
+								padding: 12px 16px;
+								border-top: 1px solid #d1d9e0;
+								margin-top: -1px;
+							"
+						>
+							<div style="flex: 1 1 280px; min-width: 0; display: flex; flex-direction: column">
+								<span style="font-weight: 600; font-size: 15px">feat: OpenTelemetry tracing for task execution</span>
+								<span style="font-size: 12px; color: #59636e">#3077 opened last week by caseycs</span>
+							</div>
+							<span
+								style="
+									flex: none;
+									width: 190px;
+									display: inline-flex;
+									align-items: center;
+									gap: 6px;
+									font-size: 13px;
+									font-weight: 600;
+									color: #0969da;
+								"
+								><span
+									aria-hidden="true"
+									style="width: 8px; height: 8px; border-radius: 50%; background: #0969da"
+								></span
+								>Review requested</span
+							>
+						</div>
+
+						<div
+							style="
+								display: flex;
+								flex-wrap: wrap;
+								align-items: center;
+								gap: 6px 16px;
+								padding: 12px 16px;
+								border-top: 1px solid #d1d9e0;
+								margin-top: -1px;
+							"
+						>
+							<div style="flex: 1 1 280px; min-width: 0; display: flex; flex-direction: column">
+								<span style="font-weight: 600; font-size: 15px">fix: preserve dotenv declaration order</span>
+								<span style="font-size: 12px; color: #59636e">#3078 opened last week by satya-sudo</span>
+							</div>
+							<span
+								style="
+									flex: none;
+									width: 190px;
+									display: inline-flex;
+									align-items: center;
+									gap: 6px;
+									font-size: 13px;
+									font-weight: 600;
+									color: #9a6700;
+								"
+								><span
+									aria-hidden="true"
+									style="width: 8px; height: 8px; border-radius: 50%; background: #9a6700"
+								></span
+								>Re-review</span
+							>
+						</div>
+
+						<div
+							style="
+								display: flex;
+								flex-wrap: wrap;
+								align-items: center;
+								gap: 6px 16px;
+								padding: 12px 16px;
+								border-top: 1px solid #d1d9e0;
+								margin-top: -1px;
+							"
+						>
+							<div style="flex: 1 1 280px; min-width: 0; display: flex; flex-direction: column">
+								<span style="font-weight: 600; font-size: 15px"
+									>feat(input): add search and scrolling to choice prompts</span
+								>
+								<span style="font-size: 12px; color: #59636e">#3071 opened 2 weeks ago by vmaerten</span>
+							</div>
+							<span
+								style="
+									flex: none;
+									width: 190px;
+									display: inline-flex;
+									align-items: center;
+									gap: 6px;
+									font-size: 13px;
+									font-weight: 600;
+									color: #d1242f;
+								"
+								><span
+									aria-hidden="true"
+									style="width: 8px; height: 8px; border-radius: 50%; background: #d1242f"
+								></span
+								>Changes requested</span
+							>
+						</div>
+
+						<div
+							style="
+								display: flex;
+								flex-wrap: wrap;
+								align-items: center;
+								gap: 6px 16px;
+								padding: 12px 16px;
+								border-top: 1px solid #d1d9e0;
+								margin-top: -1px;
+							"
+						>
+							<div style="flex: 1 1 280px; min-width: 0; display: flex; flex-direction: column">
+								<span style="font-weight: 600; font-size: 15px"
+									>refactor(watch): detect filesystem changes with fsbroker</span
+								>
+								<span style="font-size: 12px; color: #59636e">#3064 opened last month by andreynering</span>
+							</div>
+							<span
+								style="
+									flex: none;
+									width: 190px;
+									display: inline-flex;
+									align-items: center;
+									gap: 6px;
+									font-size: 13px;
+									font-weight: 600;
+									color: #59636e;
+								"
+								><span
+									aria-hidden="true"
+									style="width: 8px; height: 8px; border-radius: 50%; background: #1a7f37"
+								></span
+								>Approved · new commits</span
+							>
+						</div>
+					</figure>
+
+					<section style="display: flex; flex-direction: column; gap: 12px">
+						<h2 style="margin: 0; font-size: 24px">What each status means</h2>
+						<dl
+							style="
+								margin: 0;
+								display: grid;
+								grid-template-columns: minmax(180px, auto) 1fr;
+								gap: 10px 24px;
+								font-size: 15px;
+							"
+						>
+							<dt style="font-weight: 600; color: #0969da">Review requested</dt>
+							<dd style="margin: 0">You are asked and have not reviewed yet.</dd>
+							<dt style="font-weight: 600; color: #9a6700">Re-review</dt>
+							<dd style="margin: 0">You reviewed, then the author pushed or asked you again.</dd>
+							<dt style="font-weight: 600; color: #d1242f">Changes requested</dt>
+							<dd style="margin: 0">You asked for changes and nothing has moved since.</dd>
+							<dt style="font-weight: 600; color: #59636e">Approved · new commits</dt>
+							<dd style="margin: 0">You approved, and commits landed after your approval.</dd>
+						</dl>
+						<p style="margin: 0; color: #59636e; font-size: 15px">
+							A plain approval gets no badge: GitHub already shows it.
+						</p>
+					</section>
+
+					<section style="display: flex; flex-direction: column; gap: 12px">
+						<h2 style="margin: 0; font-size: 24px">Settings</h2>
+						<div style="border: 1px solid #d1d9e0; border-radius: 10px; overflow: hidden">
+							<div
+								style="
+									display: flex;
+									flex-wrap: wrap;
+									justify-content: space-between;
+									gap: 8px 24px;
+									padding: 14px 16px;
+								"
+							>
+								<span style="font-weight: 600">Badge placement</span>
+								<span style="color: #59636e"
+									>Right column (default) or the grey line under the title. Shared by all PR list badges.</span
+								>
+							</div>
+							<div
+								style="
+									display: flex;
+									flex-wrap: wrap;
+									justify-content: space-between;
+									gap: 8px 24px;
+									padding: 14px 16px;
+									border-top: 1px solid #d1d9e0;
+								"
+							>
+								<span style="font-weight: 600">Turn off</span>
+								<span style="color: #59636e">Options › Features › Review status</span>
+							</div>
+						</div>
+					</section>
+
+					<section style="display: flex; flex-direction: column; gap: 12px">
+						<h2 style="margin: 0; font-size: 24px">Good to know</h2>
+						<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px">
+							<li>Statuses are fetched again on every visit, so they are never stale.</li>
+							<li>A review you started but did not submit counts as no review.</li>
+							<li>Needs a token with read access to <i>Pull requests</i>.</li>
+						</ul>
+					</section>
+
+					<div
+						style="
+							display: grid;
+							grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+							gap: 12px;
+							padding-top: 24px;
+							border-top: 1px solid #d1d9e0;
+						"
+					>
+						<a
+							href="FeatureDetail.html"
+							style="
+								padding: 14px 16px;
+								border: 1px solid #d1d9e0;
+								border-radius: 10px;
+								text-decoration: none;
+								display: flex;
+								flex-direction: column;
+							"
+							><span style="font-size: 12px; color: #59636e">Previous</span
+							><span style="font-weight: 600">Reviewer load</span></a
+						>
+						<a
+							href="FeatureDetail.html"
+							style="
+								padding: 14px 16px;
+								border: 1px solid #d1d9e0;
+								border-radius: 10px;
+								text-decoration: none;
+								display: flex;
+								flex-direction: column;
+								text-align: right;
+							"
+							><span style="font-size: 12px; color: #59636e">Next</span
+							><span style="font-weight: 600">Diff stats</span></a
+						>
+					</div>
+				</main>
+			</div>
+
+			<footer style="border-top: 1px solid #d1d9e0">
+				<div
+					style="
+						max-width: 1280px;
+						margin: 0 auto;
+						padding: 28px 24px;
+						display: flex;
+						flex-wrap: wrap;
+						justify-content: space-between;
+						gap: 16px;
+						font-size: 14px;
+						color: #59636e;
+					"
+				>
+					<span>GitHub Power · Not affiliated with GitHub, Inc.</span>
+					<a href="https://github.com/vmaerten/supercharged-github/edit/main/site/features/review-status.md"
+						>Edit this page</a
+					>
+				</div>
+			</footer>
+		</div>
+	</body>
+</html>

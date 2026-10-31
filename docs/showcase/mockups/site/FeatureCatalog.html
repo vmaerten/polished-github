@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>All features</title>
+		<style>
+			body {
+				margin: 0;
+				background: #ffffff;
+			}
+			a {
+				color: #0969da;
+			}
+			a:hover {
+				color: #0550ae;
+			}
+		</style>
+	</head>
+	<body>
+		<div
+			style="
+				width: 100%;
+				background: #ffffff;
+				color: #1f2328;
+				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+				font-size: 16px;
+				line-height: 1.5;
+			"
+		>
+			<header style="border-bottom: 1px solid #d1d9e0">
+				<nav
+					aria-label="Main"
+					style="
+						max-width: 1120px;
+						margin: 0 auto;
+						padding: 16px 24px;
+						display: flex;
+						flex-wrap: wrap;
+						align-items: center;
+						gap: 16px 32px;
+					"
+				>
+					<a
+						href="MoreFeatures.html"
+						style="
+							display: inline-flex;
+							align-items: center;
+							gap: 10px;
+							color: #1f2328;
+							text-decoration: none;
+							font-weight: 700;
+							font-size: 18px;
+						"
+					>
+						<span aria-hidden="true" style="width: 28px; height: 28px; border-radius: 7px; background: #0969da"></span>
+						GitHub Power
+					</a>
+					<div style="display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 14px; flex: 1 1 auto">
+						<a
+							href="FeatureCatalog.html"
+							aria-current="page"
+							style="color: #1f2328; font-weight: 600; text-decoration: none"
+							>All features</a
+						>
+						<a href="MoreFeatures.html#install" style="color: #59636e; text-decoration: none">Install</a>
+					</div>
+					<a
+						href="https://github.com/vmaerten/supercharged-github"
+						style="font-size: 14px; color: #1f2328; text-decoration: none; font-weight: 600"
+						>Source on GitHub</a
+					>
+				</nav>
+			</header>
+
+			<section
+				style="
+					max-width: 1120px;
+					margin: 0 auto;
+					padding: 56px 24px 24px;
+					display: flex;
+					flex-direction: column;
+					gap: 24px;
+				"
+			>
+				<div style="display: flex; flex-direction: column; gap: 8px">
+					<h1 style="margin: 0; font-size: 40px; letter-spacing: -0.015em">All features</h1>
+					<p style="margin: 0; color: #59636e">6 available, 7 coming. Every one can be turned off in the options.</p>
+				</div>
+				<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+					<label
+						for="feature-search"
+						style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)"
+						>Search features</label
+					>
+					<input
+						id="feature-search"
+						type="search"
+						placeholder="Search features"
+						value=""
+						style="
+							flex: 1 1 260px;
+							max-width: 360px;
+							height: 40px;
+							box-sizing: border-box;
+							padding: 0 12px;
+							border: 1px solid #d1d9e0;
+							border-radius: 8px;
+							font: inherit;
+							font-size: 15px;
+						"
+					/>
+					<div role="group" aria-label="Filter by moment" style="display: flex; flex-wrap: wrap; gap: 8px">
+						<button
+							type="button"
+							aria-pressed="true"
+							style="
+								min-height: 40px;
+								padding: 0 14px;
+								border-radius: 999px;
+								border: 1px solid #1f2328;
+								background: #1f2328;
+								color: #ffffff;
+								font: inherit;
+								font-size: 14px;
+								font-weight: 600;
+								cursor: pointer;
+							"
+						>
+							All
+						</button>
+
+						<button
+							type="button"
+							aria-pressed="false"
+							style="
+								min-height: 40px;
+								padding: 0 14px;
+								border-radius: 999px;
+								border: 1px solid #d1d9e0;
+								background: #ffffff;
+								color: #1f2328;
+								font: inherit;
+								font-size: 14px;
+								font-weight: 600;
+								cursor: pointer;
+							"
+						>
+							Triage
+						</button>
+
+						<button
+							type="button"
+							aria-pressed="false"
+							style="
+								min-height: 40px;
+								padding: 0 14px;
+								border-radius: 999px;
+								border: 1px solid #d1d9e0;
+								background: #ffffff;
+								color: #1f2328;
+								font: inherit;
+								font-size: 14px;
+								font-weight: 600;
+								cursor: pointer;
+							"
+						>
+							Reviewing code
+						</button>
+
+						<button
+							type="button"
+							aria-pressed="false"
+							style="
+								min-height: 40px;
+								padding: 0 14px;
+								border-radius: 999px;
+								border: 1px solid #d1d9e0;
+								background: #ffffff;
+								color: #1f2328;
+								font: inherit;
+								font-size: 14px;
+								font-weight: 600;
+								cursor: pointer;
+							"
+						>
+							Discussing
+						</button>
+
+						<button
+							type="button"
+							aria-pressed="false"
+							style="
+								min-height: 40px;
+								padding: 0 14px;
+								border-radius: 999px;
+								border: 1px solid #d1d9e0;
+								background: #ffffff;
+								color: #1f2328;
+								font: inherit;
+								font-size: 14px;
+								font-weight: 600;
+								cursor: pointer;
+							"
+						>
+							Reading
+						</button>
+					</div>
+				</div>
+			</section>
+
+			<section aria-label="Features" style="max-width: 1120px; margin: 0 auto; padding: 16px 24px 96px">
+				<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px">
+					<a
+						href="FeatureDetail.html"
+						style="
+							padding: 20px;
+							border: 1px solid #d1d9e0;
+							border-radius: 12px;
+							display: flex;
+							flex-direction: column;
+							gap: 10px;
+							color: #1f2328;
+							text-decoration: none;
+							background: #ffffff;
+						"
+					>
+						<span style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+							<span style="font-size: 17px; font-weight: 600">Review status</span>
+						</span>
+						<span style="font-size: 15px; color: #59636e; flex: 1"
+							>Where each PR stands for you, on every row of the list.</span
+						>
+						<span style="display: flex; flex-wrap: wrap; gap: 6px; font-size: 12px">
+							<span style="padding: 2px 8px; border-radius: 6px; background: #f6f8fa; color: #1f2328">PR list</span>
+							<span style="padding: 2px 8px; border-radius: 6px; background: #f6f8fa; color: #59636e">Triage</span>
+							<span style="padding: 2px 8px; border-radius: 6px; background: #fff8c5; color: #7d4e00">Needs token</span>
+						</span>
+					</a>
+
+					<a
+						href="FeatureDetail.html"
+						style="
+							padding: 20px;
+							border: 1px solid #d1d9e0;
+							border-radius: 12px;
+							display: flex;
+							flex-direction: column;
+							gap: 10px;
+							color: #1f2328;
+							text-decoration: none;
+							background: #ffffff;
+						"
+					>
+						<span style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+							<span style="font-size: 17px; font-weight: 600">Diff stats</span>
+						</span>
+						<span style="font-size: 15px; color: #59636e; flex: 1"
+							>Lines added and removed, files and a size label.</span
+						>
+						<span style="display: flex; flex-wrap: wrap; gap: 6px; font-size: 12px">
+							<span style="padding: 2px 8px; border-radius: 6px; background: #f6f8fa; color: #1f2328">PR list</span>
+							<span style="padding: 2px 8px; border-radius: 6px; background: #f6f8fa; color: #59636e">Triage</span>
+							<span style="padding: 2px 8px; border-radius: 6px; background: #fff8c5; color: #7d4e00">Needs token</span>
+						</span>
+					</a>
+
+					<a
+						href="FeatureDetail.html"
+						style="
+							padding: 20px;
+							border: 1px solid #d1d9e0;
+							border-radius: 12px;
+							display: flex;
+							flex-direction: column;
+							gap: 10px;
+							color: #1f2328;
+							text-decoration: none;
+							background: #ffffff;
+						"
+					>
+						<span style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+							<span style="font-size: 17px; font-weight: 600">Idle PRs</span>
+						</span>
+						<span style="font-size: 15px; color: #59636e; flex: 1"
+							>Days since the last activity, past a threshold you set.</span
+						>
+						<span style="display: flex; flex-wrap: wrap; gap: 6px; font-size: 12px">
+							<span style="padding: 2px 8px; border-radius: 6px; background: #f6f8fa; color: #1f2328">PR list</span>
+							<span style="padding: 2px 8px; border-radius: 6px; background: #f6f8fa; color: #59636e">Triage</span>
+							<span style="padding: 2px 8px; border-radius: 6px; background: #fff8c5; color: #7d4e00">Needs token</span>
+						</span>
+					</a>
+
+					<a
+						href="FeatureDetail.html"
+						style="
+							padding: 20px;
+							border: 1px solid #d1d9e0;
+							border-radius: 12px;
+							display: flex;
+							flex-direction: column;
+							gap: 10px;
+							color: #1f2328;
+							text-decoration: none;
+							background: #ffffff;
+						"
+					>
+						<span style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+							<span style="font-size: 17px; font-weight: 600">Reviewer load</span>
+						</span>
+						<span style="font-size: 15px; color: #59636e; flex: 1"
+							>Pending reviews per person, where you pick reviewers.</span
+						>
+						<span style="display: flex; flex-wrap: wrap; gap: 6px; font-size: 12px">
+							<span style="padding: 2px 8px; border-radius: 6px; background: #f6f8fa; color: #1f2328"
+								>Reviewers picker</span
+							>
+							<span style="padding: 2px 8px; border-radius: 6px; background: #f6f8fa; color: #59636e">Triage</span>
+							<span style="padding: 2px 8px; border-radius: 6px; background: #fff8c5; color: #7d4e00">Needs token</span>
+						</span>
+					</a>
+
+					<a
+						href="FeatureDetail.html"
+						style="
+							padding: 20px;
+							border: 1px solid #d1d9e0;
+							border-radius: 12px;
+							display: flex;
+							flex-direction: column;
+							gap: 10px;
+							color: #1f2328;
+							text-decoration: none;
+							background: #ffffff;
+						"
+					>
+						<span style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+							<span style="font-size: 17px; font-weight: 600">Collapse generated files</span>
+							<span
+								style="
+									padding: 0 8px;
+									border-radius: 999px;
+									border: 1px solid #d1d9e0;
+									font-size: 12px;
+									font-weight: 600;
+									color: #59636e;
+								"
+								>Soon</span
+							>
+						</span>
+						<span style="font-size: 15px; color: #59636e; flex: 1"
+							>Lockfiles and generated code start collapsed in the diff.</span
+						>
+						<span style="display: flex; flex-wrap: wrap; gap: 6px; font-size: 12px">
+							<span style="padding: 2px 8px; border-radius: 6px; background: #f6f8fa; color: #1f2328"
+								>Files changed</span
+							>
+							<span style="padding: 2px 8px; border-radius: 6px; background: #f6f8fa; color: #59636e"
+								>Reviewing code</span
+							>
+						</span>
+					</a>
+
+					<a
+						href="FeatureDetail.html"
+						style="
+							padding: 20px;
+							border: 1px solid #d1d9e0;
+							border-radius: 12px;
+							display: flex;
+							flex-direction: column;
+							gap: 10px;
+							color: #1f2328;
+							text-decoration: none;
+							background: #ffffff;
+						"
+					>
+						<span style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+							<span style="font-size: 17px; font-weight: 600">Folder diff stats</span>
+							<span
+								style="
+									padding: 0 8px;
+									border-radius: 999px;
+									border: 1px solid #d1d9e0;
+									font-size: 12px;
+									font-weight: 600;
+									color: #59636e;
+								"
+								>Soon</span
+							>
+						</span>
+						<span style="font-size: 15px; color: #59636e; flex: 1">Lines changed per folder in the file tree.</span>
+						<span style="display: flex; flex-wrap: wrap; gap: 6px; font-size: 12px">
+							<span style="padding: 2px 8px; border-radius: 6px; background: #f6f8fa; color: #1f2328"
+								>Files changed</span
+							>
+							<span style="padding: 2px 8px; border-radius: 6px; background: #f6f8fa; color: #59636e"
+								>Reviewing code</span
+							>
+						</span>
+					</a>
+
+					<a
+						href="FeatureDetail.html"
+						style="
+							padding: 20px;
+							border: 1px solid #d1d9e0;
+							border-radius: 12px;
+							display: flex;
+							flex-direction: column;
+							gap: 10px;
+							color: #1f2328;
+							text-decoration: none;
+							background: #ffffff;
+						"
+					>
+						<span style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+							<span style="font-size: 17px; font-weight: 600">Weighted review progress</span>
+							<span
+								style="
+									padding: 0 8px;
+									border-radius: 999px;
+									border: 1px solid #d1d9e0;
+									font-size: 12px;
+									font-weight: 600;
+									color: #59636e;
+								"
+								>Soon</span
+							>
+						</span>
+						<span style="font-size: 15px; color: #59636e; flex: 1">Progress by lines viewed, not by files.</span>
+						<span style="display: flex; flex-wrap: wrap; gap: 6px; font-size: 12px">
+							<span style="padding: 2px 8px; border-radius: 6px; background: #f6f8fa; color: #1f2328"
+								>Files changed</span
+							>
+							<span style="padding: 2px 8px; border-radius: 6px; background: #f6f8fa; color: #59636e"
+								>Reviewing code</span
+							>
+						</span>
+					</a>
+
+					<a
+						href="FeatureDetail.html"
+						style="
+							padding: 20px;
+							border: 1px solid #d1d9e0;
+							border-radius: 12px;
+							display: flex;
+							flex-direction: column;
+							gap: 10px;
+							color: #1f2328;
+							text-decoration: none;
+							background: #ffffff;
+						"
+					>
+						<span style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+							<span style="font-size: 17px; font-weight: 600">Quick comments</span>
+						</span>
+						<span style="font-size: 15px; color: #59636e; flex: 1"
+							>Your usual replies as one-click buttons above the comment box.</span
+						>
+						<span style="display: flex; flex-wrap: wrap; gap: 6px; font-size: 12px">
+							<span style="padding: 2px 8px; border-radius: 6px; background: #f6f8fa; color: #1f2328">Comment box</span>
+							<span style="padding: 2px 8px; border-radius: 6px; background: #f6f8fa; color: #59636e">Discussing</span>
+						</span>
+					</a>
+
+					<a
+						href="FeatureDetail.html"
+						style="
+							padding: 20px;
+							border: 1px solid #d1d9e0;
+							border-radius: 12px;
+							display: flex;
+							flex-direction: column;
+							gap: 10px;
+							color: #1f2328;
+							text-decoration: none;
+							background: #ffffff;
+						"
+					>
+						<span style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+							<span style="font-size: 17px; font-weight: 600">Conventional Comments</span>
+							<span
+								style="
+									padding: 0 8px;
+									border-radius: 999px;
+									border: 1px solid #d1d9e0;
+									font-size: 12px;
+									font-weight: 600;
+									color: #59636e;
+								"
+								>Soon</span
+							>
+						</span>
+						<span style="font-size: 15px; color: #59636e; flex: 1"
+							>Label a comment as praise, nit, issue or question.</span
+						>
+						<span style="display: flex; flex-wrap: wrap; gap: 6px; font-size: 12px">
+							<span style="padding: 2px 8px; border-radius: 6px; background: #f6f8fa; color: #1f2328">Comment box</span>
+							<span style="padding: 2px 8px; border-radius: 6px; background: #f6f8fa; color: #59636e">Discussing</span>
+						</span>
+					</a>
+
+					<a
+						href="FeatureDetail.html"
+						style="
+							padding: 20px;
+							border: 1px solid #d1d9e0;
+							border-radius: 12px;
+							display: flex;
+							flex-direction: column;
+							gap: 10px;
+							color: #1f2328;
+							text-decoration: none;
+							background: #ffffff;
+						"
+					>
+						<span style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+							<span style="font-size: 17px; font-weight: 600">Unresolved conversations</span>
+							<span
+								style="
+									padding: 0 8px;
+									border-radius: 999px;
+									border: 1px solid #d1d9e0;
+									font-size: 12px;
+									font-weight: 600;
+									color: #59636e;
+								"
+								>Soon</span
+							>
+						</span>
+						<span style="font-size: 15px; color: #59636e; flex: 1">Count the open threads and jump between them.</span>
+						<span style="display: flex; flex-wrap: wrap; gap: 6px; font-size: 12px">
+							<span style="padding: 2px 8px; border-radius: 6px; background: #f6f8fa; color: #1f2328"
+								>Conversation</span
+							>
+							<span style="padding: 2px 8px; border-radius: 6px; background: #f6f8fa; color: #59636e">Discussing</span>
+						</span>
+					</a>
+
+					<a
+						href="FeatureDetail.html"
+						style="
+							padding: 20px;
+							border: 1px solid #d1d9e0;
+							border-radius: 12px;
+							display: flex;
+							flex-direction: column;
+							gap: 10px;
+							color: #1f2328;
+							text-decoration: none;
+							background: #ffffff;
+						"
+					>
+						<span style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+							<span style="font-size: 17px; font-weight: 600">Ticket links</span>
+							<span
+								style="
+									padding: 0 8px;
+									border-radius: 999px;
+									border: 1px solid #d1d9e0;
+									font-size: 12px;
+									font-weight: 600;
+									color: #59636e;
+								"
+								>Soon</span
+							>
+						</span>
+						<span style="font-size: 15px; color: #59636e; flex: 1"
+							>Ticket ids like ABC-123 link to your issue tracker.</span
+						>
+						<span style="display: flex; flex-wrap: wrap; gap: 6px; font-size: 12px">
+							<span style="padding: 2px 8px; border-radius: 6px; background: #f6f8fa; color: #1f2328"
+								>Conversation</span
+							>
+							<span style="padding: 2px 8px; border-radius: 6px; background: #f6f8fa; color: #59636e">Reading</span>
+						</span>
+					</a>
+
+					<a
+						href="FeatureDetail.html"
+						style="
+							padding: 20px;
+							border: 1px solid #d1d9e0;
+							border-radius: 12px;
+							display: flex;
+							flex-direction: column;
+							gap: 10px;
+							color: #1f2328;
+							text-decoration: none;
+							background: #ffffff;
+						"
+					>
+						<span style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+							<span style="font-size: 17px; font-weight: 600">Image modal</span>
+						</span>
+						<span style="font-size: 15px; color: #59636e; flex: 1">Zoom images in place, arrow keys between them.</span>
+						<span style="display: flex; flex-wrap: wrap; gap: 6px; font-size: 12px">
+							<span style="padding: 2px 8px; border-radius: 6px; background: #f6f8fa; color: #1f2328">Images</span>
+							<span style="padding: 2px 8px; border-radius: 6px; background: #f6f8fa; color: #59636e">Reading</span>
+						</span>
+					</a>
+
+					<a
+						href="FeatureDetail.html"
+						style="
+							padding: 20px;
+							border: 1px solid #d1d9e0;
+							border-radius: 12px;
+							display: flex;
+							flex-direction: column;
+							gap: 10px;
+							color: #1f2328;
+							text-decoration: none;
+							background: #ffffff;
+						"
+					>
+						<span style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+							<span style="font-size: 17px; font-weight: 600">Before/after slider</span>
+							<span
+								style="
+									padding: 0 8px;
+									border-radius: 999px;
+									border: 1px solid #d1d9e0;
+									font-size: 12px;
+									font-weight: 600;
+									color: #59636e;
+								"
+								>Soon</span
+							>
+						</span>
+						<span style="font-size: 15px; color: #59636e; flex: 1"
+							>Two images labelled Before and After become a slider.</span
+						>
+						<span style="display: flex; flex-wrap: wrap; gap: 6px; font-size: 12px">
+							<span style="padding: 2px 8px; border-radius: 6px; background: #f6f8fa; color: #1f2328">Images</span>
+							<span style="padding: 2px 8px; border-radius: 6px; background: #f6f8fa; color: #59636e">Reading</span>
+						</span>
+					</a>
+				</div>
+			</section>
+
+			<footer style="border-top: 1px solid #d1d9e0">
+				<div
+					style="
+						max-width: 1120px;
+						margin: 0 auto;
+						padding: 28px 24px;
+						display: flex;
+						flex-wrap: wrap;
+						justify-content: space-between;
+						gap: 16px;
+						font-size: 14px;
+						color: #59636e;
+					"
+				>
+					<span>GitHub Power · Not affiliated with GitHub, Inc.</span>
+					<a href="https://github.com/vmaerten/supercharged-github/blob/main/CHANGELOG.md">Changelog</a>
+				</div>
+			</footer>
+		</div>
+	</body>
+</html>

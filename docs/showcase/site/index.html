@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+		<title>GitHub Power</title>
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@500;600;700&family=Funnel+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fragment+Mono&display=swap"
+		/>
+		<link rel="stylesheet" href="site.css" />
+	</head>
+	<body data-compare="on">
+		<div class="mockbar">
+			<div class="wrap">
+				<span>Website mockup · provisional name and colours</span><a href="../index.html">← Back to the kit</a>
+			</div>
+		</div>
+
+		<header class="site-header">
+			<nav class="wrap nav" aria-label="Main">
+				<a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span>GitHub Power</a>
+				<div class="nav-links">
+					<a href="#demo">Demo</a>
+					<a href="features.html">All features</a>
+					<a href="#install">Install</a>
+					<a href="#privacy">Privacy</a>
+					<a href="#faq">FAQ</a>
+				</div>
+				<a class="nav-source" href="https://github.com/vmaerten/supercharged-github">Source on GitHub</a>
+			</nav>
+		</header>
+
+		<main>
+			<section class="wrap hero">
+				<p class="muted" style="font-size: 14px; font-weight: 600">Browser extension for Chrome and Firefox</p>
+				<h1>Review pull requests faster, right on GitHub.</h1>
+				<p class="lede">
+					See where every PR stands for you, pick the reviewer who has room, and answer in one click. No new tab, no new
+					tool.
+				</p>
+				<div class="actions">
+					<a class="btn btn-primary" href="#install">Add to Chrome</a>
+					<a class="btn btn-secondary" href="#install">Add to Firefox</a>
+				</div>
+				<p class="note">Every feature can be turned off · Your token stays in your browser</p>
+			</section>
+
+			<section id="demo" class="wrap demo" aria-label="Live comparison">
+				<div class="demo-head">
+					<div class="compare" role="group" aria-label="Compare">
+						<button type="button" id="show-off" aria-pressed="false">Plain GitHub</button>
+						<button type="button" id="show-on" aria-pressed="true">With GitHub Power</button>
+					</div>
+					<span class="muted" style="font-size: 13px">Real PRs from go-task/task, statuses for illustration</span>
+				</div>
+				<figure class="prlist" aria-label="Pull request list, with or without GitHub Power">
+					<div class="prlist-bar"><span>github.com/go-task/task/pulls</span></div>
+
+					<div class="pr-row">
+						<svg
+							class="pr-icon"
+							width="16"
+							height="16"
+							viewBox="0 0 16 16"
+							fill="none"
+							stroke="#1a7f37"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							aria-hidden="true"
+						>
+							<circle cx="4" cy="3.5" r="1.75"></circle>
+							<circle cx="4" cy="12.5" r="1.75"></circle>
+							<circle cx="12" cy="12.5" r="1.75"></circle>
+							<path d="M4 5.25v5.5M12 10.75V6a2 2 0 0 0-2-2H7.5"></path>
+						</svg>
+						<div class="pr-main">
+							<span class="pr-title">golangci-lint: add prealloc as a linter</span
+							><span class="pr-meta">#3085 opened 2 days ago by christiandins</span>
+						</div>
+						<div class="badges">
+							<span></span
+							><span class="diff"
+								><span class="a">+189</span> <span class="d">−8</span> <span class="f">· 4 files</span> <b>M</b></span
+							><span></span>
+						</div>
+					</div>
+
+					<div class="pr-row">
+						<svg
+							class="pr-icon"
+							width="16"
+							height="16"
+							viewBox="0 0 16 16"
+							fill="none"
+							stroke="#1a7f37"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							aria-hidden="true"
+						>
+							<circle cx="4" cy="3.5" r="1.75"></circle>
+							<circle cx="4" cy="12.5" r="1.75"></circle>
+							<circle cx="12" cy="12.5" r="1.75"></circle>
+							<path d="M4 5.25v5.5M12 10.75V6a2 2 0 0 0-2-2H7.5"></path>
+						</svg>
+						<div class="pr-main">
+							<span class="pr-title">feat: OpenTelemetry tracing for task execution</span
+							><span class="pr-meta">#3077 opened last week by caseycs</span>
+						</div>
+						<div class="badges">
+							<span class="status s-requested"><span class="dot" aria-hidden="true"></span>Review requested</span
+							><span class="diff"
+								><span class="a">+643</span> <span class="d">−28</span> <span class="f">· 12 files</span> <b>L</b></span
+							><span class="idle"
+								><svg
+									width="12"
+									height="12"
+									viewBox="0 0 16 16"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="1.5"
+									stroke-linecap="round"
+									aria-hidden="true"
+								>
+									<circle cx="8" cy="8" r="6.25"></circle>
+									<path d="M8 4.5V8l2.5 1.5"></path></svg
+								>9d</span
+							>
+						</div>
+					</div>
+
+					<div class="pr-row">
+						<svg
+							class="pr-icon"
+							width="16"
+							height="16"
+							viewBox="0 0 16 16"
+							fill="none"
+							stroke="#1a7f37"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							aria-hidden="true"
+						>
+							<circle cx="4" cy="3.5" r="1.75"></circle>
+							<circle cx="4" cy="12.5" r="1.75"></circle>
+							<circle cx="12" cy="12.5" r="1.75"></circle>
+							<path d="M4 5.25v5.5M12 10.75V6a2 2 0 0 0-2-2H7.5"></path>
+						</svg>
+						<div class="pr-main">
+							<span class="pr-title">fix: preserve dotenv declaration order</span
+							><span class="pr-meta">#3078 opened last week by satya-sudo</span>
+						</div>
+						<div class="badges">
+							<span class="status s-rereview"><span class="dot" aria-hidden="true"></span>Re-review</span
+							><span class="diff"
+								><span class="a">+436</span> <span class="d">−8</span> <span class="f">· 11 files</span> <b>L</b></span
+							><span class="idle"
+								><svg
+									width="12"
+									height="12"
+									viewBox="0 0 16 16"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="1.5"
+									stroke-linecap="round"
+									aria-hidden="true"
+								>
+									<circle cx="8" cy="8" r="6.25"></circle>
+									<path d="M8 4.5V8l2.5 1.5"></path></svg
+								>7d</span
+							>
+						</div>
+					</div>
+
+					<div class="pr-row">
+						<svg
+							class="pr-icon"
+							width="16"
+							height="16"
+							viewBox="0 0 16 16"
+							fill="none"
+							stroke="#1a7f37"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							aria-hidden="true"
+						>
+							<circle cx="4" cy="3.5" r="1.75"></circle>
+							<circle cx="4" cy="12.5" r="1.75"></circle>
+							<circle cx="12" cy="12.5" r="1.75"></circle>
+							<path d="M4 5.25v5.5M12 10.75V6a2 2 0 0 0-2-2H7.5"></path>
+						</svg>
+						<div class="pr-main">
+							<span class="pr-title">feat(input): add search and scrolling to choice prompts</span
+							><span class="pr-meta">#3071 opened 2 weeks ago by vmaerten</span>
+						</div>
+						<div class="badges">
+							<span class="status s-changes"><span class="dot" aria-hidden="true"></span>Changes requested</span
+							><span class="diff"
+								><span class="a">+125</span> <span class="d">−16</span> <span class="f">· 1 file</span> <b>M</b></span
+							><span class="idle"
+								><svg
+									width="12"
+									height="12"
+									viewBox="0 0 16 16"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="1.5"
+									stroke-linecap="round"
+									aria-hidden="true"
+								>
+									<circle cx="8" cy="8" r="6.25"></circle>
+									<path d="M8 4.5V8l2.5 1.5"></path></svg
+								>16d</span
+							>
+						</div>
+					</div>
+
+					<div class="pr-row">
+						<svg
+							class="pr-icon"
+							width="16"
+							height="16"
+							viewBox="0 0 16 16"
+							fill="none"
+							stroke="#1a7f37"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							aria-hidden="true"
+						>
+							<circle cx="4" cy="3.5" r="1.75"></circle>
+							<circle cx="4" cy="12.5" r="1.75"></circle>
+							<circle cx="12" cy="12.5" r="1.75"></circle>
+							<path d="M4 5.25v5.5M12 10.75V6a2 2 0 0 0-2-2H7.5"></path>
+						</svg>
+						<div class="pr-main">
+							<span class="pr-title">refactor(watch): detect filesystem changes with fsbroker</span
+							><span class="pr-meta">#3064 opened last month by andreynering</span>
+						</div>
+						<div class="badges">
+							<span class="status s-outdated"><span class="dot" aria-hidden="true"></span>Approved · new commits</span
+							><span class="diff"
+								><span class="a">+323</span> <span class="d">−103</span> <span class="f">· 11 files</span>
+								<b>L</b></span
+							><span class="idle"
+								><svg
+									width="12"
+									height="12"
+									viewBox="0 0 16 16"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="1.5"
+									stroke-linecap="round"
+									aria-hidden="true"
+								>
+									<circle cx="8" cy="8" r="6.25"></circle>
+									<path d="M8 4.5V8l2.5 1.5"></path></svg
+								>17d</span
+							>
+						</div>
+					</div>
+				</figure>
+
+				<div class="legend" aria-label="Badge legend">
+					<span
+						><span class="status s-requested"><span class="dot" aria-hidden="true"></span>Review requested</span>
+						waiting for you</span
+					>
+					<span
+						><span class="status s-rereview"><span class="dot" aria-hidden="true"></span>Re-review</span> changed since
+						your review</span
+					>
+					<span
+						><span class="status s-changes"><span class="dot" aria-hidden="true"></span>Changes requested</span> waiting
+						for the author</span
+					>
+					<span
+						><span class="status s-outdated"><span class="dot" aria-hidden="true"></span>Approved · new commits</span>
+						pushed after your approval</span
+					>
+					<span><b class="mono">L</b> size, XS to XL</span>
+					<span><span class="idle">9d</span> idle for 9 days</span>
+				</div>
+			</section>
+
+			<div class="band">
+				<section class="wrap section highlights" aria-label="Highlights">
+					<div class="feature-row">
+						<div class="feature-text">
+							<p class="eyebrow">In the PR list</p>
+							<h2>Know what needs you before opening a PR</h2>
+							<p class="muted">
+								A quiet column on each row: where the PR stands for you, how big it is, and how long it has been idle.
+								In the right column or the grey line under the title.
+							</p>
+						</div>
+						<figure class="feature-visual panel closeup" aria-label="One PR row with each badge labelled">
+							<div class="pr-main">
+								<span class="pr-title" style="font-size: 17px">feat: OpenTelemetry tracing for task execution</span
+								><span class="pr-meta" style="font-size: 13px">#3077 opened last week by caseycs</span>
+							</div>
+							<div class="closeup-grid">
+								<span class="status s-requested"><span class="dot" aria-hidden="true"></span>Review requested</span>
+								<span class="diff"
+									><span class="a">+643</span> <span class="d">−28</span> <span class="f">· 12 files</span>
+									<b>L</b></span
+								>
+								<span class="idle"
+									><svg
+										width="14"
+										height="14"
+										viewBox="0 0 16 16"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="1.5"
+										stroke-linecap="round"
+										aria-hidden="true"
+									>
+										<circle cx="8" cy="8" r="6.25"></circle>
+										<path d="M8 4.5V8l2.5 1.5"></path></svg
+									>9d</span
+								>
+								<span class="label">Where it stands for you</span>
+								<span class="label">How big it is</span>
+								<span class="label">Idle</span>
+							</div>
+						</figure>
+					</div>
+
+					<div class="feature-row reverse">
+						<div class="feature-text">
+							<p class="eyebrow">In the reviewers picker</p>
+							<h2>Pick the reviewer who has room</h2>
+							<p class="muted">
+								Next to each name, how many reviews that person already has waiting in this organization. Amber at 3,
+								orange past 5.
+							</p>
+						</div>
+						<div class="feature-visual center">
+							<figure
+								class="panel picker"
+								style="margin: 0"
+								aria-label="Reviewers picker with a pending review count next to each person"
+							>
+								<div class="picker-title">Request up to 15 reviewers</div>
+								<div class="picker-search">Find a user</div>
+								<div class="picker-section"><span>Suggestions</span><span>Pending reviews</span></div>
+								<div class="person">
+									<span class="avatar" style="background: #a5d6ff" aria-hidden="true">AN</span
+									><span class="who"><b>andreynering</b> <span>Andrey Nering</span></span
+									><span class="load load-high">8</span>
+								</div>
+								<div class="person">
+									<span class="avatar" style="background: #d2a8ff" aria-hidden="true">PD</span
+									><span class="who"><b>pd93</b> <span>Pete Davison</span></span
+									><span class="load load-mid">5</span>
+								</div>
+								<div class="picker-section"><span>Everyone else</span><span>Pending reviews</span></div>
+								<div class="person">
+									<span class="avatar" style="background: #ffa198" aria-hidden="true">VM</span
+									><span class="who"><b>vmaerten</b> <span>Valentin Maerten</span></span
+									><span class="load load-low">2</span>
+								</div>
+								<div class="person">
+									<span class="avatar" style="background: #7ee2b8" aria-hidden="true">TB</span
+									><span class="who"><b>task-bot</b></span
+									><span class="load load-low">0</span>
+								</div>
+							</figure>
+						</div>
+					</div>
+
+					<div class="feature-row">
+						<div class="feature-text">
+							<p class="eyebrow">Quick comments</p>
+							<h2>Answer in one click</h2>
+							<p class="muted">
+								Buttons above the comment box post the replies you write ten times a day. LGTM, ask a bot to rebase, say
+								thanks: the list is yours to edit.
+							</p>
+						</div>
+						<figure class="feature-visual panel cbox" aria-label="Quick comment buttons above the comment box">
+							<div class="quick" aria-hidden="true"><span>LGTM</span><span>Rebase</span><span>Thanks</span></div>
+							<b>Add a comment</b>
+							<div class="editor">
+								<div class="editor-tabs"><span>Write</span><span>Preview</span></div>
+								<div class="editor-body">LGTM :rocket:</div>
+							</div>
+							<div class="editor-actions" aria-hidden="true"><span>Close pull request</span><span>Comment</span></div>
+						</figure>
+					</div>
+				</section>
+			</div>
+
+			<section class="wrap section" aria-labelledby="more">
+				<div class="more-head">
+					<div>
+						<h2 id="more" class="section-title">And everything else</h2>
+						<p class="muted">Grouped by what you are doing. Each one can be turned off.</p>
+					</div>
+					<a class="btn btn-secondary" href="features.html">See all 13 features</a>
+				</div>
+				<div class="groups">
+					<div class="group">
+						<h3>Reviewing code</h3>
+						<a class="item" href="features.html"
+							><span class="item-name">Collapse generated files <span class="soon">Soon</span></span
+							><span class="item-text">Lockfiles and generated code start collapsed.</span></a
+						>
+						<a class="item" href="features.html"
+							><span class="item-name">Folder diff stats <span class="soon">Soon</span></span
+							><span class="item-text">Lines changed per folder in the file tree.</span></a
+						>
+						<a class="item" href="features.html"
+							><span class="item-name">Weighted review progress <span class="soon">Soon</span></span
+							><span class="item-text">Progress by lines viewed, not by files.</span></a
+						>
+					</div>
+					<div class="group">
+						<h3>Discussing</h3>
+						<a class="item" href="features.html"
+							><span class="item-name">Conventional Comments <span class="soon">Soon</span></span
+							><span class="item-text">Label a comment as praise, nit, issue or question.</span></a
+						>
+						<a class="item" href="features.html"
+							><span class="item-name">Unresolved conversations <span class="soon">Soon</span></span
+							><span class="item-text">Count the open threads and jump between them.</span></a
+						>
+						<a class="item" href="features.html"
+							><span class="item-name">Ticket links <span class="soon">Soon</span></span
+							><span class="item-text">Ticket ids like ABC-123 link to your tracker.</span></a
+						>
+					</div>
+					<div class="group">
+						<h3>Reading</h3>
+						<a class="item" href="features.html"
+							><span class="item-name">Image modal</span
+							><span class="item-text">Zoom images in place, arrow keys between them.</span></a
+						>
+						<a class="item" href="features.html"
+							><span class="item-name">Before/after slider <span class="soon">Soon</span></span
+							><span class="item-text">Two images labelled Before and After become a slider.</span></a
+						>
+					</div>
+				</div>
+			</section>
+
+			<div id="privacy" class="band">
+				<section class="wrap section">
+					<h2 class="section-title center-title">Built to stay out of the way</h2>
+					<div class="cards">
+						<div class="panel card">
+							<svg
+								width="24"
+								height="24"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="#0969da"
+								stroke-width="1.75"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								aria-hidden="true"
+							>
+								<rect x="2" y="7" width="20" height="10" rx="5"></rect>
+								<circle cx="16" cy="12" r="3"></circle>
+							</svg>
+							<h3>Everything is optional</h3>
+							<p class="muted">Each feature has its own switch, and most have settings, in the options page.</p>
+						</div>
+						<div class="panel card">
+							<svg
+								width="24"
+								height="24"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="#0969da"
+								stroke-width="1.75"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								aria-hidden="true"
+							>
+								<rect x="4" y="11" width="16" height="10" rx="2"></rect>
+								<path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
+							</svg>
+							<h3>Your token stays local</h3>
+							<p class="muted">A read-only token, kept in your browser and sent only to the GitHub API.</p>
+						</div>
+						<div class="panel card">
+							<svg
+								width="24"
+								height="24"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="#0969da"
+								stroke-width="1.75"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								aria-hidden="true"
+							>
+								<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path>
+								<circle cx="12" cy="12" r="3"></circle>
+							</svg>
+							<h3>Looks like GitHub</h3>
+							<p class="muted">GitHub's own colors, light and dark themes, and nothing that moves the page around.</p>
+						</div>
+					</div>
+				</section>
+			</div>
+
+			<section id="install" class="wrap section">
+				<h2 class="section-title center-title">Ready in two minutes</h2>
+				<ol class="steps">
+					<li>
+						<span class="step-n">01</span>
+						<h3>Install the extension</h3>
+						<p class="muted">From the Chrome Web Store or Firefox Add-ons.</p>
+					</li>
+					<li>
+						<span class="step-n">02</span>
+						<h3>Add a token</h3>
+						<p class="muted">A fine-grained token with read access to <i>Pull requests</i>, pasted in the options.</p>
+					</li>
+					<li>
+						<span class="step-n">03</span>
+						<h3>Open a PR list</h3>
+						<p class="muted">The badges appear on the next page load.</p>
+					</li>
+				</ol>
+			</section>
+
+			<section id="faq" class="wrap faq">
+				<h2 class="section-title">Questions</h2>
+				<div class="faq-list">
+					<div class="faq-item">
+						<h3>Why does it need a token?</h3>
+						<p class="muted">
+							The PR list badges and the reviewer load ask the GitHub API for data the page does not show. Quick
+							comments and the image modal work without one.
+						</p>
+					</div>
+					<div class="faq-item">
+						<h3>Does it work alongside Refined GitHub?</h3>
+						<p class="muted">Yes. The two run side by side.</p>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<footer class="site-footer">
+			<div class="wrap">
+				<span>GitHub Power · Not affiliated with GitHub, Inc.</span>
+				<nav aria-label="Footer">
+					<a href="features.html">All features</a>
+					<a href="https://github.com/vmaerten/supercharged-github/blob/main/CHANGELOG.md">Changelog</a>
+					<a href="https://github.com/vmaerten/supercharged-github">Source</a>
+				</nav>
+			</div>
+		</footer>
+
+		<script>
+			const off = document.getElementById('show-off');
+			const on = document.getElementById('show-on');
+			function setCompare(value) {
+				document.body.dataset.compare = value;
+				on.setAttribute('aria-pressed', String(value === 'on'));
+				off.setAttribute('aria-pressed', String(value === 'off'));
+			}
+			on.addEventListener('click', () => setCompare('on'));
+			off.addEventListener('click', () => setCompare('off'));
+		</script>
+	</body>
+</html>
