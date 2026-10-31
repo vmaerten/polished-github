@@ -13,18 +13,26 @@ export type ReviewInfo = {
 	viewerLatestReview: {state: string; commit: {oid: string} | null} | null;
 };
 
-export type ReviewStatus = 'requested' | 're-review' | 'approved' | 'changes-requested';
+export type ReviewStatus = 'requested' | 're-review' | 'approved' | 'approved-outdated' | 'changes-requested';
 
 const badgeClass = 'github-power-review-status' as const;
 
-const badges: Record<ReviewStatus, {text: string; color: string; title: string}> = {
+const muted = 'var(--fgColor-muted, #59636e)';
+
+const badges: Record<ReviewStatus, {text: string; color: string; dot?: string; title: string}> = {
 	requested: {text: 'Review requested', color: 'var(--fgColor-attention, #9a6700)', title: 'Your review is requested'},
 	're-review': {
 		text: 'Re-review',
 		color: 'var(--fgColor-accent, #0969da)',
-		title: 'New commits or a new request since your review',
+		title: 'Your review was requested again, or commits were pushed since you requested changes',
 	},
 	approved: {text: 'Approved', color: 'var(--fgColor-success, #1a7f37)', title: 'You approved the latest commit'},
+	'approved-outdated': {
+		text: 'Approved · new commits',
+		color: muted,
+		dot: 'var(--fgColor-success, #1a7f37)',
+		title: 'Your approval still stands, but commits were pushed since, maybe only a rebase',
+	},
 	'changes-requested': {
 		text: 'Changes requested',
 		color: 'var(--fgColor-danger, #d1242f)',
@@ -47,19 +55,21 @@ export function getReviewStatus(pr: ReviewInfo): ReviewStatus | undefined {
 		return undefined;
 	}
 
-	if (review.commit?.oid !== pr.headRefOid) {
-		return 're-review';
+	// A push after an approval is often only a rebase: the approval still stands, so it is not a call to action
+	const outdated = review.commit?.oid !== pr.headRefOid;
+	if (review.state === 'APPROVED') {
+		return outdated ? 'approved-outdated' : 'approved';
 	}
 
-	if (review.state === 'APPROVED') {
-		return 'approved';
+	if (outdated) {
+		return 're-review';
 	}
 
 	return review.state === 'CHANGES_REQUESTED' ? 'changes-requested' : undefined;
 }
 
 function addBadge(title: HTMLElement, status: ReviewStatus, placement: BadgePlacement): void {
-	const {text, color, title: tooltip} = badges[status];
+	const {text, color, dot = color, title: tooltip} = badges[status];
 	addPullRequestBadge(
 		title,
 		badgeClass,
@@ -68,7 +78,7 @@ function addBadge(title: HTMLElement, status: ReviewStatus, placement: BadgePlac
 			title={tooltip}
 			style={{display: 'inline-flex', alignItems: 'center', gap: '5px', color, fontWeight: '600', whiteSpace: 'nowrap'}}
 		>
-			<span style={{width: '7px', height: '7px', borderRadius: '50%', background: color}} />
+			<span style={{width: '7px', height: '7px', borderRadius: '50%', background: dot}} />
 			{text}
 		</span>,
 		placement,

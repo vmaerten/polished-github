@@ -32,8 +32,14 @@ test('derives the viewer review status', () => {
 	expect(getReviewStatus(pr({viewerLatestReview: {state: 'COMMENTED', commit: {oid: head}}}))).toBeUndefined();
 });
 
-test('asks for a re-review after new commits or a new request', () => {
-	expect(getReviewStatus(pr({viewerLatestReview: {state: 'APPROVED', commit: {oid: 'old'}}}))).toBe('re-review');
+test('asks for a re-review after a new request, or new commits on a non-approving review', () => {
+	expect(getReviewStatus(pr({viewerLatestReview: {state: 'CHANGES_REQUESTED', commit: {oid: 'old'}}}))).toBe(
+		're-review',
+	);
+	// A push after an approval may be a mere rebase: the approval stands
+	expect(getReviewStatus(pr({viewerLatestReview: {state: 'APPROVED', commit: {oid: 'old'}}}))).toBe(
+		'approved-outdated',
+	);
 	expect(
 		getReviewStatus(
 			pr({viewerLatestReviewRequest: request, viewerLatestReview: {state: 'APPROVED', commit: {oid: head}}}),
