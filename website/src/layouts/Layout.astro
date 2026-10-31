@@ -1,0 +1,32 @@
+---
+import '../styles/site.css';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader, {type NavLink} from '../components/SiteHeader.astro';
+
+interface Props {
+	title?: string;
+	nav?: NavLink[];
+}
+
+const {title, nav} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+		<title>{title ? `${title} · Supercharged GitHub` : 'Supercharged GitHub'}</title>
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+		/>
+		<!-- Blocking on purpose: a stored theme must apply before the first paint -->
+		<script is:inline src="/theme.js"></script>
+	</head>
+	<body>
+		<SiteHeader nav={nav} />
+		<slot />
+		<SiteFooter />
+	</body>
+</html>
