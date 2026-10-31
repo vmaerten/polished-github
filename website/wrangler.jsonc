@@ -1,0 +1,11 @@
+{
+	"name": "supercharged-github",
+	"compatibility_date": "2026-10-30",
+	"assets": {
+		"directory": "./dist",
+	},
+	"routes": [{"pattern": "supercharged-github.vmaerten.fr", "custom_domain": true}],
+	"workers_dev": false,
+	"preview_urls": true,
+	"previews": {},
+}
