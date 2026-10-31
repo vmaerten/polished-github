@@ -1117,3 +1117,28 @@ a.cat-card:hover {
 		margin-bottom: 10px;
 	}
 }
+
+/* 404 */
+.not-found {
+	min-height: 70svh;
+	justify-content: center;
+}
+.not-found-diff {
+	margin: 8px 0;
+	padding: 16px 20px;
+	max-width: 100%;
+	overflow-x: auto;
+	text-align: left;
+	font-family: var(--mono);
+	font-size: 14px;
+	line-height: 1.7;
+}
+.not-found-diff .hunk {
+	color: var(--muted);
+}
+.not-found-diff .del {
+	color: var(--del);
+}
+.not-found-diff .add {
+	color: var(--add);
+}
