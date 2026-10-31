@@ -1008,6 +1008,9 @@ a.cat-card:hover {
 	margin-top: 28px;
 	font-size: 24px;
 }
+.doc-body > h2:first-child {
+	margin-top: 0;
+}
 .meanings {
 	margin: 0;
 	display: grid;
