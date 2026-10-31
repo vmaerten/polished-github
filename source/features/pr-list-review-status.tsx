@@ -2,7 +2,8 @@ import React from 'dom-chef';
 import * as pageDetect from 'github-url-detection';
 
 import type {Feature} from '../feature-manager.js';
-import {addTitleBadge, forEachListedPullRequest} from '../github-helpers/pr-list.js';
+import {addPullRequestBadge, forEachListedPullRequest} from '../github-helpers/pr-list.js';
+import {type BadgePlacement, getOptions} from '../options-storage.js';
 
 export type ReviewInfo = {
 	state: 'OPEN' | 'CLOSED' | 'MERGED';
@@ -16,13 +17,17 @@ export type ReviewStatus = 'requested' | 're-review' | 'approved' | 'changes-req
 
 const badgeClass = 'github-power-review-status' as const;
 
-const badges: Record<ReviewStatus, {text: string; label: string; title: string}> = {
-	requested: {text: 'Review requested', label: 'Label--attention', title: 'Your review is requested'},
-	're-review': {text: 'Re-review', label: 'Label--accent', title: 'New commits or a new request since your review'},
-	approved: {text: 'Approved', label: 'Label--success', title: 'You approved the latest commit'},
+const badges: Record<ReviewStatus, {text: string; color: string; title: string}> = {
+	requested: {text: 'Review requested', color: 'var(--fgColor-attention, #9a6700)', title: 'Your review is requested'},
+	're-review': {
+		text: 'Re-review',
+		color: 'var(--fgColor-accent, #0969da)',
+		title: 'New commits or a new request since your review',
+	},
+	approved: {text: 'Approved', color: 'var(--fgColor-success, #1a7f37)', title: 'You approved the latest commit'},
 	'changes-requested': {
 		text: 'Changes requested',
-		label: 'Label--danger',
+		color: 'var(--fgColor-danger, #d1242f)',
 		title: 'You requested changes on the latest commit',
 	},
 };
@@ -53,14 +58,20 @@ export function getReviewStatus(pr: ReviewInfo): ReviewStatus | undefined {
 	return review.state === 'CHANGES_REQUESTED' ? 'changes-requested' : undefined;
 }
 
-function addBadge(title: HTMLElement, status: ReviewStatus): void {
-	const {text, label, title: tooltip} = badges[status];
-	addTitleBadge(
+function addBadge(title: HTMLElement, status: ReviewStatus, placement: BadgePlacement): void {
+	const {text, color, title: tooltip} = badges[status];
+	addPullRequestBadge(
 		title,
 		badgeClass,
-		<span className={`Label ${label} ${badgeClass}`} title={tooltip}>
+		<span
+			className={badgeClass}
+			title={tooltip}
+			style={{display: 'inline-flex', alignItems: 'center', gap: '5px', color, fontWeight: '600', whiteSpace: 'nowrap'}}
+		>
+			<span style={{width: '7px', height: '7px', borderRadius: '50%', background: color}} />
 			{text}
 		</span>,
+		placement,
 	);
 }
 
@@ -70,14 +81,15 @@ const prListReviewStatus: Feature = {
 		'Shows where each PR stands for you in the repository pull request list: review requested, re-review, approved or changes requested.',
 	include: [pageDetect.isRepoPRList],
 	requiresToken: true,
-	init(signal) {
+	async init(signal) {
+		const {prListBadges} = await getOptions();
 		// Fetched again on every visit: a status goes stale as soon as you review or someone pushes
 		forEachListedPullRequest<ReviewInfo>(
 			'state viewerDidAuthor headRefOid viewerLatestReviewRequest {id} viewerLatestReview {state commit {oid}}',
 			(title, pr) => {
 				const status = getReviewStatus(pr);
 				if (status) {
-					addBadge(title, status);
+					addBadge(title, status, prListBadges);
 				}
 			},
 			{signal, cache: new Map()},

@@ -13,3 +13,4 @@ All notable changes to this project are documented here. The format follows [Kee
 - `pr-list-stale`: the repository PR list flags PRs with no activity for a configurable number of days, drafts excluded unless asked.
 - `reviewer-load`: the reviewers picker of a PR shows how many reviews each person already has pending in the repository owner's account.
 - Options page with the GitHub token, feature switches and per-feature settings.
+- The PR list badges go in the right column, aligned from row to row, or in the grey line under the title, as set in the options.

@@ -5,6 +5,8 @@ import prListReviewStatus, {getReviewStatus, type ReviewInfo} from './pr-list-re
 
 vi.mock('../github-helpers/api.js', () => ({v4: vi.fn<typeof v4>()}));
 
+vi.stubGlobal('chrome', {storage: {sync: {get: async (defaults: object) => defaults}}});
+
 const head = 'abc';
 
 function pr(changes: Partial<ReviewInfo>): ReviewInfo {

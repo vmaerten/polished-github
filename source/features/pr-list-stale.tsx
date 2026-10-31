@@ -2,8 +2,8 @@ import React from 'dom-chef';
 import * as pageDetect from 'github-url-detection';
 
 import type {Feature} from '../feature-manager.js';
-import {addTitleBadge, forEachListedPullRequest} from '../github-helpers/pr-list.js';
-import {getOptions, type StaleSettings} from '../options-storage.js';
+import {addPullRequestBadge, forEachListedPullRequest} from '../github-helpers/pr-list.js';
+import {type BadgePlacement, getOptions, type StaleSettings} from '../options-storage.js';
 
 export type ActivityInfo = {state: 'OPEN' | 'CLOSED' | 'MERGED'; isDraft: boolean; updatedAt: string};
 
@@ -20,13 +20,36 @@ export function getIdleDays(pr: ActivityInfo, settings: StaleSettings, now = Dat
 	return days >= settings.days ? days : undefined;
 }
 
-function addBadge(title: HTMLElement, days: number): void {
-	addTitleBadge(
+function addBadge(title: HTMLElement, days: number, placement: BadgePlacement): void {
+	addPullRequestBadge(
 		title,
 		badgeClass,
-		<span className={`Label Label--severe ${badgeClass}`} title={`No activity for ${days} days`}>
-			Idle {days}d
+		<span
+			className={badgeClass}
+			title={`No activity for ${days} days`}
+			style={{
+				display: 'inline-flex',
+				alignItems: 'center',
+				gap: '3px',
+				color: 'var(--fgColor-severe, #bc4c00)',
+				whiteSpace: 'nowrap',
+			}}
+		>
+			<svg
+				width="12"
+				height="12"
+				viewBox="0 0 16 16"
+				fill="none"
+				stroke="currentColor"
+				strokeWidth="1.5"
+				aria-hidden="true"
+			>
+				<circle cx="8" cy="8" r="6.25" />
+				<path d="M8 4.5V8l2.5 1.5" strokeLinecap="round" />
+			</svg>
+			{days}d
 		</span>,
+		placement,
 	);
 }
 
@@ -36,14 +59,14 @@ const prListStale: Feature = {
 	include: [pageDetect.isRepoPRList],
 	requiresToken: true,
 	async init(signal) {
-		const {stale} = await getOptions();
+		const {stale, prListBadges} = await getOptions();
 		// Fetched again on every visit, like the review status: any comment or push resets the count
 		forEachListedPullRequest<ActivityInfo>(
 			'state isDraft updatedAt',
 			(title, pr) => {
 				const days = getIdleDays(pr, stale);
 				if (days !== undefined) {
-					addBadge(title, days);
+					addBadge(title, days, prListBadges);
 				}
 			},
 			{signal, cache: new Map()},

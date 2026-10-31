@@ -10,6 +10,7 @@
 	} from '../options-storage.js';
 	import DiffStatsEditor from './DiffStatsEditor.svelte';
 	import ImageModalEditor from './ImageModalEditor.svelte';
+	import PrListSection from './PrListSection.svelte';
 	import QuickCommentsEditor from './QuickCommentsEditor.svelte';
 	import StaleEditor from './StaleEditor.svelte';
 	import TokenSection from './TokenSection.svelte';
@@ -74,6 +75,8 @@
 	<TokenSection ontokenchange={(value) => (hasToken = value)} />
 
 	{#if options}
+		<PrListSection bind:placement={options.prListBadges} onsave={() => save({prListBadges: options!.prListBadges})} />
+
 		<section class="features">
 			<div class="features-header">
 				<div class="heading">

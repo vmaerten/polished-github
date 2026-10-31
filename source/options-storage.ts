@@ -24,6 +24,8 @@ export type StaleSettings = {
 	includeDrafts: boolean;
 };
 
+export type BadgePlacement = 'right' | 'metadata';
+
 export type Options = {
 	// Stored as an opt-out list so new features are on by default
 	disabledFeatures: string[];
@@ -31,6 +33,8 @@ export type Options = {
 	diffStats: DiffStatsSettings;
 	imageModal: ImageModalSettings;
 	stale: StaleSettings;
+	/** Where the PR list features put their badges in each row. */
+	prListBadges: BadgePlacement;
 };
 
 const defaults: Options = {
@@ -43,6 +47,7 @@ const defaults: Options = {
 	diffStats: {showChangedFiles: true, showSizeLabel: true, sizeThresholds: [10, 50, 250, 1000]},
 	imageModal: {cycleImages: true, zoom: true, includeLinkedImages: false},
 	stale: {days: 7, includeDrafts: false},
+	prListBadges: 'right',
 };
 
 export async function getOptions(): Promise<Options> {

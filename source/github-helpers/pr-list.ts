@@ -1,14 +1,22 @@
 import * as pageDetect from 'github-url-detection';
 
 import {observe} from '../helpers/observe.js';
+import type {BadgePlacement} from '../options-storage.js';
 import {v4} from './api.js';
 
 const titleLinks = 'ul[role="list"] > li h3 a[href*="/pull/"]';
 
-// Badges keep this order after a PR title, whichever request answers first
-const badgeOrder = ['github-power-diff-stats', 'github-power-review-status', 'github-power-stale'] as const;
+// One order for every row whichever request answers first; in the right column each badge also keeps its own
+// fixed-width column, so badges line up from row to row even when some are missing
+const badgeColumns = [
+	{className: 'github-power-review-status', width: '120px'},
+	{className: 'github-power-diff-stats', width: '150px'},
+	{className: 'github-power-stale', width: '44px'},
+] as const;
 
-export type TitleBadgeClass = (typeof badgeOrder)[number];
+export type BadgeClass = (typeof badgeColumns)[number]['className'];
+
+const containerClass = 'github-power-badges';
 
 function getNumber(link: HTMLAnchorElement): number | undefined {
 	const match = /\/pull\/(\d+)\/?$/.exec(link.pathname);
@@ -72,44 +80,75 @@ export function forEachListedPullRequest<T>(
 	);
 }
 
-const badgesClass = 'github-power-title-badges';
+// Rows are CSS grids; their areas are named, unlike their classes, which change with every GitHub deploy
+function findRowArea(title: HTMLElement, area: string): HTMLElement | undefined {
+	const row = title.closest('li');
+	return [...(row?.children ?? [])].find(
+		(child): child is HTMLElement => child instanceof HTMLElement && getComputedStyle(child).gridArea.startsWith(area),
+	);
+}
 
-// Inside the title: its siblings are cells of the row's CSS grid, where extra elements land in random cells
-function getBadgesContainer(title: HTMLElement): HTMLElement {
-	const existing = title.querySelector<HTMLElement>(`:scope > .${badgesClass}`);
+function getContainer(title: HTMLElement, placement: BadgePlacement): HTMLElement {
+	const row = title.closest('li') ?? title;
+	const existing = row.querySelector<HTMLElement>(`.${containerClass}`);
 	if (existing) {
 		return existing;
 	}
 
 	const container = document.createElement('span');
-	container.className = badgesClass;
-	Object.assign(container.style, {
-		display: 'inline-flex',
-		flexWrap: 'wrap',
-		alignItems: 'center',
-		gap: '6px',
-		marginLeft: '8px',
-		verticalAlign: 'middle',
-	});
-	title.append(container);
+	container.className = containerClass;
+	container.dataset.placement = placement;
+	container.style.fontSize = '12px';
+	const rightColumn = placement === 'right' ? findRowArea(title, 'metadata') : undefined;
+	const metadataArea = placement === 'metadata' ? findRowArea(title, 'main-content') : undefined;
+	if (rightColumn) {
+		Object.assign(container.style, {
+			display: 'grid',
+			gridTemplateColumns: badgeColumns.map(({width}) => width).join(' '),
+			columnGap: '12px',
+			justifyItems: 'end',
+			alignItems: 'center',
+		});
+		rightColumn.prepend(container);
+	} else {
+		Object.assign(container.style, {display: 'inline-flex', flexWrap: 'wrap', alignItems: 'center', gap: '4px'});
+		const metadataLine = metadataArea?.firstElementChild ?? metadataArea;
+		if (metadataLine) {
+			metadataLine.append(container);
+		} else {
+			// Unknown row layout: next to the title, which is always there
+			container.style.marginLeft = '8px';
+			title.append(container);
+		}
+	}
+
 	return container;
 }
 
-/** Adds `badge`, which carries `className`, next to a PR title unless that title already has one. */
-export function addTitleBadge(title: HTMLElement, className: TitleBadgeClass, badge: Element): void {
-	const container = getBadgesContainer(title);
-	if (container.querySelector(`:scope > .${className}`)) {
+/** Adds `badge`, which carries `className`, to the PR row of `title` unless that row already has one. */
+export function addPullRequestBadge(
+	title: HTMLElement,
+	className: BadgeClass,
+	badge: Element,
+	placement: BadgePlacement,
+): void {
+	const container = getContainer(title, placement);
+	if (container.querySelector(`:scope > [data-badge="${className}"]`)) {
 		return;
 	}
 
-	const previous = badgeOrder
-		.slice(0, badgeOrder.indexOf(className))
-		.toReversed()
-		.map((previousClass) => container.querySelector(`:scope > .${previousClass}`))
-		.find((element) => element !== null);
-	if (previous) {
-		previous.after(badge);
+	const index = badgeColumns.findIndex((column) => column.className === className);
+	const slot = document.createElement('span');
+	slot.dataset.badge = className;
+	if (container.style.display === 'grid') {
+		slot.style.gridArea = `1 / ${index + 1}`;
 	} else {
-		container.prepend(badge);
+		slot.style.order = String(index);
+		if (container.parentElement !== title) {
+			slot.append('· ');
+		}
 	}
+
+	slot.append(badge);
+	container.append(slot);
 }
