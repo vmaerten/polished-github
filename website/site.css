@@ -1,4 +1,4 @@
-/* Supercharged GitHub website in the Boost palette; the drawn GitHub UI keeps GitHub's own colors. */
+/* Supercharged GitHub website in the Boost palette, light and dark; the drawn GitHub UI keeps GitHub's own colors. */
 :root {
 	--ink: #1f2328;
 	--muted: #59636e;
@@ -6,8 +6,10 @@
 	--soft: #f6f8fa;
 	--paper: #ffffff;
 	--accent: #6d5bff;
+	--accent-fill: #6d5bff;
 	--accent-ink: #5b48f2;
 	--accent-soft: #ece9ff;
+	--shadow: rgba(31, 35, 40, 0.12);
 	--gh-blue: #0969da;
 	--add: #1a7f37;
 	--del: #d1242f;
@@ -22,6 +24,31 @@
 	--display: 'Manrope', system-ui, sans-serif;
 	--mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 	color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+	:root {
+		--ink: #eceef4;
+		--muted: #8b92a3;
+		--line: #272c38;
+		--soft: #161a23;
+		--paper: #0d1017;
+		--accent: #b9b0ff;
+		--accent-fill: #6d5bff;
+		--accent-ink: #5b48f2;
+		--accent-soft: #231f45;
+		--shadow: rgba(1, 4, 9, 0.5);
+		--gh-blue: #4493f8;
+		--add: #3fb950;
+		--del: #f85149;
+		--warn: #d29922;
+		--severe: #db6d28;
+		--merge: #238636;
+		--token-bg: #3b2e05;
+		--token-fg: #e3b341;
+		--ok-bg: #12261e;
+		--ok-fg: #3fb950;
+		color-scheme: dark;
+	}
 }
 * {
 	box-sizing: border-box;
@@ -156,7 +183,7 @@ input:focus-visible {
 	text-decoration: none;
 }
 .btn-primary {
-	background: var(--accent);
+	background: var(--accent-fill);
 	color: #ffffff;
 }
 .btn-primary:hover {
@@ -259,14 +286,14 @@ input:focus-visible {
 .compare button[aria-pressed='true'] {
 	background: var(--paper);
 	color: var(--ink);
-	box-shadow: 0 1px 3px rgba(31, 35, 40, 0.15);
+	box-shadow: 0 1px 3px var(--shadow);
 }
 .prlist {
 	margin: 0;
 	border: 1px solid var(--line);
 	border-radius: 12px;
 	overflow: hidden;
-	box-shadow: 0 24px 48px rgba(31, 35, 40, 0.12);
+	box-shadow: 0 24px 48px var(--shadow);
 }
 .prlist-bar {
 	padding: 10px 16px;
@@ -291,6 +318,7 @@ input:focus-visible {
 	border-top: 1px solid var(--line);
 }
 .pr-icon {
+	color: var(--add);
 	flex: none;
 	align-self: flex-start;
 	margin-top: 4px;
@@ -448,7 +476,7 @@ input:focus-visible {
 	width: 320px;
 	max-width: 100%;
 	overflow: hidden;
-	box-shadow: 0 8px 24px rgba(31, 35, 40, 0.12);
+	box-shadow: 0 8px 24px var(--shadow);
 	font-size: 14px;
 }
 .picker-title {
@@ -516,15 +544,15 @@ input:focus-visible {
 }
 .load-low {
 	color: var(--muted);
-	background: rgba(89, 99, 110, 0.12);
+	background: color-mix(in srgb, currentColor 14%, transparent);
 }
 .load-mid {
 	color: var(--warn);
-	background: rgba(154, 103, 0, 0.12);
+	background: color-mix(in srgb, currentColor 14%, transparent);
 }
 .load-high {
 	color: var(--severe);
-	background: rgba(188, 76, 0, 0.12);
+	background: color-mix(in srgb, currentColor 14%, transparent);
 }
 .cbox {
 	padding: 24px;
@@ -548,7 +576,7 @@ input:focus-visible {
 .quick span:first-child {
 	border-color: var(--gh-blue);
 	background: var(--paper);
-	box-shadow: 0 0 0 3px rgba(9, 105, 218, 0.15);
+	box-shadow: 0 0 0 3px color-mix(in srgb, var(--gh-blue) 20%, transparent);
 }
 .editor {
 	border: 1px solid var(--line);
@@ -666,6 +694,9 @@ a.item:hover .item-name {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
 	gap: 24px;
+}
+.card > svg {
+	color: var(--accent);
 }
 .card {
 	padding: 24px;
@@ -793,7 +824,7 @@ a.item:hover .item-name {
 .chips button[aria-pressed='true'] {
 	background: var(--ink);
 	border-color: var(--ink);
-	color: #ffffff;
+	color: var(--paper);
 }
 .cat-grid {
 	padding-block: 16px 96px;
