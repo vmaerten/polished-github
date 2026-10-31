@@ -142,9 +142,9 @@ input:focus-visible {
 	color: var(--ink);
 	font-weight: 600;
 }
-.nav-source {
+.nav-links .nav-source {
+	margin-left: auto;
 	color: var(--ink);
-	font-size: 14px;
 	font-weight: 600;
 }
 .theme-switch {
@@ -172,6 +172,41 @@ input:focus-visible {
 .theme-switch button[aria-pressed='true'] {
 	background: var(--accent-soft);
 	color: var(--accent);
+}
+/* Phones: brand and theme switch fit one row down to 360px; the links scroll sideways on the second */
+@media (max-width: 640px) {
+	.nav {
+		gap: 0 8px;
+		padding-block: 8px 0;
+	}
+	.brand {
+		flex: 1 1 auto;
+		gap: 8px;
+		font-size: 16px;
+	}
+	.brand-mark {
+		width: 24px;
+		height: 24px;
+	}
+	.theme-switch button {
+		width: 30px;
+		height: 30px;
+	}
+	.nav-links {
+		order: 1;
+		flex-basis: 100%;
+		flex-wrap: nowrap;
+		gap: 20px;
+		overflow-x: auto;
+		scrollbar-width: none;
+		margin-right: -24px;
+		padding-right: 24px;
+		mask-image: linear-gradient(to right, #000 calc(100% - 24px), transparent);
+	}
+	.nav-links a {
+		flex: none;
+		white-space: nowrap;
+	}
 }
 
 /* Buttons */
