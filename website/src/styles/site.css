@@ -383,7 +383,7 @@ input:focus-visible {
 	flex: none;
 	max-width: 100%;
 	display: grid;
-	grid-template-columns: minmax(0, 176px) minmax(0, 168px) 44px;
+	grid-template-columns: minmax(0, 176px) minmax(0, 200px) 44px;
 	gap: 12px;
 	align-items: center;
 	font-size: 12px;
