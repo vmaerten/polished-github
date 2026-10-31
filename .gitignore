@@ -5,3 +5,4 @@ web-ext-artifacts
 .DS_Store
 website/dist
 website/.astro
+.wrangler/
