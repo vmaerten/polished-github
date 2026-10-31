@@ -9,10 +9,14 @@ const titleLinks = 'ul[role="list"] > li h3 a[href*="/pull/"]';
 // One order for every row whichever request answers first; in the right column each badge also keeps its own
 // fixed-width column, so badges line up from row to row even when some are missing
 const badgeColumns = [
-	{className: 'github-power-review-status', width: '120px'},
-	{className: 'github-power-diff-stats', width: '150px'},
-	{className: 'github-power-stale', width: '44px'},
+	{className: 'github-power-review-status', width: 136},
+	{className: 'github-power-diff-stats', width: 160},
+	{className: 'github-power-stale', width: 44},
 ] as const;
+
+const columnGap = 12;
+// Room left after our columns for GitHub's own counters and avatars
+const githubItemsWidth = 96;
 
 export type BadgeClass = (typeof badgeColumns)[number]['className'];
 
@@ -88,6 +92,14 @@ function findRowArea(title: HTMLElement, area: string): HTMLElement | undefined 
 	);
 }
 
+// The area stacks the "#123 · opened by" line above the labels; the line is the first row of several items
+function findMetadataLine(title: HTMLElement): HTMLElement | undefined {
+	const area = findRowArea(title, 'main-content');
+	return [...(area?.querySelectorAll<HTMLElement>('*') ?? [])].find(
+		(element) => element.children.length > 1 && getComputedStyle(element).flexDirection !== 'column',
+	);
+}
+
 function getContainer(title: HTMLElement, placement: BadgePlacement): HTMLElement {
 	const row = title.closest('li') ?? title;
 	const existing = row.querySelector<HTMLElement>(`.${containerClass}`);
@@ -100,19 +112,23 @@ function getContainer(title: HTMLElement, placement: BadgePlacement): HTMLElemen
 	container.dataset.placement = placement;
 	container.style.fontSize = '12px';
 	const rightColumn = placement === 'right' ? findRowArea(title, 'metadata') : undefined;
-	const metadataArea = placement === 'metadata' ? findRowArea(title, 'main-content') : undefined;
+	const metadataLine = placement === 'metadata' ? findMetadataLine(title) : undefined;
 	if (rightColumn) {
 		Object.assign(container.style, {
 			display: 'grid',
-			gridTemplateColumns: badgeColumns.map(({width}) => width).join(' '),
-			columnGap: '12px',
+			gridTemplateColumns: badgeColumns.map(({width}) => `${width}px`).join(' '),
+			columnGap: `${columnGap}px`,
 			justifyItems: 'end',
 			alignItems: 'center',
+			// Pushes GitHub's items to the right edge
+			marginRight: 'auto',
 		});
+		// The column sizes itself to its content, so without a shared width our columns would start at a different place on every row
+		const badgesWidth = badgeColumns.reduce((sum, {width}) => sum + width + columnGap, 0);
+		rightColumn.style.minWidth = `${badgesWidth + githubItemsWidth}px`;
 		rightColumn.prepend(container);
 	} else {
 		Object.assign(container.style, {display: 'inline-flex', flexWrap: 'wrap', alignItems: 'center', gap: '4px'});
-		const metadataLine = metadataArea?.firstElementChild ?? metadataArea;
 		if (metadataLine) {
 			metadataLine.append(container);
 		} else {

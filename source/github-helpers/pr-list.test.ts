@@ -11,7 +11,10 @@ function badge(className: BadgeClass): HTMLElement {
 function setUpRow(): HTMLElement {
 	document.body.innerHTML = `<ul><li>
 		<div><h3>PR</h3></div>
-		<div style="grid-area: main-content"><div class="metadata-line">#1 · opened</div></div>
+		<div style="grid-area: main-content"><div style="display: flex; flex-direction: column">
+			<div class="metadata-line" style="display: flex"><span>#1</span><span>opened</span></div>
+			<div class="labels" style="display: flex"><span>bug</span><span>ui</span></div>
+		</div></div>
 		<div style="grid-area: metadata"><span class="comments">1</span></div>
 	</li></ul>`;
 	return document.querySelector('h3')!;
