@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import {featureUrl, getFeatures, hasPage} from '../../features';
+import {featureUrl, getFeatures, groups, hasPage} from '../../features';
 
 const features = await getFeatures();
 const coming = features.filter((f) => f.data.soon).length;
@@ -18,10 +18,13 @@ const coming = features.filter((f) => f.data.soon).length;
 				<input id="feature-search" type="search" placeholder="Search features" autocomplete="off" />
 				<div class="chips" role="group" aria-label="Filter by moment">
 					<button type="button" data-group="All" aria-pressed="true">All</button>
-					<button type="button" data-group="Triage" aria-pressed="false">Triage</button>
-					<button type="button" data-group="Reviewing code" aria-pressed="false">Reviewing code</button>
-					<button type="button" data-group="Discussing" aria-pressed="false">Discussing</button>
-					<button type="button" data-group="Reading" aria-pressed="false">Reading</button>
+					{
+						groups.map((group) => (
+							<button type="button" data-group={group} aria-pressed="false">
+								{group}
+							</button>
+						))
+					}
 				</div>
 			</div>
 		</section>
