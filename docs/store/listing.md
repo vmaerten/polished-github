@@ -4,17 +4,17 @@ Texts and answers for the Chrome Web Store and Firefox Add-ons (AMO). Every publ
 
 ## Shared
 
-| Field                                                                                | Value                                                                   |
-| ------------------------------------------------------------------------------------ | ----------------------------------------------------------------------- |
-| Name                                                                                 | Polished GitHub                                                         |
-| Short description (from `manifest.json`, 132 characters max on the Chrome Web Store) | Review pull requests faster on GitHub. Not affiliated with GitHub, Inc. |
-| Homepage                                                                             | https://github.com/vmaerten/polished-github                             |
-| Support                                                                              | https://github.com/vmaerten/polished-github/issues                      |
+| Field                                                                                | Value                                                                                                |
+| ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
+| Name                                                                                 | Polished GitHub                                                                                      |
+| Short description (from `manifest.json`, 132 characters max on the Chrome Web Store) | Polishes the GitHub you use every day, starting with pull requests. Not affiliated with GitHub, Inc. |
+| Homepage                                                                             | https://github.com/vmaerten/polished-github                                                          |
+| Support                                                                              | https://github.com/vmaerten/polished-github/issues                                                   |
 
 ### Long description
 
 ```text
-Polished GitHub adds what is missing when you review pull requests on github.com. It changes nothing else: every feature can be turned off in the options.
+Polished GitHub adds small, careful improvements to github.com, starting with pull requests. It changes nothing else: every feature can be turned off in the options.
 
 Not affiliated with, endorsed or sponsored by GitHub, Inc. GitHub is a trademark of GitHub, Inc.
 
@@ -43,7 +43,7 @@ Source code and issues: https://github.com/vmaerten/polished-github
 | ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Category                                 | Developer Tools                                                                                                                                           |
 | Language                                 | English                                                                                                                                                   |
-| Single purpose                           | Speed up pull request reviews on github.com by adding review information and shortcuts to GitHub pages.                                                   |
+| Single purpose                           | Improve github.com pages with information and shortcuts, each of which the user can turn off.                                                             |
 | `storage` justification                  | Saves the user's settings and, on this device only, the GitHub token they enter in the options.                                                           |
 | Content script on `https://github.com/*` | The features run on github.com pages: PR list badges, reviewers picker counts, quick comment buttons and the image modal.                                 |
 | No host permission for `api.github.com`  | The API allows cross-origin requests, so reading review status, diff stats, last activity and pending review counts with the user's own token needs none. |
@@ -64,13 +64,13 @@ Source code and issues: https://github.com/vmaerten/polished-github
 
 ## Firefox Add-ons (AMO)
 
-| Field                        | Value                                                                                                                                                                                                  |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Summary (250 characters max) | Review pull requests faster on GitHub: review status, PR size and idle time in the PR list, reviewer load in the reviewers picker, quick comments and an image modal. Not affiliated with GitHub, Inc. |
-| Categories                   | Web Development                                                                                                                                                                                        |
-| Support site                 | https://github.com/vmaerten/polished-github/issues                                                                                                                                                     |
-| License                      | MIT                                                                                                                                                                                                    |
-| Description                  | The long description above. AMO renders a subset of Markdown, so the bullets and capital headings can stay as they are.                                                                                |
+| Field                        | Value                                                                                                                                                                                                                               |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Summary (250 characters max) | Polishes the GitHub you use every day, starting with pull requests: review status, PR size and idle time in the PR list, reviewer load in the reviewers picker, quick comments and an image modal. Not affiliated with GitHub, Inc. |
+| Categories                   | Web Development                                                                                                                                                                                                                     |
+| Support site                 | https://github.com/vmaerten/polished-github/issues                                                                                                                                                                                  |
+| License                      | MIT                                                                                                                                                                                                                                 |
+| Description                  | The long description above. AMO renders a subset of Markdown, so the bullets and capital headings can stay as they are.                                                                                                             |
 
 **Before submitting.**
 
