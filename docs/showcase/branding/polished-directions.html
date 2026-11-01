@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="color-scheme" content="light dark" />
+		<title>Polished GitHub — pistes d’identité</title>
+		<style>
+			:root {
+				color-scheme: light;
+				--paper: #f7f8fa;
+				--surface: #fff;
+				--ink: #242834;
+				--muted: #616775;
+				--line: #dce0e7;
+				--hover: #e9ecf1;
+			}
+			:root[data-theme='dark'] {
+				color-scheme: dark;
+				--paper: #171b22;
+				--surface: #20252e;
+				--ink: #eef0f5;
+				--muted: #b0b7c4;
+				--line: #3b4350;
+				--hover: #303845;
+			}
+			* {
+				box-sizing: border-box;
+			}
+			html {
+				scroll-behavior: smooth;
+				scroll-padding-top: 100px;
+			}
+			body {
+				margin: 0;
+				background: var(--paper);
+				color: var(--ink);
+				font:
+					15px/1.55 'Avenir Next',
+					Avenir,
+					-apple-system,
+					BlinkMacSystemFont,
+					'Segoe UI',
+					sans-serif;
+			}
+			button,
+			a {
+				-webkit-tap-highlight-color: transparent;
+			}
+			button {
+				font: inherit;
+				cursor: pointer;
+			}
+			button:focus-visible,
+			a:focus-visible {
+				outline: 3px solid #7695ff;
+				outline-offset: 5px;
+			}
+			svg {
+				display: block;
+				flex-shrink: 0;
+			}
+			.wrap {
+				width: min(1220px, calc(100% - 64px));
+				margin: auto;
+			}
+			.topbar {
+				position: sticky;
+				top: 0;
+				z-index: 10;
+				background: var(--paper);
+				border-bottom: 1px solid var(--line);
+			}
+			.topbar-inner {
+				min-height: 76px;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 20px;
+			}
+			.brand-label {
+				font-size: 17px;
+				font-weight: 750;
+				letter-spacing: -0.6px;
+			}
+			.brand-label span {
+				font-weight: 450;
+				color: var(--muted);
+			}
+			.tools {
+				display: flex;
+				align-items: center;
+				gap: 20px;
+			}
+			.segmented {
+				display: flex;
+				padding: 3px;
+				border: 1px solid var(--line);
+				border-radius: 9px;
+				gap: 3px;
+			}
+			.segmented button {
+				color: var(--muted);
+				background: transparent;
+				border: 0;
+				border-radius: 6px;
+				padding: 6px 12px;
+				font-size: 13px;
+			}
+			.segmented button[aria-pressed='true'] {
+				background: var(--ink);
+				color: var(--paper);
+			}
+			.theme {
+				background: transparent;
+				border: 1px solid var(--line);
+				border-radius: 8px;
+				color: var(--ink);
+				padding: 7px 12px;
+				font-size: 13px;
+			}
+			header {
+				padding: 72px 0 52px;
+				display: grid;
+				grid-template-columns: 1.25fr 1fr;
+				gap: 60px;
+				align-items: end;
+			}
+			h1 {
+				margin: 0;
+				font-size: clamp(38px, 5vw, 68px);
+				line-height: 1.06;
+				letter-spacing: -3px;
+				font-weight: 650;
+				max-width: 13ch;
+			}
+			header p {
+				margin: 0 0 20px;
+				max-width: 48ch;
+				color: var(--muted);
+				font-size: 16px;
+			}
+			nav {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 8px 22px;
+			}
+			nav a {
+				color: var(--ink);
+				text-decoration-thickness: 1px;
+				text-underline-offset: 5px;
+				font-size: 14px;
+			}
+			.direction {
+				border-top: 1px solid var(--line);
+				padding: 40px 0 56px;
+			}
+			.section-heading {
+				display: flex;
+				justify-content: space-between;
+				align-items: baseline;
+				gap: 24px;
+				margin-bottom: 22px;
+			}
+			h2 {
+				margin: 0;
+				font-size: 26px;
+				line-height: 1.2;
+				letter-spacing: -1px;
+				font-weight: 650;
+			}
+			.description {
+				color: var(--muted);
+				margin: 0;
+				max-width: 61ch;
+				font-size: 14px;
+			}
+			.board {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				border-radius: 16px;
+				overflow: hidden;
+			}
+			.stage {
+				position: relative;
+				min-height: 320px;
+				padding: 40px;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				gap: 28px;
+				background: var(--base);
+				color: var(--deep);
+				--logo-main: var(--main);
+				--logo-accent: var(--accent);
+				--logo-cut: var(--base);
+			}
+			.stage.dark {
+				background: var(--deep);
+				color: var(--base);
+				--logo-main: var(--accent);
+				--logo-accent: var(--base);
+				--logo-cut: var(--deep);
+			}
+			.stage .hero-mark {
+				width: 96px;
+				height: 96px;
+			}
+			.wordmark {
+				font-size: 32px;
+				font-weight: 750;
+				letter-spacing: -1.4px;
+				line-height: 1.2;
+				white-space: nowrap;
+			}
+			.wordmark span {
+				font-weight: 450;
+				opacity: 0.68;
+			}
+			.stage-note {
+				position: absolute;
+				top: 19px;
+				left: 23px;
+				font-size: 12px;
+				opacity: 0.75;
+			}
+			.stage-caption {
+				position: absolute;
+				bottom: 18px;
+				left: 23px;
+				right: 23px;
+				display: flex;
+				justify-content: space-between;
+				font-size: 12px;
+				opacity: 0.75;
+			}
+			.detail-grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 28px;
+				margin-top: 24px;
+			}
+			.details {
+				display: flex;
+				flex-direction: column;
+				gap: 18px;
+				min-width: 0;
+			}
+			h3 {
+				font-size: 13px;
+				font-weight: 600;
+				margin: 0 0 10px;
+				color: var(--muted);
+			}
+			.swatches {
+				display: grid;
+				grid-template-columns: repeat(5, 1fr);
+				gap: 8px;
+			}
+			.swatch {
+				background: transparent;
+				text-align: left;
+				padding: 0;
+				border: 0;
+				color: var(--ink);
+				min-width: 0;
+			}
+			.swatch-color {
+				display: block;
+				height: 48px;
+				border-radius: 6px;
+				margin-bottom: 7px;
+				border: 1px solid #80808030;
+				background: var(--swatch);
+				transition: transform 0.15s;
+			}
+			.swatch:hover .swatch-color {
+				transform: translateY(-3px);
+			}
+			.swatch-name {
+				display: block;
+				font-size: 11px;
+				color: var(--muted);
+			}
+			.swatch-hex {
+				font-size: 11px;
+				font-variant-numeric: tabular-nums;
+			}
+			.sizes {
+				display: flex;
+				align-items: end;
+				gap: 27px;
+				min-height: 84px;
+			}
+			.size-sample {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 9px;
+				color: var(--muted);
+				font-size: 11px;
+			}
+			.app-icon {
+				display: grid;
+				place-items: center;
+				width: var(--size);
+				height: var(--size);
+				border-radius: 25%;
+				background: var(--main);
+				--logo-main: #fff;
+				--logo-accent: var(--accent);
+				--logo-cut: var(--main);
+			}
+			.app-icon svg {
+				width: 83%;
+				height: 83%;
+			}
+			.toolbar {
+				display: flex;
+				align-items: center;
+				gap: 12px;
+				background: var(--surface);
+				border: 1px solid var(--line);
+				border-radius: 9px;
+				padding: 12px 16px;
+			}
+			.browser-dots {
+				display: flex;
+				gap: 4px;
+			}
+			.browser-dots i {
+				width: 6px;
+				height: 6px;
+				border-radius: 50%;
+				background: var(--line);
+			}
+			.address {
+				flex: 1;
+				min-width: 0;
+				border-radius: 4px;
+				background: var(--paper);
+				padding: 5px 11px;
+				color: var(--muted);
+				font-size: 12px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+			.toolbar .app-icon {
+				--size: 20px;
+				flex-shrink: 0;
+			}
+			.puzzle {
+				color: var(--muted);
+				font-size: 20px;
+				line-height: 1;
+			}
+			.interface {
+				border: 1px solid var(--line);
+				border-radius: 9px;
+				overflow: hidden;
+				background: var(--surface);
+				font-size: 12px;
+			}
+			.interface-head {
+				padding: 11px 16px;
+				display: flex;
+				gap: 8px;
+				align-items: center;
+				border-bottom: 1px solid var(--line);
+				font-weight: 650;
+			}
+			.interface-head .app-icon {
+				--size: 20px;
+			}
+			.interface-head span:last-child {
+				margin-left: auto;
+				color: var(--muted);
+				font-weight: 400;
+			}
+			.setting {
+				display: flex;
+				align-items: center;
+				gap: 14px;
+				padding: 13px 16px;
+			}
+			.setting-copy {
+				flex: 1;
+			}
+			.setting-copy small {
+				display: block;
+				color: var(--muted);
+				font-size: 11px;
+			}
+			.switch {
+				width: 30px;
+				height: 18px;
+				border-radius: 12px;
+				background: var(--main);
+				padding: 3px;
+				display: flex;
+				justify-content: flex-end;
+			}
+			.switch::after {
+				content: '';
+				width: 12px;
+				height: 12px;
+				background: #fff;
+				border-radius: 50%;
+			}
+			.thought {
+				font-size: 13px;
+				color: var(--muted);
+				margin: 0;
+			}
+			.thought strong {
+				color: var(--ink);
+				font-weight: 600;
+			}
+			footer {
+				border-top: 1px solid var(--line);
+				padding: 28px 0 44px;
+				display: flex;
+				justify-content: space-between;
+				gap: 20px;
+				color: var(--muted);
+				font-size: 12px;
+			}
+			#toast {
+				position: fixed;
+				left: 50%;
+				bottom: 26px;
+				z-index: 20;
+				transform: translate(-50%, 15px);
+				background: var(--ink);
+				color: var(--paper);
+				border-radius: 8px;
+				padding: 11px 18px;
+				opacity: 0;
+				pointer-events: none;
+				transition:
+					opacity 0.15s,
+					transform 0.15s;
+				font-size: 14px;
+			}
+			#toast.visible {
+				opacity: 1;
+				transform: translate(-50%, 0);
+			}
+			[data-mono='true'] .stage {
+				--logo-main: var(--deep);
+				--logo-accent: var(--deep);
+			}
+			[data-mono='true'] .stage.dark {
+				--logo-main: var(--base);
+				--logo-accent: var(--base);
+			}
+			[data-mono='true'] .app-icon {
+				background: var(--ink);
+				--logo-main: var(--paper);
+				--logo-accent: var(--paper);
+				--logo-cut: var(--ink);
+			}
+			[data-mono='true'] .facet-seam {
+				stroke: var(--logo-cut);
+				stroke-width: 2.5;
+			}
+			@media (max-width: 850px) {
+				.wrap {
+					width: calc(100% - 40px);
+				}
+				header {
+					gap: 30px;
+				}
+				.section-heading {
+					display: block;
+				}
+				.description {
+					margin-top: 9px;
+				}
+				.stage {
+					padding: 30px 16px;
+					min-height: 290px;
+				}
+				.wordmark {
+					font-size: 27px;
+				}
+				.detail-grid {
+					gap: 20px;
+				}
+			}
+			@media (max-width: 600px) {
+				.wrap {
+					width: calc(100% - 32px);
+				}
+				.topbar-inner {
+					align-items: flex-start;
+					flex-direction: column;
+					gap: 10px;
+					padding: 14px 0;
+				}
+				.tools {
+					width: 100%;
+					justify-content: space-between;
+					gap: 8px;
+				}
+				header {
+					display: block;
+					padding: 40px 0 32px;
+				}
+				h1 {
+					letter-spacing: -2px;
+				}
+				header p {
+					margin: 22px 0 18px;
+					font-size: 14px;
+				}
+				.board {
+					grid-template-columns: 1fr;
+				}
+				.stage {
+					min-height: 280px;
+				}
+				.detail-grid {
+					grid-template-columns: 1fr;
+				}
+				.direction {
+					padding: 30px 0 38px;
+				}
+				.swatch-color {
+					height: 46px;
+				}
+				footer {
+					flex-direction: column;
+					gap: 5px;
+				}
+			}
+			@media (prefers-reduced-motion: reduce) {
+				html {
+					scroll-behavior: auto;
+				}
+				*,
+				*::before,
+				*::after {
+					transition: none !important;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="topbar">
+			<div class="wrap topbar-inner">
+				<div class="brand-label">Polished <span>GitHub</span></div>
+				<div class="tools">
+					<div class="segmented" role="group" aria-label="Rendu des logos">
+						<button type="button" data-mode="color" aria-pressed="true">Couleur</button>
+						<button type="button" data-mode="mono" aria-pressed="false">Noir &amp; blanc</button>
+					</div>
+					<button class="theme" type="button" aria-pressed="false">Interface sombre</button>
+				</div>
+			</div>
+		</div>
+		<main class="wrap">
+			<header>
+				<h1>Les détails font la différence.</h1>
+				<div>
+					<p>
+						Trois pistes pour Polished GitHub. Une identité qui évoque le soin, la précision et un quotidien un peu plus
+						agréable sur GitHub.
+					</p>
+					<nav aria-label="Les trois directions">
+						<a href="#taille">Le P taillé</a>
+						<a href="#facette">La facette</a>
+						<a href="#reflet">Le reflet</a>
+					</nav>
+				</div>
+			</header>
+			<div id="directions"></div>
+			<footer>
+				<span>Polished GitHub · Exploration d’identité</span><span>Clique sur une couleur pour copier son code.</span>
+			</footer>
+		</main>
+		<div id="toast" role="status" aria-live="polite"></div>
+		<script>
+			const directions = [
+				{
+					id: 'taille',
+					name: 'Le P taillé',
+					family: 'Violet minéral',
+					description: 'Un monogramme compact, une découpe franche. La précision sans la froideur.',
+					note: 'La continuité avec le violet actuel, avec un symbole propre à Polished.',
+					strength: 'Le plus identifiable en petit.',
+					colors: [
+						['Violet', '#6554C0'],
+						['Lavande', '#C4B8ED'],
+						['Porcelaine', '#F7F7FB'],
+						['Encre', '#242333'],
+						['Argent', '#B9BAC8'],
+					],
+				},
+				{
+					id: 'facette',
+					name: 'La facette',
+					family: 'Pétrole & verre d’eau',
+					description: 'Une surface polie, un coin biseauté. Un signe abstrait qui laisse respirer le nom.',
+					note: 'Une présence calme, avec une silhouette de tuile plutôt que de pierre précieuse.',
+					strength: 'Le plus discret et posé.',
+					colors: [
+						['Pétrole', '#176B70'],
+						['Verre d’eau', '#A8DCD2'],
+						['Brume', '#F3F8F7'],
+						['Encre', '#183436'],
+						['Étain', '#A7B9B7'],
+					],
+				},
+				{
+					id: 'reflet',
+					name: 'Le reflet',
+					family: 'Cobalt & pêche',
+					description: 'Un P arrondi, traversé par un éclat net. Une finition lumineuse et plus expressive.',
+					note: 'Un cobalt affirmé ; le pêche apporte une touche chaleureuse, en petites quantités.',
+					strength: 'Le plus chaleureux des trois.',
+					colors: [
+						['Cobalt', '#3659C9'],
+						['Pêche', '#F4B49B'],
+						['Craie', '#F8F9FC'],
+						['Bleu nuit', '#202B48'],
+						['Acier', '#B5BED3'],
+					],
+				},
+			];
+			let svgCount = 0;
+			function mark(kind, className = '') {
+				const uid = `mark-${++svgCount}`;
+				let paths;
+				if (kind === 'taille') {
+					paths =
+						'<path fill="var(--logo-main)" fill-rule="evenodd" d="M14 54V10H38L52 24V34L38 48H26V54ZM26 22V36H33L40 29L33 22Z"/>';
+				} else if (kind === 'facette') {
+					paths =
+						'<path fill="var(--logo-main)" d="M10 10H40L54 24V54H10Z"/><path fill="var(--logo-accent)" d="M10 10H40L54 24L28 28Z"/><path class="facet-seam" d="M10 10L28 28L54 24" fill="none"/>';
+				} else {
+					paths = `<defs><clipPath id="${uid}"><path fill-rule="evenodd" clip-rule="evenodd" d="M14 54V10H34C47 10 54 17 54 29S47 48 34 48H27V54ZM27 23V35H34C39 35 41 33 41 29S39 23 34 23Z"/></clipPath></defs><g clip-path="url(#${uid})"><path fill="var(--logo-main)" d="M0 0H64V64H0Z"/><path fill="var(--logo-accent)" d="M2 32L56 3L60 11L6 40Z"/><path fill="var(--logo-cut)" d="M4 37L58 8L60 12L6 41Z"/></g>`;
+				}
+				return `<svg class="${className}" viewBox="0 0 64 64" aria-hidden="true">${paths}</svg>`;
+			}
+			function icon(kind, size) {
+				return `<span class="app-icon" style="--size:${size}px">${mark(kind)}</span>`;
+			}
+			document.getElementById('directions').innerHTML = directions
+				.map((d) => {
+					const [main, accent, base, deep] = d.colors.map((c) => c[1]);
+					return `<section class="direction" id="${d.id}" aria-labelledby="heading-${d.id}" style="--main:${main};--accent:${accent};--base:${base};--deep:${deep}">
+        <div class="section-heading"><h2 id="heading-${d.id}">${d.name}</h2><p class="description">${d.description}</p></div>
+        <div class="board">
+          <div class="stage"><span class="stage-note">Sur fond clair</span>${mark(d.id, 'hero-mark')}<div class="wordmark">Polished <span>GitHub</span></div><div class="stage-caption"><span>${d.family}</span><span>Symbole + nom</span></div></div>
+          <div class="stage dark"><span class="stage-note">Sur fond sombre</span>${mark(d.id, 'hero-mark')}<div class="wordmark">Polished <span>GitHub</span></div><div class="stage-caption"><span>${d.family}</span><span>Variante claire</span></div></div>
+        </div>
+        <div class="detail-grid">
+          <div class="details">
+            <div><h3>La palette</h3><div class="swatches">${d.colors.map(([name, hex]) => `<button class="swatch" type="button" data-color="${hex}" aria-label="Copier ${name}, ${hex}"><span class="swatch-color" style="--swatch:${hex}"></span><span class="swatch-name">${name}</span><span class="swatch-hex">${hex}</span></button>`).join('')}</div></div>
+            <div><h3>À la taille d’une extension</h3><div class="sizes">${[16, 24, 32, 48].map((size) => `<div class="size-sample">${icon(d.id, size)}<span>${size} px</span></div>`).join('')}</div></div>
+            <p class="thought"><strong>${d.strength}</strong> ${d.note}</p>
+          </div>
+          <div class="details">
+            <div><h3>Dans le navigateur</h3><div class="toolbar"><span class="browser-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="address">github.com / pulls</span>${icon(d.id, 20)}<span class="puzzle" aria-hidden="true">⋮</span></div></div>
+            <div class="interface"><div class="interface-head">${icon(d.id, 20)}<span>Polished GitHub</span><span>Options</span></div><div class="setting"><div class="setting-copy">Badges de pull requests<small>Statut, taille et temps d’inactivité.</small></div><span class="switch" role="img" aria-label="Activé"></span></div><div class="setting"><div class="setting-copy">Commentaires rapides<small>Vos réponses habituelles, en un clic.</small></div><span class="switch" role="img" aria-label="Activé"></span></div></div>
+          </div>
+        </div>
+      </section>`;
+				})
+				.join('');
+			document.querySelectorAll('[data-mode]').forEach((button) =>
+				button.addEventListener('click', () => {
+					document.documentElement.dataset.mono = String(button.dataset.mode === 'mono');
+					document.querySelectorAll('[data-mode]').forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
+				}),
+			);
+			const themeButton = document.querySelector('.theme');
+			function setTheme(dark) {
+				document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+				themeButton.setAttribute('aria-pressed', String(dark));
+				themeButton.textContent = dark ? 'Interface claire' : 'Interface sombre';
+			}
+			setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches);
+			themeButton.addEventListener('click', () => setTheme(document.documentElement.dataset.theme !== 'dark'));
+			let toastTimer;
+			function notify(message) {
+				const toast = document.getElementById('toast');
+				toast.textContent = message;
+				toast.classList.add('visible');
+				clearTimeout(toastTimer);
+				toastTimer = setTimeout(() => toast.classList.remove('visible'), 2200);
+			}
+			document.querySelectorAll('[data-color]').forEach((button) =>
+				button.addEventListener('click', async () => {
+					const color = button.dataset.color;
+					try {
+						if (!navigator.clipboard) throw new Error('Clipboard unavailable');
+						await navigator.clipboard.writeText(color);
+						notify(`${color} copié`);
+					} catch {
+						window.prompt('Copier cette couleur :', color);
+					}
+				}),
+			);
+		</script>
+	</body>
+</html>
