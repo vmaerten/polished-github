@@ -16,7 +16,6 @@ const features = defineCollection({
 		lede: z.string().optional(),
 		needsToken: z.boolean().default(false),
 		onByDefault: z.boolean().default(true),
-		soon: z.boolean().default(false),
 		// Shown in the home page highlights, so left out of its "everything else" list
 		featured: z.boolean().default(false),
 	}),

@@ -30,11 +30,11 @@ const {title, group, lede, summary, appearsIn, needsToken, onByDefault} = featur
 							.map((f) =>
 								hasPage(f) ? (
 									<a href={featureUrl(f)} aria-current={f.id === feature.id ? 'page' : undefined}>
-										{f.data.title} {f.data.soon && <small>Soon</small>}
+										{f.data.title}
 									</a>
 								) : (
 									<span class="side-item">
-										{f.data.title} {f.data.soon && <small>Soon</small>}
+										{f.data.title}
 									</span>
 								),
 							)}
