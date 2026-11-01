@@ -3,7 +3,6 @@ import Layout from '../../layouts/Layout.astro';
 import {featureUrl, getFeatures, groups, hasPage} from '../../features';
 
 const features = await getFeatures();
-const coming = features.filter((f) => f.data.soon).length;
 ---
 
 <Layout title="All features">
@@ -11,7 +10,7 @@ const coming = features.filter((f) => f.data.soon).length;
 		<section class="cat-head">
 			<div style="display: flex; flex-direction: column; gap: 8px">
 				<h1>All features</h1>
-				<p class="muted">{features.length - coming} available, {coming} coming. Every one can be turned off in the options.</p>
+				<p class="muted">{features.length} features. Every one can be turned off in the options.</p>
 			</div>
 			<div class="filters">
 				<label for="feature-search" class="sr-only">Search features</label>
@@ -19,7 +18,9 @@ const coming = features.filter((f) => f.data.soon).length;
 				<div class="chips" role="group" aria-label="Filter by moment">
 					<button type="button" data-group="All" aria-pressed="true">All</button>
 					{
-						groups.map((group) => (
+						groups
+							.filter((group) => features.some((f) => f.data.group === group))
+							.map((group) => (
 							<button type="button" data-group={group} aria-pressed="false">
 								{group}
 							</button>
@@ -36,7 +37,7 @@ const coming = features.filter((f) => f.data.soon).length;
 					return (
 						<Card class="panel cat-card" href={hasPage(f) ? featureUrl(f) : undefined} data-group={f.data.group}>
 							<span class="top">
-								{f.data.title} {f.data.soon && <span class="soon">Soon</span>}
+								{f.data.title}
 							</span>
 							<p>{f.data.summary}</p>
 							<span class="tags">
