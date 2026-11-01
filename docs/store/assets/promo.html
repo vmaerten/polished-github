@@ -4,7 +4,7 @@
 	<title>Polished GitHub promo tiles</title>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;800&display=swap" />
 	<style>
-		/* Source of the Chrome Web Store promo tiles: render #small at 440 × 280 and #marquee at 1400 × 560. */
+		/* Source of the Chrome Web Store promo tiles: render #small at 440 × 280 and #marquee at 1400 × 560. The store asks for brand over text, so only the logo and the name. */
 		body {
 			margin: 0;
 			font-family: 'Manrope', system-ui, sans-serif;
@@ -30,11 +30,6 @@
 			font-weight: 400;
 			opacity: 0.75;
 		}
-		.tagline {
-			margin: 0;
-			font-weight: 500;
-			opacity: 0.85;
-		}
 		#small {
 			width: 440px;
 			height: 280px;
@@ -48,9 +43,6 @@
 		#small .name {
 			font-size: 38px;
 		}
-		#small .tagline {
-			font-size: 18px;
-		}
 		#marquee {
 			width: 1400px;
 			height: 560px;
@@ -63,9 +55,6 @@
 		}
 		#marquee .name {
 			font-size: 96px;
-		}
-		#marquee .tagline {
-			font-size: 36px;
 		}
 	</style>
 	<svg width="0" height="0" style="position: absolute" aria-hidden="true">
@@ -83,12 +72,10 @@
 	<div class="tile" id="small">
 		<svg class="mark" aria-hidden="true"><use href="#mark" /></svg>
 		<p class="name">Polished <span>GitHub</span></p>
-		<p class="tagline">Review pull requests faster</p>
 	</div>
 
 	<div class="tile" id="marquee">
 		<svg class="mark" aria-hidden="true"><use href="#mark" /></svg>
 		<p class="name">Polished <span>GitHub</span></p>
-		<p class="tagline">Review pull requests faster, right on GitHub</p>
 	</div>
 </html>
