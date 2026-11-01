@@ -9,9 +9,9 @@ const titleLinks = 'ul[role="list"] > li h3 a[href*="/pull/"]';
 // One order for every row whichever request answers first; in the right column each badge also keeps its own
 // fixed-width column, so badges line up from row to row even when some are missing
 const badgeColumns = [
-	{className: 'supercharged-github-review-status', width: 168},
-	{className: 'supercharged-github-diff-stats', width: 160},
-	{className: 'supercharged-github-stale', width: 44},
+	{className: 'polished-github-review-status', width: 168},
+	{className: 'polished-github-diff-stats', width: 160},
+	{className: 'polished-github-stale', width: 44},
 ] as const;
 
 const columnGap = 12;
@@ -20,7 +20,7 @@ const githubItemsWidth = 96;
 
 export type BadgeClass = (typeof badgeColumns)[number]['className'];
 
-const containerClass = 'supercharged-github-badges';
+const containerClass = 'polished-github-badges';
 
 function getNumber(link: HTMLAnchorElement): number | undefined {
 	const match = /\/pull\/(\d+)\/?$/.exec(link.pathname);
@@ -77,7 +77,7 @@ export function forEachListedPullRequest<T>(
 		titleLinks,
 		(links) => {
 			handleTitles(links, fields, callback, cache).catch((error: unknown) => {
-				console.error('supercharged-github: fetching the PR list data failed', error);
+				console.error('polished-github: fetching the PR list data failed', error);
 			});
 		},
 		{signal},

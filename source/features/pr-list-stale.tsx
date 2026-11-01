@@ -7,7 +7,7 @@ import {type BadgePlacement, getOptions, type StaleSettings} from '../options-st
 
 export type ActivityInfo = {state: 'OPEN' | 'CLOSED' | 'MERGED'; isDraft: boolean; updatedAt: string};
 
-const badgeClass = 'supercharged-github-stale' as const;
+const badgeClass = 'polished-github-stale' as const;
 const dayInMs = 24 * 60 * 60 * 1000;
 
 /** Whole days since the PR's last activity, or undefined when it should not be flagged. */

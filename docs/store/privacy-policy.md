@@ -1,6 +1,6 @@
 # Privacy policy
 
-Supercharged GitHub is a browser extension for github.com. It is not affiliated with, endorsed or sponsored by GitHub, Inc.
+Polished GitHub is a browser extension for github.com. It is not affiliated with, endorsed or sponsored by GitHub, Inc.
 
 ## What the extension stores
 
@@ -22,4 +22,4 @@ To delete the token, empty the token field in the options page and save. "Reset 
 
 ## Contact
 
-Questions and requests: https://github.com/vmaerten/supercharged-github/issues
+Questions and requests: https://github.com/vmaerten/polished-github/issues

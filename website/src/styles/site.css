@@ -1,4 +1,4 @@
-/* Supercharged GitHub website in the Boost palette, light and dark; the drawn GitHub UI keeps GitHub's own colors. */
+/* Polished GitHub website in the Boost palette, light and dark; the drawn GitHub UI keeps GitHub's own colors. */
 :root {
 	--ink: light-dark(#1f2328, #eceef4);
 	--muted: light-dark(#59636e, #8b92a3);

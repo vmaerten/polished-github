@@ -1,16 +1,16 @@
 {
-	"name": "supercharged-github",
+	"name": "polished-github",
 	"version": "0.0.0",
 	"private": "true",
 	"description": "Browser extension (Chrome & Firefox) that adds superpowers to GitHub",
-	"homepage": "https://github.com/vmaerten/supercharged-github#readme",
+	"homepage": "https://github.com/vmaerten/polished-github#readme",
 	"bugs": {
-		"url": "https://github.com/vmaerten/supercharged-github/issues"
+		"url": "https://github.com/vmaerten/polished-github/issues"
 	},
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/vmaerten/supercharged-github.git"
+		"url": "git+https://github.com/vmaerten/polished-github.git"
 	},
 	"type": "module",
 	"dependencies": {

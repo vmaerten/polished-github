@@ -6,15 +6,15 @@ Texts and answers for the Chrome Web Store and Firefox Add-ons (AMO). Every publ
 
 | Field                                                                                | Value                                                                   |
 | ------------------------------------------------------------------------------------ | ----------------------------------------------------------------------- |
-| Name                                                                                 | Supercharged GitHub                                                     |
+| Name                                                                                 | Polished GitHub                                                         |
 | Short description (from `manifest.json`, 132 characters max on the Chrome Web Store) | Review pull requests faster on GitHub. Not affiliated with GitHub, Inc. |
-| Homepage                                                                             | https://github.com/vmaerten/supercharged-github                         |
-| Support                                                                              | https://github.com/vmaerten/supercharged-github/issues                  |
+| Homepage                                                                             | https://github.com/vmaerten/polished-github                             |
+| Support                                                                              | https://github.com/vmaerten/polished-github/issues                      |
 
 ### Long description
 
 ```text
-Supercharged GitHub adds what is missing when you review pull requests on github.com. It changes nothing else: every feature can be turned off in the options.
+Polished GitHub adds what is missing when you review pull requests on github.com. It changes nothing else: every feature can be turned off in the options.
 
 Not affiliated with, endorsed or sponsored by GitHub, Inc. GitHub is a trademark of GitHub, Inc.
 
@@ -34,7 +34,7 @@ IN COMMENTS AND READMES
 YOUR TOKEN STAYS WITH YOU
 The PR list badges and the reviewer load need a read-only GitHub token (a fine-grained token with read access to Pull requests). It is stored in your browser only and sent only to api.github.com. The extension has no server and no analytics.
 
-Source code and issues: https://github.com/vmaerten/supercharged-github
+Source code and issues: https://github.com/vmaerten/polished-github
 ```
 
 ## Chrome Web Store
@@ -68,7 +68,7 @@ Source code and issues: https://github.com/vmaerten/supercharged-github
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Summary (250 characters max) | Review pull requests faster on GitHub: review status, PR size and idle time in the PR list, reviewer load in the reviewers picker, quick comments and an image modal. Not affiliated with GitHub, Inc. |
 | Categories                   | Web Development                                                                                                                                                                                        |
-| Support site                 | https://github.com/vmaerten/supercharged-github/issues                                                                                                                                                 |
+| Support site                 | https://github.com/vmaerten/polished-github/issues                                                                                                                                                     |
 | License                      | MIT                                                                                                                                                                                                    |
 | Description                  | The long description above. AMO renders a subset of Markdown, so the bullets and capital headings can stay as they are.                                                                                |
 
