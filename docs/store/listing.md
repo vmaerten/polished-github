@@ -49,18 +49,18 @@ Source code and issues: https://github.com/vmaerten/polished-github
 | Host permission `https://api.github.com/*` | Reads review status, diff stats and pending review counts from the GitHub API with the user's own token.                  |
 | Remote code                                | No. Everything ships in the package.                                                                                      |
 
-**Data usage.** The token is sent to api.github.com to authenticate the user's own requests, so declare _Authentication information_, then certify that the data is not sold, not used for anything but the single purpose, and not used for creditworthiness or lending. Nothing else is collected. Check the wording of the form at submission time, it changes.
+**Data usage.** Declare _Authentication information_: the store counts handling a login or token as handling user data, even when it only goes to a third-party API. The API requests also name the repository and pull requests of the page being viewed, which the store's definition of _Web browsing activity_ covers, so declare it too. Then certify that the data is not sold, not used for anything but the single purpose, and not used for creditworthiness or lending. Check the wording of the form at submission time, it changes.
 
-**Privacy policy.** Required once user data is declared. The text is in [privacy-policy.md](privacy-policy.md); it needs a public URL, for example a page on the website.
+**Privacy policy.** Required once user data is declared: https://polished-github.vmaerten.fr/privacy/, rendered from [privacy-policy.md](privacy-policy.md).
 
 **Assets.**
 
-| Asset              | Size               | Status                                                                        |
-| ------------------ | ------------------ | ----------------------------------------------------------------------------- |
-| Icon               | 128 × 128          | `source/icons/icon-128.png`                                                   |
-| Screenshots        | 1280 × 800, 1 to 5 | To make: PR list, reviewers picker, quick comments, image modal, options page |
-| Small promo tile   | 440 × 280          | To make from the branding board's Boost tile                                  |
-| Marquee promo tile | 1400 × 560         | Optional                                                                      |
+| Asset              | Size               | Status                                                                                         |
+| ------------------ | ------------------ | ---------------------------------------------------------------------------------------------- |
+| Icon               | 128 × 128          | `source/icons/icon-128.png`: a 96 px icon in 16 px of transparent padding                      |
+| Screenshots        | 1280 × 800, 1 to 5 | `assets/1-pr-list.png` to `assets/5-options.png`, captured on github.com with the extension    |
+| Small promo tile   | 440 × 280          | `assets/promo-small-440x280.png`, from `assets/promo.html`; optional, but listed lower without |
+| Marquee promo tile | 1400 × 560         | `assets/promo-marquee-1400x560.png`, optional                                                  |
 
 ## Firefox Add-ons (AMO)
 
@@ -75,5 +75,5 @@ Source code and issues: https://github.com/vmaerten/polished-github
 **Before submitting.**
 
 - **Source code.** The package is bundled by tsdown, so AMO asks for the source and the build steps: `pnpm install --frozen-lockfile` then `pnpm exec tsdown`, with Node and pnpm versions from `package.json`.
-- **Data collection.** `manifest.json` declares `data_collection_permissions: none`. Check whether sending the token to api.github.com counts as `authenticationInfo` under Mozilla's current definition, and update the manifest if it does.
-- **Screenshots.** Same set as the Chrome Web Store, 1280 × 800.
+- **Data collection.** Mozilla counts the token sent to api.github.com as `authenticationInfo`. `manifest.json` declares it as optional data, and the options page asks for consent when the user saves a token in Firefox.
+- **Screenshots.** Same set as the Chrome Web Store, in `assets/`.

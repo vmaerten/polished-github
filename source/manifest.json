@@ -17,7 +17,8 @@
 			"id": "polished-github@vmaerten",
 			"strict_min_version": "140.0",
 			"data_collection_permissions": {
-				"required": ["none"]
+				"required": ["none"],
+				"optional": ["authenticationInfo"]
 			}
 		},
 		"gecko_android": {

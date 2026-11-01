@@ -862,7 +862,8 @@ a.item:hover .item-name {
 	gap: 24px;
 }
 .cat-head h1,
-.doc-head h1 {
+.doc-head h1,
+.privacy h1 {
 	font-size: 40px;
 	letter-spacing: -0.015em;
 	line-height: 1.15;
@@ -1141,4 +1142,16 @@ a.cat-card:hover {
 }
 .not-found-diff .add {
 	color: var(--add);
+}
+
+/* Privacy policy */
+.privacy {
+	margin-inline: auto;
+}
+.privacy h1 {
+	margin-bottom: 4px;
+}
+.privacy code {
+	font-family: var(--mono);
+	font-size: 0.9em;
 }

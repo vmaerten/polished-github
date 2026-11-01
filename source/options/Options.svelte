@@ -58,7 +58,7 @@
 <main>
 	<header>
 		<div class="brand">
-			<img class="logo" src="icons/icon-128.png" width="40" height="40" alt="">
+			<img class="logo" src="icons/icon-48.png" width="40" height="40" alt="">
 			<div>
 				<h1>Polished <span class="wordmark-light">GitHub</span></h1>
 				<span class="muted small">Version {version} · Options</span>
