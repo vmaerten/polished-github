@@ -1,6 +1,7 @@
 <script lang="ts">
 	import {v3} from '../github-helpers/api.js';
 	import {getToken, setToken} from '../options-storage.js';
+	import {t} from '../helpers/i18n.js';
 
 	type Status =
 		| {kind: 'none'}
@@ -51,7 +52,7 @@
 	async function save(event: SubmitEvent): Promise<void> {
 		event.preventDefault();
 		if (token.trim() !== '' && !(await allowSendingToken())) {
-			status = {kind: 'error', message: 'Firefox needs your consent to send the token and the pages you browse to the GitHub API. Nothing was saved.'};
+			status = {kind: 'error', message: t('token_consentDenied')};
 			return;
 		}
 
@@ -65,11 +66,11 @@
 
 <section class="card">
 	<div class="heading">
-		<h2>GitHub token</h2>
-		<p class="muted">Needed by features that call the GitHub API. Stored on this device only, never synced.</p>
+		<h2>{t('token_title')}</h2>
+		<p class="muted">{t('token_description')}</p>
 	</div>
 	<form onsubmit={save}>
-		<label for="token">Personal access token</label>
+		<label for="token">{t('token_label')}</label>
 		<div class="token-row">
 			<div class="token-input">
 				<input
@@ -82,28 +83,28 @@
 				<button
 					type="button"
 					class="icon"
-					aria-label={visible ? 'Hide token' : 'Show token'}
+					aria-label={visible ? t('token_hide') : t('token_show')}
 					onclick={() => (visible = !visible)}
 				>
 					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z" /><circle cx="12" cy="12" r="3" /></svg>
 				</button>
 			</div>
-			<button type="submit" class="primary">Save</button>
+			<button type="submit" class="primary">{t('token_save')}</button>
 		</div>
 		<p class="status" role="status">
 			{#if status.kind === 'checking'}
-				<span class="muted">Checking…</span>
+				<span class="muted">{t('token_checking')}</span>
 			{:else if status.kind === 'connected'}
-				<span class="success">Connected as <strong>@{status.login}</strong></span>
-				<span class="muted">· {status.remaining.toLocaleString()} / {status.limit.toLocaleString()} requests left this hour</span>
+				<span class="success">{t('token_connectedAs')} <strong>@{status.login}</strong></span>
+				<span class="muted">{t('token_requestsLeft', status.remaining.toLocaleString(), status.limit.toLocaleString())}</span>
 			{:else if status.kind === 'error'}
 				<span class="danger">{status.message}</span>
 			{/if}
 		</p>
 	</form>
 	<p class="muted small">
-		Use a <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer">fine-grained token</a>
-		with read access to <em>Pull requests</em> on the repositories you browse, or a classic token with the <code>repo</code> scope. For organizations using SSO, authorize the token for them too.
+		{t('token_helpStart')} <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer">{t('token_helpLink')}</a>
+		{t('token_helpAccess')} <em>Pull requests</em> {t('token_helpClassic')} <code>repo</code>{t('token_helpEnd')}
 	</p>
 </section>
 

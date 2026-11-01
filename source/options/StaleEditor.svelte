@@ -1,18 +1,19 @@
 <script lang="ts">
 	import type {StaleSettings} from '../options-storage.js';
+	import {t} from '../helpers/i18n.js';
 
 	let {settings = $bindable(), onsave}: {settings: StaleSettings; onsave: () => void} = $props();
 </script>
 
 <div class="editor">
 	<label>
-		Flag PRs with no activity for
+		{t('idlePrs_before')}
 		<input type="number" min="1" bind:value={settings.days} onchange={onsave}>
-		days or more
+		{t('idlePrs_after')}
 	</label>
 	<label class="check">
 		<input type="checkbox" bind:checked={settings.includeDrafts} onchange={onsave}>
-		Also flag draft PRs
+		{t('idlePrs_drafts')}
 	</label>
 </div>
 

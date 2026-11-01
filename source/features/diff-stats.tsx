@@ -4,6 +4,7 @@ import * as pageDetect from 'github-url-detection';
 import type {Feature} from '../feature-manager.js';
 import {mutedColor} from '../github-helpers/colors.js';
 import {addPullRequestBadge, forEachListedPullRequest} from '../github-helpers/pr-list.js';
+import {t} from '../helpers/i18n.js';
 import {type BadgePlacement, type DiffStatsSettings, getOptions} from '../options-storage.js';
 
 type DiffStats = {additions: number; deletions: number; changedFiles: number};
@@ -47,7 +48,7 @@ function addBadge(title: HTMLElement, stats: DiffStats, settings: DiffStatsSetti
 
 const diffStats: Feature = {
 	id: 'diff-stats',
-	description: 'Shows lines added and removed for each PR in the repository pull request list.',
+	description: t('feature_diffStats'),
 	include: [pageDetect.isRepoPRList],
 	requiresToken: true,
 	async init(signal) {

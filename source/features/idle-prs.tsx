@@ -8,6 +8,7 @@ import {
 	type PullRequestState,
 	removePullRequestBadge,
 } from '../github-helpers/pr-list.js';
+import {t} from '../helpers/i18n.js';
 import {type BadgePlacement, getOptions, type StaleSettings} from '../options-storage.js';
 
 export type ActivityInfo = {state: PullRequestState; isDraft: boolean; updatedAt: string};
@@ -60,7 +61,7 @@ function addBadge(title: HTMLElement, days: number, placement: BadgePlacement): 
 
 const idlePrs: Feature = {
 	id: 'idle-prs',
-	description: 'Flags PRs with no recent activity in the repository pull request list.',
+	description: t('feature_idlePrs'),
 	include: [pageDetect.isRepoPRList],
 	requiresToken: true,
 	async init(signal) {

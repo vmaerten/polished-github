@@ -29,6 +29,8 @@ The website lives in `website/` (Astro, a pnpm workspace package): `task website
 
 `init` runs again after each in-app navigation: check the element isn't already there before injecting, and pass `signal` to listeners and to `observe` (`source/helpers/observe.ts`) so they stop on the next navigation. Use [`dom-chef`](https://github.com/vadimdemedes/dom-chef) JSX for small injections, a Svelte component for anything stateful.
 
+Text follows two rules. What appears inside github.com stays in English, like GitHub's own interface. What belongs to the extension, its options page and error messages, goes through `t()` from `source/helpers/i18n.ts`, with the message in both `source/_locales/en/messages.json` and `source/_locales/fr/messages.json`.
+
 ## Pull requests
 
 - Every pull request closes an issue. Open one first, a [bug report or a feature request](https://github.com/vmaerten/polished-github/issues/new/choose), so the change is agreed on before anyone writes code, then write `Closes #123` in the description.

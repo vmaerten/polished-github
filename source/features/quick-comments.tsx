@@ -4,6 +4,7 @@ import {insertTextIntoField} from 'text-field-edit';
 
 import type {Feature} from '../feature-manager.js';
 import {observe} from '../helpers/observe.js';
+import {t} from '../helpers/i18n.js';
 import {getOptions, type QuickComment} from '../options-storage.js';
 
 // The classic form on PRs, the React composer on issues
@@ -79,8 +80,7 @@ function addButtons(composer: Element, comments: QuickComment[]): void {
 
 const quickComments: Feature = {
 	id: 'quick-comments',
-	description:
-		'Buttons above the comment box that post a predefined comment in one click. Shift-click inserts it instead.',
+	description: t('feature_quickComments'),
 	include: [pageDetect.isIssue, pageDetect.isPRConversation],
 	async init(signal) {
 		const scope = pageDetect.isIssue() ? 'issues' : 'prs';
