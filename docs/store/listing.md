@@ -75,5 +75,5 @@ Source code and issues: https://github.com/vmaerten/polished-github
 **Before submitting.**
 
 - **Source code.** The package is bundled by tsdown, so AMO asks for the source and the build steps: `pnpm install --frozen-lockfile` then `pnpm exec tsdown`, with Node and pnpm versions from `package.json`.
-- **Data collection.** `manifest.json` declares `data_collection_permissions: none`, which no longer holds. Mozilla counts as transmission any data handled outside the add-on, with no exception for the service the user is browsing, and lists passwords and similar credentials under `authenticationInfo`: the token sent to api.github.com falls there. Declare it as `required` (consent at install, no code) or as `optional` (consent asked through `browser.permissions.request()` when the user saves a token).
+- **Data collection.** Mozilla counts the token sent to api.github.com as `authenticationInfo`. `manifest.json` declares it as optional data, and the options page asks for consent when the user saves a token in Firefox.
 - **Screenshots.** Same set as the Chrome Web Store, in `assets/`.

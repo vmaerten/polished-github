@@ -38,8 +38,23 @@
 		await check();
 	}
 
+	// Firefox asks before data leaves the extension, and the token goes to api.github.com. The request must run
+	// before any await, while the click still counts as user input.
+	function allowSendingToken(): Promise<boolean> {
+		if (!navigator.userAgent.includes('Firefox/')) {
+			return Promise.resolve(true);
+		}
+
+		return chrome.permissions.request({data_collection: ['authenticationInfo']} as chrome.permissions.Permissions);
+	}
+
 	async function save(event: SubmitEvent): Promise<void> {
 		event.preventDefault();
+		if (token.trim() !== '' && !(await allowSendingToken())) {
+			status = {kind: 'error', message: 'Firefox needs your consent to send the token to the GitHub API. Nothing was saved.'};
+			return;
+		}
+
 		await setToken(token);
 		ontokenchange(token.trim() !== '');
 		await check();
