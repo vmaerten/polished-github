@@ -1,7 +1,7 @@
 import {beforeEach, expect, test, vi} from 'vitest';
 
 import {v4} from '../github-helpers/api.js';
-import prListDiffStats, {getSizeLabel} from './pr-list-diff-stats.js';
+import diffStats, {getSizeLabel} from './diff-stats.js';
 
 vi.mock('../github-helpers/api.js', () => ({v4: vi.fn<typeof v4>()}));
 
@@ -40,7 +40,7 @@ beforeEach(() => {
 });
 
 test('fetches each PR once, in batches, and never adds a badge twice', async () => {
-	await prListDiffStats.init(new AbortController().signal);
+	await diffStats.init(new AbortController().signal);
 	await vi.waitFor(() => expect(badges()).toEqual(['+10 −1', '+20 −2']));
 	expect(v4Mock).toHaveBeenCalledOnce();
 
@@ -51,7 +51,7 @@ test('fetches each PR once, in batches, and never adds a badge twice', async () 
 	expect(v4Mock.mock.lastCall?.[0]).not.toContain('number: 1)');
 
 	// Next in-app navigation back to the same list: served from the cache
-	await prListDiffStats.init(new AbortController().signal);
+	await diffStats.init(new AbortController().signal);
 	await new Promise((resolve) => setTimeout(resolve));
 	expect(badges()).toEqual(['+10 −1', '+20 −2', '+30 −3']);
 	expect(v4Mock).toHaveBeenCalledTimes(2);

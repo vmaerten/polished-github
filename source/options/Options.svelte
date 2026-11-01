@@ -15,7 +15,7 @@
 	import StaleEditor from './StaleEditor.svelte';
 	import TokenSection from './TokenSection.svelte';
 
-	const configurable = new Set(['image-modal', 'quick-comments', 'pr-list-diff-stats', 'pr-list-stale']);
+	const configurable = new Set(['image-modal', 'quick-comments', 'diff-stats', 'idle-prs']);
 	const {version} = chrome.runtime.getManifest();
 
 	let options = $state<Options>();
@@ -128,12 +128,12 @@
 										bind:comments={options.quickComments}
 										onsave={() => save({quickComments: $state.snapshot(options!.quickComments)})}
 									/>
-								{:else if feature.id === 'pr-list-diff-stats'}
+								{:else if feature.id === 'diff-stats'}
 									<DiffStatsEditor
 										bind:settings={options.diffStats}
 										onsave={() => save({diffStats: $state.snapshot(options!.diffStats)})}
 									/>
-								{:else if feature.id === 'pr-list-stale'}
+								{:else if feature.id === 'idle-prs'}
 									<StaleEditor
 										bind:settings={options.stale}
 										onsave={() => save({stale: $state.snapshot(options!.stale)})}

@@ -45,19 +45,19 @@ function addBadge(title: HTMLElement, stats: DiffStats, settings: DiffStatsSetti
 	);
 }
 
-const prListDiffStats: Feature = {
-	id: 'pr-list-diff-stats',
+const diffStats: Feature = {
+	id: 'diff-stats',
 	description: 'Shows lines added and removed for each PR in the repository pull request list.',
 	include: [pageDetect.isRepoPRList],
 	requiresToken: true,
 	async init(signal) {
-		const {diffStats, prListBadges} = await getOptions();
+		const {diffStats: settings, prListBadges} = await getOptions();
 		forEachListedPullRequest<DiffStats>(
 			'additions deletions changedFiles',
-			(title, stats) => addBadge(title, stats, diffStats, prListBadges),
+			(title, stats) => addBadge(title, stats, settings, prListBadges),
 			{signal, cache},
 		);
 	},
 };
 
-export default prListDiffStats;
+export default diffStats;

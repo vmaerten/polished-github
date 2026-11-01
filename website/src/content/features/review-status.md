@@ -70,7 +70,7 @@ featured: true
 		<span style="font-weight: 600">Badge placement</span
 		><span>Right column (default) or the grey line under the title. Shared by all PR list badges.</span>
 	</div>
-	<div><span style="font-weight: 600">Turn off</span><span>Options › Features › pr-list-review-status</span></div>
+	<div><span style="font-weight: 600">Turn off</span><span>Options › Features › review-status</span></div>
 </div>
 
 ## Good to know

@@ -53,8 +53,8 @@ function addBadge(title: HTMLElement, days: number, placement: BadgePlacement): 
 	);
 }
 
-const prListStale: Feature = {
-	id: 'pr-list-stale',
+const idlePrs: Feature = {
+	id: 'idle-prs',
 	description: 'Flags PRs with no recent activity in the repository pull request list.',
 	include: [pageDetect.isRepoPRList],
 	requiresToken: true,
@@ -74,4 +74,4 @@ const prListStale: Feature = {
 	},
 };
 
-export default prListStale;
+export default idlePrs;

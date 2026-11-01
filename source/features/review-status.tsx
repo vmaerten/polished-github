@@ -84,8 +84,8 @@ function addBadge(title: HTMLElement, status: ReviewStatus, placement: BadgePlac
 	);
 }
 
-const prListReviewStatus: Feature = {
-	id: 'pr-list-review-status',
+const reviewStatus: Feature = {
+	id: 'review-status',
 	description:
 		'Shows where each PR stands for you in the repository pull request list: review requested, re-review, changes requested, or approved with commits pushed since.',
 	include: [pageDetect.isRepoPRList],
@@ -106,4 +106,4 @@ const prListReviewStatus: Feature = {
 	},
 };
 
-export default prListReviewStatus;
+export default reviewStatus;

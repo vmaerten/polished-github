@@ -1,6 +1,6 @@
 import {expect, test} from 'vitest';
 
-import {type ActivityInfo, getIdleDays} from './pr-list-stale.js';
+import {type ActivityInfo, getIdleDays} from './idle-prs.js';
 
 const now = Date.parse('2026-10-30T12:00:00Z');
 const settings = {days: 7, includeDrafts: false};

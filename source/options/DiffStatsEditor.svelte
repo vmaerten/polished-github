@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {getSizeLabel, sizeLabels} from '../features/pr-list-diff-stats.js';
+	import {getSizeLabel, sizeLabels} from '../features/diff-stats.js';
 	import type {DiffStatsSettings} from '../options-storage.js';
 
 	let {settings = $bindable(), onsave}: {settings: DiffStatsSettings; onsave: () => void} = $props();
