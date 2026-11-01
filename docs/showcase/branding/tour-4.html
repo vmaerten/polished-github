@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="fr">
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>P3, P taillé, P reflet</title>
+	<link
+		rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=JetBrains+Mono:wght@400&display=swap"
+	/>
+	<style>
+		/* Duel de formes pour Polished GitHub : même violet Boost, même tuile, mêmes tailles. Seule la forme change. */
+		:root {
+			--paper: #f4f5f7;
+			--card: #ffffff;
+			--ink: #15181e;
+			--muted: #5a6170;
+			--line: #d9dce2;
+			--font: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+			--mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+			color-scheme: light;
+		}
+		@media (prefers-color-scheme: dark) {
+			:root:not([data-theme='light']) {
+				--paper: #101217;
+				--card: #181b21;
+				--ink: #e7e9ee;
+				--muted: #9aa1ae;
+				--line: #2a2e37;
+				color-scheme: dark;
+			}
+		}
+		:root[data-theme='dark'] {
+			--paper: #101217;
+			--card: #181b21;
+			--ink: #e7e9ee;
+			--muted: #9aa1ae;
+			--line: #2a2e37;
+			color-scheme: dark;
+		}
+		* {
+			box-sizing: border-box;
+		}
+		body {
+			margin: 0;
+			background: var(--paper);
+			color: var(--ink);
+			font-family: var(--font);
+			font-size: 15px;
+			line-height: 1.55;
+		}
+		.wrap {
+			max-width: 1080px;
+			margin: 0 auto;
+			padding: 0 16px;
+		}
+		header {
+			padding: 56px 0 24px;
+		}
+		h1 {
+			margin: 0 0 8px;
+			font-size: clamp(28px, 5vw, 40px);
+			letter-spacing: -0.02em;
+			text-wrap: balance;
+		}
+		h2 {
+			margin: 40px 0 12px;
+			font-size: 20px;
+		}
+		p {
+			margin: 0;
+			max-width: 64ch;
+			text-wrap: pretty;
+		}
+		.muted {
+			color: var(--muted);
+		}
+		.grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+			gap: 16px;
+		}
+		.card {
+			background: var(--card);
+			border: 1px solid var(--line);
+			border-radius: 14px;
+			padding: 20px;
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+		}
+		.card h3 {
+			margin: 0;
+			font-size: 16px;
+		}
+		.hero-logo {
+			display: flex;
+			justify-content: center;
+			padding: 12px 0;
+		}
+		.hero-logo svg {
+			width: 128px;
+			height: 128px;
+		}
+		.sizes {
+			display: flex;
+			align-items: flex-end;
+			gap: 16px;
+			font-family: var(--mono);
+			font-size: 11px;
+			color: var(--muted);
+		}
+		.sizes span {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 4px;
+		}
+		.bars {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 8px;
+		}
+		.bar {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			height: 34px;
+			padding: 0 10px;
+			border-radius: 8px;
+		}
+		.bar.light {
+			background: #f6f8fa;
+			border: 1px solid #d1d9e0;
+		}
+		.bar.dark {
+			background: #1f2328;
+			border: 1px solid #3d444d;
+		}
+		.bar .ghost {
+			width: 16px;
+			height: 16px;
+			border-radius: 4px;
+			background: currentColor;
+			opacity: 0.25;
+		}
+		.bar.light .ghost {
+			color: #59636e;
+		}
+		.bar.dark .ghost {
+			color: #9198a1;
+		}
+		.tab {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			height: 34px;
+			padding: 0 12px;
+			border-radius: 8px 8px 0 0;
+			font-size: 12px;
+			max-width: 220px;
+		}
+		.tab.light {
+			background: #ffffff;
+			color: #1f2328;
+			border: 1px solid #d1d9e0;
+			border-bottom: 0;
+		}
+		.tab.dark {
+			background: #2b3036;
+			color: #e6edf3;
+		}
+		.tabs {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 8px;
+		}
+		.lockup {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			padding: 12px 14px;
+			border-radius: 10px;
+			border: 1px solid var(--line);
+			font-weight: 800;
+			font-size: 19px;
+			letter-spacing: -0.03em;
+		}
+		.lockup.on-light {
+			background: #ffffff;
+			color: #1f2328;
+		}
+		.lockup.on-dark {
+			background: #0d1017;
+			color: #eceef4;
+		}
+		.lockup .light {
+			font-weight: 400;
+			opacity: 0.6;
+		}
+		.verdict {
+			font-size: 14px;
+			/* Four lines, so the rows line up across the cards */
+			min-height: 6.2em;
+		}
+		.verdict b {
+			display: block;
+			margin-bottom: 2px;
+		}
+		footer {
+			padding: 40px 0 64px;
+		}
+	</style>
+
+	<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+		<!-- P3 : le logo actuel, sans changement -->
+		<symbol id="p3" viewBox="0 0 48 48">
+			<rect width="48" height="48" rx="12" fill="#6D5BFF" />
+			<g id="p3-arm">
+				<path d="M24 24 C24 15 31 10 37 13" fill="none" stroke="#FFFFFF" stroke-width="5.5" stroke-linecap="round" />
+				<circle cx="27.5" cy="14.6" r="1.1" fill="#6D5BFF" />
+				<circle cx="30.7" cy="12.6" r="1.1" fill="#6D5BFF" />
+				<circle cx="33.9" cy="12.1" r="1.1" fill="#6D5BFF" />
+			</g>
+			<use href="#p3-arm" transform="rotate(120 24 24)" />
+			<use href="#p3-arm" transform="rotate(240 24 24)" />
+			<circle cx="24" cy="24" r="5" fill="#FFFFFF" />
+		</symbol>
+		<!-- P taillé : le tracé de polished-directions, repassé en violet Boost sur la même tuile -->
+		<symbol id="p-cut" viewBox="0 0 48 48">
+			<rect width="48" height="48" rx="12" fill="#6D5BFF" />
+			<path
+				transform="translate(3.2 3.2) scale(0.65)"
+				fill="#FFFFFF"
+				fill-rule="evenodd"
+				d="M14 54V10H38L52 24V34L38 48H26V54ZM26 22V36H33L40 29L33 22Z"
+			/>
+		</symbol>
+		<!-- P taillé adouci : mêmes facettes, angles arrondis -->
+		<symbol id="p-soft" viewBox="0 0 48 48">
+			<rect width="48" height="48" rx="12" fill="#6D5BFF" />
+			<path
+				transform="translate(3.2 3.2) scale(0.65)"
+				fill="#FFFFFF"
+				fill-rule="evenodd"
+				d="M14 50V14Q14 10 18 10H36.3Q38 10 39.2 11.2L50.8 22.8Q52 24 52 25.7V32.3Q52 34 50.8 35.2L39.2 46.8Q38 48 36.3 48H26V50Q26 54 22 54H18Q14 54 14 50ZM26 22V36H32.2Q33 36 33.6 35.4L39.3 29.7Q40 29 39.3 28.3L33.6 22.6Q33 22 32.2 22Z"
+			/>
+		</symbol>
+		<!-- P reflet : le tracé de polished-directions, l'éclat passe du pêche au lilas Boost -->
+		<symbol id="p-reflect" viewBox="0 0 48 48">
+			<defs>
+				<clipPath id="p-reflect-clip">
+					<path
+						clip-rule="evenodd"
+						d="M14 54V10H34C47 10 54 17 54 29S47 48 34 48H27V54ZM27 23V35H34C39 35 41 33 41 29S39 23 34 23Z"
+					/>
+				</clipPath>
+			</defs>
+			<rect width="48" height="48" rx="12" fill="#6D5BFF" />
+			<g transform="translate(2.2 3.2) scale(0.65)" clip-path="url(#p-reflect-clip)">
+				<path fill="#FFFFFF" d="M0 0H64V64H0Z" />
+				<path fill="#B9B0FF" d="M2 32L56 3L60 11L6 40Z" />
+				<path fill="#6D5BFF" d="M4 37L58 8L60 12L6 41Z" />
+			</g>
+		</symbol>
+	</svg>
+
+	<header class="wrap">
+		<h1>P3, P taillé, P reflet · Polished GitHub</h1>
+		<p class="muted">
+			Même violet Boost (#6D5BFF), même tuile, mêmes tailles : seule la forme change. Le P taillé d'origine est gardé en
+			référence, pour juger l'effet de l'adoucissement.
+		</p>
+	</header>
+
+	<main class="wrap">
+		<div class="grid">
+			<article class="card" data-logo="p3">
+				<h3>P3 · logo actuel</h3>
+				<p class="verdict muted">
+					Trois bras de poulpe, clin d'œil à l'Octocat. Déjà sur le site, l'extension et le favicon.
+				</p>
+			</article>
+			<article class="card" data-logo="p-cut">
+				<h3>P taillé · référence</h3>
+				<p class="verdict muted">
+					Le tracé de polished-directions, repassé en violet Boost. Biseaux nets, angles vifs.
+				</p>
+			</article>
+			<article class="card" data-logo="p-soft">
+				<h3>P taillé · adouci</h3>
+				<p class="verdict muted">
+					Mêmes facettes, angles extérieurs et contre-forme arrondis. Plus proche de l'idée de « poli ».
+				</p>
+			</article>
+			<article class="card" data-logo="p-reflect">
+				<h3>P reflet</h3>
+				<p class="verdict muted">
+					Le P arrondi de polished-directions, traversé par un éclat. Le pêche devient le lilas Boost.
+				</p>
+			</article>
+		</div>
+	</main>
+
+	<footer class="wrap">
+		<p class="muted">16 et 32 px : barre d'outils et onglet. 48 px : page des extensions. 128 px : stores.</p>
+	</footer>
+
+	<script>
+		const icon = (id, size) =>
+			`<svg width="${size}" height="${size}" viewBox="0 0 48 48" aria-hidden="true"><use href="#${id}" /></svg>`;
+		document.querySelectorAll('.card').forEach((card) => {
+			const id = card.dataset.logo;
+			card.insertAdjacentHTML(
+				'afterbegin',
+				`<div class="hero-logo"><svg viewBox="0 0 48 48" role="img" aria-label="Logo ${card.querySelector('h3').textContent}"><use href="#${id}" /></svg></div>`,
+			);
+			card.insertAdjacentHTML(
+				'beforeend',
+				`<div class="sizes">${[16, 24, 32, 48].map((s) => `<span>${icon(id, s)}${s}</span>`).join('')}</div>
+				<div class="bars">
+					<div class="bar light"><span class="ghost"></span>${icon(id, 16)}<span class="ghost"></span></div>
+					<div class="bar dark"><span class="ghost"></span>${icon(id, 16)}<span class="ghost"></span></div>
+				</div>
+				<div class="tabs">
+					<div class="tab light">${icon(id, 16)}<span>Options</span></div>
+					<div class="tab dark">${icon(id, 16)}<span>Options</span></div>
+				</div>
+				<div class="lockup on-light">${icon(id, 28)}<span>Polished <span class="light">GitHub</span></span></div>
+				<div class="lockup on-dark">${icon(id, 28)}<span>Polished <span class="light">GitHub</span></span></div>`,
+			);
+		});
+	</script>
+</html>

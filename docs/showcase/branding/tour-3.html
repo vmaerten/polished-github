@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="fr">
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Logos Polished et Octane</title>
+	<link
+		rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Archivo:ital,wdth,wght@1,125,900&family=JetBrains+Mono:wght@400&display=swap"
+	/>
+	<style>
+		/* Planche de comparaison : chrome neutre, chaque logo montré en grand, en petites tailles, dans une barre d'outils et en lockup. */
+		:root {
+			--paper: #f4f5f7;
+			--card: #ffffff;
+			--ink: #15181e;
+			--muted: #5a6170;
+			--line: #d9dce2;
+			--bar-light: #f6f8fa;
+			--bar-dark: #1f2328;
+			--font: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+			--mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+			color-scheme: light;
+		}
+		@media (prefers-color-scheme: dark) {
+			:root:not([data-theme='light']) {
+				--paper: #101217;
+				--card: #181b21;
+				--ink: #e7e9ee;
+				--muted: #9aa1ae;
+				--line: #2a2e37;
+				color-scheme: dark;
+			}
+		}
+		:root[data-theme='dark'] {
+			--paper: #101217;
+			--card: #181b21;
+			--ink: #e7e9ee;
+			--muted: #9aa1ae;
+			--line: #2a2e37;
+			color-scheme: dark;
+		}
+		* {
+			box-sizing: border-box;
+		}
+		body {
+			margin: 0;
+			background: var(--paper);
+			color: var(--ink);
+			font-family: var(--font);
+			font-size: 15px;
+			line-height: 1.55;
+		}
+		.wrap {
+			max-width: 1080px;
+			margin: 0 auto;
+			padding: 0 16px;
+		}
+		header {
+			padding: 56px 0 24px;
+		}
+		h1 {
+			margin: 0 0 8px;
+			font-size: clamp(28px, 5vw, 40px);
+			letter-spacing: -0.02em;
+			text-wrap: balance;
+		}
+		h2 {
+			margin: 48px 0 4px;
+			font-size: 24px;
+			letter-spacing: -0.01em;
+		}
+		p {
+			margin: 0;
+			max-width: 64ch;
+			text-wrap: pretty;
+		}
+		.muted {
+			color: var(--muted);
+		}
+		.grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+			gap: 16px;
+			margin-top: 20px;
+		}
+		.card {
+			background: var(--card);
+			border: 1px solid var(--line);
+			border-radius: 14px;
+			padding: 20px;
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+		}
+		.card h3 {
+			margin: 0;
+			font-size: 16px;
+		}
+		.card .code {
+			font-family: var(--mono);
+			font-size: 12px;
+			color: var(--muted);
+		}
+		.hero-logo {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 20px 0;
+		}
+		.hero-logo svg {
+			width: 120px;
+			height: 120px;
+		}
+		.sizes {
+			display: flex;
+			align-items: flex-end;
+			gap: 16px;
+			font-family: var(--mono);
+			font-size: 11px;
+			color: var(--muted);
+		}
+		.sizes span {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 4px;
+		}
+		.bars {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 8px;
+		}
+		.bar {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			height: 34px;
+			padding: 0 10px;
+			border-radius: 8px;
+		}
+		.bar.light {
+			background: var(--bar-light);
+			border: 1px solid #d1d9e0;
+		}
+		.bar.dark {
+			background: var(--bar-dark);
+			border: 1px solid #3d444d;
+		}
+		.bar .ghost {
+			width: 16px;
+			height: 16px;
+			border-radius: 4px;
+			background: currentColor;
+			opacity: 0.25;
+		}
+		.bar.light .ghost {
+			color: #59636e;
+		}
+		.bar.dark .ghost {
+			color: #9198a1;
+		}
+		.lockup {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			padding: 12px 14px;
+			border-radius: 10px;
+			border: 1px solid var(--line);
+			font-weight: 800;
+			font-size: 19px;
+			letter-spacing: -0.03em;
+		}
+		.lockup.on-light {
+			background: #ffffff;
+			color: #1f2328;
+		}
+		.lockup.on-dark {
+			background: #0d1017;
+			color: #eceef4;
+		}
+		.lockup .light {
+			font-weight: 400;
+			opacity: 0.6;
+		}
+		.lockup.octane {
+			font-family: 'Archivo', var(--font);
+			font-style: italic;
+			font-weight: 900;
+			font-stretch: 125%;
+			letter-spacing: -0.01em;
+		}
+		.lockup.octane .light {
+			font-family: var(--font);
+			font-style: normal;
+			font-weight: 400;
+			font-stretch: 100%;
+			font-size: 15px;
+		}
+		.pick {
+			display: inline-block;
+			margin-left: 6px;
+			padding: 1px 8px;
+			border-radius: 999px;
+			font-size: 12px;
+			font-weight: 700;
+			background: #ece9ff;
+			color: #5b48f2;
+			vertical-align: 2px;
+		}
+		footer {
+			padding: 48px 0 64px;
+		}
+	</style>
+
+	<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+		<!-- Polished · étincelle : le reflet d'une surface polie -->
+		<symbol id="pl-spark" viewBox="0 0 48 48">
+			<rect width="48" height="48" rx="12" fill="#6D5BFF" />
+			<path d="M22 12 Q24.5 23.5 36 26 Q24.5 28.5 22 40 Q19.5 28.5 8 26 Q19.5 23.5 22 12 Z" fill="#FFFFFF" />
+			<path
+				d="M36 7 Q36.9 11.1 41 12 Q36.9 12.9 36 17 Q35.1 12.9 31 12 Q35.1 11.1 36 7 Z"
+				fill="#FFFFFF"
+				opacity=".7"
+			/>
+		</symbol>
+		<!-- Polished · P3 lustré : le poulpe actuel, avec un reflet -->
+		<symbol id="pl-p3" viewBox="0 0 48 48">
+			<rect width="48" height="48" rx="12" fill="#6D5BFF" />
+			<g id="pl-arm">
+				<path d="M24 24 C24 15 31 10 37 13" fill="none" stroke="#FFFFFF" stroke-width="5.5" stroke-linecap="round" />
+				<circle cx="27.5" cy="14.6" r="1.1" fill="#6D5BFF" />
+				<circle cx="30.7" cy="12.6" r="1.1" fill="#6D5BFF" />
+				<circle cx="33.9" cy="12.1" r="1.1" fill="#6D5BFF" />
+			</g>
+			<use href="#pl-arm" transform="rotate(120 24 24)" />
+			<use href="#pl-arm" transform="rotate(240 24 24)" />
+			<circle cx="24" cy="24" r="5" fill="#FFFFFF" />
+			<path d="M13 6.5 Q13.9 10.1 17.5 11 Q13.9 11.9 13 15.5 Q12.1 11.9 8.5 11 Q12.1 10.1 13 6.5 Z" fill="#FFFFFF" />
+		</symbol>
+		<!-- Polished · facette : une pierre taillée -->
+		<symbol id="pl-gem" viewBox="0 0 48 48">
+			<rect width="48" height="48" rx="12" fill="#6D5BFF" />
+			<path
+				d="M17.5 12 H30.5 L36 19.5 L24 37 L12 19.5 Z"
+				fill="#FFFFFF"
+				stroke="#FFFFFF"
+				stroke-width="2"
+				stroke-linejoin="round"
+			/>
+			<g fill="none" stroke="#6D5BFF" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
+				<path d="M12.5 19.5 H35.5" />
+				<path d="M19.5 19.5 L24 12.5 L28.5 19.5" />
+				<path d="M19.5 19.5 L24 36" />
+				<path d="M28.5 19.5 L24 36" />
+			</g>
+		</symbol>
+		<!-- Octane · compte-tours d'origine, palette Pétrole -->
+		<symbol id="oc-petrol" viewBox="0 0 48 48">
+			<rect width="48" height="48" rx="10" fill="#0F4C5C" />
+			<path
+				d="M12.7 35.3 A16 16 0 1 1 35.3 35.3"
+				fill="none"
+				stroke="#3CC4D6"
+				stroke-width="6"
+				stroke-linecap="round"
+			/>
+			<path d="M24 24 L35 16.5" stroke="#E9EEF2" stroke-width="4.5" stroke-linecap="round" />
+			<circle cx="24" cy="24" r="4" fill="#E9EEF2" />
+		</symbol>
+		<!-- Octane · compte-tours en Boost : garde la palette actuelle du site -->
+		<symbol id="oc-boost" viewBox="0 0 48 48">
+			<rect width="48" height="48" rx="12" fill="#6D5BFF" />
+			<path
+				d="M12.7 35.3 A16 16 0 1 1 35.3 35.3"
+				fill="none"
+				stroke="#FFFFFF"
+				stroke-opacity=".3"
+				stroke-width="6"
+				stroke-linecap="round"
+			/>
+			<path d="M12.7 35.3 A16 16 0 1 1 37.2 15" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" />
+			<path d="M24 24 L33 18" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" />
+			<circle cx="24" cy="24" r="4" fill="#FFFFFF" />
+		</symbol>
+		<!-- Octane · O lancé : l'initiale en italique avec des traits de vitesse -->
+		<symbol id="oc-o" viewBox="0 0 48 48">
+			<rect width="48" height="48" rx="12" fill="#6D5BFF" />
+			<ellipse
+				cx="28"
+				cy="24"
+				rx="8.5"
+				ry="11.5"
+				transform="skewX(-14) translate(6 0)"
+				fill="none"
+				stroke="#FFFFFF"
+				stroke-width="5.5"
+			/>
+			<g stroke="#FFFFFF" stroke-width="3" stroke-linecap="round">
+				<path d="M7 18 H14" opacity=".55" />
+				<path d="M5 24 H13" />
+				<path d="M7 30 H14" opacity=".55" />
+			</g>
+		</symbol>
+	</svg>
+
+	<header class="wrap">
+		<h1>Logos · Polished GitHub et Octane for GitHub</h1>
+		<p class="muted">
+			Trois pistes par nom. Chacune en grand, aux tailles d'icône du navigateur (16, 32, 48), dans une barre d'outils
+			claire et sombre, et en lockup avec le nom.
+		</p>
+	</header>
+
+	<main class="wrap">
+		<h2>Polished GitHub</h2>
+		<p class="muted">Le fini soigné. Palette Boost conservée.</p>
+		<div class="grid" data-name="polished">
+			<article class="card" data-logo="pl-spark" data-word="Polished" data-rest="GitHub">
+				<h3>PL1 · Étincelle <span class="pick">Mon choix</span></h3>
+				<p class="muted">Le reflet d'une surface qu'on vient de polir. Lisible à 16 px, et la forme la plus simple.</p>
+			</article>
+			<article class="card" data-logo="pl-p3" data-word="Polished" data-rest="GitHub">
+				<h3>PL2 · P3 lustré</h3>
+				<p class="muted">
+					Le poulpe actuel, avec un reflet dans le coin. Continuité avec le site, mais l'étincelle disparaît à 16 px.
+				</p>
+			</article>
+			<article class="card" data-logo="pl-gem" data-word="Polished" data-rest="GitHub">
+				<h3>PL3 · Facette</h3>
+				<p class="muted">Une pierre taillée. Évoque le travail de finition, mais vire au diamant générique.</p>
+			</article>
+		</div>
+
+		<h2>Octane for GitHub</h2>
+		<p class="muted">Le carburant. Lockup en Archivo large italique, comme dans la planche d'identité.</p>
+		<div class="grid" data-name="octane">
+			<article class="card" data-logo="oc-petrol" data-word="Octane" data-rest="for GitHub">
+				<h3>OC1 · Compte-tours Pétrole</h3>
+				<p class="muted">La piste d'origine : aiguille presque à fond. Demande de repasser le site en Pétrole.</p>
+			</article>
+			<article class="card" data-logo="oc-boost" data-word="Octane" data-rest="for GitHub">
+				<h3>OC2 · Compte-tours Boost <span class="pick">Mon choix</span></h3>
+				<p class="muted">Le même compte-tours sur le violet actuel. Le site et les options ne changent que de logo.</p>
+			</article>
+			<article class="card" data-logo="oc-o" data-word="Octane" data-rest="for GitHub">
+				<h3>OC3 · O lancé</h3>
+				<p class="muted">L'initiale en italique, avec des traits de vitesse. Plus typographique, porte le nom court.</p>
+			</article>
+		</div>
+	</main>
+
+	<footer class="wrap">
+		<p class="muted">
+			Les tailles 16 et 32 sont celles de la barre d'outils et de l'onglet ; 128 est celle des stores.
+		</p>
+	</footer>
+
+	<script>
+		const icon = (id, size) =>
+			`<svg width="${size}" height="${size}" viewBox="0 0 48 48" aria-hidden="true"><use href="#${id}" /></svg>`;
+		document.querySelectorAll('.card').forEach((card) => {
+			const {logo, word, rest} = card.dataset;
+			const octane = card.closest('[data-name="octane"]') ? ' octane' : '';
+			const label = `${word} ${rest}`;
+			card.insertAdjacentHTML(
+				'afterbegin',
+				`<div class="hero-logo"><svg viewBox="0 0 48 48" role="img" aria-label="Logo ${label}"><use href="#${logo}" /></svg></div>`,
+			);
+			card.insertAdjacentHTML(
+				'beforeend',
+				`<div class="sizes">${[16, 32, 48].map((s) => `<span>${icon(logo, s)}${s}</span>`).join('')}</div>
+				<div class="bars">
+					<div class="bar light"><span class="ghost"></span>${icon(logo, 16)}<span class="ghost"></span></div>
+					<div class="bar dark"><span class="ghost"></span>${icon(logo, 16)}<span class="ghost"></span></div>
+				</div>
+				<div class="lockup on-light${octane}">${icon(logo, 28)}<span>${word} <span class="light">${rest}</span></span></div>
+				<div class="lockup on-dark${octane}">${icon(logo, 28)}<span>${word} <span class="light">${rest}</span></span></div>`,
+			);
+		});
+	</script>
+</html>

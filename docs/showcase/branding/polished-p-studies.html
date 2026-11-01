@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="color-scheme" content="light dark" />
+		<title>Polished GitHub — études du P</title>
+		<style>
+			:root {
+				color-scheme: light;
+				--paper: #f5f6f8;
+				--surface: #fff;
+				--ink: #222631;
+				--muted: #606978;
+				--line: #d8dee7;
+				--violet: #6d5bff;
+				--lavender: #c9c2ff;
+			}
+			:root[data-theme='dark'] {
+				color-scheme: dark;
+				--paper: #171b22;
+				--surface: #202630;
+				--ink: #edf0f5;
+				--muted: #abb5c5;
+				--line: #3d4654;
+			}
+			* {
+				box-sizing: border-box;
+			}
+			body {
+				margin: 0;
+				background: var(--paper);
+				color: var(--ink);
+				font:
+					14px/1.5 'Avenir Next',
+					Avenir,
+					-apple-system,
+					BlinkMacSystemFont,
+					'Segoe UI',
+					sans-serif;
+			}
+			button,
+			select {
+				font: inherit;
+			}
+			button {
+				cursor: pointer;
+			}
+			button:focus-visible,
+			select:focus-visible,
+			summary:focus-visible,
+			a:focus-visible {
+				outline: 3px solid #897cff;
+				outline-offset: 4px;
+			}
+			svg {
+				display: block;
+				flex-shrink: 0;
+			}
+			.wrap {
+				width: min(1200px, calc(100% - 48px));
+				margin: auto;
+			}
+			.masthead {
+				padding: 44px 0 26px;
+				display: flex;
+				justify-content: space-between;
+				align-items: end;
+				gap: 32px;
+			}
+			h1 {
+				font-size: clamp(32px, 4vw, 48px);
+				line-height: 1.1;
+				font-weight: 650;
+				letter-spacing: -1.8px;
+				margin: 0 0 14px;
+			}
+			.intro {
+				color: var(--muted);
+				margin: 0;
+				max-width: 66ch;
+			}
+			.brand {
+				font-size: 18px;
+				font-weight: 750;
+				letter-spacing: -0.7px;
+				white-space: nowrap;
+			}
+			.brand span {
+				font-weight: 400;
+				color: var(--muted);
+			}
+			.controls {
+				display: flex;
+				gap: 16px;
+				align-items: center;
+				justify-content: space-between;
+				flex-wrap: wrap;
+				padding: 14px 0;
+				border-block: 1px solid var(--line);
+				position: sticky;
+				top: 0;
+				z-index: 10;
+				background: var(--paper);
+			}
+			.control-group {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				flex-wrap: wrap;
+			}
+			.segmented {
+				display: flex;
+				gap: 3px;
+				padding: 3px;
+				border: 1px solid var(--line);
+				border-radius: 8px;
+			}
+			.segmented button {
+				border: 0;
+				background: transparent;
+				color: var(--muted);
+				font-size: 12px;
+				padding: 6px 11px;
+				border-radius: 5px;
+			}
+			.segmented button[aria-pressed='true'] {
+				background: var(--ink);
+				color: var(--paper);
+			}
+			select,
+			.theme {
+				padding: 8px 10px;
+				border: 1px solid var(--line);
+				border-radius: 7px;
+				background: var(--surface);
+				color: var(--ink);
+				font-size: 12px;
+			}
+			.palette-note {
+				color: var(--muted);
+				font-size: 12px;
+			}
+			.family {
+				padding: 32px 0 14px;
+			}
+			.family-heading {
+				display: flex;
+				align-items: baseline;
+				justify-content: space-between;
+				gap: 24px;
+				margin-bottom: 18px;
+			}
+			h2 {
+				font-size: 24px;
+				font-weight: 650;
+				letter-spacing: -0.8px;
+				margin: 0;
+			}
+			.family-heading p {
+				margin: 0;
+				font-size: 13px;
+				color: var(--muted);
+				max-width: 58ch;
+			}
+			.grid {
+				display: grid;
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+				gap: 20px;
+			}
+			.study {
+				min-width: 0;
+			}
+			.display {
+				background: var(--surface);
+				border: 1px solid var(--line);
+				border-radius: 12px;
+				overflow: hidden;
+			}
+			.large {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				min-height: 174px;
+			}
+			.sample {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				gap: 13px;
+				background: #fafaff;
+				color: #343047;
+				--mark: var(--violet);
+				--highlight: var(--lavender);
+				--cut: #fafaff;
+			}
+			.sample.dark {
+				background: #242333;
+				color: #d7d2f0;
+				--mark: var(--lavender);
+				--highlight: #fff;
+				--cut: #242333;
+			}
+			.sample svg {
+				width: 76px;
+				height: 76px;
+			}
+			.sample > span {
+				font-size: 10px;
+				opacity: 0.7;
+			}
+			.wordmark {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 8px;
+				padding: 16px 10px;
+				border-top: 1px solid var(--line);
+				font-size: 20px;
+				font-weight: 750;
+				letter-spacing: -0.8px;
+			}
+			.wordmark .rest {
+				color: var(--muted);
+				font-weight: 400;
+			}
+			.tile {
+				display: grid;
+				place-items: center;
+				width: var(--size);
+				height: var(--size);
+				flex-shrink: 0;
+				border-radius: 25%;
+				background: var(--violet);
+				--mark: #fff;
+				--highlight: var(--lavender);
+				--cut: var(--violet);
+			}
+			.tile svg {
+				width: 100%;
+				height: 100%;
+			}
+			.wordmark .tile {
+				--size: 28px;
+			}
+			.sizes {
+				display: flex;
+				justify-content: space-between;
+				align-items: end;
+				gap: 12px;
+				padding: 17px 20px;
+				border-top: 1px solid var(--line);
+			}
+			.size {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 8px;
+				font-size: 10px;
+				color: var(--muted);
+			}
+			.bars {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 8px;
+				padding: 0 12px 12px;
+			}
+			.bar {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 16px;
+				padding: 9px 12px;
+				border: 1px solid #d8dee7;
+				border-radius: 6px;
+				background: #f6f8fa;
+			}
+			.bar.dark {
+				border-color: #404751;
+				background: #252b34;
+			}
+			.bar .tile {
+				--size: 16px;
+			}
+			.ghost {
+				width: 12px;
+				height: 12px;
+				border-radius: 3px;
+				background: #a4acb9;
+				opacity: 0.4;
+			}
+			.study-heading {
+				display: flex;
+				justify-content: space-between;
+				align-items: baseline;
+				gap: 12px;
+				padding-top: 14px;
+			}
+			h3 {
+				margin: 0;
+				font-size: 16px;
+				font-weight: 650;
+				letter-spacing: -0.3px;
+			}
+			.code {
+				font-size: 11px;
+				color: var(--muted);
+				margin-right: 7px;
+				font-weight: 500;
+			}
+			.export {
+				background: transparent;
+				color: var(--muted);
+				font-size: 11px;
+				padding: 3px 0;
+				border: 0;
+				text-decoration: underline;
+				text-underline-offset: 3px;
+				white-space: nowrap;
+			}
+			.description {
+				color: var(--muted);
+				font-size: 12px;
+				margin: 7px 0 0;
+				max-width: 48ch;
+			}
+			details {
+				margin: 30px 0;
+				padding: 20px 0;
+				border-block: 1px solid var(--line);
+			}
+			summary {
+				cursor: pointer;
+				font-size: 14px;
+				font-weight: 600;
+				width: fit-content;
+			}
+			details .grid {
+				margin-top: 22px;
+				max-width: 794px;
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+			}
+			.comparison-note {
+				color: var(--muted);
+				font-size: 12px;
+				margin: 12px 0 0;
+				max-width: 75ch;
+			}
+			footer {
+				display: flex;
+				justify-content: space-between;
+				gap: 20px;
+				color: var(--muted);
+				padding: 0 0 36px;
+				font-size: 12px;
+			}
+			footer a {
+				color: inherit;
+				text-underline-offset: 3px;
+			}
+			.tile-mode .sample {
+				--cut: var(--violet);
+				--mark: #fff;
+				--highlight: var(--lavender);
+			}
+			.tile-mode .sample > svg {
+				padding: 0;
+				border-radius: 25%;
+				background: var(--violet);
+			}
+			.mono .sample {
+				--mark: #252630;
+				--highlight: #252630;
+			}
+			.mono .sample.dark {
+				--mark: #fff;
+				--highlight: #fff;
+			}
+			.mono .tile {
+				background: var(--ink);
+				--mark: var(--surface);
+				--highlight: var(--surface);
+				--cut: var(--ink);
+			}
+			.mono svg {
+				--highlight: var(--mark) !important;
+			}
+			.mono.tile-mode .sample {
+				--mark: #fff;
+				--highlight: #fff;
+				--cut: #252630;
+			}
+			.mono.tile-mode .sample > svg {
+				background: #252630;
+			}
+			.mono.tile-mode .sample.dark {
+				--mark: #252630;
+				--highlight: #252630;
+				--cut: #fff;
+			}
+			.mono.tile-mode .sample.dark > svg {
+				background: #fff;
+			}
+			@media (max-width: 960px) {
+				.grid {
+					gap: 14px;
+				}
+				.wordmark {
+					font-size: 17px;
+					gap: 6px;
+				}
+				.sizes {
+					padding: 15px 12px;
+					gap: 8px;
+				}
+				.family-heading {
+					align-items: start;
+					flex-direction: column;
+					gap: 8px;
+				}
+				.sample svg {
+					width: 68px;
+					height: 68px;
+				}
+				.sample {
+					min-width: 0;
+				}
+			}
+			@media (max-width: 720px) {
+				.wrap {
+					width: calc(100% - 32px);
+				}
+				.masthead {
+					padding-top: 28px;
+				}
+				.masthead > .brand {
+					display: none;
+				}
+				.grid {
+					grid-template-columns: 1fr;
+					gap: 28px;
+				}
+				.large {
+					min-height: 180px;
+				}
+				.sample svg {
+					width: 88px;
+					height: 88px;
+				}
+				.wordmark {
+					font-size: 22px;
+				}
+				.sizes {
+					justify-content: center;
+					gap: 36px;
+				}
+				.control-group {
+					gap: 6px;
+				}
+				.controls {
+					gap: 8px;
+				}
+				.segmented button {
+					padding: 6px 8px;
+				}
+				details .grid {
+					grid-template-columns: 1fr;
+				}
+				footer {
+					flex-direction: column;
+					gap: 8px;
+				}
+			}
+			@media (prefers-reduced-motion: reduce) {
+				*,
+				*::before,
+				*::after {
+					scroll-behavior: auto !important;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<header class="wrap masthead">
+			<div>
+				<h1>Un P, deux caractères.</h1>
+				<p class="intro">
+					Géométrie adoucie ou surface lumineuse : six variantes pour Polished GitHub, avec la même palette et les mêmes
+					dimensions.
+				</p>
+			</div>
+			<div class="brand">Polished <span>GitHub</span></div>
+		</header>
+		<main class="wrap">
+			<div class="controls" aria-label="Options de comparaison">
+				<div class="control-group">
+					<div class="segmented" role="group" aria-label="Couleur du symbole">
+						<button type="button" data-color="color" aria-pressed="true">Couleur</button
+						><button type="button" data-color="mono" aria-pressed="false">Monochrome</button>
+					</div>
+					<div class="segmented" role="group" aria-label="Présentation en grand">
+						<button type="button" data-display="symbol" aria-pressed="true">Symbole</button
+						><button type="button" data-display="tile" aria-pressed="false">Icône</button>
+					</div>
+				</div>
+				<div class="control-group">
+					<span class="palette-note">Boost · #6D5BFF</span
+					><button type="button" class="theme" aria-pressed="false">Interface sombre</button>
+				</div>
+			</div>
+			<section class="family" aria-labelledby="cut-heading">
+				<div class="family-heading">
+					<h2 id="cut-heading">Le P taillé, adouci</h2>
+					<p>Conserver une découpe caractéristique, en assouplissant les angles et les proportions.</p>
+				</div>
+				<div class="grid" id="cut-studies"></div>
+			</section>
+			<section class="family" aria-labelledby="reflection-heading">
+				<div class="family-heading">
+					<h2 id="reflection-heading">Le P à reflet</h2>
+					<p>Trois façons de suggérer une surface polie, avec un seul effet par symbole.</p>
+				</div>
+				<div class="grid" id="reflection-studies"></div>
+			</section>
+			<details>
+				<summary>Comparer avec les deux dessins précédents</summary>
+				<p class="comparison-note">
+					Les originaux sont présentés sur le même violet pour isoler la forme. Le reflet conserve son accent pêche dans
+					la version couleur.
+				</p>
+				<div class="grid" id="references"></div>
+			</details>
+			<footer>
+				<span>Études de forme · 16, 24, 32 et 48 px · SVG exportables</span
+				><span><a href="polished-directions.html">Première planche</a> · <a href="tour-3.html">Tour 3</a></span>
+			</footer>
+		</main>
+		<script>
+			const roundedP =
+				'M17 12H34C46 12 52 18 52 29C52 40 45 47 34 47H28V51Q28 55 24 55H18Q14 55 14 51V16Q14 12 17 12ZM28 24V35H33C37 35 39 33 39 29.5S37 24 33 24Z';
+			const studies = [
+				{
+					id: 't1',
+					family: 'cut',
+					code: 'T1',
+					name: 'Biseau doux',
+					description:
+						'Le biseau extérieur reste visible. Les raccords sont arrondis et la contreforme est plus ouverte.',
+					path: 'M17 12H34Q37 12 39 14L48 23Q50 25 50 28V33Q50 35 48 37L40 45Q38 47 35 47H27V52Q27 54 25 54H17Q15 54 15 52V14Q15 12 17 12ZM27 24V35H32Q34 35 35 34L39 30Q40 29 39 28L36 25Q35 24 33 24Z',
+				},
+				{
+					id: 't2',
+					family: 'cut',
+					code: 'T2',
+					name: 'Épaule souple',
+					description:
+						'Une épaule ronde et un biseau limité au retour inférieur. Un compromis entre précision et douceur.',
+					path: 'M17 12H34C45 12 51 19 51 29C51 35 48 38 44 42L40 46Q38 48 34 48H27V52Q27 54 25 54H17Q15 54 15 52V14Q15 12 17 12ZM27 24V36H33C37 36 39 33 39 29C39 26 37 24 33 24Z',
+				},
+				{
+					id: 't3',
+					family: 'cut',
+					code: 'T3',
+					name: 'Cœur taillé',
+					description:
+						'Une silhouette arrondie ; la facette passe à l’intérieur du P. Le détail se découvre dans la contreforme.',
+					path: 'M17 12H34C46 12 52 18 52 29C52 40 45 47 34 47H28V51Q28 55 24 55H18Q14 55 14 51V16Q14 12 17 12ZM28 24V35H33Q35 35 36 34L39 31V28L36.5 25.5Q35 24 33 24Z',
+				},
+				{
+					id: 'r1',
+					family: 'reflection',
+					code: 'R1',
+					name: 'Reflet court',
+					description: 'Un reflet courbe sur l’épaule du P. Il accompagne le volume sans traverser la lettre.',
+					path: roundedP,
+					effect:
+						'<path d="M34 17C42 17 47 21 47 28" fill="none" stroke="var(--highlight)" stroke-width="3.2" stroke-linecap="round"/>',
+				},
+				{
+					id: 'r2',
+					family: 'reflection',
+					code: 'R2',
+					name: 'Lumière rasante',
+					description:
+						'Une bande douce sur la partie haute. La lettre garde toute sa silhouette et le reflet reste secondaire.',
+					path: roundedP,
+					effect: '<path d="M24 9L57 20L54 26L24 16Z" fill="var(--highlight)"/>',
+				},
+				{
+					id: 'r3',
+					family: 'reflection',
+					code: 'R3',
+					name: 'Reflet découpé',
+					description: 'Une seule découpe oblique remplace la double bande. Le reflet reste présent en monochrome.',
+					path: roundedP,
+					effect: '<path d="M10 31L53 12L55 16L12 35Z" fill="var(--cut)"/>',
+				},
+				{
+					id: 'old-cut',
+					family: 'reference',
+					code: 'Avant',
+					name: 'P taillé initial',
+					description: 'Des angles francs, une contreforme polygonale et un pied court.',
+					path: 'M14 54V10H38L52 24V34L38 48H26V54ZM26 22V36H33L40 29L33 22Z',
+				},
+				{
+					id: 'old-reflection',
+					family: 'reference',
+					code: 'Avant',
+					name: 'P reflet initial',
+					description: 'Une bande pêche et une découpe oblique traversent la partie haute du P.',
+					path: 'M14 54V10H34C47 10 54 17 54 29S47 48 34 48H27V54ZM27 23V35H34C39 35 41 33 41 29S39 23 34 23Z',
+					effect:
+						'<path fill="var(--highlight)" d="M2 32L56 3L60 11L6 40Z"/><path fill="var(--cut)" d="M4 37L58 8L60 12L6 41Z"/>',
+					peach: true,
+				},
+			];
+			let svgSequence = 0;
+			function mark(study, standalone = false) {
+				const clipId = `p-clip-${++svgSequence}`;
+				const peach = study.peach ? ' style="--highlight:#f4b49b"' : '';
+				const shape = `<path d="${study.path}" fill="var(--mark)" fill-rule="evenodd"/>`;
+				const effect = study.effect
+					? `<defs><clipPath id="${clipId}"><path d="${study.path}" clip-rule="evenodd"/></clipPath></defs><g clip-path="url(#${clipId})">${study.effect}</g>`
+					: '';
+				const content = `${shape}${effect}`;
+				return standalone ? content : `<svg viewBox="0 0 64 64" aria-hidden="true"${peach}>${content}</svg>`;
+			}
+			function tile(study, size) {
+				return `<span class="tile" style="--size:${size}px">${mark(study)}</span>`;
+			}
+			function card(study) {
+				return `<article class="study" aria-labelledby="title-${study.id}">
+        <div class="display">
+          <div class="large"><div class="sample">${mark(study)}<span>Clair</span></div><div class="sample dark">${mark(study)}<span>Sombre</span></div></div>
+          <div class="wordmark">${tile(study, 28)}<span>Polished <span class="rest">GitHub</span></span></div>
+          <div class="sizes">${[16, 24, 32, 48].map((size) => `<div class="size">${tile(study, size)}<span>${size} px</span></div>`).join('')}</div>
+          <div class="bars">${['light', 'dark'].map((theme) => `<div class="bar ${theme}"><span class="ghost"></span>${tile(study, 16)}<span class="ghost"></span></div>`).join('')}</div>
+        </div>
+        <div class="study-heading"><h3 id="title-${study.id}"><span class="code">${study.code}</span>${study.name}</h3><button type="button" class="export" data-export="${study.id}" aria-label="Télécharger le logo ${study.name} en SVG">SVG ↓</button></div>
+        <p class="description">${study.description}</p>
+      </article>`;
+			}
+			for (const [family, id] of [
+				['cut', 'cut-studies'],
+				['reflection', 'reflection-studies'],
+				['reference', 'references'],
+			]) {
+				document.getElementById(id).innerHTML = studies
+					.filter((s) => s.family === family)
+					.map(card)
+					.join('');
+			}
+			for (const [selector, attribute, className, activeValue] of [
+				['[data-color]', 'color', 'mono', 'mono'],
+				['[data-display]', 'display', 'tile-mode', 'tile'],
+			]) {
+				document.querySelectorAll(selector).forEach((button) =>
+					button.addEventListener('click', () => {
+						document.documentElement.classList.toggle(className, button.dataset[attribute] === activeValue);
+						document.querySelectorAll(selector).forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
+					}),
+				);
+			}
+			const themeButton = document.querySelector('.theme');
+			function setTheme(dark) {
+				document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+				themeButton.setAttribute('aria-pressed', String(dark));
+				themeButton.textContent = dark ? 'Interface claire' : 'Interface sombre';
+			}
+			setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches);
+			themeButton.addEventListener('click', () => setTheme(document.documentElement.dataset.theme !== 'dark'));
+			document.querySelectorAll('[data-export]').forEach((button) =>
+				button.addEventListener('click', () => {
+					const study = studies.find((s) => s.id === button.dataset.export);
+					const mono = document.documentElement.classList.contains('mono');
+					const background = mono ? '#222631' : '#6d5bff';
+					const accent = mono ? '#ffffff' : study.peach ? '#f4b49b' : '#c9c2ff';
+					const svg =
+						`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="128" height="128" role="img" aria-labelledby="title"><title id="title">Polished GitHub — ${study.name}</title><rect width="64" height="64" rx="16" fill="${background}"/>${mark(study, true)}</svg>`
+							.replaceAll('var(--mark)', '#ffffff')
+							.replaceAll('var(--highlight)', accent)
+							.replaceAll('var(--cut)', background);
+					const url = URL.createObjectURL(new Blob([svg], {type: 'image/svg+xml'}));
+					const anchor = document.createElement('a');
+					anchor.href = url;
+					anchor.download = `polished-${study.id}${mono ? '-mono' : ''}.svg`;
+					document.body.append(anchor);
+					anchor.click();
+					anchor.remove();
+					setTimeout(() => URL.revokeObjectURL(url), 1000);
+				}),
+			);
+		</script>
+	</body>
+</html>
