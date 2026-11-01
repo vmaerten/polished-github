@@ -1,0 +1,221 @@
+{
+	"extensionName": {
+		"message": "Polished GitHub"
+	},
+	"extensionDescription": {
+		"message": "Peaufine le GitHub que vous utilisez chaque jour, à commencer par les pull requests. Sans lien avec GitHub, Inc."
+	},
+	"feature_imageModal": {
+		"message": "Ouvre les images des issues, des PR, des commentaires et des README dans une fenêtre zoomable au lieu d'un nouvel onglet."
+	},
+	"feature_diffStats": {
+		"message": "Affiche les lignes ajoutées et supprimées de chaque PR dans la liste des pull requests du dépôt."
+	},
+	"feature_reviewStatus": {
+		"message": "Indique où en est chaque PR pour vous dans la liste des pull requests du dépôt : review demandée, nouvelle review, modifications demandées, ou approuvée avec des commits poussés depuis."
+	},
+	"feature_idlePrs": {
+		"message": "Signale les PR sans activité récente dans la liste des pull requests du dépôt."
+	},
+	"feature_quickComments": {
+		"message": "Des boutons au-dessus de la zone de commentaire qui publient un commentaire prédéfini en un clic. Maj-clic l'insère à la place."
+	},
+	"feature_reviewerLoad": {
+		"message": "Affiche combien de reviews chaque personne a déjà en attente dans le choix des reviewers d'une PR."
+	},
+	"api_noToken": {
+		"message": "Aucun token GitHub : ajoutez-en un dans les options de Polished GitHub"
+	},
+	"api_invalidToken": {
+		"message": "Le token GitHub est invalide ou a expiré"
+	},
+	"api_rateLimit": {
+		"message": "Limite de requêtes de l'API GitHub atteinte, réinitialisée à $1"
+	},
+	"api_error": {
+		"message": "API GitHub $1 : $2"
+	},
+	"api_graphqlError": {
+		"message": "GraphQL GitHub : $1"
+	},
+	"options_title": {
+		"message": "Options de Polished GitHub"
+	},
+	"options_version": {
+		"message": "Version $1 · Options"
+	},
+	"options_repository": {
+		"message": "Dépôt"
+	},
+	"options_reportBug": {
+		"message": "Signaler un bug"
+	},
+	"options_features": {
+		"message": "Fonctionnalités"
+	},
+	"options_enabledCount": {
+		"message": "$1 sur $2 activées. Les changements s'appliquent au prochain chargement de page."
+	},
+	"options_filter": {
+		"message": "Filtrer les fonctionnalités"
+	},
+	"options_needsToken": {
+		"message": "token requis"
+	},
+	"options_addToken": {
+		"message": "Ajoutez un token ci-dessus pour l'activer."
+	},
+	"options_settings": {
+		"message": "Réglages"
+	},
+	"options_enable": {
+		"message": "Activer $1"
+	},
+	"options_noMatch": {
+		"message": "Aucune fonctionnalité ne correspond à « $1 »."
+	},
+	"options_syncNote": {
+		"message": "Les réglages se synchronisent entre vos navigateurs. Le token reste sur cet appareil."
+	},
+	"options_reset": {
+		"message": "Rétablir les réglages par défaut"
+	},
+	"options_resetConfirm": {
+		"message": "Rétablir tous les réglages par défaut ? Votre token est conservé."
+	},
+	"options_notAffiliated": {
+		"message": "Polished GitHub n'est ni affilié à GitHub, Inc., ni approuvé ou soutenu par GitHub, Inc."
+	},
+	"options_saveQuota": {
+		"message": "Non enregistré : trop long pour être synchronisé entre vos navigateurs. Raccourcissez ou supprimez quelque chose."
+	},
+	"options_saveError": {
+		"message": "Non enregistré : $1"
+	},
+	"options_preview": {
+		"message": "Aperçu"
+	},
+	"token_title": {
+		"message": "Token GitHub"
+	},
+	"token_description": {
+		"message": "Nécessaire aux fonctionnalités qui appellent l'API GitHub. Stocké sur cet appareil uniquement, jamais synchronisé."
+	},
+	"token_label": {
+		"message": "Token d'accès personnel"
+	},
+	"token_show": {
+		"message": "Afficher le token"
+	},
+	"token_hide": {
+		"message": "Masquer le token"
+	},
+	"token_save": {
+		"message": "Enregistrer"
+	},
+	"token_checking": {
+		"message": "Vérification…"
+	},
+	"token_connectedAs": {
+		"message": "Connecté en tant que"
+	},
+	"token_requestsLeft": {
+		"message": "· $1 / $2 requêtes restantes cette heure-ci"
+	},
+	"token_consentDenied": {
+		"message": "Firefox a besoin de votre accord pour envoyer le token et les pages que vous consultez à l'API GitHub. Rien n'a été enregistré."
+	},
+	"token_helpStart": {
+		"message": "Utilisez un"
+	},
+	"token_helpLink": {
+		"message": "token fine-grained"
+	},
+	"token_helpAccess": {
+		"message": "avec l'accès en lecture aux"
+	},
+	"token_helpClassic": {
+		"message": "sur les dépôts que vous consultez, ou un token classique avec le scope"
+	},
+	"token_helpEnd": {
+		"message": ". Pour les organisations qui utilisent le SSO, autorisez aussi le token pour elles."
+	},
+	"prList_title": {
+		"message": "Badges de la liste des PR"
+	},
+	"prList_description": {
+		"message": "Où placer les statistiques du diff, votre statut de review et l'inactivité sur chaque ligne de la liste des PR."
+	},
+	"prList_right": {
+		"message": "Dans la colonne de droite, alignés d'une ligne à l'autre"
+	},
+	"prList_metadata": {
+		"message": "Dans la ligne grise sous le titre"
+	},
+	"idlePrs_before": {
+		"message": "Signaler les PR sans activité depuis"
+	},
+	"idlePrs_after": {
+		"message": "jours ou plus"
+	},
+	"idlePrs_drafts": {
+		"message": "Signaler aussi les PR en brouillon"
+	},
+	"imageModal_cycle": {
+		"message": "Passer d'une image du commentaire à l'autre avec ← et →"
+	},
+	"imageModal_zoom": {
+		"message": "Zoomer avec la molette, faire glisser pour se déplacer"
+	},
+	"imageModal_linked": {
+		"message": "Ouvrir aussi les images qui mènent ailleurs, comme les badges de CI"
+	},
+	"diffStats_showFiles": {
+		"message": "Afficher le nombre de fichiers modifiés"
+	},
+	"diffStats_showSize": {
+		"message": "Afficher un libellé de taille, d'après les lignes ajoutées et supprimées"
+	},
+	"diffStats_above": {
+		"message": "$1 au-delà"
+	},
+	"diffStats_previewFiles": {
+		"message": "· $1 fichiers"
+	},
+	"quickComments_label": {
+		"message": "Libellé du bouton"
+	},
+	"quickComments_comment": {
+		"message": "Commentaire"
+	},
+	"quickComments_showOn": {
+		"message": "Afficher sur"
+	},
+	"quickComments_prs": {
+		"message": "PR"
+	},
+	"quickComments_issues": {
+		"message": "Issues"
+	},
+	"quickComments_both": {
+		"message": "Les deux"
+	},
+	"quickComments_moveUp": {
+		"message": "Monter"
+	},
+	"quickComments_moveDown": {
+		"message": "Descendre"
+	},
+	"quickComments_remove": {
+		"message": "Supprimer"
+	},
+	"quickComments_add": {
+		"message": "+ Ajouter un bouton"
+	},
+	"quickComments_newLabel": {
+		"message": "Nouveau"
+	},
+	"quickComments_newBody": {
+		"message": "Nouveau commentaire"
+	}
+}

@@ -4,6 +4,7 @@ import * as pageDetect from 'github-url-detection';
 import type {Feature} from '../feature-manager.js';
 import {v4} from '../github-helpers/api.js';
 import {observe} from '../helpers/observe.js';
+import {t} from '../helpers/i18n.js';
 import {mutedColor} from '../github-helpers/colors.js';
 
 // The picker loads its rows when opened and again when filtering
@@ -112,7 +113,7 @@ async function addCounts(elements: Element[], counts: Map<string, number>): Prom
 
 const reviewerLoad: Feature = {
 	id: 'reviewer-load',
-	description: 'Shows how many reviews each person already has pending in the reviewers picker of a PR.',
+	description: t('feature_reviewerLoad'),
 	include: [pageDetect.isPRConversation],
 	requiresToken: true,
 	init(signal) {

@@ -1,13 +1,14 @@
 import {mount, unmount} from 'svelte';
 
 import type {Feature} from '../../feature-manager.js';
+import {t} from '../../helpers/i18n.js';
 import {getOptions} from '../../options-storage.js';
 import {getGallery} from './gallery.js';
 import ImageModal from './ImageModal.svelte';
 
 const imageModal: Feature = {
 	id: 'image-modal',
-	description: 'Opens images from issues, PRs, comments and READMEs in a zoomable modal instead of a new tab.',
+	description: t('feature_imageModal'),
 	async init(signal) {
 		const settings = (await getOptions()).imageModal;
 		const onClick = (event: MouseEvent): void => {

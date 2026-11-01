@@ -1,5 +1,6 @@
 <script lang="ts">
 	import {features} from '../features/index.js';
+	import {t} from '../helpers/i18n.js';
 	import {
 		getOptions,
 		getToken,
@@ -50,13 +51,13 @@
 			// Sync storage caps each setting at 8 KB: past it, the change would only live until the page reloads
 			const message = error instanceof Error ? error.message : String(error);
 			saveError = /quota/i.test(message)
-				? 'Not saved: too long to sync between your browsers. Shorten or remove something.'
-				: `Not saved: ${message}`;
+				? t('options_saveQuota')
+				: t('options_saveError', message);
 		}
 	}
 
 	async function reset(): Promise<void> {
-		if (confirm('Reset every setting to its default? Your token is kept.')) {
+		if (confirm(t('options_resetConfirm'))) {
 			await resetOptions();
 			await load();
 		}
@@ -71,12 +72,12 @@
 			<img class="logo" src="icons/icon-48.png" width="40" height="40" alt="">
 			<div>
 				<h1>Polished <span class="wordmark-light">GitHub</span></h1>
-				<span class="muted small">Version {version} · Options</span>
+				<span class="muted small">{t('options_version', version)}</span>
 			</div>
 		</div>
 		<nav class="small">
-			<a href="https://github.com/vmaerten/polished-github" target="_blank" rel="noopener noreferrer">Repository</a>
-			<a href="https://github.com/vmaerten/polished-github/issues/new" target="_blank" rel="noopener noreferrer">Report a bug</a>
+			<a href="https://github.com/vmaerten/polished-github" target="_blank" rel="noopener noreferrer">{t('options_repository')}</a>
+			<a href="https://github.com/vmaerten/polished-github/issues/new" target="_blank" rel="noopener noreferrer">{t('options_reportBug')}</a>
 		</nav>
 	</header>
 
@@ -88,10 +89,10 @@
 		<section class="features">
 			<div class="features-header">
 				<div class="heading">
-					<h2>Features</h2>
-					<p class="muted">{enabledCount} of {features.length} enabled. Changes apply on the next page load.</p>
+					<h2>{t('options_features')}</h2>
+					<p class="muted">{t('options_enabledCount', enabledCount, features.length)}</p>
 				</div>
-				<input type="search" aria-label="Filter features" placeholder="Filter features" bind:value={filter}>
+				<input type="search" aria-label={t('options_filter')} placeholder={t('options_filter')} bind:value={filter}>
 			</div>
 
 			<ul class="card list">
@@ -102,11 +103,11 @@
 							<div class="feature-text">
 								<div class="feature-title">
 									<h3 class="mono">{feature.id}</h3>
-									{#if feature.requiresToken}<span class="pill">needs token</span>{/if}
+									{#if feature.requiresToken}<span class="pill">{t('options_needsToken')}</span>{/if}
 								</div>
 								<p class="muted">{feature.description}</p>
 								{#if feature.requiresToken && !hasToken && enabled}
-									<p class="warning small">Add a token above to turn this on.</p>
+									<p class="warning small">{t('options_addToken')}</p>
 								{/if}
 								{#if configurable.has(feature.id)}
 									<button
@@ -114,7 +115,7 @@
 										class="link"
 										aria-expanded={expanded === feature.id}
 										onclick={() => (expanded = expanded === feature.id ? undefined : feature.id)}
-									>{expanded === feature.id ? '▾' : '▸'} Settings</button>
+									>{expanded === feature.id ? '▾' : '▸'} {t('options_settings')}</button>
 								{/if}
 							</div>
 							<button
@@ -122,7 +123,7 @@
 								role="switch"
 								class="switch"
 								aria-checked={enabled}
-								aria-label="Enable {feature.id}"
+								aria-label={t('options_enable', feature.id)}
 								onclick={() => toggle(feature.id, !enabled)}
 							><span></span></button>
 						</div>
@@ -156,18 +157,18 @@
 						{/if}
 					</li>
 				{:else}
-					<li class="muted">No feature matches “{filter}”.</li>
+					<li class="muted">{t('options_noMatch', filter)}</li>
 				{/each}
 			</ul>
 		</section>
 
 		<footer class="small muted">
-			<span>Settings sync across your browsers. The token stays on this device.</span>
-			<button type="button" class="link danger" onclick={reset}>Reset to defaults</button>
+			<span>{t('options_syncNote')}</span>
+			<button type="button" class="link danger" onclick={reset}>{t('options_reset')}</button>
 		</footer>
 	{/if}
 
-	<p class="small muted">Polished GitHub is not affiliated with, endorsed or sponsored by GitHub, Inc.</p>
+	<p class="small muted">{t('options_notAffiliated')}</p>
 </main>
 
 <style>

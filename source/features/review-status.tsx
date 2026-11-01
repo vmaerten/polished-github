@@ -9,6 +9,7 @@ import {
 	type PullRequestState,
 	removePullRequestBadge,
 } from '../github-helpers/pr-list.js';
+import {t} from '../helpers/i18n.js';
 import {type BadgePlacement, getOptions} from '../options-storage.js';
 
 export type ReviewInfo = {
@@ -91,8 +92,7 @@ function addBadge(title: HTMLElement, status: ReviewStatus, placement: BadgePlac
 
 const reviewStatus: Feature = {
 	id: 'review-status',
-	description:
-		'Shows where each PR stands for you in the repository pull request list: review requested, re-review, changes requested, or approved with commits pushed since.',
+	description: t('feature_reviewStatus'),
 	include: [pageDetect.isRepoPRList],
 	requiresToken: true,
 	async init(signal) {

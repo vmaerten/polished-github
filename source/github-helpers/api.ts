@@ -1,4 +1,5 @@
 import {getToken} from '../options-storage.js';
+import {t} from '../helpers/i18n.js';
 
 export class GitHubApiError extends Error {
 	override name = 'GitHubApiError';
@@ -7,7 +8,7 @@ export class GitHubApiError extends Error {
 async function request(path: string, init: RequestInit = {}): Promise<Response> {
 	const token = await getToken();
 	if (!token) {
-		throw new GitHubApiError('No GitHub token: set one in the Polished GitHub options');
+		throw new GitHubApiError(t('api_noToken'));
 	}
 
 	const headers = new Headers(init.headers);
@@ -23,17 +24,17 @@ async function request(path: string, init: RequestInit = {}): Promise<Response> 
 	}
 
 	if (response.status === 401) {
-		throw new GitHubApiError('GitHub token is invalid or expired');
+		throw new GitHubApiError(t('api_invalidToken'));
 	}
 
 	if (response.headers.get('x-ratelimit-remaining') === '0') {
 		const reset = new Date(Number(response.headers.get('x-ratelimit-reset')) * 1000);
-		throw new GitHubApiError(`GitHub API rate limit exceeded, resets at ${reset.toLocaleTimeString()}`);
+		throw new GitHubApiError(t('api_rateLimit', reset.toLocaleTimeString()));
 	}
 
 	// Error bodies are usually `{message}`, but proxies can answer with HTML
 	const {message} = (await response.json().catch(() => ({message: response.statusText}))) as {message: string};
-	throw new GitHubApiError(`GitHub API ${response.status}: ${message}`);
+	throw new GitHubApiError(t('api_error', response.status, message));
 }
 
 /** REST API. `path` starts with `/`, e.g. `/repos/owner/name`. */
@@ -47,7 +48,7 @@ export async function v4<T>(query: string, variables: Record<string, unknown> = 
 	const response = await request('/graphql', {method: 'POST', body: JSON.stringify({query, variables})});
 	const {data, errors} = (await response.json()) as {data: T; errors?: Array<{message: string}>};
 	if (errors?.length) {
-		throw new GitHubApiError(`GitHub GraphQL: ${errors.map((error) => error.message).join('; ')}`);
+		throw new GitHubApiError(t('api_graphqlError', errors.map((error) => error.message).join('; ')));
 	}
 
 	return data;

@@ -4,5 +4,218 @@
 	},
 	"extensionDescription": {
 		"message": "Polishes the GitHub you use every day, starting with pull requests. Not affiliated with GitHub, Inc."
+	},
+	"feature_imageModal": {
+		"message": "Opens images from issues, PRs, comments and READMEs in a zoomable modal instead of a new tab."
+	},
+	"feature_diffStats": {
+		"message": "Shows lines added and removed for each PR in the repository pull request list."
+	},
+	"feature_reviewStatus": {
+		"message": "Shows where each PR stands for you in the repository pull request list: review requested, re-review, changes requested, or approved with commits pushed since."
+	},
+	"feature_idlePrs": {
+		"message": "Flags PRs with no recent activity in the repository pull request list."
+	},
+	"feature_quickComments": {
+		"message": "Buttons above the comment box that post a predefined comment in one click. Shift-click inserts it instead."
+	},
+	"feature_reviewerLoad": {
+		"message": "Shows how many reviews each person already has pending in the reviewers picker of a PR."
+	},
+	"api_noToken": {
+		"message": "No GitHub token: set one in the Polished GitHub options"
+	},
+	"api_invalidToken": {
+		"message": "GitHub token is invalid or expired"
+	},
+	"api_rateLimit": {
+		"message": "GitHub API rate limit exceeded, resets at $1"
+	},
+	"api_error": {
+		"message": "GitHub API $1: $2"
+	},
+	"api_graphqlError": {
+		"message": "GitHub GraphQL: $1"
+	},
+	"options_title": {
+		"message": "Polished GitHub options"
+	},
+	"options_version": {
+		"message": "Version $1 · Options"
+	},
+	"options_repository": {
+		"message": "Repository"
+	},
+	"options_reportBug": {
+		"message": "Report a bug"
+	},
+	"options_features": {
+		"message": "Features"
+	},
+	"options_enabledCount": {
+		"message": "$1 of $2 enabled. Changes apply on the next page load."
+	},
+	"options_filter": {
+		"message": "Filter features"
+	},
+	"options_needsToken": {
+		"message": "needs token"
+	},
+	"options_addToken": {
+		"message": "Add a token above to turn this on."
+	},
+	"options_settings": {
+		"message": "Settings"
+	},
+	"options_enable": {
+		"message": "Enable $1"
+	},
+	"options_noMatch": {
+		"message": "No feature matches “$1”."
+	},
+	"options_syncNote": {
+		"message": "Settings sync across your browsers. The token stays on this device."
+	},
+	"options_reset": {
+		"message": "Reset to defaults"
+	},
+	"options_resetConfirm": {
+		"message": "Reset every setting to its default? Your token is kept."
+	},
+	"options_notAffiliated": {
+		"message": "Polished GitHub is not affiliated with, endorsed or sponsored by GitHub, Inc."
+	},
+	"options_saveQuota": {
+		"message": "Not saved: too long to sync between your browsers. Shorten or remove something."
+	},
+	"options_saveError": {
+		"message": "Not saved: $1"
+	},
+	"options_preview": {
+		"message": "Preview"
+	},
+	"token_title": {
+		"message": "GitHub token"
+	},
+	"token_description": {
+		"message": "Needed by features that call the GitHub API. Stored on this device only, never synced."
+	},
+	"token_label": {
+		"message": "Personal access token"
+	},
+	"token_show": {
+		"message": "Show token"
+	},
+	"token_hide": {
+		"message": "Hide token"
+	},
+	"token_save": {
+		"message": "Save"
+	},
+	"token_checking": {
+		"message": "Checking…"
+	},
+	"token_connectedAs": {
+		"message": "Connected as"
+	},
+	"token_requestsLeft": {
+		"message": "· $1 / $2 requests left this hour"
+	},
+	"token_consentDenied": {
+		"message": "Firefox needs your consent to send the token and the pages you browse to the GitHub API. Nothing was saved."
+	},
+	"token_helpStart": {
+		"message": "Use a"
+	},
+	"token_helpLink": {
+		"message": "fine-grained token"
+	},
+	"token_helpAccess": {
+		"message": "with read access to"
+	},
+	"token_helpClassic": {
+		"message": "on the repositories you browse, or a classic token with the"
+	},
+	"token_helpEnd": {
+		"message": " scope. For organizations using SSO, authorize the token for them too."
+	},
+	"prList_title": {
+		"message": "PR list badges"
+	},
+	"prList_description": {
+		"message": "Where the diff stats, your review status and idle time go in each row of the PR list."
+	},
+	"prList_right": {
+		"message": "In the right column, aligned from row to row"
+	},
+	"prList_metadata": {
+		"message": "In the grey line under the title"
+	},
+	"idlePrs_before": {
+		"message": "Flag PRs with no activity for"
+	},
+	"idlePrs_after": {
+		"message": "days or more"
+	},
+	"idlePrs_drafts": {
+		"message": "Also flag draft PRs"
+	},
+	"imageModal_cycle": {
+		"message": "Cycle through the comment's images with ← and →"
+	},
+	"imageModal_zoom": {
+		"message": "Zoom with the scroll wheel, drag to pan"
+	},
+	"imageModal_linked": {
+		"message": "Also open images that link elsewhere, like CI badges"
+	},
+	"diffStats_showFiles": {
+		"message": "Show the number of changed files"
+	},
+	"diffStats_showSize": {
+		"message": "Show a size label, from lines added and removed"
+	},
+	"diffStats_above": {
+		"message": "$1 above"
+	},
+	"diffStats_previewFiles": {
+		"message": "· $1 files"
+	},
+	"quickComments_label": {
+		"message": "Button label"
+	},
+	"quickComments_comment": {
+		"message": "Comment"
+	},
+	"quickComments_showOn": {
+		"message": "Show on"
+	},
+	"quickComments_prs": {
+		"message": "PRs"
+	},
+	"quickComments_issues": {
+		"message": "Issues"
+	},
+	"quickComments_both": {
+		"message": "Both"
+	},
+	"quickComments_moveUp": {
+		"message": "Move up"
+	},
+	"quickComments_moveDown": {
+		"message": "Move down"
+	},
+	"quickComments_remove": {
+		"message": "Remove"
+	},
+	"quickComments_add": {
+		"message": "+ Add button"
+	},
+	"quickComments_newLabel": {
+		"message": "New"
+	},
+	"quickComments_newBody": {
+		"message": "New comment"
 	}
 }

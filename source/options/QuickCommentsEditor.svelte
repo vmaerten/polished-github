@@ -1,12 +1,13 @@
 <script lang="ts">
 	import type {QuickComment} from '../options-storage.js';
+	import {t} from '../helpers/i18n.js';
 
 	let {comments = $bindable(), onsave}: {comments: QuickComment[]; onsave: () => void} = $props();
 
 	const scopes: Array<{value: QuickComment['on']; label: string}> = [
-		{value: 'prs', label: 'PRs'},
-		{value: 'issues', label: 'Issues'},
-		{value: 'both', label: 'Both'},
+		{value: 'prs', label: t('quickComments_prs')},
+		{value: 'issues', label: t('quickComments_issues')},
+		{value: 'both', label: t('quickComments_both')},
 	];
 
 	function move(index: number, step: number): void {
@@ -21,7 +22,7 @@
 	}
 
 	function add(): void {
-		comments.push({label: 'New', body: 'New comment', on: 'both'});
+		comments.push({label: t('quickComments_newLabel'), body: t('quickComments_newBody'), on: 'both'});
 		onsave();
 	}
 </script>
@@ -29,31 +30,31 @@
 <div class="editor">
 	{#each comments as comment, index (index)}
 		<div class="comment-row">
-			<input aria-label="Button label" bind:value={comment.label} onchange={onsave}>
-			<input aria-label="Comment" class="mono" bind:value={comment.body} onchange={onsave}>
-			<select aria-label="Show on" bind:value={comment.on} onchange={onsave}>
+			<input aria-label={t('quickComments_label')} bind:value={comment.label} onchange={onsave}>
+			<input aria-label={t('quickComments_comment')} class="mono" bind:value={comment.body} onchange={onsave}>
+			<select aria-label={t('quickComments_showOn')} bind:value={comment.on} onchange={onsave}>
 				{#each scopes as scope (scope.value)}
 					<option value={scope.value}>{scope.label}</option>
 				{/each}
 			</select>
 			<div class="actions">
-				<button type="button" class="icon" aria-label="Move up" disabled={index === 0} onclick={() => move(index, -1)}>↑</button>
+				<button type="button" class="icon" aria-label={t('quickComments_moveUp')} disabled={index === 0} onclick={() => move(index, -1)}>↑</button>
 				<button
 					type="button"
 					class="icon"
-					aria-label="Move down"
+					aria-label={t('quickComments_moveDown')}
 					disabled={index === comments.length - 1}
 					onclick={() => move(index, 1)}
 				>↓</button>
-				<button type="button" class="icon" aria-label="Remove" onclick={() => remove(index)}>
+				<button type="button" class="icon" aria-label={t('quickComments_remove')} onclick={() => remove(index)}>
 					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3" /></svg>
 				</button>
 			</div>
 		</div>
 	{/each}
-	<button type="button" class="secondary" onclick={add}>+ Add button</button>
+	<button type="button" class="secondary" onclick={add}>{t('quickComments_add')}</button>
 	<div class="preview">
-		<span class="preview-title">Preview</span>
+		<span class="preview-title">{t('options_preview')}</span>
 		<div class="preview-buttons">
 			{#each comments as comment, index (index)}
 				<span class="chip">{comment.label}</span>

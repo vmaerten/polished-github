@@ -1,6 +1,7 @@
 <script lang="ts">
 	import {getSizeLabel, sizeLabels} from '../features/diff-stats.js';
 	import type {DiffStatsSettings} from '../options-storage.js';
+	import {t} from '../helpers/i18n.js';
 
 	let {settings = $bindable(), onsave}: {settings: DiffStatsSettings; onsave: () => void} = $props();
 
@@ -11,11 +12,11 @@
 <div class="editor">
 	<label class="check">
 		<input type="checkbox" bind:checked={settings.showChangedFiles} onchange={onsave}>
-		Show the number of changed files
+		{t('diffStats_showFiles')}
 	</label>
 	<label class="check">
 		<input type="checkbox" bind:checked={settings.showSizeLabel} onchange={onsave}>
-		Show a size label, from lines added and removed
+		{t('diffStats_showSize')}
 	</label>
 	<div class="thresholds">
 		{#each labels as label, index (label)}
@@ -24,15 +25,15 @@
 				<input type="number" min="1" bind:value={settings.sizeThresholds[index]} onchange={onsave}>
 			</label>
 		{/each}
-		<span class="muted">XL above</span>
+		<span class="muted">{t('diffStats_above', sizeLabels.at(-1)!)}</span>
 	</div>
 	<div class="preview">
-		<span class="preview-title">Preview</span>
+		<span class="preview-title">{t('options_preview')}</span>
 		<div class="pr-row">
 			<strong>feat: open images in a modal on click</strong>
 			<span class="mono success">+128</span>
 			<span class="mono danger">−14</span>
-			{#if settings.showChangedFiles}<span class="muted">· 6 files</span>{/if}
+			{#if settings.showChangedFiles}<span class="muted">{t('diffStats_previewFiles', 6)}</span>{/if}
 			{#if settings.showSizeLabel}<span class="chip">{getSizeLabel(142, settings.sizeThresholds)}</span>{/if}
 		</div>
 	</div>
