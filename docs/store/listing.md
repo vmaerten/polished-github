@@ -4,12 +4,12 @@ Texts and answers for the Chrome Web Store and Firefox Add-ons (AMO). Every publ
 
 ## Shared
 
-| Field                                                                                | Value                                                                                                |
-| ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
-| Name                                                                                 | Polished GitHub                                                                                      |
-| Short description (from `manifest.json`, 132 characters max on the Chrome Web Store) | Polishes the GitHub you use every day, starting with pull requests. Not affiliated with GitHub, Inc. |
-| Homepage                                                                             | https://github.com/vmaerten/polished-github                                                          |
-| Support                                                                              | https://github.com/vmaerten/polished-github/issues                                                   |
+| Field                                                                                                   | Value                                                                                                |
+| ------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| Name                                                                                                    | Polished GitHub                                                                                      |
+| Short description (from `source/_locales/en/messages.json`, 132 characters max on the Chrome Web Store) | Polishes the GitHub you use every day, starting with pull requests. Not affiliated with GitHub, Inc. |
+| Homepage                                                                                                | https://github.com/vmaerten/polished-github                                                          |
+| Support                                                                                                 | https://github.com/vmaerten/polished-github/issues                                                   |
 
 ### Long description
 

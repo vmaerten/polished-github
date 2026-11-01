@@ -28,6 +28,7 @@ export default defineConfig([
 			{from: 'source/manifest.json', to: 'distribution'},
 			{from: 'source/options.html', to: 'distribution'},
 			{from: 'source/icons/*.png', to: 'distribution/icons'},
+			{from: 'source/_locales', to: 'distribution'},
 			{
 				from: 'node_modules/@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2',
 				to: 'distribution/fonts',
