@@ -51,7 +51,34 @@ const defaults: Options = {
 };
 
 export async function getOptions(): Promise<Options> {
-	return (await chrome.storage.sync.get(defaults)) as Options;
+	const stored = (await chrome.storage.sync.get(defaults)) as Options;
+	// storage.sync.get only fills missing top-level keys, and an emptied number field is saved as null
+	const stale = {...defaults.stale, ...stored.stale};
+	const diffStats = {...defaults.diffStats, ...stored.diffStats};
+	return {
+		...stored,
+		imageModal: {...defaults.imageModal, ...stored.imageModal},
+		stale: {...stale, days: isPositiveInteger(stale.days) ? stale.days : defaults.stale.days},
+		diffStats: {
+			...diffStats,
+			sizeThresholds: areAscending(diffStats.sizeThresholds)
+				? diffStats.sizeThresholds
+				: defaults.diffStats.sizeThresholds,
+		},
+	};
+}
+
+function isPositiveInteger(value: unknown): value is number {
+	return Number.isInteger(value) && (value as number) > 0;
+}
+
+function areAscending(thresholds: unknown[]): boolean {
+	return (
+		thresholds.length === 4 &&
+		thresholds.every(
+			(value, index) => isPositiveInteger(value) && (index === 0 || value > (thresholds[index - 1] as number)),
+		)
+	);
 }
 
 export async function setOptions(changes: Partial<Options>): Promise<void> {
