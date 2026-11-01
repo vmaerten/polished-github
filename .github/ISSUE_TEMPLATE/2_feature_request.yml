@@ -7,7 +7,7 @@ body:
       value: |
         Polished GitHub adds small, careful improvements to github.com, starting with pull requests. Every feature can be turned off, and none of them sends data anywhere but the GitHub API.
 
-        Check the [features](https://polished-github.vmaerten.fr/features/), including the ones coming soon, before suggesting one.
+        Check the [features](https://polished-github.vmaerten.fr/features/) before suggesting one.
   - type: textarea
     id: problem
     attributes:
