@@ -393,7 +393,7 @@ const nav = [
 					<h2 id="more" class="section-title">And everything else</h2>
 					<p class="muted">Grouped by what you are doing. Each one can be turned off.</p>
 				</div>
-				<a class="btn btn-secondary" href="/features/">See all {features.length} features</a>
+				<a class="btn btn-secondary" href="/features/">See all {features.filter((f) => !f.data.soon).length} features</a>
 			</div>
 			<div class="groups">
 				{
