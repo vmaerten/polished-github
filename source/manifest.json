@@ -1,9 +1,10 @@
 {
 	"$schema": "https://json.schemastore.org/chrome-manifest",
 	"manifest_version": 3,
-	"name": "Polished GitHub",
+	"name": "__MSG_extensionName__",
 	"version": "0.1.0",
-	"description": "Polishes the GitHub you use every day, starting with pull requests. Not affiliated with GitHub, Inc.",
+	"description": "__MSG_extensionDescription__",
+	"default_locale": "en",
 	"homepage_url": "https://github.com/vmaerten/polished-github",
 	"minimum_chrome_version": "120",
 	"icons": {
