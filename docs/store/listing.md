@@ -103,6 +103,47 @@ The PR list badges and the reviewer load need a read-only GitHub token (a fine-g
 Open source under the MIT license. Code and issues: https://github.com/vmaerten/polished-github
 ```
 
+### AMO, French
+
+AMO stores one version of the listing per language. The English one is the default; this French one is for French-speaking users.
+
+Summary (238 characters):
+
+```text
+Peaufine le GitHub que vous utilisez chaque jour, à commencer par les pull requests : statut de review, taille et inactivité des PR dans la liste, charge des reviewers, réponses rapides et visionneuse d'images. Sans lien avec GitHub, Inc.
+```
+
+Description:
+
+```markdown
+Polished GitHub apporte de petites améliorations soignées à github.com, à commencer par les pull requests. Il est gratuit et open source, et ne change rien d'autre : chaque fonctionnalité peut être désactivée dans les options.
+
+Sans lien avec GitHub, Inc., ni approuvé ou soutenu par GitHub, Inc. GitHub est une marque de GitHub, Inc.
+
+**📋 Dans la liste des PR**
+
+- Statut de review : où en est chaque PR pour vous, review demandée, nouvelle review, modifications demandées, ou approuvée avec des commits poussés depuis.
+- Statistiques du diff : lignes ajoutées et supprimées, fichiers modifiés et une taille de XS à XL.
+- PR inactives : le nombre de jours depuis la dernière activité, au-delà d'un seuil que vous choisissez.
+
+Les badges se placent dans une colonne à droite, alignée d'une ligne à l'autre, ou dans la ligne grise sous le titre.
+
+**👥 Dans le choix des reviewers**
+
+- Charge des reviewers : combien de reviews chaque personne a déjà en attente, pour choisir quelqu'un de disponible.
+
+**💬 Dans les commentaires et les README**
+
+- Réponses rapides : vos réponses habituelles en boutons, publiées en un clic au-dessus de la zone de commentaire.
+- Visionneuse d'images : les images s'ouvrent dans une fenêtre zoomable au lieu d'un nouvel onglet, et les flèches du clavier passent de l'une à l'autre.
+
+**🔒 Votre token reste chez vous**
+
+Les badges de la liste des PR et la charge des reviewers nécessitent un token GitHub en lecture seule (un token fine-grained avec l'accès en lecture aux Pull requests). Il est stocké uniquement dans votre navigateur et envoyé uniquement à api.github.com. L'extension n'a ni serveur ni outil d'analyse.
+
+Open source sous licence MIT. Code et issues : https://github.com/vmaerten/polished-github
+```
+
 **Before submitting.**
 
 - **Source code.** The package is bundled by tsdown, so AMO asks for the source and the build steps: `pnpm install --frozen-lockfile`, `pnpm exec tsdown`, then `node build/firefox.ts`, which writes the Firefox package to `distribution-firefox/`. Node and pnpm versions come from `package.json`.
