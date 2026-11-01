@@ -2,7 +2,12 @@ import React from 'dom-chef';
 import * as pageDetect from 'github-url-detection';
 
 import type {Feature} from '../feature-manager.js';
-import {addPullRequestBadge, forEachListedPullRequest, type PullRequestState} from '../github-helpers/pr-list.js';
+import {
+	addPullRequestBadge,
+	forEachListedPullRequest,
+	type PullRequestState,
+	removePullRequestBadge,
+} from '../github-helpers/pr-list.js';
 import {type BadgePlacement, getOptions, type StaleSettings} from '../options-storage.js';
 
 export type ActivityInfo = {state: PullRequestState; isDraft: boolean; updatedAt: string};
@@ -65,7 +70,9 @@ const idlePrs: Feature = {
 			'state isDraft updatedAt',
 			(title, pr) => {
 				const days = getIdleDays(pr, stale);
-				if (days !== undefined) {
+				if (days === undefined) {
+					removePullRequestBadge(title, badgeClass);
+				} else {
 					addBadge(title, days, prListBadges);
 				}
 			},

@@ -45,6 +45,14 @@ export async function start(features: readonly Feature[]): Promise<void> {
 		document.addEventListener(event, run);
 	}
 
+	// Turbo shows a cached clone of the page on back and forward: our elements would come back stale and without their
+	// listeners, and the features would skip them as already there
+	document.addEventListener('turbo:before-cache', () => {
+		for (const element of document.querySelectorAll('[class^="polished-github-"]')) {
+			element.remove();
+		}
+	});
+
 	run();
 }
 

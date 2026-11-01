@@ -3,7 +3,12 @@ import * as pageDetect from 'github-url-detection';
 
 import type {Feature} from '../feature-manager.js';
 import {mutedColor as muted} from '../github-helpers/colors.js';
-import {addPullRequestBadge, forEachListedPullRequest, type PullRequestState} from '../github-helpers/pr-list.js';
+import {
+	addPullRequestBadge,
+	forEachListedPullRequest,
+	type PullRequestState,
+	removePullRequestBadge,
+} from '../github-helpers/pr-list.js';
 import {type BadgePlacement, getOptions} from '../options-storage.js';
 
 export type ReviewInfo = {
@@ -99,6 +104,8 @@ const reviewStatus: Feature = {
 				const status = getReviewStatus(pr);
 				if (status) {
 					addBadge(title, status, prListBadges);
+				} else {
+					removePullRequestBadge(title, badgeClass);
 				}
 			},
 			{signal},

@@ -1,6 +1,6 @@
 import {expect, test} from 'vitest';
 
-import {addPullRequestBadge, type BadgeClass} from './pr-list.js';
+import {addPullRequestBadge, type BadgeClass, removePullRequestBadge} from './pr-list.js';
 
 function badge(className: BadgeClass): HTMLElement {
 	const element = document.createElement('span');
@@ -20,7 +20,7 @@ function setUpRow(): HTMLElement {
 	return document.querySelector('h3')!;
 }
 
-test('puts badges in their own column of the right column, once each', () => {
+test('puts badges in their own column of the right column, the latest replacing the previous one', () => {
 	const title = setUpRow();
 	addPullRequestBadge(title, 'polished-github-stale', badge('polished-github-stale'), 'right');
 	addPullRequestBadge(title, 'polished-github-review-status', badge('polished-github-review-status'), 'right');
@@ -29,8 +29,12 @@ test('puts badges in their own column of the right column, once each', () => {
 	const rightColumn = document.querySelector('[style*="metadata"]')!;
 	const container = rightColumn.firstElementChild as HTMLElement;
 	expect(container.className).toBe('polished-github-badges');
+	const columns = (): string[] => [...container.children].map((slot) => (slot as HTMLElement).style.gridArea);
 	// A missing diff-stats badge leaves its column empty, so the next rows still line up
-	expect([...container.children].map((slot) => (slot as HTMLElement).style.gridArea)).toEqual(['1 / 3', '1 / 1']);
+	expect(columns()).toEqual(['1 / 1', '1 / 3']);
+
+	removePullRequestBadge(title, 'polished-github-review-status');
+	expect(columns()).toEqual(['1 / 3']);
 });
 
 test('appends badges to the metadata line, in a fixed order', () => {

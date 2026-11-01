@@ -144,17 +144,15 @@ function getContainer(title: HTMLElement, placement: BadgePlacement): HTMLElemen
 	return container;
 }
 
-/** Adds `badge`, which carries `className`, to the PR row of `title` unless that row already has one. */
+/** Adds `badge`, which carries `className`, to the PR row of `title`, replacing the one already there. */
 export function addPullRequestBadge(
 	title: HTMLElement,
 	className: BadgeClass,
 	badge: Element,
 	placement: BadgePlacement,
 ): void {
+	removePullRequestBadge(title, className);
 	const container = getContainer(title, placement);
-	if (container.querySelector(`:scope > [data-badge="${className}"]`)) {
-		return;
-	}
 
 	const index = badgeColumns.findIndex((column) => column.className === className);
 	const slot = document.createElement('span');
@@ -170,4 +168,9 @@ export function addPullRequestBadge(
 
 	slot.append(badge);
 	container.append(slot);
+}
+
+/** Removes the `className` badge from the PR row of `title`, for a PR that no longer needs it. */
+export function removePullRequestBadge(title: HTMLElement, className: BadgeClass): void {
+	(title.closest('li') ?? title).querySelector(`.${containerClass} > [data-badge="${className}"]`)?.remove();
 }
