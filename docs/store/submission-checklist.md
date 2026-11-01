@@ -10,7 +10,7 @@ Texts, answers and assets live in [listing.md](listing.md) and [assets/](assets/
   - [x] With a token, the PR list badges and the reviewer load show up (no host permission any more).
 - [ ] In Chrome, load `distribution/` unpacked and check that it loads without errors and that every feature works with a token.
 - [x] On a PR page, go elsewhere then back: the quick comment buttons still post.
-- [ ] Decide on Firefox for Android: `manifest.json` declares `gecko_android`, but nothing was tested there. Keep it or remove it.
+- [x] Firefox for Android: not declared, since nothing was tested there.
 - [ ] Make the repository public: the homepage, support and source links in the listings point to it, and AMO reviews the source.
 - [ ] Have a developer account on the Chrome Web Store (one-time fee) and on addons.mozilla.org.
 
