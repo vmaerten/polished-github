@@ -2,6 +2,7 @@ import React from 'dom-chef';
 import * as pageDetect from 'github-url-detection';
 
 import type {Feature} from '../feature-manager.js';
+import {mutedColor} from '../github-helpers/colors.js';
 import {addPullRequestBadge, forEachListedPullRequest} from '../github-helpers/pr-list.js';
 import {type BadgePlacement, type DiffStatsSettings, getOptions} from '../options-storage.js';
 
@@ -9,7 +10,7 @@ type DiffStats = {additions: number; deletions: number; changedFiles: number};
 
 const badgeClass = 'polished-github-diff-stats' as const;
 
-const sizeLabels = ['XS', 'S', 'M', 'L', 'XL'];
+export const sizeLabels = ['XS', 'S', 'M', 'L', 'XL'];
 
 export function getSizeLabel(changedLines: number, thresholds: DiffStatsSettings['sizeThresholds']): string {
 	const index = thresholds.findIndex((max) => changedLines <= max);
@@ -32,11 +33,9 @@ function addBadge(title: HTMLElement, stats: DiffStats, settings: DiffStatsSetti
 		>
 			<span style={{color: 'var(--fgColor-success, #1a7f37)'}}>+{additions.toLocaleString()}</span>{' '}
 			<span style={{color: 'var(--fgColor-danger, #d1242f)'}}>−{deletions.toLocaleString()}</span>
-			{settings.showChangedFiles && (
-				<span style={{color: 'var(--fgColor-muted, #59636e)', fontWeight: '400'}}> · {files}</span>
-			)}
+			{settings.showChangedFiles && <span style={{color: mutedColor, fontWeight: '400'}}> · {files}</span>}
 			{settings.showSizeLabel && (
-				<span style={{color: 'var(--fgColor-muted, #59636e)', fontWeight: '600'}}>
+				<span style={{color: mutedColor, fontWeight: '600'}}>
 					{' '}
 					{getSizeLabel(additions + deletions, settings.sizeThresholds)}
 				</span>
@@ -46,19 +45,19 @@ function addBadge(title: HTMLElement, stats: DiffStats, settings: DiffStatsSetti
 	);
 }
 
-const prListDiffStats: Feature = {
-	id: 'pr-list-diff-stats',
+const diffStats: Feature = {
+	id: 'diff-stats',
 	description: 'Shows lines added and removed for each PR in the repository pull request list.',
 	include: [pageDetect.isRepoPRList],
 	requiresToken: true,
 	async init(signal) {
-		const {diffStats, prListBadges} = await getOptions();
+		const {diffStats: settings, prListBadges} = await getOptions();
 		forEachListedPullRequest<DiffStats>(
 			'additions deletions changedFiles',
-			(title, stats) => addBadge(title, stats, diffStats, prListBadges),
+			(title, stats) => addBadge(title, stats, settings, prListBadges),
 			{signal, cache},
 		);
 	},
 };
 
-export default prListDiffStats;
+export default diffStats;

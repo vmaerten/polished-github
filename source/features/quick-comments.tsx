@@ -40,8 +40,15 @@ async function useComment(composer: Element, {body}: QuickComment, {insertOnly}:
 	// Never send a draft along: with text already typed, insert instead of posting
 	const post = !insertOnly && field.value.trim() === '';
 	insertTextIntoField(field, body);
-	if (post) {
-		(await waitForSubmitButton(composer)).click();
+	if (!post) {
+		return;
+	}
+
+	const inserted = field.value;
+	const button = await waitForSubmitButton(composer);
+	// Text typed while GitHub enabled the button would go out with the comment: leave it all for the user to send
+	if (field.value === inserted) {
+		button.click();
 	}
 }
 

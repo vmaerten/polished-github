@@ -37,9 +37,9 @@ async function request(path: string, init: RequestInit = {}): Promise<Response> 
 }
 
 /** REST API. `path` starts with `/`, e.g. `/repos/owner/name`. */
-export async function v3<T>(path: string, init?: RequestInit): Promise<T> {
-	const response = await request(path, init);
-	return response.status === 204 ? (undefined as T) : ((await response.json()) as T);
+export async function v3<T>(path: string): Promise<T> {
+	const response = await request(path);
+	return (await response.json()) as T;
 }
 
 /** GraphQL API. Throws on partial errors instead of returning half the data. */

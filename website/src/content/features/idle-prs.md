@@ -45,7 +45,7 @@ featured: true
 	<div><span style="font-weight: 600">Threshold</span><span>7 days by default.</span></div>
 	<div><span style="font-weight: 600">Drafts</span><span>Off by default: draft PRs are never flagged.</span></div>
 	<div><span style="font-weight: 600">Badge placement</span><span>Right column (default) or the grey line under the title. Shared by all PR list badges.</span></div>
-	<div><span style="font-weight: 600">Turn off</span><span>Options › Features › pr-list-stale</span></div>
+	<div><span style="font-weight: 600">Turn off</span><span>Options › Features › idle-prs</span></div>
 </div>
 
 ## Good to know

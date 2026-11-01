@@ -4,6 +4,11 @@ export function observe(
 	callback: (elements: Element[]) => void,
 	{signal}: {signal: AbortSignal},
 ): void {
+	// A navigation during the caller's await aborts the signal before we listen to it
+	if (signal.aborted) {
+		return;
+	}
+
 	const seen = new WeakSet<Element>();
 	const check = (): void => {
 		const added = [...document.querySelectorAll(selector)].filter((element) => !seen.has(element));

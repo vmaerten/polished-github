@@ -29,7 +29,6 @@
 		"scripts": ["background.js"]
 	},
 	"permissions": ["storage"],
-	"host_permissions": ["https://github.com/*", "https://api.github.com/*"],
 	"options_ui": {
 		"page": "options.html",
 		"open_in_tab": true

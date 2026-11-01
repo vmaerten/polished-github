@@ -1,7 +1,7 @@
 import {expect, test, vi} from 'vitest';
 
 import {v4} from '../github-helpers/api.js';
-import prListReviewStatus, {getReviewStatus, type ReviewInfo} from './pr-list-review-status.js';
+import reviewStatus, {getReviewStatus, type ReviewInfo} from './review-status.js';
 
 vi.mock('../github-helpers/api.js', () => ({v4: vi.fn<typeof v4>()}));
 
@@ -66,9 +66,9 @@ test('adds one badge per PR, fetched again on every visit', async () => {
 	document.body.innerHTML = `<ul role="list"><li><div><h3><a href="/o/r/pull/1">PR 1</a></h3></div></li></ul>`;
 	vi.mocked(v4).mockResolvedValue({repository: {pr1: pr({viewerLatestReviewRequest: request})}});
 
-	await prListReviewStatus.init(new AbortController().signal);
+	await reviewStatus.init(new AbortController().signal);
 	await vi.waitFor(() => expect(document.querySelector('.polished-github-review-status')).not.toBeNull());
-	await prListReviewStatus.init(new AbortController().signal);
+	await reviewStatus.init(new AbortController().signal);
 	await new Promise((resolve) => setTimeout(resolve));
 
 	expect(document.querySelectorAll('.polished-github-review-status')).toHaveLength(1);
