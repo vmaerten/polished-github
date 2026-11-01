@@ -70,7 +70,38 @@ Open source under the MIT license. Code and issues: https://github.com/vmaerten/
 | Categories                   | Web Development                                                                                                                                                                                                                     |
 | Support site                 | https://github.com/vmaerten/polished-github/issues                                                                                                                                                                                  |
 | License                      | MIT                                                                                                                                                                                                                                 |
-| Description                  | The long description above. AMO renders a subset of Markdown, so the bullets and emoji headings can stay as they are.                                                                                                               |
+| Description                  | The Markdown version below: AMO joins lines that follow each other, so headings and bullets need blank lines around them.                                                                                                           |
+
+### AMO description
+
+```markdown
+Polished GitHub adds small, careful improvements to github.com, starting with pull requests. It is free and open source, and changes nothing else: every feature can be turned off in the options.
+
+Not affiliated with, endorsed or sponsored by GitHub, Inc. GitHub is a trademark of GitHub, Inc.
+
+**📋 In the PR list**
+
+- Review status: where each PR stands for you, review requested, re-review, changes requested, or approved with commits pushed since.
+- Diff stats: lines added and removed, files changed and a size from XS to XL.
+- Idle PRs: days since the last activity, past a threshold you choose.
+
+The badges go in a right-hand column aligned from row to row, or in the grey line under the title.
+
+**👥 In the reviewers picker**
+
+- Reviewer load: how many reviews each person already has waiting, so you pick someone who has room.
+
+**💬 In comments and READMEs**
+
+- Quick comments: your usual replies as one-click buttons above the comment box.
+- Image modal: images open in a zoomable modal instead of a new tab, arrow keys go through them.
+
+**🔒 Your token stays with you**
+
+The PR list badges and the reviewer load need a read-only GitHub token (a fine-grained token with read access to Pull requests). It is stored in your browser only and sent only to api.github.com. The extension has no server and no analytics.
+
+Open source under the MIT license. Code and issues: https://github.com/vmaerten/polished-github
+```
 
 **Before submitting.**
 
