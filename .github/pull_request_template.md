@@ -20,4 +20,3 @@ Closes #
 ## Checklist
 
 - [ ] `task check` passes.
-- [ ] User-facing changes are listed under `## Unreleased` in `CHANGELOG.md`.

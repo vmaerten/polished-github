@@ -33,6 +33,5 @@ The website lives in `website/` (Astro, a pnpm workspace package): `task website
 
 - Every pull request closes an issue. Open one first, a [bug report or a feature request](https://github.com/vmaerten/polished-github/issues/new/choose), so the change is agreed on before anyone writes code, then write `Closes #123` in the description.
 - One change per pull request, titled as a conventional commit: `fix(review-status): keep the badge after a force push`.
-- List user-facing changes under `## Unreleased` in `CHANGELOG.md`.
 - For anything visible, add a screenshot and a real github.com URL where you checked it.
 - Run `task check` before pushing: it runs what CI runs, and `task format` fixes formatting.
