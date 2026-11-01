@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+	<meta charset="utf-8" />
+	<title>Polished GitHub promo tiles</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;800&display=swap" />
+	<style>
+		/* Source of the Chrome Web Store promo tiles: render #small at 440 × 280 and #marquee at 1400 × 560. */
+		body {
+			margin: 0;
+			font-family: 'Manrope', system-ui, sans-serif;
+		}
+		.tile {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			box-sizing: border-box;
+			background: #6d5bff;
+			color: #ffffff;
+		}
+		.tile .mark {
+			display: block;
+		}
+		.name {
+			margin: 0;
+			font-weight: 800;
+			letter-spacing: -0.03em;
+			line-height: 1.05;
+		}
+		.name span {
+			font-weight: 400;
+			opacity: 0.75;
+		}
+		.tagline {
+			margin: 0;
+			font-weight: 500;
+			opacity: 0.85;
+		}
+		#small {
+			width: 440px;
+			height: 280px;
+			padding: 0 40px;
+			gap: 18px;
+		}
+		#small .mark {
+			width: 64px;
+			height: 64px;
+		}
+		#small .name {
+			font-size: 38px;
+		}
+		#small .tagline {
+			font-size: 18px;
+		}
+		#marquee {
+			width: 1400px;
+			height: 560px;
+			padding: 0 120px;
+			gap: 32px;
+		}
+		#marquee .mark {
+			width: 128px;
+			height: 128px;
+		}
+		#marquee .name {
+			font-size: 96px;
+		}
+		#marquee .tagline {
+			font-size: 36px;
+		}
+	</style>
+	<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+		<!-- The logo inverted: white tile, violet P, so it stands on the violet background -->
+		<symbol id="mark" viewBox="0 0 64 64">
+			<rect width="64" height="64" rx="16" fill="#FFFFFF" />
+			<path
+				fill="#6D5BFF"
+				fill-rule="evenodd"
+				d="M17 12H34Q37 12 39 14L48 23Q50 25 50 28V33Q50 35 48 37L40 45Q38 47 35 47H27V52Q27 54 25 54H17Q15 54 15 52V14Q15 12 17 12ZM27 24V35H32Q34 35 35 34L39 30Q40 29 39 28L36 25Q35 24 33 24Z"
+			/>
+		</symbol>
+	</svg>
+
+	<div class="tile" id="small">
+		<svg class="mark" aria-hidden="true"><use href="#mark" /></svg>
+		<p class="name">Polished <span>GitHub</span></p>
+		<p class="tagline">Review pull requests faster</p>
+	</div>
+
+	<div class="tile" id="marquee">
+		<svg class="mark" aria-hidden="true"><use href="#mark" /></svg>
+		<p class="name">Polished <span>GitHub</span></p>
+		<p class="tagline">Review pull requests faster, right on GitHub</p>
+	</div>
+</html>

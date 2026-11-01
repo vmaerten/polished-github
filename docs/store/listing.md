@@ -55,12 +55,12 @@ Source code and issues: https://github.com/vmaerten/polished-github
 
 **Assets.**
 
-| Asset              | Size               | Status                                                                        |
-| ------------------ | ------------------ | ----------------------------------------------------------------------------- |
-| Icon               | 128 × 128          | `source/icons/icon-128.png`                                                   |
-| Screenshots        | 1280 × 800, 1 to 5 | To make: PR list, reviewers picker, quick comments, image modal, options page |
-| Small promo tile   | 440 × 280          | To make from the branding board's Boost tile                                  |
-| Marquee promo tile | 1400 × 560         | Optional                                                                      |
+| Asset              | Size               | Status                                                                                           |
+| ------------------ | ------------------ | ------------------------------------------------------------------------------------------------ |
+| Icon               | 128 × 128          | `source/icons/icon-128.png`                                                                      |
+| Screenshots        | 1280 × 800, 1 to 5 | `assets/1-pr-list.png` to `assets/5-options.png`: the website's demos, and the real options page |
+| Small promo tile   | 440 × 280          | `assets/promo-small-440x280.png`, from `assets/promo.html`                                       |
+| Marquee promo tile | 1400 × 560         | `assets/promo-marquee-1400x560.png`, optional                                                    |
 
 ## Firefox Add-ons (AMO)
 
@@ -76,4 +76,4 @@ Source code and issues: https://github.com/vmaerten/polished-github
 
 - **Source code.** The package is bundled by tsdown, so AMO asks for the source and the build steps: `pnpm install --frozen-lockfile` then `pnpm exec tsdown`, with Node and pnpm versions from `package.json`.
 - **Data collection.** `manifest.json` declares `data_collection_permissions: none`. Check whether sending the token to api.github.com counts as `authenticationInfo` under Mozilla's current definition, and update the manifest if it does.
-- **Screenshots.** Same set as the Chrome Web Store, 1280 × 800.
+- **Screenshots.** Same set as the Chrome Web Store, in `assets/`.
