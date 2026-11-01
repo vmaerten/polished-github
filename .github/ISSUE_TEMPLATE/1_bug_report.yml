@@ -1,0 +1,70 @@
+name: Bug report
+description: A feature does something wrong, or stopped working
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. Before you do, please check that:
+
+        - it goes away when you turn Polished GitHub off;
+        - for a feature that needs a token, one is set in the options page.
+  - type: input
+    id: feature
+    attributes:
+      label: Feature
+      description: The feature id, as shown in the options page. Leave it empty if you don't know.
+      placeholder: review-status
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened
+      description: What you saw, and what you expected instead. Screenshots help, and can be dropped here.
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: URL
+      description: A real github.com URL where it happens. For a private repository, find a public page where it happens too.
+      placeholder: https://github.com/go-task/task/pulls
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open the URL above
+        2. Click …
+  - type: input
+    id: version
+    attributes:
+      label: Extension version
+      description: Shown at the top of the options page.
+      placeholder: 0.1.0
+    validations:
+      required: true
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser
+      options:
+        - Chrome
+        - Firefox
+        - Another Chromium browser (Edge, Brave, Arc…)
+    validations:
+      required: true
+  - type: textarea
+    id: console
+    attributes:
+      label: Console errors
+      description: Open the developer tools on the page. Our messages start with `polished-github:`.
+      render: text
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched the [existing issues](https://github.com/vmaerten/polished-github/issues?q=is%3Aissue) for this bug.
+          required: true
