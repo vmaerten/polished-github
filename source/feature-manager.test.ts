@@ -25,9 +25,8 @@ describe('shouldRun', () => {
 		expect(shouldRun(feature({requiresToken: true}), context)).toBe(true);
 	});
 
-	test('runs when any include matches and no exclude does', () => {
+	test('runs when any include matches', () => {
 		expect(shouldRun(feature({include: [no, yes]}), context)).toBe(true);
 		expect(shouldRun(feature({include: [no]}), context)).toBe(false);
-		expect(shouldRun(feature({include: [yes], exclude: [no, yes]}), context)).toBe(false);
 	});
 });

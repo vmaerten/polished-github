@@ -5,7 +5,6 @@ export type Feature = {
 	description: string;
 	/** Run only on pages where one of these matches. Defaults to every page. */
 	include?: Array<() => boolean>;
-	exclude?: Array<() => boolean>;
 	requiresToken?: boolean;
 	/** Called again after every in-app navigation, so it must not inject twice. `signal` aborts on the next one. */
 	init: (signal: AbortSignal) => void | Promise<void>;
@@ -21,11 +20,7 @@ export function shouldRun(feature: Feature, {disabled, hasToken}: RunContext): b
 		return false;
 	}
 
-	if (feature.include && !feature.include.some((matches) => matches())) {
-		return false;
-	}
-
-	return !feature.exclude?.some((matches) => matches());
+	return !feature.include || feature.include.some((matches) => matches());
 }
 
 // GitHub swaps pages without a full load: Turbo on most pages, React soft navigation on newer ones

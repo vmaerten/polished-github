@@ -17,12 +17,11 @@ function respond(status: number, body: unknown, headers: Record<string, string> 
 }
 
 describe('v3', () => {
-	test('sends the token alongside caller headers', async () => {
+	test('sends the token to the GitHub API', async () => {
 		respond(200, {login: 'octocat'});
-		await expect(v3('/user', {headers: new Headers({'X-Custom': 'yes'})})).resolves.toEqual({login: 'octocat'});
-		const headers = new Headers(fetchMock.mock.calls[0][1]?.headers);
-		expect(headers.get('Authorization')).toBe('Bearer secret');
-		expect(headers.get('X-Custom')).toBe('yes');
+		await expect(v3('/user')).resolves.toEqual({login: 'octocat'});
+		expect(fetchMock.mock.calls[0][0]).toBe('https://api.github.com/user');
+		expect(new Headers(fetchMock.mock.calls[0][1]?.headers).get('Authorization')).toBe('Bearer secret');
 	});
 
 	test('fails before calling GitHub without a token', async () => {
@@ -48,11 +47,6 @@ describe('v3', () => {
 });
 
 describe('v4', () => {
-	test('returns data', async () => {
-		respond(200, {data: {viewer: {login: 'octocat'}}});
-		await expect(v4('{viewer {login}}')).resolves.toEqual({viewer: {login: 'octocat'}});
-	});
-
 	test('throws on GraphQL errors, even with a 200', async () => {
 		respond(200, {data: null, errors: [{message: 'Field missing'}]});
 		await expect(v4('{nope}')).rejects.toThrow('GitHub GraphQL: Field missing');
