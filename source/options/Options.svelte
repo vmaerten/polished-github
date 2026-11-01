@@ -22,6 +22,7 @@
 	let hasToken = $state(false);
 	let filter = $state('');
 	let expanded = $state<string>();
+	let saveError = $state('');
 
 	const visibleFeatures = $derived(
 		features.filter(({id, description}) =>
@@ -42,7 +43,16 @@
 	}
 
 	async function save(changes: Partial<Options>): Promise<void> {
-		await setOptions(changes);
+		try {
+			await setOptions(changes);
+			saveError = '';
+		} catch (error) {
+			// Sync storage caps each setting at 8 KB: past it, the change would only live until the page reloads
+			const message = error instanceof Error ? error.message : String(error);
+			saveError = /quota/i.test(message)
+				? 'Not saved: too long to sync between your browsers. Shorten or remove something.'
+				: `Not saved: ${message}`;
+		}
 	}
 
 	async function reset(): Promise<void> {
@@ -138,6 +148,9 @@
 										bind:settings={options.stale}
 										onsave={() => save({stale: $state.snapshot(options!.stale)})}
 									/>
+								{/if}
+								{#if saveError}
+									<p class="danger small" role="alert">{saveError}</p>
 								{/if}
 							</div>
 						{/if}
