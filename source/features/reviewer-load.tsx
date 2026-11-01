@@ -4,6 +4,7 @@ import * as pageDetect from 'github-url-detection';
 import type {Feature} from '../feature-manager.js';
 import {v4} from '../github-helpers/api.js';
 import {observe} from '../helpers/observe.js';
+import {mutedColor} from '../github-helpers/colors.js';
 
 // The picker loads its rows when opened and again when filtering
 const usernames = '#reviewers-select-menu .select-menu-item .js-username';
@@ -13,7 +14,7 @@ const headerClass = 'polished-github-reviewer-load-header';
 
 // Up to 2 pending reviews is a normal load
 const loadLevels = [
-	{max: 2, color: 'var(--fgColor-muted, #59636e)', background: 'var(--bgColor-neutral-muted, #818b981f)'},
+	{max: 2, color: mutedColor, background: 'var(--bgColor-neutral-muted, #818b981f)'},
 	{max: 5, color: 'var(--fgColor-attention, #9a6700)', background: 'var(--bgColor-attention-muted, #d4a72c33)'},
 	{max: Infinity, color: 'var(--fgColor-severe, #bc4c00)', background: 'var(--bgColor-severe-muted, #fb8f4433)'},
 ];
@@ -83,7 +84,7 @@ function addHeader(divider: Element): void {
 	}
 
 	divider.append(
-		<span className={headerClass} style={{float: 'right', fontWeight: '400', color: 'var(--fgColor-muted, #59636e)'}}>
+		<span className={headerClass} style={{float: 'right', fontWeight: '400', color: mutedColor}}>
 			Pending reviews
 		</span>,
 	);

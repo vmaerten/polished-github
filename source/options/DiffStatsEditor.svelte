@@ -1,10 +1,11 @@
 <script lang="ts">
-	import {getSizeLabel} from '../features/pr-list-diff-stats.js';
+	import {getSizeLabel, sizeLabels} from '../features/pr-list-diff-stats.js';
 	import type {DiffStatsSettings} from '../options-storage.js';
 
 	let {settings = $bindable(), onsave}: {settings: DiffStatsSettings; onsave: () => void} = $props();
 
-	const labels = ['XS', 'S', 'M', 'L'];
+	// The last label, XL, has no threshold: it is everything above L
+	const labels = sizeLabels.slice(0, -1);
 </script>
 
 <div class="editor">

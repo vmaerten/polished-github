@@ -4,6 +4,8 @@ import {observe} from '../helpers/observe.js';
 import type {BadgePlacement} from '../options-storage.js';
 import {v4} from './api.js';
 
+export type PullRequestState = 'OPEN' | 'CLOSED' | 'MERGED';
+
 const titleLinks = 'ul[role="list"] > li h3 a[href*="/pull/"]';
 
 // One order for every row whichever request answers first; in the right column each badge also keeps its own
@@ -66,12 +68,13 @@ async function handleTitles<T>(
 
 /**
  * Calls `callback` with each PR title of the repository PR list and the GraphQL `fields` of that PR, now and as GitHub
- * renders more rows. One query per render; PRs already in `cache` are not fetched again, so its lifetime sets freshness.
+ * renders more rows. One query per render; PRs already in `cache` are not fetched again, so its lifetime sets freshness:
+ * without one, every render fetches afresh.
  */
 export function forEachListedPullRequest<T>(
 	fields: string,
 	callback: (title: HTMLHeadingElement, pr: T) => void,
-	{signal, cache}: {signal: AbortSignal; cache: Map<string, T>},
+	{signal, cache = new Map()}: {signal: AbortSignal; cache?: Map<string, T>},
 ): void {
 	observe(
 		titleLinks,

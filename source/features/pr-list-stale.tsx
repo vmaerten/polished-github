@@ -2,10 +2,10 @@ import React from 'dom-chef';
 import * as pageDetect from 'github-url-detection';
 
 import type {Feature} from '../feature-manager.js';
-import {addPullRequestBadge, forEachListedPullRequest} from '../github-helpers/pr-list.js';
+import {addPullRequestBadge, forEachListedPullRequest, type PullRequestState} from '../github-helpers/pr-list.js';
 import {type BadgePlacement, getOptions, type StaleSettings} from '../options-storage.js';
 
-export type ActivityInfo = {state: 'OPEN' | 'CLOSED' | 'MERGED'; isDraft: boolean; updatedAt: string};
+export type ActivityInfo = {state: PullRequestState; isDraft: boolean; updatedAt: string};
 
 const badgeClass = 'polished-github-stale' as const;
 const dayInMs = 24 * 60 * 60 * 1000;
@@ -69,7 +69,7 @@ const prListStale: Feature = {
 					addBadge(title, days, prListBadges);
 				}
 			},
-			{signal, cache: new Map()},
+			{signal},
 		);
 	},
 };

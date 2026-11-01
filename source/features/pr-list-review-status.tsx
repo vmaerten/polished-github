@@ -2,11 +2,12 @@ import React from 'dom-chef';
 import * as pageDetect from 'github-url-detection';
 
 import type {Feature} from '../feature-manager.js';
-import {addPullRequestBadge, forEachListedPullRequest} from '../github-helpers/pr-list.js';
+import {mutedColor as muted} from '../github-helpers/colors.js';
+import {addPullRequestBadge, forEachListedPullRequest, type PullRequestState} from '../github-helpers/pr-list.js';
 import {type BadgePlacement, getOptions} from '../options-storage.js';
 
 export type ReviewInfo = {
-	state: 'OPEN' | 'CLOSED' | 'MERGED';
+	state: PullRequestState;
 	viewerDidAuthor: boolean;
 	headRefOid: string;
 	viewerLatestReviewRequest: {id: string} | null;
@@ -16,8 +17,6 @@ export type ReviewInfo = {
 export type ReviewStatus = 'requested' | 're-review' | 'approved-outdated' | 'changes-requested';
 
 const badgeClass = 'polished-github-review-status' as const;
-
-const muted = 'var(--fgColor-muted, #59636e)';
 
 const badges: Record<ReviewStatus, {text: string; color: string; dot?: string; title: string}> = {
 	requested: {text: 'Review requested', color: 'var(--fgColor-attention, #9a6700)', title: 'Your review is requested'},
@@ -102,7 +101,7 @@ const prListReviewStatus: Feature = {
 					addBadge(title, status, prListBadges);
 				}
 			},
-			{signal, cache: new Map()},
+			{signal},
 		);
 	},
 };
