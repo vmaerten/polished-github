@@ -2,7 +2,7 @@
 	"$schema": "https://json.schemastore.org/chrome-manifest",
 	"manifest_version": 3,
 	"name": "Polished GitHub",
-	"version": "0.0.0",
+	"version": "0.1.0",
 	"description": "Polishes the GitHub you use every day, starting with pull requests. Not affiliated with GitHub, Inc.",
 	"homepage_url": "https://github.com/vmaerten/polished-github",
 	"minimum_chrome_version": "120",

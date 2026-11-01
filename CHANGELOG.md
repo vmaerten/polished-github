@@ -4,6 +4,8 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## Unreleased
 
+## 0.1.0 - 2026-11-01
+
 ### Added
 
 - `image-modal`: images in issues, PRs, comments and READMEs open in a zoomable modal instead of a new tab. Cycling, zoom and badges can be turned on or off in the options.
