@@ -65,8 +65,8 @@
 			</div>
 		</div>
 		<nav class="small">
-			<a href="https://github.com/vmaerten/supercharged-github" target="_blank" rel="noopener noreferrer">Repository</a>
-			<a href="https://github.com/vmaerten/supercharged-github/issues/new" target="_blank" rel="noopener noreferrer">Report a bug</a>
+			<a href="https://github.com/vmaerten/polished-github" target="_blank" rel="noopener noreferrer">Repository</a>
+			<a href="https://github.com/vmaerten/polished-github/issues/new" target="_blank" rel="noopener noreferrer">Report a bug</a>
 		</nav>
 	</header>
 

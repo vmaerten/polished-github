@@ -22,4 +22,4 @@ To delete the token, empty the token field in the options page and save. "Reset 
 
 ## Contact
 
-Questions and requests: https://github.com/vmaerten/supercharged-github/issues
+Questions and requests: https://github.com/vmaerten/polished-github/issues

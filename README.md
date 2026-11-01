@@ -26,7 +26,7 @@ Every feature can be turned off, and most have settings, in the options page.
 
 ## Install
 
-Download the zip of the [latest release](https://github.com/vmaerten/supercharged-github/releases/latest), unzip it, and load the folder as an unpacked extension (`chrome://extensions`, developer mode) or as a temporary add-on (`about:debugging` in Firefox).
+Download the zip of the [latest release](https://github.com/vmaerten/polished-github/releases/latest), unzip it, and load the folder as an unpacked extension (`chrome://extensions`, developer mode) or as a temporary add-on (`about:debugging` in Firefox).
 
 The PR list badges and the reviewer load call the GitHub API: add a [fine-grained token](https://github.com/settings/personal-access-tokens/new) with read access to _Pull requests_ in the options, or a classic token with the `repo` scope. It stays on your device.
 
