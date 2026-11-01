@@ -1,0 +1,46 @@
+name: Feature request
+description: A new feature, or a change to an existing one
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Polished GitHub adds small, careful improvements to github.com, starting with pull requests. Every feature can be turned off, and none of them sends data anywhere but the GitHub API.
+
+        Check the [features](https://polished-github.vmaerten.fr/features/), including the ones coming soon, before suggesting one.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What is slow, missing or annoying on GitHub today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: What should the extension do? A mockup or a screenshot helps, and can be dropped here.
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Example URL
+      description: A real github.com URL where the feature would appear.
+      placeholder: https://github.com/go-task/task/pull/3064
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives
+      description: Other ways to get there, including other extensions or GitHub settings.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched the [existing issues](https://github.com/vmaerten/polished-github/issues?q=is%3Aissue) for this idea.
+          required: true
+        - label: I wrote this issue myself. AI may have helped with the wording, not with the content.
+          required: true

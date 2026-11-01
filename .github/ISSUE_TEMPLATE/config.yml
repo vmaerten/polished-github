@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Features
+    url: https://polished-github.vmaerten.fr/features/
+    about: What each feature does and how to set it up, including the ones coming soon.
