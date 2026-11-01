@@ -1,76 +1,22 @@
-# Polished GitHub
+<p align="center"><img src="source/icons/icon.svg" width="72" height="72" alt=""></p>
 
-Browser extension for Chrome and Firefox that makes reviewing pull requests on GitHub faster.
+<h1 align="center">Polished GitHub</h1>
 
-Not affiliated with, endorsed or sponsored by GitHub, Inc. GitHub is a trademark of GitHub, Inc.
+<p align="center">Review pull requests faster, right on GitHub. For Chrome and Firefox.<br><a href="https://polished-github.vmaerten.fr">Website</a> · <a href="https://polished-github.vmaerten.fr/features/">All features</a> · <a href="CHANGELOG.md">Changelog</a></p>
 
-## Features
+![The PR list with review status, diff stats and idle badges](docs/store/assets/1-pr-list.png)
 
-**In the PR list**, a column on the right of each PR: lines added and removed with a size label, where it stands for you (review requested, re-review, changes requested, approved but changed since) and how long it has been idle. The badges can go in the grey line under the title instead.
+- **PR list**: where each PR stands for you, its size, and how long it has been idle.
+- **Reviewers picker**: how many reviews each person already has waiting.
+- **Quick comments**: your usual replies as one-click buttons.
+- **Image modal**: images open in a zoomable modal instead of a new tab.
 
-![PR list with diff stats, review status and idle badges](docs/screenshots/pr-list.png)
-
-**In the reviewers picker**, how many reviews each person already has pending, to spread the load.
-
-![Reviewers picker with pending review counts](docs/screenshots/reviewer-load.png)
-
-**Quick comments**: buttons above the comment box post a predefined comment in one click.
-
-![Quick comment buttons above the comment box](docs/screenshots/quick-comments.png)
-
-**Image modal**: images in issues, PRs and READMEs open in a zoomable modal instead of a new tab, and ← → go through the comment's images.
-
-![Image opened in the modal](docs/screenshots/image-modal.png)
-
-Every feature can be turned off, and most have settings, in the options page.
+Every feature can be turned off in the options. The badges and the reviewer load need a read-only [fine-grained token](https://github.com/settings/personal-access-tokens/new) (_Pull requests_: read), kept on your device and sent only to the GitHub API.
 
 ## Install
 
-Download the zip of the [latest release](https://github.com/vmaerten/polished-github/releases/latest), unzip it, and load the folder as an unpacked extension (`chrome://extensions`, developer mode) or as a temporary add-on (`about:debugging` in Firefox).
+Load the zip of the [latest release](https://github.com/vmaerten/polished-github/releases/latest), unzipped, as an unpacked extension (`chrome://extensions`, developer mode) or a temporary add-on (`about:debugging` in Firefox).
 
-The PR list badges and the reviewer load call the GitHub API: add a [fine-grained token](https://github.com/settings/personal-access-tokens/new) with read access to _Pull requests_ in the options, or a classic token with the `repo` scope. It stays on your device.
+## Contributing
 
-## Development
-
-Needs [pnpm](https://pnpm.io) and [Task](https://taskfile.dev). `task` lists every command.
-
-```sh
-task install
-task dev                  # rebuilds distribution/ on change
-task start                # opens Chromium with the extension loaded; TARGET=firefox-desktop for Firefox
-```
-
-To use your everyday browser instead, load `distribution/` as an unpacked extension (`chrome://extensions`, developer mode) or as a temporary add-on (`about:debugging` in Firefox). In Firefox, grant the github.com permission from the extension's page in `about:addons`: Manifest V3 makes host permissions opt-in.
-
-The website lives in `website/` (Astro, a pnpm workspace package): `task website:dev` serves it with live reload.
-
-Before pushing: `task check`, which runs what CI runs. `task format` fixes formatting.
-
-## Releasing
-
-Every PR adds its user-facing changes under `## Unreleased` in `CHANGELOG.md`. To release, from an up-to-date `main`:
-
-```sh
-task release VERSION=1.2.0
-```
-
-It runs the checks, bumps `package.json` and `manifest.json`, dates the changelog section, commits, tags `v1.2.0` and pushes. The tag starts the release workflow, which builds the zip and publishes a GitHub release with that changelog section as notes.
-
-## Layout
-
-- `source/content-script.ts` starts the feature manager on every github.com page.
-- `source/feature-manager.ts` runs each feature on matching pages, again after every in-app navigation, and skips features the user disabled or that need a missing token.
-- `source/features/` holds one file per feature (a folder for bigger ones), registered in `features/index.ts`.
-- `source/github-helpers/api.ts` calls the GitHub REST (`v3`) and GraphQL (`v4`) APIs with the user's token.
-- `source/options/` is the options page (Svelte).
-
-## Adding a feature
-
-1. Create `source/features/<feature-id>.tsx` exporting a `Feature`: `id`, `description`, optional `include`/`exclude` page detectors from [`github-url-detection`](https://github.com/refined-github/github-url-detection), `requiresToken` if it calls the API, and `init(signal)`.
-2. Add it to `source/features/index.ts`.
-
-`init` runs again after each in-app navigation: check the element isn't already there before injecting, and pass `signal` to listeners and `element-ready` so they stop on the next navigation. Use [`dom-chef`](https://github.com/vadimdemedes/dom-chef) JSX for small injections, a Svelte component for anything stateful.
-
-## License
-
-[MIT](LICENSE)
+See [CONTRIBUTING.md](CONTRIBUTING.md). [MIT](LICENSE) licensed. Not affiliated with, endorsed or sponsored by GitHub, Inc.
