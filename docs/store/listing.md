@@ -39,15 +39,15 @@ Source code and issues: https://github.com/vmaerten/polished-github
 
 ## Chrome Web Store
 
-| Field                                      | Value                                                                                                                     |
-| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
-| Category                                   | Developer Tools                                                                                                           |
-| Language                                   | English                                                                                                                   |
-| Single purpose                             | Speed up pull request reviews on github.com by adding review information and shortcuts to GitHub pages.                   |
-| `storage` justification                    | Saves the user's settings and, on this device only, the GitHub token they enter in the options.                           |
-| Host permission `https://github.com/*`     | The features run on github.com pages: PR list badges, reviewers picker counts, quick comment buttons and the image modal. |
-| Host permission `https://api.github.com/*` | Reads review status, diff stats, last activity and pending review counts from the GitHub API with the user's own token.   |
-| Remote code                                | No. Everything ships in the package.                                                                                      |
+| Field                                    | Value                                                                                                                                                     |
+| ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Category                                 | Developer Tools                                                                                                                                           |
+| Language                                 | English                                                                                                                                                   |
+| Single purpose                           | Speed up pull request reviews on github.com by adding review information and shortcuts to GitHub pages.                                                   |
+| `storage` justification                  | Saves the user's settings and, on this device only, the GitHub token they enter in the options.                                                           |
+| Content script on `https://github.com/*` | The features run on github.com pages: PR list badges, reviewers picker counts, quick comment buttons and the image modal.                                 |
+| No host permission for `api.github.com`  | The API allows cross-origin requests, so reading review status, diff stats, last activity and pending review counts with the user's own token needs none. |
+| Remote code                              | No. Everything ships in the package.                                                                                                                      |
 
 **Data usage.** Declare _Authentication information_: the store counts handling a login or token as handling user data, even when it only goes to a third-party API. The API requests also name the repository and pull requests of the page being viewed, which the store's definition of _Web browsing activity_ covers, so declare it too. Then certify that the data is not sold, not used for anything but the single purpose, and not used for creditworthiness or lending. Check the wording of the form at submission time, it changes.
 
