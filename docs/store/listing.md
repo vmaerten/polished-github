@@ -49,7 +49,7 @@ Open source under the MIT license. Code and issues: https://github.com/vmaerten/
 | No host permission for `api.github.com`  | The API allows cross-origin requests, so reading review status, diff stats, last activity and pending review counts with the user's own token needs none. |
 | Remote code                              | No. Everything ships in the package.                                                                                                                      |
 
-**Data usage.** Declare _Authentication information_: the store counts handling a login or token as handling user data, even when it only goes to a third-party API. The API requests also name the repository and pull requests of the page being viewed, which the store's definition of _Web browsing activity_ covers, so declare it too. Then certify that the data is not sold, not used for anything but the single purpose, and not used for creditworthiness or lending. Check the wording of the form at submission time, it changes.
+**Data usage.** Check _Authentication information_: the token is handled by the extension, even though it only goes to the GitHub API. Check _Website content_ too: the API requests carry what the extension reads from the page, the repository, the PR numbers and the reviewers' logins. Leave _Web history_ unchecked: the extension keeps no list of visited pages. Then certify that the data is not sold, not used for anything but the single purpose, and not used for creditworthiness or lending.
 
 **Privacy policy.** Required once user data is declared: https://polished-github.vmaerten.fr/privacy/, rendered from [privacy-policy.md](privacy-policy.md).
 

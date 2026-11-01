@@ -24,7 +24,7 @@ Texts, answers and assets live in [listing.md](listing.md) and [assets/](assets/
 - [ ] Upload `polished-github-chrome-0.1.0.zip`.
 - [ ] Store listing: description, Developer Tools category, English, the 5 screenshots, the small promo tile, the marquee (optional).
 - [ ] Privacy practices: single purpose, `storage` justification, content script on github.com, remote code: no.
-- [ ] Data usage: _Authentication information_ and _Web browsing activity_, then the three certifications.
+- [ ] Data usage: _Authentication information_ and _Website content_, then the three certifications.
 - [ ] Privacy policy: https://polished-github.vmaerten.fr/privacy/
 - [ ] Distribution: public, every region.
 
