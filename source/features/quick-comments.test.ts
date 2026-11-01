@@ -49,9 +49,7 @@ beforeEach(() => {
 });
 
 function buttons(): string[] {
-	return [...document.querySelectorAll('.supercharged-github-quick-comments button')].map(
-		(button) => button.textContent,
-	);
+	return [...document.querySelectorAll('.polished-github-quick-comments button')].map((button) => button.textContent);
 }
 
 function clickButton(label: string, init: MouseEventInit = {}): void {

@@ -10,7 +10,7 @@ import {getOptions, type QuickComment} from '../options-storage.js';
 const composers = '#new_comment_form, [data-testid="comment-composer"]';
 const submitButtons =
 	'button.btn-primary[type="submit"], [data-testid="markdown-editor-footer"] button[data-variant="primary"]';
-const rowClass = 'supercharged-github-quick-comments';
+const rowClass = 'polished-github-quick-comments';
 
 function isEnabled(button: HTMLButtonElement): boolean {
 	return !button.disabled && button.getAttribute('aria-disabled') !== 'true';
@@ -59,7 +59,7 @@ function addButtons(composer: Element, comments: QuickComment[]): void {
 					title={`Post “${comment.body}”. Shift-click to insert it instead.`}
 					onClick={(event) => {
 						useComment(composer, comment, {insertOnly: event.shiftKey}).catch((error: unknown) => {
-							console.error('supercharged-github: quick-comments failed', error);
+							console.error('polished-github: quick-comments failed', error);
 						});
 					}}
 				>

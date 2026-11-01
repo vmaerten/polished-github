@@ -15,7 +15,7 @@ export type ReviewInfo = {
 
 export type ReviewStatus = 'requested' | 're-review' | 'approved-outdated' | 'changes-requested';
 
-const badgeClass = 'supercharged-github-review-status' as const;
+const badgeClass = 'polished-github-review-status' as const;
 
 const muted = 'var(--fgColor-muted, #59636e)';
 

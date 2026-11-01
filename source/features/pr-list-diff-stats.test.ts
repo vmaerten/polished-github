@@ -23,7 +23,7 @@ function row(number: number): string {
 }
 
 function badges(): string[] {
-	return [...document.querySelectorAll('.supercharged-github-diff-stats')].map((badge) => badge.textContent);
+	return [...document.querySelectorAll('.polished-github-diff-stats')].map((badge) => badge.textContent);
 }
 
 beforeEach(() => {

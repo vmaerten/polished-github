@@ -67,10 +67,10 @@ test('adds one badge per PR, fetched again on every visit', async () => {
 	vi.mocked(v4).mockResolvedValue({repository: {pr1: pr({viewerLatestReviewRequest: request})}});
 
 	await prListReviewStatus.init(new AbortController().signal);
-	await vi.waitFor(() => expect(document.querySelector('.supercharged-github-review-status')).not.toBeNull());
+	await vi.waitFor(() => expect(document.querySelector('.polished-github-review-status')).not.toBeNull());
 	await prListReviewStatus.init(new AbortController().signal);
 	await new Promise((resolve) => setTimeout(resolve));
 
-	expect(document.querySelectorAll('.supercharged-github-review-status')).toHaveLength(1);
+	expect(document.querySelectorAll('.polished-github-review-status')).toHaveLength(1);
 	expect(v4).toHaveBeenCalledTimes(2);
 });
