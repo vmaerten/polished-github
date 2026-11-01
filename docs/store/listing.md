@@ -55,12 +55,12 @@ Source code and issues: https://github.com/vmaerten/polished-github
 
 **Assets.**
 
-| Asset              | Size               | Status                                                                                           |
-| ------------------ | ------------------ | ------------------------------------------------------------------------------------------------ |
-| Icon               | 128 × 128          | `source/icons/icon-128.png`                                                                      |
-| Screenshots        | 1280 × 800, 1 to 5 | `assets/1-pr-list.png` to `assets/5-options.png`: the website's demos, and the real options page |
-| Small promo tile   | 440 × 280          | `assets/promo-small-440x280.png`, from `assets/promo.html`                                       |
-| Marquee promo tile | 1400 × 560         | `assets/promo-marquee-1400x560.png`, optional                                                    |
+| Asset              | Size               | Status                                                                                      |
+| ------------------ | ------------------ | ------------------------------------------------------------------------------------------- |
+| Icon               | 128 × 128          | `source/icons/icon-128.png`                                                                 |
+| Screenshots        | 1280 × 800, 1 to 5 | `assets/1-pr-list.png` to `assets/5-options.png`, captured on github.com with the extension |
+| Small promo tile   | 440 × 280          | `assets/promo-small-440x280.png`, from `assets/promo.html`                                  |
+| Marquee promo tile | 1400 × 560         | `assets/promo-marquee-1400x560.png`, optional                                               |
 
 ## Firefox Add-ons (AMO)
 
