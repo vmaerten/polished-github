@@ -135,7 +135,13 @@
 		"message": "with read access to"
 	},
 	"token_helpClassic": {
-		"message": "on the repositories you browse, or a classic token with the"
+		"message": "on the repositories you browse, or, for several organizations, a"
+	},
+	"token_helpClassicLink": {
+		"message": "classic token"
+	},
+	"token_helpScope": {
+		"message": "with the"
 	},
 	"token_helpEnd": {
 		"message": " scope. For organizations using SSO, authorize the token for them too."
