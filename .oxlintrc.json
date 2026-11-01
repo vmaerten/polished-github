@@ -19,5 +19,5 @@
 		"browser": true,
 		"webextensions": true
 	},
-	"ignorePatterns": ["distribution", "web-ext-artifacts", "website/dist", "website/.astro"]
+	"ignorePatterns": ["distribution", "distribution-firefox", "web-ext-artifacts", "website/dist", "website/.astro"]
 }

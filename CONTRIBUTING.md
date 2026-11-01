@@ -6,11 +6,11 @@ Needs [pnpm](https://pnpm.io) and [Task](https://taskfile.dev). `task` lists eve
 
 ```sh
 task install
-task dev                  # rebuilds distribution/ on change
+task dev                  # rebuilds distribution/ (Chrome) on change
 task start                # opens Chromium with the extension loaded; TARGET=firefox-desktop for Firefox
 ```
 
-To use your everyday browser instead, load `distribution/` as an unpacked extension (`chrome://extensions`, developer mode) or as a temporary add-on (`about:debugging` in Firefox). In Firefox, grant the github.com permission from the extension's page in `about:addons`: Manifest V3 makes host permissions opt-in.
+To use your everyday browser instead, run `task build` and load `distribution/` as an unpacked extension (`chrome://extensions`, developer mode), or `distribution-firefox/` as a temporary add-on (`about:debugging` in Firefox). The Firefox package also declares the background script that drops the token when the data consent is withdrawn; Chrome would flag it. In Firefox, grant the github.com permission from the extension's page in `about:addons`: Manifest V3 makes host permissions opt-in.
 
 The website lives in `website/` (Astro, a pnpm workspace package): `task website:dev` serves it with live reload.
 

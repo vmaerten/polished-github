@@ -12,9 +12,10 @@ tasks:
       - pnpm install --frozen-lockfile
 
   build:
-    desc: Build the extension into distribution/
+    desc: Build the extension into distribution/ for Chrome and distribution-firefox/ for Firefox
     cmds:
       - pnpm exec tsdown
+      - node build/firefox.ts
 
   dev:
     desc: Rebuild distribution/ on every change
@@ -26,7 +27,7 @@ tasks:
     vars:
       TARGET: '{{.TARGET | default "chromium"}}'
     cmds:
-      - pnpm exec web-ext run --source-dir distribution --target {{.TARGET}} --start-url https://github.com/vmaerten/polished-github
+      - pnpm exec web-ext run --source-dir {{if eq .TARGET "firefox-desktop"}}distribution-firefox{{else}}distribution{{end}} --target {{.TARGET}} --start-url https://github.com/vmaerten/polished-github
 
   website:dev:
     desc: Serve the website with live reload
@@ -68,17 +69,18 @@ tasks:
     deps: [lint, typecheck, test]
     cmds:
       - task: build
-      - pnpm exec web-ext lint --source-dir distribution
+      - pnpm exec web-ext lint --source-dir distribution-firefox
       - task: website:build
 
   package:
-    desc: Zip distribution/ into web-ext-artifacts/
+    desc: Zip the Chrome and Firefox packages into web-ext-artifacts/
     deps: [build]
     vars:
       VERSION:
         sh: jq -r .version package.json
     cmds:
-      - pnpm exec web-ext build --source-dir distribution --artifacts-dir web-ext-artifacts --filename polished-github-{{.VERSION}}.zip --overwrite-dest
+      - pnpm exec web-ext build --source-dir distribution --artifacts-dir web-ext-artifacts --filename polished-github-chrome-{{.VERSION}}.zip --overwrite-dest
+      - pnpm exec web-ext build --source-dir distribution-firefox --artifacts-dir web-ext-artifacts --filename polished-github-firefox-{{.VERSION}}.zip --overwrite-dest
 
   release:
     desc: 'Release a version from main, e.g. task release VERSION=1.2.0'

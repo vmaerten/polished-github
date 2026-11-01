@@ -74,6 +74,6 @@ Source code and issues: https://github.com/vmaerten/polished-github
 
 **Before submitting.**
 
-- **Source code.** The package is bundled by tsdown, so AMO asks for the source and the build steps: `pnpm install --frozen-lockfile` then `pnpm exec tsdown`, with Node and pnpm versions from `package.json`.
-- **Data collection.** Mozilla counts the token sent to api.github.com as `authenticationInfo`, and the repositories, PRs and reviewers it looks up as `browsingActivity`. `manifest.json` declares both as optional data: the options page asks for consent when the user saves a token in Firefox, and `background.ts` removes the token when the consent is withdrawn.
+- **Source code.** The package is bundled by tsdown, so AMO asks for the source and the build steps: `pnpm install --frozen-lockfile`, `pnpm exec tsdown`, then `node build/firefox.ts`, which writes the Firefox package to `distribution-firefox/`. Node and pnpm versions come from `package.json`.
+- **Data collection.** Mozilla counts the token sent to api.github.com as `authenticationInfo`, and the repositories, PRs and reviewers it looks up as `browsingActivity`. `manifest.json` declares both as optional data: the options page asks for consent when the user saves a token in Firefox, and `background.ts`, declared in the Firefox package only, removes the token when the consent is withdrawn.
 - **Screenshots.** Same set as the Chrome Web Store, in `assets/`.
