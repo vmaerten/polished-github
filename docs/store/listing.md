@@ -14,7 +14,7 @@ Texts and answers for the Chrome Web Store and Firefox Add-ons (AMO). Every publ
 ### Long description
 
 ```text
-Polished GitHub adds small, careful improvements to github.com, starting with pull requests. It changes nothing else: every feature can be turned off in the options.
+Polished GitHub adds small, careful improvements to github.com, starting with pull requests. It is free and open source, and changes nothing else: every feature can be turned off in the options.
 
 Not affiliated with, endorsed or sponsored by GitHub, Inc. GitHub is a trademark of GitHub, Inc.
 
@@ -34,7 +34,7 @@ IN COMMENTS AND READMES
 YOUR TOKEN STAYS WITH YOU
 The PR list badges and the reviewer load need a read-only GitHub token (a fine-grained token with read access to Pull requests). It is stored in your browser only and sent only to api.github.com. The extension has no server and no analytics.
 
-Source code and issues: https://github.com/vmaerten/polished-github
+Open source under the MIT license. Code and issues: https://github.com/vmaerten/polished-github
 ```
 
 ## Chrome Web Store
