@@ -46,7 +46,7 @@ Source code and issues: https://github.com/vmaerten/polished-github
 | Single purpose                             | Speed up pull request reviews on github.com by adding review information and shortcuts to GitHub pages.                   |
 | `storage` justification                    | Saves the user's settings and, on this device only, the GitHub token they enter in the options.                           |
 | Host permission `https://github.com/*`     | The features run on github.com pages: PR list badges, reviewers picker counts, quick comment buttons and the image modal. |
-| Host permission `https://api.github.com/*` | Reads review status, diff stats and pending review counts from the GitHub API with the user's own token.                  |
+| Host permission `https://api.github.com/*` | Reads review status, diff stats, last activity and pending review counts from the GitHub API with the user's own token.   |
 | Remote code                                | No. Everything ships in the package.                                                                                      |
 
 **Data usage.** Declare _Authentication information_: the store counts handling a login or token as handling user data, even when it only goes to a third-party API. The API requests also name the repository and pull requests of the page being viewed, which the store's definition of _Web browsing activity_ covers, so declare it too. Then certify that the data is not sold, not used for anything but the single purpose, and not used for creditworthiness or lending. Check the wording of the form at submission time, it changes.
@@ -75,5 +75,5 @@ Source code and issues: https://github.com/vmaerten/polished-github
 **Before submitting.**
 
 - **Source code.** The package is bundled by tsdown, so AMO asks for the source and the build steps: `pnpm install --frozen-lockfile` then `pnpm exec tsdown`, with Node and pnpm versions from `package.json`.
-- **Data collection.** Mozilla counts the token sent to api.github.com as `authenticationInfo`. `manifest.json` declares it as optional data, and the options page asks for consent when the user saves a token in Firefox.
+- **Data collection.** Mozilla counts the token sent to api.github.com as `authenticationInfo`, and the repositories, PRs and reviewers it looks up as `browsingActivity`. `manifest.json` declares both as optional data: the options page asks for consent when the user saves a token in Firefox, and `background.ts` removes the token when the consent is withdrawn.
 - **Screenshots.** Same set as the Chrome Web Store, in `assets/`.

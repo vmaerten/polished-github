@@ -40,6 +40,13 @@ export default defineConfig([
 	},
 	{
 		...shared,
+		// Firefox runs it as an event page, which can't be an ES module without "type": "module"
+		entry: {background: 'source/background.ts'},
+		format: 'iife',
+		outputOptions: {entryFileNames: '[name].js'},
+	},
+	{
+		...shared,
 		entry: {options: 'source/options.ts'},
 		format: 'esm',
 	},
