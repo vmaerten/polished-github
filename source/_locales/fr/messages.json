@@ -135,7 +135,13 @@
 		"message": "avec l'accès en lecture aux"
 	},
 	"token_helpClassic": {
-		"message": "sur les dépôts que vous consultez, ou un token classique avec le scope"
+		"message": "sur les dépôts que vous consultez, ou, pour plusieurs organisations, un"
+	},
+	"token_helpClassicLink": {
+		"message": "token classique"
+	},
+	"token_helpScope": {
+		"message": "avec le scope"
 	},
 	"token_helpEnd": {
 		"message": ". Pour les organisations qui utilisent le SSO, autorisez aussi le token pour elles."

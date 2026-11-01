@@ -9,6 +9,13 @@
 		| {kind: 'connected'; login: string; remaining: number; limit: number}
 		| {kind: 'error'; message: string};
 
+	// GitHub pre-fills the form with the only permission the features need; the user still picks the repositories
+	const newTokenUrl =
+		'https://github.com/settings/personal-access-tokens/new?name=Polished+GitHub&description=Lets+the+Polished+GitHub+browser+extension+read+pull+requests&pull_requests=read';
+
+	// A fine-grained token covers a single account or organization; a classic one covers them all
+	const classicTokenUrl = 'https://github.com/settings/tokens/new?scopes=repo&description=Polished+GitHub';
+
 	let {ontokenchange}: {ontokenchange: (hasToken: boolean) => void} = $props();
 
 	let token = $state('');
@@ -103,8 +110,10 @@
 		</p>
 	</form>
 	<p class="muted small">
-		{t('token_helpStart')} <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer">{t('token_helpLink')}</a>
-		{t('token_helpAccess')} <em>Pull requests</em> {t('token_helpClassic')} <code>repo</code>{t('token_helpEnd')}
+		{t('token_helpStart')} <a href={newTokenUrl} target="_blank" rel="noopener noreferrer">{t('token_helpLink')}</a>
+		{t('token_helpAccess')} <em>Pull requests</em> {t('token_helpClassic')}
+		<a href={classicTokenUrl} target="_blank" rel="noopener noreferrer">{t('token_helpClassicLink')}</a>
+		{t('token_helpScope')} <code>repo</code>{t('token_helpEnd')}
 	</p>
 </section>
 
