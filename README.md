@@ -2,7 +2,7 @@
 
 <h1 align="center">Polished GitHub</h1>
 
-<p align="center">Review pull requests faster, right on GitHub. For Chrome and Firefox.<br><a href="https://polished-github.vmaerten.fr">Website</a> · <a href="https://polished-github.vmaerten.fr/features/">All features</a> · <a href="CHANGELOG.md">Changelog</a></p>
+<p align="center">Polishes the GitHub you use every day, starting with pull requests. For Chrome and Firefox.<br><a href="https://polished-github.vmaerten.fr">Website</a> · <a href="https://polished-github.vmaerten.fr/features/">All features</a> · <a href="CHANGELOG.md">Changelog</a></p>
 
 ![The PR list with review status, diff stats and idle badges](docs/store/assets/1-pr-list.png)
 
