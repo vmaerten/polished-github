@@ -1,5 +1,19 @@
 version: '3'
 
+vars:
+  REPO_URL: https://github.com/vmaerten/polished-github
+  # One package per browser: Firefox's also declares the background script, see build/firefox.ts
+  PACKAGES:
+    map:
+      chrome: distribution
+      firefox: distribution-firefox
+  # The package each web-ext target loads
+  TARGET_PACKAGES:
+    map:
+      chromium: chrome
+      firefox-desktop: firefox
+  VERSION_PATTERN: '^[0-9]+\.[0-9]+\.[0-9]+$'
+
 tasks:
   default:
     cmds:
@@ -12,13 +26,13 @@ tasks:
       - pnpm install --frozen-lockfile
 
   build:
-    desc: Build the extension into distribution/ for Chrome and distribution-firefox/ for Firefox
+    desc: Build the extension into {{.PACKAGES.chrome}}/ for Chrome and {{.PACKAGES.firefox}}/ for Firefox
     cmds:
       - pnpm exec tsdown
       - node build/firefox.ts
 
   dev:
-    desc: Rebuild distribution/ on every change
+    desc: Rebuild {{.PACKAGES.chrome}}/ on every change
     cmds:
       - pnpm exec tsdown --watch
 
@@ -26,8 +40,12 @@ tasks:
     desc: 'Open a browser with the built extension loaded (TARGET=firefox-desktop for Firefox)'
     vars:
       TARGET: '{{.TARGET | default "chromium"}}'
+    requires:
+      vars:
+        - name: TARGET
+          enum: [chromium, firefox-desktop]
     cmds:
-      - pnpm exec web-ext run --source-dir {{if eq .TARGET "firefox-desktop"}}distribution-firefox{{else}}distribution{{end}} --target {{.TARGET}} --start-url https://github.com/vmaerten/polished-github
+      - pnpm exec web-ext run --source-dir {{get .PACKAGES (get .TARGET_PACKAGES .TARGET)}} --target {{.TARGET}} --start-url {{.REPO_URL}}
 
   website:dev:
     desc: Serve the website with live reload
@@ -48,9 +66,9 @@ tasks:
       - pnpm exec oxfmt --check
 
   format:
-    desc: Format every file
+    desc: 'Format every file, or the ones given: task format -- README.md'
     cmds:
-      - pnpm exec oxfmt
+      - pnpm exec oxfmt {{.CLI_ARGS}}
 
   typecheck:
     desc: Type-check TypeScript and Svelte files
@@ -60,44 +78,53 @@ tasks:
       - pnpm exec svelte-check --tsgo --fail-on-warnings
 
   test:
-    desc: Run the unit tests
+    desc: 'Run the unit tests, or the matching ones: task test -- quick-comments'
     cmds:
-      - pnpm exec vitest run
+      - pnpm exec vitest run {{.CLI_ARGS}}
 
   check:
     desc: Run every check CI runs
     deps: [lint, typecheck, test]
     cmds:
       - task: build
-      - pnpm exec web-ext lint --source-dir distribution-firefox
+      - pnpm exec web-ext lint --source-dir {{.PACKAGES.firefox}}
       - task: website:build
 
   package:
-    desc: Zip the Chrome and Firefox packages into web-ext-artifacts/
+    desc: 'Zip each browser package into web-ext-artifacts/:{{range $browser, $_ := .PACKAGES}} polished-github-{{$browser}}-<version>.zip{{end}}'
     deps: [build]
     vars:
       VERSION:
         sh: jq -r .version package.json
     cmds:
-      - pnpm exec web-ext build --source-dir distribution --artifacts-dir web-ext-artifacts --filename polished-github-chrome-{{.VERSION}}.zip --overwrite-dest
-      - pnpm exec web-ext build --source-dir distribution-firefox --artifacts-dir web-ext-artifacts --filename polished-github-firefox-{{.VERSION}}.zip --overwrite-dest
+      - for: {var: PACKAGES}
+        cmd: pnpm exec web-ext build --source-dir {{.ITEM}} --artifacts-dir web-ext-artifacts --filename polished-github-{{.KEY}}-{{.VERSION}}.zip --overwrite-dest
 
   release:
     desc: 'Release a version from main, e.g. task release VERSION=1.2.0'
     requires:
       vars: [VERSION]
-    prompt: Release v{{.VERSION}} and push it to origin?
+    vars:
+      TAG: v{{.VERSION}}
+      BRANCH:
+        sh: git branch --show-current
+      # The files `build/release.ts bump` rewrites
+      BUMPED: [package.json, source/manifest.json, CHANGELOG.md]
+    prompt: Release {{.TAG}} and push it to origin?
     preconditions:
-      - sh: '[ "$(git branch --show-current)" = main ]'
-        msg: Releases are cut from main
+      # `true` and `false` are commands: the template decides which one runs
+      - sh: '{{regexMatch .VERSION_PATTERN .VERSION}}'
+        msg: 'VERSION must look like 1.2.0, not "{{.VERSION}}"'
+      - sh: '{{eq .BRANCH "main"}}'
+        msg: 'Releases are cut from main, not {{.BRANCH}}'
       - sh: git diff --quiet HEAD
         msg: Commit or stash your changes first
     cmds:
       - task: check
       - node build/release.ts bump {{.VERSION}}
-      - pnpm exec oxfmt package.json source/manifest.json CHANGELOG.md
-      - git add package.json source/manifest.json CHANGELOG.md
-      - 'git commit -m "chore(release): v{{.VERSION}}"'
-      - git tag v{{.VERSION}}
+      - pnpm exec oxfmt {{.BUMPED | join " "}}
+      - git add {{.BUMPED | join " "}}
+      - 'git commit -m "chore(release): {{.TAG}}"'
+      - git tag {{.TAG}}
       # Atomic: the tag triggers the release workflow, which must find the release commit on main
-      - git push --atomic origin main v{{.VERSION}}
+      - git push --atomic origin main {{.TAG}}
