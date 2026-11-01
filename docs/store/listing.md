@@ -51,7 +51,7 @@ Source code and issues: https://github.com/vmaerten/polished-github
 
 **Data usage.** The token is sent to api.github.com to authenticate the user's own requests, so declare _Authentication information_, then certify that the data is not sold, not used for anything but the single purpose, and not used for creditworthiness or lending. Nothing else is collected. Check the wording of the form at submission time, it changes.
 
-**Privacy policy.** Required once user data is declared. The text is in [privacy-policy.md](privacy-policy.md); it needs a public URL, for example a page on the website.
+**Privacy policy.** Required once user data is declared: https://polished-github.vmaerten.fr/privacy/, rendered from [privacy-policy.md](privacy-policy.md).
 
 **Assets.**
 
