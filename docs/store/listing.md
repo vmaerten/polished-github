@@ -70,7 +70,7 @@ Open source under the MIT license. Code and issues: https://github.com/vmaerten/
 | Categories                   | Web Development                                                                                                                                                                                                                     |
 | Support site                 | https://github.com/vmaerten/polished-github/issues                                                                                                                                                                                  |
 | License                      | MIT                                                                                                                                                                                                                                 |
-| Description                  | The long description above. AMO renders a subset of Markdown, so the bullets and emoji headings can stay as they are.                                                                                                             |
+| Description                  | The long description above. AMO renders a subset of Markdown, so the bullets and emoji headings can stay as they are.                                                                                                               |
 
 **Before submitting.**
 
