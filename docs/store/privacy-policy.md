@@ -9,12 +9,17 @@ Polished GitHub is a browser extension for github.com. It is not affiliated with
 
 ## What the extension sends
 
-- Your GitHub token goes only to `api.github.com`, to authenticate the requests that read review status, diff stats and pending review counts for the pages you open.
-- Nothing is sent to the developer or to any other party. The extension has no server, no analytics and no tracking.
+Only when you have entered a token, and only to `api.github.com`:
+
+- **Your GitHub token**, to authenticate the requests.
+- **What the features need to look up**: the owner and name of the repository you are viewing, the numbers of the pull requests listed on the page, and the logins of the people and teams in the reviewers picker. GitHub answers with review status, diff stats, last activity and pending review counts.
+- When you open the options page, a check of the token: your login and how many API requests you have left.
+
+Nothing is sent to the developer or to any other party. The extension has no server, no analytics and no tracking.
 
 ## What the extension reads
 
-On github.com pages, the extension reads the page to add its badges and buttons. This happens in your browser and is not sent anywhere.
+On github.com pages, the extension reads the page to add its badges and buttons. Apart from the lookups above, what it reads stays in your browser.
 
 ## Removing your data
 
