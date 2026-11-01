@@ -14,5 +14,5 @@ All notable changes to this project are documented here. The format follows [Kee
 - `reviewer-load`: the reviewers picker of a PR shows how many reviews each person already has pending in the repository owner's account.
 - Options page with the GitHub token, feature switches and per-feature settings.
 - The PR list badges go in the right column, aligned from row to row, or in the grey line under the title, as set in the options.
-- The extension is named Supercharged GitHub and has its own icon.
-- The options page takes the Supercharged GitHub look: Boost palette, Manrope and JetBrains Mono, and the logo in the header.
+- The extension is named Polished GitHub and has its own icon.
+- The options page takes the Polished GitHub look: Boost palette, Manrope and JetBrains Mono, and the logo in the header.

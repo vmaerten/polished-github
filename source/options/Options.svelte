@@ -60,7 +60,7 @@
 		<div class="brand">
 			<img class="logo" src="icons/icon-128.png" width="40" height="40" alt="">
 			<div>
-				<h1>Supercharged <span class="wordmark-light">GitHub</span></h1>
+				<h1>Polished <span class="wordmark-light">GitHub</span></h1>
 				<span class="muted small">Version {version} · Options</span>
 			</div>
 		</div>
@@ -154,7 +154,7 @@
 		</footer>
 	{/if}
 
-	<p class="small muted">Supercharged GitHub is not affiliated with, endorsed or sponsored by GitHub, Inc.</p>
+	<p class="small muted">Polished GitHub is not affiliated with, endorsed or sponsored by GitHub, Inc.</p>
 </main>
 
 <style>

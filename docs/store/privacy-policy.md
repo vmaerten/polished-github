@@ -1,6 +1,6 @@
 # Privacy policy
 
-Supercharged GitHub is a browser extension for github.com. It is not affiliated with, endorsed or sponsored by GitHub, Inc.
+Polished GitHub is a browser extension for github.com. It is not affiliated with, endorsed or sponsored by GitHub, Inc.
 
 ## What the extension stores
 

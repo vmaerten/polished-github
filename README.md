@@ -1,4 +1,4 @@
-# Supercharged GitHub
+# Polished GitHub
 
 Browser extension for Chrome and Firefox that makes reviewing pull requests on GitHub faster.
 

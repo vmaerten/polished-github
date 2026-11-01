@@ -6,7 +6,7 @@ Texts and answers for the Chrome Web Store and Firefox Add-ons (AMO). Every publ
 
 | Field                                                                                | Value                                                                   |
 | ------------------------------------------------------------------------------------ | ----------------------------------------------------------------------- |
-| Name                                                                                 | Supercharged GitHub                                                     |
+| Name                                                                                 | Polished GitHub                                                     |
 | Short description (from `manifest.json`, 132 characters max on the Chrome Web Store) | Review pull requests faster on GitHub. Not affiliated with GitHub, Inc. |
 | Homepage                                                                             | https://github.com/vmaerten/supercharged-github                         |
 | Support                                                                              | https://github.com/vmaerten/supercharged-github/issues                  |
@@ -14,7 +14,7 @@ Texts and answers for the Chrome Web Store and Firefox Add-ons (AMO). Every publ
 ### Long description
 
 ```text
-Supercharged GitHub adds what is missing when you review pull requests on github.com. It changes nothing else: every feature can be turned off in the options.
+Polished GitHub adds what is missing when you review pull requests on github.com. It changes nothing else: every feature can be turned off in the options.
 
 Not affiliated with, endorsed or sponsored by GitHub, Inc. GitHub is a trademark of GitHub, Inc.
 
