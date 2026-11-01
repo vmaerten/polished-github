@@ -77,3 +77,12 @@ test('inserts without posting on Shift-click, or when a draft is in progress', a
 	expect(document.querySelector('textarea')!.value).toBe('Thanks!LGTM');
 	expect(submitted).toBe(0);
 });
+
+test('does not post text typed while GitHub was enabling the button', async () => {
+	await quickComments.init(new AbortController().signal);
+	clickButton('LGTM');
+	document.querySelector('textarea')!.value += ' my draft';
+	await new Promise((resolve) => setTimeout(resolve, 100));
+	expect(submitted).toBe(0);
+	expect(document.querySelector('textarea')!.value).toBe('LGTM my draft');
+});
