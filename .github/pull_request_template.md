@@ -7,7 +7,7 @@ Closes #
 
 ## Summary
 
-<!-- The problem, then the solution, in two or three sentences. -->
+<!-- The problem, then the solution, in two or three sentences, in your own words. -->
 
 ## Test plan
 
@@ -20,3 +20,5 @@ Closes #
 ## Checklist
 
 - [ ] `task check` passes.
+- [ ] I wrote this description myself and understand every change in this pull request.
+- [ ] If I used AI, I say how above.

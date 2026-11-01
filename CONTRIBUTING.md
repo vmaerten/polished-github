@@ -35,3 +35,10 @@ The website lives in `website/` (Astro, a pnpm workspace package): `task website
 - One change per pull request, titled as a conventional commit: `fix(review-status): keep the badge after a force push`.
 - For anything visible, add a screenshot and a real github.com URL where you checked it.
 - Run `task check` before pushing: it runs what CI runs, and `task format` fixes formatting.
+
+## AI
+
+AI tools are welcome for writing code. Issues, pull request descriptions and review replies must be written mostly by you, in your own words: they are how we understand what you saw and why you changed it.
+
+- You understand every line you submit and can explain it in review.
+- Say in the pull request how you used AI, if you did.

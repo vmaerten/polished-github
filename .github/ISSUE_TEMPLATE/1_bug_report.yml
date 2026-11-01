@@ -68,3 +68,5 @@ body:
       options:
         - label: I searched the [existing issues](https://github.com/vmaerten/polished-github/issues?q=is%3Aissue) for this bug.
           required: true
+        - label: I wrote this issue myself. AI may have helped with the wording, not with the content.
+          required: true
