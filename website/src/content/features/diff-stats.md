@@ -48,7 +48,7 @@ featured: true
 	<dd>More than 1,000.</dd>
 </dl>
 
-<p class="muted" style="font-size: 15px">Changed lines are lines added plus lines removed. The four thresholds are yours to change.</p>
+<p class="muted">Changed lines are lines added plus lines removed. The four thresholds are yours to change.</p>
 
 ## Settings
 

@@ -61,7 +61,7 @@ featured: true
 	<dd>You approved, and commits landed after your approval.</dd>
 </dl>
 
-<p class="muted" style="font-size: 15px">A plain approval gets no badge: GitHub already shows it.</p>
+<p class="muted">A plain approval gets no badge: GitHub already shows it.</p>
 
 ## Settings
 
