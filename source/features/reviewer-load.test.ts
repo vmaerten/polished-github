@@ -10,6 +10,31 @@ const v4Mock = vi.mocked(v4);
 // Without the pulse: happy-dom leaves the finished promise of a canceled animation unhandled, unlike browsers
 vi.stubGlobal('matchMedia', () => ({matches: true}));
 
+const storage: Record<string, unknown> = {};
+vi.stubGlobal('chrome', {
+	storage: {
+		local: {
+			get: async (key: string) => (key in storage ? {[key]: structuredClone(storage[key])} : {}),
+			set: async (items: Record<string, unknown>) => Object.assign(storage, structuredClone(items)),
+		},
+	},
+});
+
+// A fresh module, as after a page reload; the API mock outlives it
+async function reload(): Promise<typeof reviewerLoad> {
+	vi.resetModules();
+	v4Mock.mockClear();
+	const {default: reloaded} = await import('./reviewer-load.js');
+	return reloaded;
+}
+
+async function openPicker(feature: typeof reviewerLoad, login: string): Promise<AbortController> {
+	document.body.innerHTML = `<details id="reviewers-select-menu"><div class="list">${item(login)}</div></details>`;
+	const page = new AbortController();
+	await feature.init(page.signal);
+	return page;
+}
+
 function item(login: string): string {
 	return `<label class="select-menu-item"><div class="select-menu-item-text"><span class="select-menu-item-heading"><span class="js-username">${login}</span><span class="description">Name</span></span></div></label>`;
 }
@@ -40,14 +65,18 @@ test('shows each reviewer’s pending reviews in the owner’s repositories, fet
 	expect(v4Mock).toHaveBeenCalledOnce();
 	page.abort();
 
-	// Another PR of the same owner, a few minutes later
+	// A reload, or another tab, on a PR of the same owner a few minutes later
 	vi.useFakeTimers({now: Date.now() + 4 * 60 * 1000, toFake: ['Date']});
 	history.pushState({}, '', '/o/other/pull/2');
-	document.body.innerHTML = `<details id="reviewers-select-menu"><div class="list">${item('ada')}</div></details>`;
-	const nextPage = new AbortController();
-	await reviewerLoad.init(nextPage.signal);
+	let nextPage = await openPicker(await reload(), 'ada');
 	await vi.waitFor(() => expect(counts()).toEqual(['3']));
-	expect(v4Mock).toHaveBeenCalledOnce();
+	expect(v4Mock).not.toHaveBeenCalled();
+	nextPage.abort();
+
+	// Past five minutes, the counts are fetched again
+	vi.setSystemTime(Date.now() + 2 * 60 * 1000);
+	nextPage = await openPicker(await reload(), 'ada');
+	await vi.waitFor(() => expect(v4Mock).toHaveBeenCalledOnce());
 	nextPage.abort();
 	vi.useRealTimers();
 });

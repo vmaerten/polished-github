@@ -41,27 +41,72 @@ async function fetchPendingCounts(reviewers: string[], owner: string): Promise<n
 	return reviewers.map((_, index) => result[`r${index}`].issueCount);
 }
 
-// Kept across Turbo navigations, so the next PRs of the organization show the counts at once
 const cacheDuration = 5 * 60 * 1000;
-const cache = new Map<string, {time: number; count: Promise<number>}>();
+const storageKey = 'reviewerLoadCounts';
+type StoredCounts = Record<string, {time: number; count: number}>;
+
+function cacheKey(owner: string, reviewer: string): string {
+	return `${owner} ${reviewer}`;
+}
+
+async function readStoredCounts(): Promise<StoredCounts> {
+	const {[storageKey]: stored} = (await chrome.storage.local.get(storageKey)) as {[storageKey]?: StoredCounts};
+	const now = Date.now();
+	return Object.fromEntries(Object.entries(stored ?? {}).filter(([, {time}]) => now - time <= cacheDuration));
+}
+
+async function storeCounts(counts: Map<string, number>): Promise<void> {
+	const stored = await readStoredCounts();
+	const time = Date.now();
+	for (const [key, count] of counts) {
+		stored[key] = {time, count};
+	}
+
+	await chrome.storage.local.set({[storageKey]: stored});
+}
+
+// Stored rather than kept in memory, so a reload or a new tab on the organization shows the counts at once
+async function loadCounts(reviewers: string[], owner: string): Promise<number[]> {
+	const stored = await readStoredCounts();
+	const missing = reviewers.filter((reviewer) => !(cacheKey(owner, reviewer) in stored));
+	const fetched = new Map<string, number>();
+	if (missing.length > 0) {
+		const counts = await fetchPendingCounts(missing, owner);
+		for (const [index, reviewer] of missing.entries()) {
+			fetched.set(cacheKey(owner, reviewer), counts[index]);
+		}
+
+		storeCounts(fetched).catch((error: unknown) => {
+			console.error('polished-github: reviewer-load could not store the counts', error);
+		});
+	}
+
+	return reviewers.map((reviewer) => {
+		const key = cacheKey(owner, reviewer);
+		return stored[key]?.count ?? fetched.get(key)!;
+	});
+}
+
+// Shared by the rows of every page in this tab, so a count is never requested twice at once
+const pending = new Map<string, {time: number; count: Promise<number>}>();
 
 function getCounts(reviewers: string[], owner: string): Map<string, Promise<number>> {
 	const now = Date.now();
-	const key = (reviewer: string): string => `${owner} ${reviewer}`;
 	const missing = reviewers.filter((reviewer) => {
-		const cached = cache.get(key(reviewer));
+		const cached = pending.get(cacheKey(owner, reviewer));
 		return !cached || now - cached.time > cacheDuration;
 	});
 	if (missing.length > 0) {
-		const fetched = fetchPendingCounts(missing, owner);
+		const loaded = loadCounts(missing, owner);
 		for (const [index, reviewer] of missing.entries()) {
-			const count = fetched.then((counts) => counts[index]);
-			cache.set(key(reviewer), {time: now, count});
-			count.catch(() => cache.delete(key(reviewer)));
+			const key = cacheKey(owner, reviewer);
+			const count = loaded.then((counts) => counts[index]);
+			pending.set(key, {time: now, count});
+			count.catch(() => pending.delete(key));
 		}
 	}
 
-	return new Map(reviewers.map((reviewer) => [reviewer, cache.get(key(reviewer))!.count]));
+	return new Map(reviewers.map((reviewer) => [reviewer, pending.get(cacheKey(owner, reviewer))!.count]));
 }
 
 // Added as soon as the row appears, so the count fills a space already there instead of moving the rows
