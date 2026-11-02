@@ -1,7 +1,7 @@
 ---
 import {render} from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
-import {featureUrl, getFeatures, groups, hasPage, type Feature} from '../../features';
+import {featureUrl, getFeatures, groups, hasPage, releasedIn, type Feature} from '../../features';
 
 export async function getStaticPaths() {
 	const features = await getFeatures();
@@ -16,6 +16,7 @@ interface Props {
 const {feature, features} = Astro.props;
 const {Content} = await render(feature);
 const {title, group, lede, summary, appearsIn, needsToken, onByDefault} = feature.data;
+const release = releasedIn(feature);
 ---
 
 <Layout title={title}>
@@ -54,6 +55,7 @@ const {title, group, lede, summary, appearsIn, needsToken, onByDefault} = featur
 					<span class="tag">Appears in: {appearsIn}</span>
 					{needsToken && <span class="tag tag-token">Needs token</span>}
 					{onByDefault && <span class="tag tag-on">On by default</span>}
+					<a class="tag tag-release" href="/changelog/">{release ? `Since ${release}` : 'Next release'}</a>
 				</div>
 			</div>
 
