@@ -1,22 +1,13 @@
 ---
 import ThemeSwitch from './ThemeSwitch.astro';
 
-export interface NavLink {
-	href: string;
-	label: string;
-}
-
-interface Props {
-	nav?: NavLink[];
-}
-
-const {
-	nav = [
-		{href: '/#install', label: 'Install'},
-		{href: '/features/', label: 'All features'},
-		{href: '/changelog/', label: 'Changelog'},
-	],
-} = Astro.props;
+const nav = [
+	{href: '/#install', label: 'Install'},
+	{href: '/features/', label: 'All features'},
+	{href: '/changelog/', label: 'Changelog'},
+	{href: '/#privacy', label: 'Privacy'},
+	{href: '/#faq', label: 'FAQ'},
+];
 ---
 
 <header class="site-header">

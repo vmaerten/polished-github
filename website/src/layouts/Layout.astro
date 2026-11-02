@@ -1,14 +1,13 @@
 ---
 import '../styles/site.css';
 import SiteFooter from '../components/SiteFooter.astro';
-import SiteHeader, {type NavLink} from '../components/SiteHeader.astro';
+import SiteHeader from '../components/SiteHeader.astro';
 
 interface Props {
 	title?: string;
-	nav?: NavLink[];
 }
 
-const {title, nav} = Astro.props;
+const {title} = Astro.props;
 ---
 
 <!doctype html>
@@ -27,7 +26,7 @@ const {title, nav} = Astro.props;
 		<script is:inline src="/theme.js"></script>
 	</head>
 	<body>
-		<SiteHeader nav={nav} />
+		<SiteHeader />
 		<slot />
 		<SiteFooter />
 	</body>

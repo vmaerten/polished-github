@@ -4,16 +4,9 @@ import {featureUrl, getFeatures, groups, hasPage} from '../features';
 
 const features = await getFeatures();
 const others = features.filter((f) => !f.data.featured);
-const nav = [
-	{href: '#install', label: 'Install'},
-	{href: '/features/', label: 'All features'},
-	{href: '/changelog/', label: 'Changelog'},
-	{href: '#privacy', label: 'Privacy'},
-	{href: '#faq', label: 'FAQ'},
-];
 ---
 
-<Layout nav={nav}>
+<Layout>
 	<main>
 		<section class="wrap hero">
 			<p class="muted" style="font-size: 14px; font-weight: 600">Browser extension for Chrome and Firefox</p>
