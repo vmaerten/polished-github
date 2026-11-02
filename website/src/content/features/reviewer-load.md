@@ -53,7 +53,7 @@ featured: true
 
 - Open PRs where that person's review is requested, across every repository of the organization or user that owns the current one.
 - For a team, the PRs where the team's review is requested.
-- Counts load when you open the picker, and again for the new names when you filter it.
+- Counts load when you open the picker, and for the new names when you filter it. They are kept for five minutes, so the picker shows them at once on the next PRs of the organization, even after a reload.
 
 ## Settings
 
