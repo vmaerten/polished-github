@@ -5,9 +5,9 @@ import {featureUrl, getFeatures, groups, hasPage} from '../features';
 const features = await getFeatures();
 const others = features.filter((f) => !f.data.featured);
 const nav = [
-	{href: '#demo', label: 'Demo'},
-	{href: '/features/', label: 'All features'},
 	{href: '#install', label: 'Install'},
+	{href: '/features/', label: 'All features'},
+	{href: '/changelog/', label: 'Changelog'},
 	{href: '#privacy', label: 'Privacy'},
 	{href: '#faq', label: 'FAQ'},
 ];
