@@ -15,7 +15,8 @@ Every feature can be turned off in the options. The badges and the reviewer load
 
 ## Install
 
-From the [latest release](https://github.com/vmaerten/polished-github/releases/latest), load the Chrome zip, unzipped, as an unpacked extension (`chrome://extensions`, developer mode), or the Firefox zip as a temporary add-on (`about:debugging`).
+- **Chrome**: from the [Chrome Web Store](https://chromewebstore.google.com/detail/polished-github/bdmfdhhfmbkfbgomeefpchhgfbapjbpg).
+- **Firefox**: awaiting review on Firefox Add-ons; meanwhile, load the Firefox zip of the [latest release](https://github.com/vmaerten/polished-github/releases/latest) as a temporary add-on (`about:debugging`).
 
 ## Contributing
 
