@@ -18,7 +18,7 @@ function counts(): string[] {
 	return [...document.querySelectorAll('.polished-github-reviewer-load')].map((count) => count.textContent);
 }
 
-test('shows each reviewer’s pending reviews in the owner’s repositories, fetching each once', async () => {
+test('shows each reviewer’s pending reviews in the owner’s repositories, fetching each once for a few minutes', async () => {
 	history.pushState({}, '', '/o/r/pull/1');
 	document.body.innerHTML = `<details id="reviewers-select-menu"><div class="select-menu-divider">Suggestions</div><div class="list">${item('ada')}${item('org/core')}</div></details>`;
 	v4Mock.mockImplementation(async (_query, variables) =>
@@ -39,6 +39,17 @@ test('shows each reviewer’s pending reviews in the owner’s repositories, fet
 	await vi.waitFor(() => expect(counts()).toEqual(['3']));
 	expect(v4Mock).toHaveBeenCalledOnce();
 	page.abort();
+
+	// Another PR of the same owner, a few minutes later
+	vi.useFakeTimers({now: Date.now() + 4 * 60 * 1000, toFake: ['Date']});
+	history.pushState({}, '', '/o/other/pull/2');
+	document.body.innerHTML = `<details id="reviewers-select-menu"><div class="list">${item('ada')}</div></details>`;
+	const nextPage = new AbortController();
+	await reviewerLoad.init(nextPage.signal);
+	await vi.waitFor(() => expect(counts()).toEqual(['3']));
+	expect(v4Mock).toHaveBeenCalledOnce();
+	nextPage.abort();
+	vi.useRealTimers();
 });
 
 test('reserves the counter while the counts load, and removes it if they fail', async () => {

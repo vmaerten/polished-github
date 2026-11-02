@@ -41,23 +41,27 @@ async function fetchPendingCounts(reviewers: string[], owner: string): Promise<n
 	return reviewers.map((_, index) => result[`r${index}`].issueCount);
 }
 
-// Shared by the rows of a page, so filtering the picker fetches nobody twice
-function getCounts(
-	reviewers: string[],
-	owner: string,
-	cache: Map<string, Promise<number>>,
-): Map<string, Promise<number>> {
-	const missing = reviewers.filter((reviewer) => !cache.has(reviewer));
+// Kept across Turbo navigations, so the next PRs of the organization show the counts at once
+const cacheDuration = 5 * 60 * 1000;
+const cache = new Map<string, {time: number; count: Promise<number>}>();
+
+function getCounts(reviewers: string[], owner: string): Map<string, Promise<number>> {
+	const now = Date.now();
+	const key = (reviewer: string): string => `${owner} ${reviewer}`;
+	const missing = reviewers.filter((reviewer) => {
+		const cached = cache.get(key(reviewer));
+		return !cached || now - cached.time > cacheDuration;
+	});
 	if (missing.length > 0) {
 		const fetched = fetchPendingCounts(missing, owner);
 		for (const [index, reviewer] of missing.entries()) {
 			const count = fetched.then((counts) => counts[index]);
-			cache.set(reviewer, count);
-			count.catch(() => cache.delete(reviewer));
+			cache.set(key(reviewer), {time: now, count});
+			count.catch(() => cache.delete(key(reviewer)));
 		}
 	}
 
-	return new Map(reviewers.map((reviewer) => [reviewer, cache.get(reviewer)!]));
+	return new Map(reviewers.map((reviewer) => [reviewer, cache.get(key(reviewer))!.count]));
 }
 
 // Added as soon as the row appears, so the count fills a space already there instead of moving the rows
@@ -135,7 +139,7 @@ function addHeader(divider: Element): void {
 	);
 }
 
-async function addCounts(elements: Element[], cache: Map<string, Promise<number>>): Promise<void> {
+async function addCounts(elements: Element[]): Promise<void> {
 	const {owner} = pageDetect.utils.getRepositoryInfo()!;
 	const rows = elements.flatMap((element) => {
 		const reviewer = element.textContent.trim();
@@ -143,7 +147,7 @@ async function addCounts(elements: Element[], cache: Map<string, Promise<number>
 		return counter ? [{counter, reviewer}] : [];
 	});
 
-	const counts = getCounts([...new Set(rows.map(({reviewer}) => reviewer))], owner, cache);
+	const counts = getCounts([...new Set(rows.map(({reviewer}) => reviewer))], owner);
 	const results = await Promise.allSettled(
 		rows.map(async ({counter, reviewer}) => {
 			try {
@@ -166,12 +170,11 @@ const reviewerLoad: Feature = {
 	include: [pageDetect.isPRConversation],
 	requiresToken: true,
 	init(signal) {
-		const cache = new Map<string, Promise<number>>();
 		observe(dividers, (elements) => elements.forEach(addHeader), {signal});
 		observe(
 			usernames,
 			(elements) => {
-				addCounts(elements, cache).catch((error: unknown) => {
+				addCounts(elements).catch((error: unknown) => {
 					console.error('polished-github: reviewer-load failed', error);
 				});
 			},
