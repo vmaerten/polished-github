@@ -27,3 +27,22 @@ jobs:
         run: |
           node build/release.ts notes "${GITHUB_REF_NAME#v}" > release-notes.md
           gh release create "$GITHUB_REF_NAME" web-ext-artifacts/*.zip --title "$GITHUB_REF_NAME" --notes-file release-notes.md
+
+  # Submits the released package for review; listing, screenshots and privacy answers stay in the dashboard
+  chrome:
+    needs: release
+    runs-on: ubuntu-latest
+    environment: Chrome
+    steps:
+      - name: Download the Chrome package from the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release download "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" --pattern 'polished-github-chrome-*.zip'
+      - name: Upload and publish to the Chrome Web Store
+        env:
+          EXTENSION_ID: bdmfdhhfmbkfbgomeefpchhgfbapjbpg
+          PUBLISHER_ID: ${{ vars.CWS_PUBLISHER_ID }}
+          CLIENT_ID: ${{ secrets.CWS_CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CWS_CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.CWS_REFRESH_TOKEN }}
+        run: npx chrome-webstore-upload-cli@4.0.2 --source polished-github-chrome-*.zip
