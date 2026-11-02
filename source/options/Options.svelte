@@ -11,12 +11,13 @@
 	} from '../options-storage.js';
 	import DiffStatsEditor from './DiffStatsEditor.svelte';
 	import ImageModalEditor from './ImageModalEditor.svelte';
+	import MergeEmailEditor from './MergeEmailEditor.svelte';
 	import PrListSection from './PrListSection.svelte';
 	import QuickCommentsEditor from './QuickCommentsEditor.svelte';
 	import StaleEditor from './StaleEditor.svelte';
 	import TokenSection from './TokenSection.svelte';
 
-	const configurable = new Set(['image-modal', 'quick-comments', 'diff-stats', 'idle-prs']);
+	const configurable = new Set(['image-modal', 'quick-comments', 'diff-stats', 'idle-prs', 'merge-email']);
 	const {version} = chrome.runtime.getManifest();
 
 	let options = $state<Options>();
@@ -148,6 +149,11 @@
 									<StaleEditor
 										bind:settings={options.stale}
 										onsave={() => save({stale: $state.snapshot(options!.stale)})}
+									/>
+								{:else if feature.id === 'merge-email'}
+									<MergeEmailEditor
+										bind:rules={options.mergeEmails}
+										onsave={() => save({mergeEmails: $state.snapshot(options!.mergeEmails)})}
 									/>
 								{/if}
 								{#if saveError}

@@ -24,6 +24,12 @@ export type StaleSettings = {
 	includeDrafts: boolean;
 };
 
+export type MergeEmail = {
+	/** Organization or user that owns the repository. */
+	owner: string;
+	email: string;
+};
+
 export type BadgePlacement = 'right' | 'metadata';
 
 export type Options = {
@@ -35,6 +41,7 @@ export type Options = {
 	stale: StaleSettings;
 	/** Where the PR list features put their badges in each row. */
 	prListBadges: BadgePlacement;
+	mergeEmails: MergeEmail[];
 };
 
 const defaults: Options = {
@@ -48,6 +55,7 @@ const defaults: Options = {
 	imageModal: {cycleImages: true, zoom: true, includeLinkedImages: false},
 	stale: {days: 7, includeDrafts: false},
 	prListBadges: 'right',
+	mergeEmails: [],
 };
 
 export async function getOptions(): Promise<Options> {

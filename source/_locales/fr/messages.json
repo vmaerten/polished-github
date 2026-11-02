@@ -23,6 +23,9 @@
 	"feature_reviewerLoad": {
 		"message": "Affiche combien de reviews chaque personne a déjà en attente dans le choix des reviewers d'une PR."
 	},
+	"feature_mergeEmail": {
+		"message": "Choisit l'email de commit selon l'owner quand vous mergez une pull request."
+	},
 	"api_noToken": {
 		"message": "Aucun token GitHub : ajoutez-en un dans les options de Polished GitHub"
 	},
@@ -223,5 +226,26 @@
 	},
 	"quickComments_newBody": {
 		"message": "Nouveau commentaire"
+	},
+	"mergeEmail_help": {
+		"message": "Sur les dépôts de chaque owner, les merges et squashes utilisent cet email. Les owners sans règle gardent celui de GitHub par défaut."
+	},
+	"mergeEmail_owner": {
+		"message": "Owner"
+	},
+	"mergeEmail_ownerPlaceholder": {
+		"message": "Organisation ou utilisateur"
+	},
+	"mergeEmail_email": {
+		"message": "Email de commit"
+	},
+	"mergeEmail_emailPlaceholder": {
+		"message": "Un email vérifié de votre compte"
+	},
+	"mergeEmail_remove": {
+		"message": "Supprimer la règle"
+	},
+	"mergeEmail_add": {
+		"message": "+ Ajouter une règle"
 	}
 }
