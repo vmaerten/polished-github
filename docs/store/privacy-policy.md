@@ -4,7 +4,7 @@ Polished GitHub is a browser extension for github.com. It is not affiliated with
 
 ## What the extension stores
 
-- **Your settings**, such as which features are on, saved in your browser's extension storage. If browser sync is on, your browser syncs them across your own devices.
+- **Your settings**, such as which features are on and the commit email you chose for each organization, saved in your browser's extension storage. If browser sync is on, your browser syncs them across your own devices.
 - **Your GitHub token**, if you enter one, saved in your browser's local extension storage on this device only. It is never synced.
 - **Pending review counts** shown in the reviewers picker, saved in the same local storage for five minutes so they show at once on the next pages, then dropped.
 

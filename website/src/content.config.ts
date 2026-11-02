@@ -2,7 +2,7 @@ import {defineCollection} from 'astro:content';
 import {glob} from 'astro/loaders';
 import {z} from 'astro/zod';
 
-export const groups = ['Triage', 'Reviewing code', 'Discussing', 'Reading'] as const;
+export const groups = ['Triage', 'Reviewing code', 'Discussing', 'Merging', 'Reading'] as const;
 
 const features = defineCollection({
 	loader: glob({pattern: '*.md', base: './src/content/features'}),

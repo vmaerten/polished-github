@@ -23,6 +23,9 @@
 	"feature_reviewerLoad": {
 		"message": "Shows how many reviews each person already has pending in the reviewers picker of a PR."
 	},
+	"feature_mergeEmail": {
+		"message": "Picks the commit email for each owner when you merge a pull request."
+	},
 	"api_noToken": {
 		"message": "No GitHub token: set one in the Polished GitHub options"
 	},
@@ -223,5 +226,26 @@
 	},
 	"quickComments_newBody": {
 		"message": "New comment"
+	},
+	"mergeEmail_help": {
+		"message": "On the repositories of each owner, merges and squashes use this email. Owners without a rule keep GitHub's default."
+	},
+	"mergeEmail_owner": {
+		"message": "Owner"
+	},
+	"mergeEmail_ownerPlaceholder": {
+		"message": "Organization or user"
+	},
+	"mergeEmail_email": {
+		"message": "Commit email"
+	},
+	"mergeEmail_emailPlaceholder": {
+		"message": "A verified email of your account"
+	},
+	"mergeEmail_remove": {
+		"message": "Remove rule"
+	},
+	"mergeEmail_add": {
+		"message": "+ Add rule"
 	}
 }
