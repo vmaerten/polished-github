@@ -992,9 +992,9 @@ a.tag-release {
 }
 .sidebar .side-group {
 	padding: 0 10px 6px;
-	font-size: 11px;
+	font-size: 12px;
 	font-weight: 700;
-	color: var(--muted);
+	color: var(--ink);
 	text-transform: uppercase;
 	letter-spacing: 0.08em;
 }
