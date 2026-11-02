@@ -856,7 +856,8 @@ a.item:hover .item-name {
 }
 .cat-head h1,
 .doc-head h1,
-.privacy h1 {
+.privacy h1,
+.changelog h1 {
 	font-size: 40px;
 	letter-spacing: -0.015em;
 	line-height: 1.15;
@@ -956,6 +957,11 @@ a.cat-card:hover {
 .tag-on {
 	background: var(--ok-bg);
 	color: var(--ok-fg);
+}
+a.tag-release {
+	background: var(--accent-soft);
+	color: var(--accent);
+	text-decoration: none;
 }
 .empty {
 	grid-column: 1 / -1;
@@ -1140,14 +1146,21 @@ a.cat-card:hover {
 	color: var(--add);
 }
 
-/* Privacy policy */
-.privacy {
+/* Privacy policy and changelog */
+.privacy,
+.changelog {
 	margin-inline: auto;
 }
-.privacy h1 {
+.privacy h1,
+.changelog h1 {
 	margin-bottom: 4px;
 }
-.privacy code {
+.privacy code,
+.changelog code {
 	font-family: var(--mono);
 	font-size: 0.9em;
+}
+/* The Unreleased section stays in the file between releases, empty */
+.changelog h2:has(+ h2) {
+	display: none;
 }
