@@ -30,9 +30,17 @@ export async function start(features: readonly Feature[]): Promise<void> {
 	const [{disabledFeatures}, token] = await Promise.all([getOptions(), getToken()]);
 	const context: RunContext = {disabled: new Set(disabledFeatures), hasToken: token !== ''};
 	let controller = new AbortController();
+	const navigation = new AbortController();
 
 	const run = (): void => {
 		controller.abort();
+		// After an update or a reload of the extension, this script lives on in open tabs but can no longer reach the
+		// extension's APIs: it stops, and the new version runs once the tab reloads
+		if (!chrome.runtime?.id) {
+			navigation.abort();
+			return;
+		}
+
 		controller = new AbortController();
 		for (const feature of features) {
 			if (shouldRun(feature, context)) {
@@ -42,7 +50,7 @@ export async function start(features: readonly Feature[]): Promise<void> {
 	};
 
 	for (const event of navigationEvents) {
-		document.addEventListener(event, run);
+		document.addEventListener(event, run, {signal: navigation.signal});
 	}
 
 	// Turbo shows a cached clone of the page on back and forward: our elements would come back stale and without their
