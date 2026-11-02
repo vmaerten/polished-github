@@ -1,6 +1,11 @@
-import {describe, expect, test} from 'vitest';
+import {describe, expect, test, vi} from 'vitest';
 
-import {type Feature, shouldRun} from './feature-manager.js';
+import {type Feature, shouldRun, start} from './feature-manager.js';
+
+vi.mock('./options-storage.js', () => ({
+	getOptions: async () => ({disabledFeatures: []}),
+	getToken: async () => 'token',
+}));
 
 const yes = (): boolean => true;
 const no = (): boolean => false;
@@ -29,4 +34,24 @@ describe('shouldRun', () => {
 		expect(shouldRun(feature({include: [no, yes]}), context)).toBe(true);
 		expect(shouldRun(feature({include: [no]}), context)).toBe(false);
 	});
+});
+
+test('stops once the extension is updated or reloaded under the open tab', async () => {
+	const runtime: {id?: string} = {id: 'extension'};
+	vi.stubGlobal('chrome', {runtime});
+	const init = vi.fn<Feature['init']>();
+	await start([feature({init})]);
+	expect(init).toHaveBeenCalledOnce();
+
+	document.dispatchEvent(new Event('turbo:render'));
+	expect(init).toHaveBeenCalledTimes(2);
+	const signal = init.mock.lastCall![0];
+
+	delete runtime.id;
+	document.dispatchEvent(new Event('turbo:render'));
+	expect(signal.aborted).toBe(true);
+	runtime.id = 'extension';
+	document.dispatchEvent(new Event('soft-nav:react-done'));
+	expect(init).toHaveBeenCalledTimes(2);
+	vi.unstubAllGlobals();
 });
