@@ -32,5 +32,6 @@ lede: GitHub merges with one default email everywhere. Tell it which email goes 
 
 ## Good to know
 
+- GitHub only offers the choice when the commit is yours: squashing someone else's pull request, a Renovate update for instance, authors the commit as them, and the extension has nothing to pick.
 - Covers merges and squashes from the pull request page. Commits made elsewhere in GitHub, and on your machine, keep their own email: for local commits, git's `includeIf` does the same per directory.
 - No token needed. The rules are saved with your settings, and the extension sends them nowhere.
