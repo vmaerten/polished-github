@@ -44,7 +44,7 @@ Open source under the MIT license. Code and issues: https://github.com/vmaerten/
 | Category                                 | Developer Tools                                                                                                                                           |
 | Language                                 | English                                                                                                                                                   |
 | Single purpose                           | Improve github.com pages with information and shortcuts, each of which the user can turn off.                                                             |
-| `storage` justification                  | Saves the user's settings and, on this device only, the GitHub token they enter in the options.                                                           |
+| `storage` justification                  | Saves the user's settings and, on this device only, the GitHub token they enter in the options and the reviewers' pending review counts for five minutes. |
 | Content script on `https://github.com/*` | The features run on github.com pages: PR list badges, reviewers picker counts, quick comment buttons and the image modal.                                 |
 | No host permission for `api.github.com`  | The API allows cross-origin requests, so reading review status, diff stats, last activity and pending review counts with the user's own token needs none. |
 | Remote code                              | No. Everything ships in the package.                                                                                                                      |
