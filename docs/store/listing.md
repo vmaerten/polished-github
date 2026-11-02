@@ -31,6 +31,9 @@ The badges go in a right-hand column aligned from row to row, or in the grey lin
 • Quick comments: your usual replies as one-click buttons above the comment box.
 • Image modal: images open in a zoomable modal instead of a new tab, arrow keys go through them.
 
+🔀 In the merge box
+• Merge email: the commit email you chose for each organization, picked for you when you merge or squash.
+
 🔒 Your token stays with you
 The PR list badges and the reviewer load need a read-only GitHub token (a fine-grained token with read access to Pull requests). It is stored in your browser only and sent only to api.github.com. The extension has no server and no analytics.
 
@@ -45,7 +48,7 @@ Open source under the MIT license. Code and issues: https://github.com/vmaerten/
 | Language                                 | English                                                                                                                                                   |
 | Single purpose                           | Improve github.com pages with information and shortcuts, each of which the user can turn off.                                                             |
 | `storage` justification                  | Saves the user's settings and, on this device only, the GitHub token they enter in the options and the reviewers' pending review counts for five minutes. |
-| Content script on `https://github.com/*` | The features run on github.com pages: PR list badges, reviewers picker counts, quick comment buttons and the image modal.                                 |
+| Content script on `https://github.com/*` | The features run on github.com pages: PR list badges, reviewers picker counts, quick comment buttons, the image modal and the merge email.                |
 | No host permission for `api.github.com`  | The API allows cross-origin requests, so reading review status, diff stats, last activity and pending review counts with the user's own token needs none. |
 | Remote code                              | No. Everything ships in the package.                                                                                                                      |
 
@@ -96,6 +99,10 @@ The badges go in a right-hand column aligned from row to row, or in the grey lin
 - Quick comments: your usual replies as one-click buttons above the comment box.
 - Image modal: images open in a zoomable modal instead of a new tab, arrow keys go through them.
 
+**🔀 In the merge box**
+
+- Merge email: the commit email you chose for each organization, picked for you when you merge or squash.
+
 **🔒 Your token stays with you**
 
 The PR list badges and the reviewer load need a read-only GitHub token (a fine-grained token with read access to Pull requests). It is stored in your browser only and sent only to api.github.com. The extension has no server and no analytics.
@@ -136,6 +143,10 @@ Les badges se placent dans une colonne à droite, alignée d'une ligne à l'autr
 
 - Réponses rapides : vos réponses habituelles en boutons, publiées en un clic au-dessus de la zone de commentaire.
 - Visionneuse d'images : les images s'ouvrent dans une fenêtre zoomable au lieu d'un nouvel onglet, et les flèches du clavier passent de l'une à l'autre.
+
+**🔀 Dans la boîte de merge**
+
+- Email de merge : l'email de commit que vous avez choisi pour chaque organisation, sélectionné pour vous quand vous mergez ou squashez.
 
 **🔒 Votre token reste chez vous**
 
