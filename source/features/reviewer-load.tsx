@@ -41,28 +41,50 @@ async function fetchPendingCounts(reviewers: string[], owner: string): Promise<n
 	return reviewers.map((_, index) => result[`r${index}`].issueCount);
 }
 
-function addCount(username: Element, count: number, owner: string): void {
-	const item = username.closest<HTMLElement>('.select-menu-item');
-	if (!item || item.querySelector(`.${loadClass}`)) {
-		return;
+// Shared by the rows of a page, so filtering the picker fetches nobody twice
+function getCounts(
+	reviewers: string[],
+	owner: string,
+	cache: Map<string, Promise<number>>,
+): Map<string, Promise<number>> {
+	const missing = reviewers.filter((reviewer) => !cache.has(reviewer));
+	if (missing.length > 0) {
+		const fetched = fetchPendingCounts(missing, owner);
+		for (const [index, reviewer] of missing.entries()) {
+			const count = fetched.then((counts) => counts[index]);
+			cache.set(reviewer, count);
+			count.catch(() => cache.delete(reviewer));
+		}
 	}
 
-	const {color, background} = loadLevels.find(({max}) => count <= max)!;
-	const description = `${count} open ${count === 1 ? 'PR' : 'PRs'} waiting for their review in ${owner}`;
+	return new Map(reviewers.map((reviewer) => [reviewer, cache.get(reviewer)!]));
+}
+
+// Added as soon as the row appears, so the count fills a space already there instead of moving the rows
+function reserveCounter(username: Element): HTMLElement | undefined {
+	const item = username.closest<HTMLElement>('.select-menu-item');
+	if (!item) {
+		return undefined;
+	}
+
+	const existing = item.querySelector<HTMLElement>(`.${loadClass}`);
+	if (existing) {
+		return existing;
+	}
+
 	// The item is a block layout: an absolute counter keeps it in a right-hand column without reflowing the name
 	item.style.position = 'relative';
 	item.querySelector<HTMLElement>('.select-menu-item-text')?.style.setProperty('padding-right', '36px');
-	item.append(
+	const counter = (
 		<span
 			className={loadClass}
-			title={description}
-			aria-label={description}
 			style={{
 				position: 'absolute',
 				top: '50%',
 				right: '16px',
 				transform: 'translateY(-50%)',
 				minWidth: '22px',
+				height: '20px',
 				boxSizing: 'border-box',
 				padding: '0 7px',
 				borderRadius: '999px',
@@ -70,13 +92,35 @@ function addCount(username: Element, count: number, owner: string): void {
 				fontWeight: '600',
 				lineHeight: '20px',
 				textAlign: 'center',
-				color,
-				background,
+				background: loadLevels[0].background,
 			}}
-		>
-			{count}
-		</span>,
-	);
+		/>
+	) as HTMLElement;
+	item.append(counter);
+	if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+		counter.animate([{opacity: 1}, {opacity: 0.4}], {duration: 800, direction: 'alternate', iterations: Infinity});
+	}
+
+	return counter;
+}
+
+function fillCounter(counter: HTMLElement, count: number, owner: string): void {
+	const {color, background} = loadLevels.find(({max}) => count <= max)!;
+	const description = `${count} open ${count === 1 ? 'PR' : 'PRs'} waiting for their review in ${owner}`;
+	for (const animation of counter.getAnimations()) {
+		animation.cancel();
+	}
+
+	counter.textContent = String(count);
+	counter.title = description;
+	counter.setAttribute('aria-label', description);
+	counter.style.color = color;
+	counter.style.background = background;
+}
+
+function removeCounter(counter: HTMLElement): void {
+	counter.parentElement?.querySelector<HTMLElement>('.select-menu-item-text')?.style.removeProperty('padding-right');
+	counter.remove();
 }
 
 function addHeader(divider: Element): void {
@@ -91,23 +135,28 @@ function addHeader(divider: Element): void {
 	);
 }
 
-async function addCounts(elements: Element[], counts: Map<string, number>): Promise<void> {
+async function addCounts(elements: Element[], cache: Map<string, Promise<number>>): Promise<void> {
 	const {owner} = pageDetect.utils.getRepositoryInfo()!;
 	const rows = elements.flatMap((element) => {
 		const reviewer = element.textContent.trim();
-		return reviewer ? [{element, reviewer}] : [];
+		const counter = reviewer ? reserveCounter(element) : undefined;
+		return counter ? [{counter, reviewer}] : [];
 	});
 
-	const missing = [...new Set(rows.map(({reviewer}) => reviewer))].filter((reviewer) => !counts.has(reviewer));
-	if (missing.length > 0) {
-		const fetched = await fetchPendingCounts(missing, owner);
-		for (const [index, reviewer] of missing.entries()) {
-			counts.set(reviewer, fetched[index]);
-		}
-	}
-
-	for (const {element, reviewer} of rows) {
-		addCount(element, counts.get(reviewer)!, owner);
+	const counts = getCounts([...new Set(rows.map(({reviewer}) => reviewer))], owner, cache);
+	const results = await Promise.allSettled(
+		rows.map(async ({counter, reviewer}) => {
+			try {
+				fillCounter(counter, await counts.get(reviewer)!, owner);
+			} catch (error) {
+				removeCounter(counter);
+				throw error;
+			}
+		}),
+	);
+	const failure = results.find((result) => result.status === 'rejected');
+	if (failure) {
+		throw failure.reason;
 	}
 }
 
@@ -117,12 +166,12 @@ const reviewerLoad: Feature = {
 	include: [pageDetect.isPRConversation],
 	requiresToken: true,
 	init(signal) {
-		const counts = new Map<string, number>();
+		const cache = new Map<string, Promise<number>>();
 		observe(dividers, (elements) => elements.forEach(addHeader), {signal});
 		observe(
 			usernames,
 			(elements) => {
-				addCounts(elements, counts).catch((error: unknown) => {
+				addCounts(elements, cache).catch((error: unknown) => {
 					console.error('polished-github: reviewer-load failed', error);
 				});
 			},
