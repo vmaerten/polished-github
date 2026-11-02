@@ -22,7 +22,9 @@ const {title, group, lede, summary, appearsIn, needsToken, onByDefault} = featur
 	<div class="wrap doc">
 		<nav class="sidebar" aria-label="Features">
 			{
-				groups.map((g) => (
+				groups
+					.filter((g) => features.some((f) => f.data.group === g))
+					.map((g) => (
 					<div>
 						<span class="side-group">{g}</span>
 						{features
