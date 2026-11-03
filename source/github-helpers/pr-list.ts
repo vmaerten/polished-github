@@ -119,7 +119,8 @@ function getContainer(title: HTMLElement, placement: BadgePlacement): HTMLElemen
 	if (rightColumn) {
 		Object.assign(container.style, {
 			display: 'grid',
-			gridTemplateColumns: badgeColumns.map(({width}) => `${width}px`).join(' '),
+			// A wider badge widens its column on that row rather than running over the next one
+			gridTemplateColumns: badgeColumns.map(({width}) => `minmax(${width}px, max-content)`).join(' '),
 			columnGap: `${columnGap}px`,
 			justifyItems: 'end',
 			alignItems: 'center',

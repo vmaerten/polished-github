@@ -4,6 +4,10 @@ All notable changes to Polished GitHub. Versions follow [Semantic Versioning](ht
 
 ## Unreleased
 
+### 🐛 Fixes
+
+- The diff stats of a large pull request no longer run over its review status in the right-hand column (`diff-stats`).
+
 ## 0.2.0 - 2026-11-03
 
 ### ✨ Features
