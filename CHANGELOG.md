@@ -4,6 +4,8 @@ All notable changes to Polished GitHub. Versions follow [Semantic Versioning](ht
 
 ## Unreleased
 
+## 0.2.0 - 2026-11-03
+
 ### ✨ Features
 
 - Merge with the right email for each organization: set an email per owner, and the merge box picks it when you merge or squash (`merge-email`).
