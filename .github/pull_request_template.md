@@ -20,5 +20,6 @@ Closes #
 ## Checklist
 
 - [ ] `task check` passes.
+- [ ] A change users will notice has its line under `## Unreleased` in `CHANGELOG.md`.
 - [ ] I wrote this description myself and understand every change in this pull request.
 - [ ] If I used AI, I say how above.
