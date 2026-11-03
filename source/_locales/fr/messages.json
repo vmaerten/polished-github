@@ -245,6 +245,9 @@
 	"mergeEmail_remove": {
 		"message": "Supprimer la règle"
 	},
+	"mergeEmail_suggestionsHelp": {
+		"message": "Les suggestions viennent des merge boxes que vous ouvrez. Pour lister tous vos emails d'un coup, donnez au token l'accès en lecture à Email addresses (fine-grained) ou le scope user:email (classique)."
+	},
 	"mergeEmail_add": {
 		"message": "+ Ajouter une règle"
 	}
