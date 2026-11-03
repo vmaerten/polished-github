@@ -4,6 +4,17 @@ All notable changes to Polished GitHub. Versions follow [Semantic Versioning](ht
 
 ## Unreleased
 
+### ✨ Features
+
+- Merge with the right email for each organization: set an email per owner, and the merge box picks it when you merge or squash (`merge-email`).
+- The options page is in French when your browser is.
+- The token form opens pre-filled with the permissions the features need.
+
+### 🐛 Fixes
+
+- The reviewers picker no longer jumps while the review counts load (`reviewer-load`).
+- After the extension updates, tabs left open stop quietly instead of throwing "Extension context invalidated" errors.
+
 ## 0.1.0 - 2026-11-01
 
 The first release, for Chrome and Firefox.

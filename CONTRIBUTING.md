@@ -35,6 +35,7 @@ Text follows two rules. What appears inside github.com stays in English, like Gi
 
 - Every pull request closes an issue. Open one first, a [bug report or a feature request](https://github.com/vmaerten/polished-github/issues/new/choose), so the change is agreed on before anyone writes code, then write `Closes #123` in the description.
 - One change per pull request, titled as a conventional commit: `fix(review-status): keep the badge after a force push`.
+- A change users will notice adds a line under `## Unreleased` in `CHANGELOG.md`, in the section that fits (✨ Features, 🐛 Fixes…), ending with the feature id in backticks, like (`review-status`). These lines become the release notes.
 - For anything visible, add a screenshot and a real github.com URL where you checked it.
 - Run `task check` before pushing: it runs what CI runs, and `task format` fixes formatting.
 
