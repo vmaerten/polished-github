@@ -22,6 +22,7 @@ lede: GitHub merges with one default email everywhere. Tell it which email goes 
 - Owners without a rule keep GitHub's default email.
 - A note under the field says the extension chose it. Pick another email by hand and it stays your choice for that merge.
 - The email must be a verified email of your GitHub account: otherwise the field is left as is, and the note says so.
+- The options suggest owners and emails: those of the merge boxes you opened, and, if the token can read them, all your organizations and verified emails.
 
 ## Settings
 

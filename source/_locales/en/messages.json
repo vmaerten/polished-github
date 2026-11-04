@@ -245,6 +245,9 @@
 	"mergeEmail_remove": {
 		"message": "Remove rule"
 	},
+	"mergeEmail_suggestionsHelp": {
+		"message": "Suggestions come from the merge boxes you open. To list all your emails at once, give the token read access to Email addresses (fine-grained) or the user:email scope (classic)."
+	},
 	"mergeEmail_add": {
 		"message": "+ Add rule"
 	}

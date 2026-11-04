@@ -2,8 +2,16 @@ import {afterEach, expect, test, vi} from 'vitest';
 
 import mergeEmail from './merge-email.js';
 
+let local: Record<string, unknown> = {};
+
 vi.stubGlobal('chrome', {
 	storage: {
+		local: {
+			get: async (defaults: object) => ({...defaults, ...local}),
+			set: async (items: Record<string, unknown>) => {
+				local = {...local, ...items};
+			},
+		},
 		sync: {
 			get: async (defaults: object) => ({
 				...defaults,
@@ -67,10 +75,16 @@ test('leaves the field alone when the email is not one of the account’s', asyn
 	expect(changes).toEqual([]);
 });
 
-test('changes nothing for an owner without a rule', async () => {
+test('changes nothing for an owner without a rule, but remembers the merge box for the options', async () => {
+	local = {mergeBoxesSeen: {owners: ['Ondorse'], emails: ['old@personal.dev']}};
 	const {field} = await openMergeBox('/vmaerten/app/pull/1');
 
-	await new Promise((resolve) => setTimeout(resolve, 0));
+	await vi.waitFor(() =>
+		expect(local.mergeBoxesSeen).toEqual({
+			owners: ['Ondorse', 'vmaerten'],
+			emails: ['me@personal.dev', 'me@ondorse.co'],
+		}),
+	);
 	expect(field.value).toBe('me@personal.dev');
 	expect(note()).toBeUndefined();
 });

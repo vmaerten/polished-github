@@ -1,8 +1,12 @@
 <script lang="ts">
 	import type {MergeEmail} from '../options-storage.js';
 	import {t} from '../helpers/i18n.js';
+	import {getMergeEmailSuggestions, type MergeEmailSuggestions} from './merge-email-suggestions.js';
 
 	let {rules = $bindable(), onsave}: {rules: MergeEmail[]; onsave: () => void} = $props();
+
+	let suggestions = $state<MergeEmailSuggestions>({owners: [], emails: [], partial: false});
+	void getMergeEmailSuggestions().then((found) => (suggestions = found));
 
 	function remove(index: number): void {
 		rules.splice(index, 1);
@@ -16,11 +20,25 @@
 
 <div class="editor">
 	<p class="muted small">{t('mergeEmail_help')}</p>
+	{#if suggestions.partial}
+		<p class="muted small">{t('mergeEmail_suggestionsHelp')}</p>
+	{/if}
+	<datalist id="merge-email-owners">
+		{#each suggestions.owners as owner (owner)}
+			<option value={owner}></option>
+		{/each}
+	</datalist>
+	<datalist id="merge-email-emails">
+		{#each suggestions.emails as email (email)}
+			<option value={email}></option>
+		{/each}
+	</datalist>
 	{#each rules as rule, index (index)}
 		<div class="rule-row">
 			<input
 				aria-label={t('mergeEmail_owner')}
 				placeholder={t('mergeEmail_ownerPlaceholder')}
+				list="merge-email-owners"
 				bind:value={rule.owner}
 				onchange={onsave}
 			>
@@ -28,6 +46,7 @@
 				type="email"
 				aria-label={t('mergeEmail_email')}
 				placeholder={t('mergeEmail_emailPlaceholder')}
+				list="merge-email-emails"
 				bind:value={rule.email}
 				onchange={onsave}
 			>

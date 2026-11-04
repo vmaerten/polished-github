@@ -5,7 +5,7 @@ import type {Feature} from '../feature-manager.js';
 import {mutedColor} from '../github-helpers/colors.js';
 import {t} from '../helpers/i18n.js';
 import {observe} from '../helpers/observe.js';
-import {getOptions, type MergeEmail} from '../options-storage.js';
+import {getOptions, rememberMergeBox, type MergeEmail} from '../options-storage.js';
 
 // A native select controlled by React, shown once a merge or a squash is to be confirmed
 const emailSelects = 'select[aria-label="Select commit author email"]';
@@ -42,9 +42,6 @@ const mergeEmail: Feature = {
 	async init(signal) {
 		const {owner} = pageDetect.utils.getRepositoryInfo()!;
 		const email = findEmail((await getOptions()).mergeEmails, owner);
-		if (!email) {
-			return;
-		}
 
 		// The form is rendered again when switching between merge and squash: keep a choice made by hand
 		let chosenByHand = false;
@@ -63,7 +60,12 @@ const mergeEmail: Feature = {
 			emailSelects,
 			(fields) => {
 				for (const field of fields as HTMLSelectElement[]) {
-					if (chosenByHand) {
+					// Even without a rule: the options page suggests these owners and emails
+					void rememberMergeBox(
+						owner,
+						[...field.options].map((option) => option.value),
+					);
+					if (!email || chosenByHand) {
 						continue;
 					}
 

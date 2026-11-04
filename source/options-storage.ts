@@ -113,3 +113,26 @@ export async function getToken(): Promise<string> {
 export async function setToken(token: string): Promise<void> {
 	await chrome.storage.local.set({token: token.trim()});
 }
+
+export type MergeBoxesSeen = {
+	/** The owners of the pull requests where a merge box showed up. */
+	owners: string[];
+	/** The verified emails the last merge box offered. */
+	emails: string[];
+};
+
+export async function getMergeBoxesSeen(): Promise<MergeBoxesSeen> {
+	const {mergeBoxesSeen} = (await chrome.storage.local.get({mergeBoxesSeen: {owners: [], emails: []}})) as {
+		mergeBoxesSeen: MergeBoxesSeen;
+	};
+	return mergeBoxesSeen;
+}
+
+/** Keeps what a merge box shows, for the options page to suggest: its owner joins the others, its emails replace the previous ones. */
+export async function rememberMergeBox(owner: string, emails: string[]): Promise<void> {
+	const seen = await getMergeBoxesSeen();
+	const owners = seen.owners.some((known) => known.toLowerCase() === owner.toLowerCase())
+		? seen.owners
+		: [...seen.owners, owner];
+	await chrome.storage.local.set({mergeBoxesSeen: {owners, emails}});
+}

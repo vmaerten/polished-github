@@ -4,6 +4,10 @@ All notable changes to Polished GitHub. Versions follow [Semantic Versioning](ht
 
 ## Unreleased
 
+### ✨ Features
+
+- The commit email rules suggest your organizations and verified emails, from the merge boxes you opened or, when the token can read them, from your account (`merge-email`).
+
 ### 🐛 Fixes
 
 - The diff stats of a large pull request no longer run over its review status in the right-hand column (`diff-stats`).
