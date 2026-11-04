@@ -7,6 +7,7 @@ All notable changes to Polished GitHub. Versions follow [Semantic Versioning](ht
 ### ✨ Features
 
 - The commit email rules suggest your organizations and verified emails, from the merge boxes you opened or, when the token can read them, from your account (`merge-email`).
+- Images in a pull request's changes open in the image viewer from a button in their corner, and a changed image switches between its old and new versions at the same zoom (`image-modal`).
 
 ### 🐛 Fixes
 
