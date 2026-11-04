@@ -13,7 +13,7 @@ lede: Images in issues, PRs, comments, READMEs and diffs open over the page inst
 	<dt>Click an image</dt>
 	<dd>Opens it over the page.</dd>
 	<dt>← and →</dt>
-	<dd>Previous and next image of the same comment, or of the diff.</dd>
+	<dd>Previous and next image of the same comment, or of the diff, at the same zoom and position.</dd>
 	<dt>S</dt>
 	<dd>Switches a changed image between its old and new versions, keeping the zoom and position.</dd>
 	<dt>Scroll wheel, + and −</dt>

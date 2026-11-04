@@ -41,9 +41,9 @@
 		view = zoomAt(view, factor, point);
 	}
 
+	// Keeps the zoom and position, to compare the same spot across images
 	function show(step: number): void {
 		index = (index + step + images.length) % images.length;
-		view = initialView;
 		showBefore = false;
 	}
 
