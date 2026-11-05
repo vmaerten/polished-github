@@ -17,7 +17,7 @@ Every feature can be turned off in the options. The badges and the reviewer load
 ## Install
 
 - **Chrome**: from the [Chrome Web Store](https://chromewebstore.google.com/detail/polished-github/bdmfdhhfmbkfbgomeefpchhgfbapjbpg).
-- **Firefox**: awaiting review on Firefox Add-ons; meanwhile, load the Firefox zip of the [latest release](https://github.com/vmaerten/polished-github/releases/latest) as a temporary add-on (`about:debugging`).
+- **Firefox**: from [Firefox Add-ons](https://addons.mozilla.org/firefox/addon/polished-github/).
 
 ## Contributing
 
