@@ -4,6 +4,8 @@ All notable changes to Polished GitHub. Versions follow [Semantic Versioning](ht
 
 ## Unreleased
 
+## 0.3.0 - 2026-11-05
+
 ### ✨ Features
 
 - The commit email rules suggest your organizations and verified emails, from the merge boxes you opened or, when the token can read them, from your account (`merge-email`).
