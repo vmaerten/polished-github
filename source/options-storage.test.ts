@@ -1,5 +1,5 @@
 import {expect, test, vi} from 'vitest';
-import {getOptions} from './options-storage.js';
+import {getOptions, isFeatureEnabled} from './options-storage.js';
 
 function stubStored(stored: object): void {
 	vi.stubGlobal('chrome', {storage: {sync: {get: async (defaults: object) => ({...defaults, ...stored})}}});
@@ -18,4 +18,12 @@ test('falls back to the defaults when a number field was emptied', async () => {
 test('rejects size thresholds that are out of order', async () => {
 	stubStored({diffStats: {showChangedFiles: true, showSizeLabel: true, sizeThresholds: [100, 50, 250, 1000]}});
 	expect((await getOptions()).diffStats.sizeThresholds).toEqual([10, 50, 250, 1000]);
+});
+
+test('runs a feature off by default only once the user turns it on', () => {
+	expect(isFeatureEnabled('unresolved-comments', {disabledFeatures: [], enabledFeatures: []})).toBe(false);
+	expect(
+		isFeatureEnabled('unresolved-comments', {disabledFeatures: [], enabledFeatures: ['unresolved-comments']}),
+	).toBe(true);
+	expect(isFeatureEnabled('diff-stats', {disabledFeatures: [], enabledFeatures: []})).toBe(true);
 });

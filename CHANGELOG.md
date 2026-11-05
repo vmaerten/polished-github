@@ -10,6 +10,7 @@ All notable changes to Polished GitHub. Versions follow [Semantic Versioning](ht
 - Images in a pull request's changes open in the image viewer from a button in their corner, and a changed image switches between its old and new versions at the same zoom (`image-modal`).
 - The arrow keys keep the zoom and position from one image to the next (`image-modal`).
 - An option counts only the reviews requested from each person directly, leaving out those requested from one of their teams (`reviewer-load`).
+- See how many review conversations are still unresolved on each open PR of the list. Off by default: turn it on in the options (`unresolved-comments`).
 
 ### 🐛 Fixes
 

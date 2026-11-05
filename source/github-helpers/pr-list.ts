@@ -1,7 +1,7 @@
 import * as pageDetect from 'github-url-detection';
 
 import {observe} from '../helpers/observe.js';
-import type {Options} from '../options-storage.js';
+import {isFeatureEnabled, type Options} from '../options-storage.js';
 import {v4} from './api.js';
 
 export type PullRequestState = 'OPEN' | 'CLOSED' | 'MERGED';
@@ -14,6 +14,7 @@ const badgeColumns = [
 	{className: 'polished-github-review-status', feature: 'review-status', width: 168},
 	{className: 'polished-github-diff-stats', feature: 'diff-stats', width: 160},
 	{className: 'polished-github-stale', feature: 'idle-prs', width: 44},
+	{className: 'polished-github-unresolved-comments', feature: 'unresolved-comments', width: 44},
 ] as const;
 
 const columnGap = 12;
@@ -22,7 +23,7 @@ const githubItemsWidth = 96;
 
 export type BadgeClass = (typeof badgeColumns)[number]['className'];
 
-export type BadgeOptions = Pick<Options, 'prListBadges' | 'disabledFeatures'>;
+export type BadgeOptions = Pick<Options, 'prListBadges' | 'disabledFeatures' | 'enabledFeatures'>;
 
 const containerClass = 'polished-github-badges';
 
@@ -105,7 +106,7 @@ function findMetadataLine(title: HTMLElement): HTMLElement | undefined {
 	);
 }
 
-function getContainer(title: HTMLElement, {prListBadges: placement, disabledFeatures}: BadgeOptions): HTMLElement {
+function getContainer(title: HTMLElement, {prListBadges: placement, ...toggles}: BadgeOptions): HTMLElement {
 	const row = title.closest('li') ?? title;
 	const existing = row.querySelector<HTMLElement>(`.${containerClass}`);
 	if (existing) {
@@ -120,7 +121,7 @@ function getContainer(title: HTMLElement, {prListBadges: placement, disabledFeat
 	const metadataLine = placement === 'metadata' ? findMetadataLine(title) : undefined;
 	if (rightColumn) {
 		// A disabled feature would leave an empty column on every row
-		const columns = badgeColumns.filter(({feature}) => !disabledFeatures.includes(feature));
+		const columns = badgeColumns.filter(({feature}) => isFeatureEnabled(feature, toggles));
 		container.dataset.columns = columns.map(({className}) => className).join(' ');
 		Object.assign(container.style, {
 			display: 'grid',

@@ -40,6 +40,8 @@ export type BadgePlacement = 'right' | 'metadata';
 export type Options = {
 	// Stored as an opt-out list so new features are on by default
 	disabledFeatures: string[];
+	/** The features off by default that the user turned on. */
+	enabledFeatures: string[];
 	quickComments: QuickComment[];
 	diffStats: DiffStatsSettings;
 	imageModal: ImageModalSettings;
@@ -50,8 +52,18 @@ export type Options = {
 	mergeEmails: MergeEmail[];
 };
 
+export type FeatureToggles = Pick<Options, 'disabledFeatures' | 'enabledFeatures'>;
+
+// Off until the user turns them on, which adds them to `enabledFeatures`
+const offByDefault: ReadonlySet<string> = new Set(['unresolved-comments']);
+
+export function isFeatureEnabled(id: string, {disabledFeatures, enabledFeatures}: FeatureToggles): boolean {
+	return offByDefault.has(id) ? enabledFeatures.includes(id) : !disabledFeatures.includes(id);
+}
+
 const defaults: Options = {
 	disabledFeatures: [],
+	enabledFeatures: [],
 	quickComments: [
 		{label: 'LGTM', body: 'LGTM :rocket:', on: 'prs'},
 		{label: 'Rebase', body: '@dependabot rebase', on: 'prs'},
@@ -106,10 +118,14 @@ export async function resetOptions(): Promise<void> {
 	await chrome.storage.sync.clear();
 }
 
+// Updates both lists, so it needs no feature's default and the choice outlives a change of that default
 export async function setFeatureEnabled(id: string, enabled: boolean): Promise<void> {
-	const {disabledFeatures} = await getOptions();
-	const others = disabledFeatures.filter((disabledId) => disabledId !== id);
-	await chrome.storage.sync.set({disabledFeatures: enabled ? others : [...others, id]});
+	const {disabledFeatures, enabledFeatures} = await getOptions();
+	const without = (ids: string[]): string[] => ids.filter((other) => other !== id);
+	await chrome.storage.sync.set({
+		disabledFeatures: enabled ? without(disabledFeatures) : [...without(disabledFeatures), id],
+		enabledFeatures: enabled ? [...without(enabledFeatures), id] : without(enabledFeatures),
+	});
 }
 
 // The token lives in local storage: sync storage would upload it to the browser vendor's servers

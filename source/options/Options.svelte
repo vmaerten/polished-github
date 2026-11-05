@@ -4,6 +4,7 @@
 	import {
 		getOptions,
 		getToken,
+		isFeatureEnabled,
 		type Options,
 		resetOptions,
 		setFeatureEnabled,
@@ -33,7 +34,7 @@
 		),
 	);
 	const enabledCount = $derived(
-		features.filter(({id}) => options && !options.disabledFeatures.includes(id)).length,
+		features.filter(({id}) => options && isFeatureEnabled(id, options)).length,
 	);
 
 	async function load(): Promise<void> {
@@ -99,7 +100,7 @@
 
 			<ul class="card list">
 				{#each visibleFeatures as feature (feature.id)}
-					{@const enabled = !options.disabledFeatures.includes(feature.id)}
+					{@const enabled = isFeatureEnabled(feature.id, options)}
 					<li>
 						<div class="feature">
 							<div class="feature-text">

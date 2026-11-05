@@ -26,6 +26,9 @@
 	"feature_mergeEmail": {
 		"message": "Picks the commit email for each owner when you merge a pull request."
 	},
+	"feature_unresolvedComments": {
+		"message": "Shows how many review conversations are still unresolved on each open PR in the repository pull request list."
+	},
 	"api_noToken": {
 		"message": "No GitHub token: set one in the Polished GitHub options"
 	},
