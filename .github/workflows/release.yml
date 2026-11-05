@@ -46,3 +46,25 @@ jobs:
           CLIENT_SECRET: ${{ secrets.CWS_CLIENT_SECRET }}
           REFRESH_TOKEN: ${{ secrets.CWS_REFRESH_TOKEN }}
         run: npx chrome-webstore-upload-cli@4.0.2 --source polished-github-chrome-*.zip
+
+  # Same as the Chrome job: the listing and the data collection answers stay in the AMO dashboard
+  firefox:
+    needs: release
+    runs-on: ubuntu-latest
+    environment: Firefox
+    steps:
+      - uses: actions/checkout@v7
+      - name: Download the Firefox package from the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download "$GITHUB_REF_NAME" --pattern 'polished-github-firefox-*.zip'
+          unzip -q polished-github-firefox-*.zip -d package
+      # The package is bundled, so AMO reviewers rebuild it from the source
+      - run: git archive --format=zip --output source.zip HEAD
+      - name: Submit to Firefox Add-ons
+        env:
+          WEB_EXT_API_KEY: ${{ secrets.AMO_JWT_ISSUER }}
+          WEB_EXT_API_SECRET: ${{ secrets.AMO_JWT_SECRET }}
+        # Listed versions are signed once a reviewer approves them, which can take days
+        run: npx web-ext@10.8.0 sign --source-dir package --channel listed --upload-source-code source.zip --approval-timeout 0
