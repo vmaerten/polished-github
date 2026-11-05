@@ -51,13 +51,14 @@ featured: true
 
 ## What is counted
 
-- Open PRs where that person's review is requested, across every repository of the organization or user that owns the current one.
+- Open PRs where that person's review is requested, across every repository of the organization or user that owns the current one. This includes the PRs that request one of their teams, unless you count only direct requests.
 - For a team, the PRs where the team's review is requested.
 - Counts load when you open the picker, and for the new names when you filter it. They are kept for five minutes, so the picker shows them at once on the next PRs of the organization, even after a reload.
 
 ## Settings
 
 <div class="panel settings">
+	<div><span style="font-weight: 600">Direct requests only</span><span>Off by default: leaves out the PRs that request one of the person's teams. Useful when a team is requested on most PRs and everyone in it shows the same count.</span></div>
 	<div><span style="font-weight: 600">Turn off</span><span>Options › Features › reviewer-load</span></div>
 </div>
 
