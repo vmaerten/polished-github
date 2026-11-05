@@ -4,12 +4,13 @@ import * as pageDetect from 'github-url-detection';
 import type {Feature} from '../feature-manager.js';
 import {
 	addPullRequestBadge,
+	type BadgeOptions,
 	forEachListedPullRequest,
 	type PullRequestState,
 	removePullRequestBadge,
 } from '../github-helpers/pr-list.js';
 import {t} from '../helpers/i18n.js';
-import {type BadgePlacement, getOptions, type StaleSettings} from '../options-storage.js';
+import {getOptions, type StaleSettings} from '../options-storage.js';
 
 export type ActivityInfo = {state: PullRequestState; isDraft: boolean; updatedAt: string};
 
@@ -26,7 +27,7 @@ export function getIdleDays(pr: ActivityInfo, settings: StaleSettings, now = Dat
 	return days >= settings.days ? days : undefined;
 }
 
-function addBadge(title: HTMLElement, days: number, placement: BadgePlacement): void {
+function addBadge(title: HTMLElement, days: number, options: BadgeOptions): void {
 	addPullRequestBadge(
 		title,
 		badgeClass,
@@ -55,7 +56,7 @@ function addBadge(title: HTMLElement, days: number, placement: BadgePlacement): 
 			</svg>
 			{days}d
 		</span>,
-		placement,
+		options,
 	);
 }
 
@@ -65,16 +66,16 @@ const idlePrs: Feature = {
 	include: [pageDetect.isRepoPRList],
 	requiresToken: true,
 	async init(signal) {
-		const {stale, prListBadges} = await getOptions();
+		const options = await getOptions();
 		// Fetched again on every visit, like the review status: any comment or push resets the count
 		forEachListedPullRequest<ActivityInfo>(
 			'state isDraft updatedAt',
 			(title, pr) => {
-				const days = getIdleDays(pr, stale);
+				const days = getIdleDays(pr, options.stale);
 				if (days === undefined) {
 					removePullRequestBadge(title, badgeClass);
 				} else {
-					addBadge(title, days, prListBadges);
+					addBadge(title, days, options);
 				}
 			},
 			{signal},

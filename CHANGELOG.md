@@ -14,6 +14,7 @@ All notable changes to Polished GitHub. Versions follow [Semantic Versioning](ht
 ### 🐛 Fixes
 
 - The diff stats of a large pull request no longer run over its review status in the right-hand column (`diff-stats`).
+- A PR list feature you turn off no longer keeps its empty column in the right-hand column of every row.
 
 ## 0.2.0 - 2026-11-03
 
