@@ -2,8 +2,8 @@ import {expect, test} from 'vitest';
 
 import {addPullRequestBadge, type BadgeClass, type BadgeOptions, removePullRequestBadge} from './pr-list.js';
 
-const right: BadgeOptions = {prListBadges: 'right', disabledFeatures: []};
-const metadata: BadgeOptions = {prListBadges: 'metadata', disabledFeatures: []};
+const right: BadgeOptions = {prListBadges: 'right', disabledFeatures: [], enabledFeatures: []};
+const metadata: BadgeOptions = {prListBadges: 'metadata', disabledFeatures: [], enabledFeatures: []};
 
 function badge(className: BadgeClass): HTMLElement {
 	const element = document.createElement('span');

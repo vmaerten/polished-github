@@ -26,6 +26,7 @@ The website lives in `website/` (Astro, a pnpm workspace package): `task website
 
 1. Create `source/features/<feature-id>.tsx` exporting a `Feature`: `id`, `description`, optional `include` page detectors from [`github-url-detection`](https://github.com/refined-github/github-url-detection), `requiresToken` if it calls the API, and `init(signal)`.
 2. Add it to `source/features/index.ts`.
+3. If users should turn it on themselves, add its id to `offByDefault` in `source/options-storage.ts`.
 
 `init` runs again after each in-app navigation: check the element isn't already there before injecting, and pass `signal` to listeners and to `observe` (`source/helpers/observe.ts`) so they stop on the next navigation. Use [`dom-chef`](https://github.com/vadimdemedes/dom-chef) JSX for small injections, a Svelte component for anything stateful.
 

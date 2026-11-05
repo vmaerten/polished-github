@@ -6,6 +6,7 @@ import idlePrs from './idle-prs.js';
 import quickComments from './quick-comments.js';
 import reviewerLoad from './reviewer-load.js';
 import mergeEmail from './merge-email.js';
+import unresolvedComments from './unresolved-comments.js';
 
 export const features: Feature[] = [
 	imageModal,
@@ -15,4 +16,5 @@ export const features: Feature[] = [
 	quickComments,
 	reviewerLoad,
 	mergeEmail,
+	unresolvedComments,
 ];

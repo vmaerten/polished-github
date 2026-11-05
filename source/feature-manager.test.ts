@@ -2,8 +2,9 @@ import {describe, expect, test, vi} from 'vitest';
 
 import {type Feature, shouldRun, start} from './feature-manager.js';
 
-vi.mock('./options-storage.js', () => ({
-	getOptions: async () => ({disabledFeatures: []}),
+vi.mock('./options-storage.js', async (importOriginal) => ({
+	...(await importOriginal()),
+	getOptions: async () => ({disabledFeatures: [], enabledFeatures: []}),
 	getToken: async () => 'token',
 }));
 
@@ -14,7 +15,7 @@ function feature(overrides: Partial<Feature> = {}): Feature {
 	return {id: 'demo', description: '', init() {}, ...overrides};
 }
 
-const context = {disabled: new Set<string>(), hasToken: true};
+const context = {toggles: {disabledFeatures: [], enabledFeatures: []}, hasToken: true};
 
 describe('shouldRun', () => {
 	test('runs everywhere by default', () => {
@@ -22,7 +23,7 @@ describe('shouldRun', () => {
 	});
 
 	test('skips features the user disabled', () => {
-		expect(shouldRun(feature(), {...context, disabled: new Set(['demo'])})).toBe(false);
+		expect(shouldRun(feature(), {...context, toggles: {disabledFeatures: ['demo'], enabledFeatures: []}})).toBe(false);
 	});
 
 	test('skips token features until a token is set', () => {

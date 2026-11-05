@@ -1,4 +1,4 @@
-import {getOptions, getToken} from './options-storage.js';
+import {type FeatureToggles, getOptions, getToken, isFeatureEnabled} from './options-storage.js';
 
 export type Feature = {
 	id: string;
@@ -11,12 +11,12 @@ export type Feature = {
 };
 
 type RunContext = {
-	disabled: ReadonlySet<string>;
+	toggles: FeatureToggles;
 	hasToken: boolean;
 };
 
-export function shouldRun(feature: Feature, {disabled, hasToken}: RunContext): boolean {
-	if (disabled.has(feature.id) || (feature.requiresToken && !hasToken)) {
+export function shouldRun(feature: Feature, {toggles, hasToken}: RunContext): boolean {
+	if (!isFeatureEnabled(feature.id, toggles) || (feature.requiresToken && !hasToken)) {
 		return false;
 	}
 
@@ -27,8 +27,8 @@ export function shouldRun(feature: Feature, {disabled, hasToken}: RunContext): b
 const navigationEvents = ['turbo:render', 'soft-nav:react-done'];
 
 export async function start(features: readonly Feature[]): Promise<void> {
-	const [{disabledFeatures}, token] = await Promise.all([getOptions(), getToken()]);
-	const context: RunContext = {disabled: new Set(disabledFeatures), hasToken: token !== ''};
+	const [toggles, token] = await Promise.all([getOptions(), getToken()]);
+	const context: RunContext = {toggles, hasToken: token !== ''};
 	let controller = new AbortController();
 	const navigation = new AbortController();
 
