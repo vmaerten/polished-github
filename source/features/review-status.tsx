@@ -5,12 +5,13 @@ import type {Feature} from '../feature-manager.js';
 import {mutedColor as muted} from '../github-helpers/colors.js';
 import {
 	addPullRequestBadge,
+	type BadgeOptions,
 	forEachListedPullRequest,
 	type PullRequestState,
 	removePullRequestBadge,
 } from '../github-helpers/pr-list.js';
 import {t} from '../helpers/i18n.js';
-import {type BadgePlacement, getOptions} from '../options-storage.js';
+import {getOptions} from '../options-storage.js';
 
 export type ReviewInfo = {
 	state: PullRequestState;
@@ -73,7 +74,7 @@ export function getReviewStatus(pr: ReviewInfo): ReviewStatus | undefined {
 	return review.state === 'CHANGES_REQUESTED' ? 'changes-requested' : undefined;
 }
 
-function addBadge(title: HTMLElement, status: ReviewStatus, placement: BadgePlacement): void {
+function addBadge(title: HTMLElement, status: ReviewStatus, options: BadgeOptions): void {
 	const {text, color, dot = color, title: tooltip} = badges[status];
 	addPullRequestBadge(
 		title,
@@ -86,7 +87,7 @@ function addBadge(title: HTMLElement, status: ReviewStatus, placement: BadgePlac
 			<span style={{width: '7px', height: '7px', borderRadius: '50%', background: dot}} />
 			{text}
 		</span>,
-		placement,
+		options,
 	);
 }
 
@@ -96,14 +97,14 @@ const reviewStatus: Feature = {
 	include: [pageDetect.isRepoPRList],
 	requiresToken: true,
 	async init(signal) {
-		const {prListBadges} = await getOptions();
+		const options = await getOptions();
 		// Fetched again on every visit: a status goes stale as soon as you review or someone pushes
 		forEachListedPullRequest<ReviewInfo>(
 			'state viewerDidAuthor headRefOid viewerLatestReviewRequest {id} viewerLatestReview {state commit {oid}}',
 			(title, pr) => {
 				const status = getReviewStatus(pr);
 				if (status) {
-					addBadge(title, status, prListBadges);
+					addBadge(title, status, options);
 				} else {
 					removePullRequestBadge(title, badgeClass);
 				}

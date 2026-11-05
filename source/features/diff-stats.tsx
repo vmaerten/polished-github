@@ -3,9 +3,9 @@ import * as pageDetect from 'github-url-detection';
 
 import type {Feature} from '../feature-manager.js';
 import {mutedColor} from '../github-helpers/colors.js';
-import {addPullRequestBadge, forEachListedPullRequest} from '../github-helpers/pr-list.js';
+import {addPullRequestBadge, type BadgeOptions, forEachListedPullRequest} from '../github-helpers/pr-list.js';
 import {t} from '../helpers/i18n.js';
-import {type BadgePlacement, type DiffStatsSettings, getOptions} from '../options-storage.js';
+import {type DiffStatsSettings, getOptions} from '../options-storage.js';
 
 type DiffStats = {additions: number; deletions: number; changedFiles: number};
 
@@ -21,7 +21,7 @@ export function getSizeLabel(changedLines: number, thresholds: DiffStatsSettings
 // Kept for the life of the tab: lists are revisited often, and a reload refreshes stale numbers
 const cache = new Map<string, DiffStats>();
 
-function addBadge(title: HTMLElement, stats: DiffStats, settings: DiffStatsSettings, placement: BadgePlacement): void {
+function addBadge(title: HTMLElement, stats: DiffStats, settings: DiffStatsSettings, options: BadgeOptions): void {
 	const {additions, deletions, changedFiles} = stats;
 	const files = `${changedFiles} ${changedFiles === 1 ? 'file' : 'files'}`;
 	addPullRequestBadge(
@@ -42,7 +42,7 @@ function addBadge(title: HTMLElement, stats: DiffStats, settings: DiffStatsSetti
 				</span>
 			)}
 		</span>,
-		placement,
+		options,
 	);
 }
 
@@ -52,10 +52,10 @@ const diffStats: Feature = {
 	include: [pageDetect.isRepoPRList],
 	requiresToken: true,
 	async init(signal) {
-		const {diffStats: settings, prListBadges} = await getOptions();
+		const options = await getOptions();
 		forEachListedPullRequest<DiffStats>(
 			'additions deletions changedFiles',
-			(title, stats) => addBadge(title, stats, settings, prListBadges),
+			(title, stats) => addBadge(title, stats, options.diffStats, options),
 			{signal, cache},
 		);
 	},

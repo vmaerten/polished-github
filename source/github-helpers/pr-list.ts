@@ -1,19 +1,19 @@
 import * as pageDetect from 'github-url-detection';
 
 import {observe} from '../helpers/observe.js';
-import type {BadgePlacement} from '../options-storage.js';
+import type {Options} from '../options-storage.js';
 import {v4} from './api.js';
 
 export type PullRequestState = 'OPEN' | 'CLOSED' | 'MERGED';
 
 const titleLinks = 'ul[role="list"] > li h3 a[href*="/pull/"]';
 
-// One order for every row whichever request answers first; in the right column each badge also keeps its own
-// fixed-width column, so badges line up from row to row even when some are missing
+// One order for every row whichever request answers first; in the right column each enabled feature also keeps its
+// own fixed-width column, so badges line up from row to row even when some are missing
 const badgeColumns = [
-	{className: 'polished-github-review-status', width: 168},
-	{className: 'polished-github-diff-stats', width: 160},
-	{className: 'polished-github-stale', width: 44},
+	{className: 'polished-github-review-status', feature: 'review-status', width: 168},
+	{className: 'polished-github-diff-stats', feature: 'diff-stats', width: 160},
+	{className: 'polished-github-stale', feature: 'idle-prs', width: 44},
 ] as const;
 
 const columnGap = 12;
@@ -21,6 +21,8 @@ const columnGap = 12;
 const githubItemsWidth = 96;
 
 export type BadgeClass = (typeof badgeColumns)[number]['className'];
+
+export type BadgeOptions = Pick<Options, 'prListBadges' | 'disabledFeatures'>;
 
 const containerClass = 'polished-github-badges';
 
@@ -103,7 +105,7 @@ function findMetadataLine(title: HTMLElement): HTMLElement | undefined {
 	);
 }
 
-function getContainer(title: HTMLElement, placement: BadgePlacement): HTMLElement {
+function getContainer(title: HTMLElement, {prListBadges: placement, disabledFeatures}: BadgeOptions): HTMLElement {
 	const row = title.closest('li') ?? title;
 	const existing = row.querySelector<HTMLElement>(`.${containerClass}`);
 	if (existing) {
@@ -117,10 +119,13 @@ function getContainer(title: HTMLElement, placement: BadgePlacement): HTMLElemen
 	const rightColumn = placement === 'right' ? findRowArea(title, 'metadata') : undefined;
 	const metadataLine = placement === 'metadata' ? findMetadataLine(title) : undefined;
 	if (rightColumn) {
+		// A disabled feature would leave an empty column on every row
+		const columns = badgeColumns.filter(({feature}) => !disabledFeatures.includes(feature));
+		container.dataset.columns = columns.map(({className}) => className).join(' ');
 		Object.assign(container.style, {
 			display: 'grid',
 			// A wider badge widens its column on that row rather than running over the next one
-			gridTemplateColumns: badgeColumns.map(({width}) => `minmax(${width}px, max-content)`).join(' '),
+			gridTemplateColumns: columns.map(({width}) => `minmax(${width}px, max-content)`).join(' '),
 			columnGap: `${columnGap}px`,
 			justifyItems: 'end',
 			alignItems: 'center',
@@ -128,7 +133,7 @@ function getContainer(title: HTMLElement, placement: BadgePlacement): HTMLElemen
 			marginRight: 'auto',
 		});
 		// The column sizes itself to its content, so without a shared width our columns would start at a different place on every row
-		const badgesWidth = badgeColumns.reduce((sum, {width}) => sum + width + columnGap, 0);
+		const badgesWidth = columns.reduce((sum, {width}) => sum + width + columnGap, 0);
 		rightColumn.style.minWidth = `${badgesWidth + githubItemsWidth}px`;
 		rightColumn.prepend(container);
 	} else {
@@ -150,18 +155,18 @@ export function addPullRequestBadge(
 	title: HTMLElement,
 	className: BadgeClass,
 	badge: Element,
-	placement: BadgePlacement,
+	options: BadgeOptions,
 ): void {
 	removePullRequestBadge(title, className);
-	const container = getContainer(title, placement);
+	const container = getContainer(title, options);
 
-	const index = badgeColumns.findIndex((column) => column.className === className);
 	const slot = document.createElement('span');
 	slot.dataset.badge = className;
-	if (container.style.display === 'grid') {
-		slot.style.gridArea = `1 / ${index + 1}`;
+	if (container.dataset.columns) {
+		// The columns the row was built with, should the options have changed since
+		slot.style.gridArea = `1 / ${container.dataset.columns.split(' ').indexOf(className) + 1}`;
 	} else {
-		slot.style.order = String(index);
+		slot.style.order = String(badgeColumns.findIndex((column) => column.className === className));
 		if (container.parentElement !== title) {
 			slot.append('· ');
 		}
