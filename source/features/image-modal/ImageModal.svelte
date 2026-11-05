@@ -20,7 +20,10 @@
 	let view = $state(initialView);
 	let drag = $state<{x: number; y: number}>();
 	let dialog: HTMLDialogElement;
+	// A changed image of a diff opens on its new version
+	let showBefore = $state(false);
 	const image = $derived(images[index]);
+	const src = $derived(showBefore && image.before ? image.before : image.src);
 
 	onMount(() => {
 		dialog.showModal();
@@ -38,9 +41,10 @@
 		view = zoomAt(view, factor, point);
 	}
 
+	// Keeps the zoom and position, to compare the same spot across images
 	function show(step: number): void {
 		index = (index + step + images.length) % images.length;
-		view = initialView;
+		showBefore = false;
 	}
 
 	function onwheel(event: WheelEvent): void {
@@ -48,9 +52,11 @@
 		zoom(Math.exp(-event.deltaY * 0.002), fromCenter(event));
 	}
 
+	// The version switch keeps the zoom and position, so the change shows in place
 	const navigationShortcuts: Record<string, () => void> = {
 		ArrowLeft: () => show(-1),
 		ArrowRight: () => show(1),
+		s: () => (showBefore = image.before ? !showBefore : false),
 	};
 	const zoomShortcuts: Record<string, () => void> = {
 		'+': () => zoom(zoomStep),
@@ -98,7 +104,7 @@
 <dialog bind:this={dialog} aria-label="Image viewer" {onclick} {onkeydown} {onclose}>
 	<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 	<img
-		src={image.src}
+		{src}
 		alt={image.alt}
 		draggable="false"
 		class:zoomable
@@ -108,11 +114,20 @@
 		{onpointermove}
 		onpointerup={() => (drag = undefined)}
 	>
+	{#if image.path}
+		<div class="path">{image.path}</div>
+	{/if}
 	<div class="toolbar">
 		{#if images.length > 1}
 			<button type="button" aria-label="Previous image" onclick={() => show(-1)}>‹</button>
 			<span class="counter">{index + 1} / {images.length}</span>
 			<button type="button" aria-label="Next image" onclick={() => show(1)}>›</button>
+		{/if}
+		{#if image.before}
+			<span class="versions" title="Switch with S">
+				<button type="button" aria-pressed={showBefore} onclick={() => (showBefore = true)}>Before</button>
+				<button type="button" aria-pressed={!showBefore} onclick={() => (showBefore = false)}>After</button>
+			</span>
 		{/if}
 		{#if zoomable}
 			<button type="button" aria-label="Zoom out" onclick={() => zoom(1 / zoomStep)}>−</button>
@@ -121,7 +136,7 @@
 			</button>
 			<button type="button" aria-label="Zoom in" onclick={() => zoom(zoomStep)}>+</button>
 		{/if}
-		<a href={image.src} target="_blank" rel="noopener noreferrer">Open original</a>
+		<a href={src} target="_blank" rel="noopener noreferrer">Open original</a>
 		<button type="button" aria-label="Close" onclick={() => dialog.close()}>×</button>
 	</div>
 </dialog>
@@ -165,6 +180,23 @@
 		cursor: grabbing;
 	}
 
+	.path {
+		position: absolute;
+		top: 16px;
+		left: 50%;
+		max-width: 90vw;
+		transform: translateX(-50%);
+		overflow: hidden;
+		padding: 4px 12px;
+		border-radius: 6px;
+		background: rgb(0 0 0 / 60%);
+		color: #fff;
+		font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		cursor: default;
+	}
+
 	.toolbar {
 		position: absolute;
 		bottom: 16px;
@@ -199,6 +231,19 @@
 
 	.toolbar .scale {
 		min-width: 64px;
+	}
+
+	.versions {
+		display: flex;
+		gap: 2px;
+	}
+
+	.toolbar .versions button {
+		font-size: 14px;
+	}
+
+	.toolbar .versions button[aria-pressed='true'] {
+		background: rgb(255 255 255 / 35%);
 	}
 
 	.counter {

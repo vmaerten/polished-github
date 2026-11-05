@@ -1,6 +1,13 @@
 import type {ImageModalSettings} from '../../options-storage.js';
 
-export type ModalImage = {src: string; alt: string};
+export type ModalImage = {
+	src: string;
+	alt: string;
+	/** The file, for an image of a diff. */
+	path?: string;
+	/** The previous version, for an image changed in a diff. */
+	before?: string;
+};
 export type Gallery = {images: ModalImage[]; start: number};
 
 // Rendered Markdown wraps each image in a link to itself; READMEs link the /blob/ page of the /raw/ file instead

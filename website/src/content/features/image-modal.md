@@ -4,7 +4,7 @@ summary: Zoom images in place, arrow keys between them.
 group: Reading
 appearsIn: Images
 order: 2
-lede: Images in issues, PRs, comments and READMEs open over the page instead of in a new tab. Zoom, pan, and move to the next image with the arrow keys.
+lede: Images in issues, PRs, comments, READMEs and diffs open over the page instead of in a new tab. Zoom, pan, and move to the next image with the arrow keys.
 ---
 
 ## Controls
@@ -13,7 +13,9 @@ lede: Images in issues, PRs, comments and READMEs open over the page instead of 
 	<dt>Click an image</dt>
 	<dd>Opens it over the page.</dd>
 	<dt>← and →</dt>
-	<dd>Previous and next image of the same comment.</dd>
+	<dd>Previous and next image of the same comment, or of the diff, at the same zoom and position.</dd>
+	<dt>S</dt>
+	<dd>Switches a changed image between its old and new versions, keeping the zoom and position.</dd>
 	<dt>Scroll wheel, + and −</dt>
 	<dd>Zoom in and out. 0 resets the zoom.</dd>
 	<dt>Drag</dt>
@@ -27,6 +29,7 @@ lede: Images in issues, PRs, comments and READMEs open over the page instead of 
 - Images in rendered Markdown: issue and PR descriptions, comments, READMEs.
 - Images that link elsewhere, like CI badges, keep their link unless you change it in the settings.
 - Emoji never open, and a click with ⌘, Ctrl, Shift or Alt keeps the browser's behavior.
+- Images in a diff, in a pull request's changes or a commit: GitHub draws them in a frame the page can't listen to, so they open from the magnifier button in their top-right corner. A changed image opens on its new version, with Before and After to compare.
 
 ## Settings
 
@@ -40,3 +43,4 @@ lede: Images in issues, PRs, comments and READMEs open over the page instead of 
 ## Good to know
 
 - No token needed.
+- In a diff, ← and → go through the images GitHub has rendered when the viewer opens: on a long pull request, those near the part you're reading.
