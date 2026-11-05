@@ -11,8 +11,12 @@ const v4Mock = vi.mocked(v4);
 vi.stubGlobal('matchMedia', () => ({matches: true}));
 
 const storage: Record<string, unknown> = {};
+const settings: Record<string, unknown> = {};
 vi.stubGlobal('chrome', {
 	storage: {
+		sync: {
+			get: async (defaults: Record<string, unknown>) => ({...defaults, ...structuredClone(settings)}),
+		},
 		local: {
 			get: async (key: string) => (key in storage ? {[key]: structuredClone(storage[key])} : {}),
 			set: async (items: Record<string, unknown>) => Object.assign(storage, structuredClone(items)),
@@ -103,4 +107,26 @@ test('reserves the counter while the counts load, and removes it if they fail', 
 	expect(text.style.paddingRight).toBe('');
 	expect(consoleError).toHaveBeenCalledOnce();
 	page.abort();
+});
+
+test('counts only the reviews requested from the person directly when set to', async () => {
+	settings.reviewerLoad = {directOnly: true};
+	history.pushState({}, '', '/q/r/pull/1');
+	document.body.innerHTML = `<details id="reviewers-select-menu"><div class="list">${item('ada')}${item('org/core')}</div></details>`;
+	v4Mock.mockImplementation(async (_query, variables) =>
+		Object.fromEntries(Object.keys(variables!).map((key) => [`r${key.slice(1)}`, {issueCount: 1}])),
+	);
+
+	const page = new AbortController();
+	await reviewerLoad.init(page.signal);
+	await vi.waitFor(() => expect(counts()).toEqual(['1', '1']));
+	expect(v4Mock.mock.lastCall?.[1]).toEqual({
+		q0: 'is:pr is:open user-review-requested:ada user:q',
+		q1: 'is:pr is:open team-review-requested:org/core user:q',
+	});
+	expect(document.querySelector('.polished-github-reviewer-load')!.getAttribute('title')).toBe(
+		'1 open PR requesting their review directly, not through a team, in q',
+	);
+	page.abort();
+	delete settings.reviewerLoad;
 });

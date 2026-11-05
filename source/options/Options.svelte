@@ -14,10 +14,11 @@
 	import MergeEmailEditor from './MergeEmailEditor.svelte';
 	import PrListSection from './PrListSection.svelte';
 	import QuickCommentsEditor from './QuickCommentsEditor.svelte';
+	import ReviewerLoadEditor from './ReviewerLoadEditor.svelte';
 	import StaleEditor from './StaleEditor.svelte';
 	import TokenSection from './TokenSection.svelte';
 
-	const configurable = new Set(['image-modal', 'quick-comments', 'diff-stats', 'idle-prs', 'merge-email']);
+	const configurable = new Set(['image-modal', 'quick-comments', 'diff-stats', 'idle-prs', 'merge-email', 'reviewer-load']);
 	const {version} = chrome.runtime.getManifest();
 
 	let options = $state<Options>();
@@ -149,6 +150,11 @@
 									<StaleEditor
 										bind:settings={options.stale}
 										onsave={() => save({stale: $state.snapshot(options!.stale)})}
+									/>
+								{:else if feature.id === 'reviewer-load'}
+									<ReviewerLoadEditor
+										bind:settings={options.reviewerLoad}
+										onsave={() => save({reviewerLoad: $state.snapshot(options!.reviewerLoad)})}
 									/>
 								{:else if feature.id === 'merge-email'}
 									<MergeEmailEditor

@@ -170,6 +170,12 @@
 	"idlePrs_drafts": {
 		"message": "Also flag draft PRs"
 	},
+	"reviewerLoad_directOnly": {
+		"message": "Count only the reviews requested from the person directly"
+	},
+	"reviewerLoad_directOnlyHelp": {
+		"message": "Leaves out the PRs that request one of their teams. The counts of the teams themselves stay the same."
+	},
 	"imageModal_cycle": {
 		"message": "Cycle through the comment's images with ← and →"
 	},
