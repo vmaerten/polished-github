@@ -24,6 +24,11 @@ export type StaleSettings = {
 	includeDrafts: boolean;
 };
 
+export type ReviewerLoadSettings = {
+	/** Leave out the PRs that request the review of one of the person's teams. */
+	directOnly: boolean;
+};
+
 export type MergeEmail = {
 	/** Organization or user that owns the repository. */
 	owner: string;
@@ -39,6 +44,7 @@ export type Options = {
 	diffStats: DiffStatsSettings;
 	imageModal: ImageModalSettings;
 	stale: StaleSettings;
+	reviewerLoad: ReviewerLoadSettings;
 	/** Where the PR list features put their badges in each row. */
 	prListBadges: BadgePlacement;
 	mergeEmails: MergeEmail[];
@@ -54,6 +60,7 @@ const defaults: Options = {
 	diffStats: {showChangedFiles: true, showSizeLabel: true, sizeThresholds: [10, 50, 250, 1000]},
 	imageModal: {cycleImages: true, zoom: true, includeLinkedImages: false},
 	stale: {days: 7, includeDrafts: false},
+	reviewerLoad: {directOnly: false},
 	prListBadges: 'right',
 	mergeEmails: [],
 };
@@ -66,6 +73,7 @@ export async function getOptions(): Promise<Options> {
 	return {
 		...stored,
 		imageModal: {...defaults.imageModal, ...stored.imageModal},
+		reviewerLoad: {...defaults.reviewerLoad, ...stored.reviewerLoad},
 		stale: {...stale, days: isPositiveInteger(stale.days) ? stale.days : defaults.stale.days},
 		diffStats: {
 			...diffStats,

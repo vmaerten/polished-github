@@ -170,6 +170,12 @@
 	"idlePrs_drafts": {
 		"message": "Signaler aussi les PR en brouillon"
 	},
+	"reviewerLoad_directOnly": {
+		"message": "Ne compter que les reviews demandées directement à la personne"
+	},
+	"reviewerLoad_directOnlyHelp": {
+		"message": "Laisse de côté les PR qui demandent une de ses équipes. Le compte des équipes elles-mêmes ne change pas."
+	},
 	"imageModal_cycle": {
 		"message": "Passer d'une image du commentaire à l'autre avec ← et →"
 	},

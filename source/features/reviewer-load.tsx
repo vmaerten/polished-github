@@ -6,6 +6,7 @@ import {v4} from '../github-helpers/api.js';
 import {observe} from '../helpers/observe.js';
 import {t} from '../helpers/i18n.js';
 import {mutedColor} from '../github-helpers/colors.js';
+import {getOptions} from '../options-storage.js';
 
 // The picker loads its rows when opened and again when filtering
 const usernames = '#reviewers-select-menu .select-menu-item .js-username';
@@ -20,34 +21,38 @@ const loadLevels = [
 	{max: Infinity, color: 'var(--fgColor-severe, #bc4c00)', background: 'var(--bgColor-severe-muted, #fb8f4433)'},
 ];
 
-function pendingQuery(reviewer: string, owner: string): string {
-	const qualifier = reviewer.includes('/') ? 'team-review-requested' : 'review-requested';
+function isTeam(reviewer: string): boolean {
+	return reviewer.includes('/');
+}
+
+// `review-requested` also matches the requests made to one of the person's teams, `user-review-requested` doesn't
+function pendingQuery(reviewer: string, owner: string, directOnly: boolean): string {
+	const qualifier = isTeam(reviewer)
+		? 'team-review-requested'
+		: directOnly
+			? 'user-review-requested'
+			: 'review-requested';
 	return `is:pr is:open ${qualifier}:${reviewer} user:${owner}`;
 }
 
 // GraphQL search instead of the REST search endpoint, which allows only 30 calls a minute
-async function fetchPendingCounts(reviewers: string[], owner: string): Promise<number[]> {
-	const variables = Object.fromEntries(
-		reviewers.map((reviewer, index) => [`q${index}`, pendingQuery(reviewer, owner)]),
-	);
-	const declarations = reviewers.map((_, index) => `$q${index}: String!`).join(', ');
-	const searches = reviewers.map(
+async function fetchPendingCounts(queries: string[]): Promise<number[]> {
+	const variables = Object.fromEntries(queries.map((query, index) => [`q${index}`, query]));
+	const declarations = queries.map((_, index) => `$q${index}: String!`).join(', ');
+	const searches = queries.map(
 		(_, index) => `r${index}: search(query: $q${index}, type: ISSUE, first: 0) {issueCount}`,
 	);
 	const result = await v4<Record<string, {issueCount: number}>>(
 		`query(${declarations}) {${searches.join(' ')}}`,
 		variables,
 	);
-	return reviewers.map((_, index) => result[`r${index}`].issueCount);
+	return queries.map((_, index) => result[`r${index}`].issueCount);
 }
 
 const cacheDuration = 5 * 60 * 1000;
 const storageKey = 'reviewerLoadCounts';
+// Keyed by search query, so turning the setting on or off never shows the other count
 type StoredCounts = Record<string, {time: number; count: number}>;
-
-function cacheKey(owner: string, reviewer: string): string {
-	return `${owner} ${reviewer}`;
-}
 
 async function readStoredCounts(): Promise<StoredCounts> {
 	const {[storageKey]: stored} = (await chrome.storage.local.get(storageKey)) as {[storageKey]?: StoredCounts};
@@ -66,14 +71,14 @@ async function storeCounts(counts: Map<string, number>): Promise<void> {
 }
 
 // Stored rather than kept in memory, so a reload or a new tab on the organization shows the counts at once
-async function loadCounts(reviewers: string[], owner: string): Promise<number[]> {
+async function loadCounts(queries: string[]): Promise<number[]> {
 	const stored = await readStoredCounts();
-	const missing = reviewers.filter((reviewer) => !(cacheKey(owner, reviewer) in stored));
+	const missing = queries.filter((query) => !(query in stored));
 	const fetched = new Map<string, number>();
 	if (missing.length > 0) {
-		const counts = await fetchPendingCounts(missing, owner);
-		for (const [index, reviewer] of missing.entries()) {
-			fetched.set(cacheKey(owner, reviewer), counts[index]);
+		const counts = await fetchPendingCounts(missing);
+		for (const [index, query] of missing.entries()) {
+			fetched.set(query, counts[index]);
 		}
 
 		storeCounts(fetched).catch((error: unknown) => {
@@ -81,32 +86,28 @@ async function loadCounts(reviewers: string[], owner: string): Promise<number[]>
 		});
 	}
 
-	return reviewers.map((reviewer) => {
-		const key = cacheKey(owner, reviewer);
-		return stored[key]?.count ?? fetched.get(key)!;
-	});
+	return queries.map((query) => stored[query]?.count ?? fetched.get(query)!);
 }
 
 // Shared by the rows of every page in this tab, so a count is never requested twice at once
 const pending = new Map<string, {time: number; count: Promise<number>}>();
 
-function getCounts(reviewers: string[], owner: string): Map<string, Promise<number>> {
+function getCounts(queries: string[]): Map<string, Promise<number>> {
 	const now = Date.now();
-	const missing = reviewers.filter((reviewer) => {
-		const cached = pending.get(cacheKey(owner, reviewer));
+	const missing = queries.filter((query) => {
+		const cached = pending.get(query);
 		return !cached || now - cached.time > cacheDuration;
 	});
 	if (missing.length > 0) {
-		const loaded = loadCounts(missing, owner);
-		for (const [index, reviewer] of missing.entries()) {
-			const key = cacheKey(owner, reviewer);
+		const loaded = loadCounts(missing);
+		for (const [index, query] of missing.entries()) {
 			const count = loaded.then((counts) => counts[index]);
-			pending.set(key, {time: now, count});
-			count.catch(() => pending.delete(key));
+			pending.set(query, {time: now, count});
+			count.catch(() => pending.delete(query));
 		}
 	}
 
-	return new Map(reviewers.map((reviewer) => [reviewer, pending.get(cacheKey(owner, reviewer))!.count]));
+	return new Map(queries.map((query) => [query, pending.get(query)!.count]));
 }
 
 // Added as soon as the row appears, so the count fills a space already there instead of moving the rows
@@ -153,9 +154,8 @@ function reserveCounter(username: Element): HTMLElement | undefined {
 	return counter;
 }
 
-function fillCounter(counter: HTMLElement, count: number, owner: string): void {
+function fillCounter(counter: HTMLElement, count: number, description: string): void {
 	const {color, background} = loadLevels.find(({max}) => count <= max)!;
-	const description = `${count} open ${count === 1 ? 'PR' : 'PRs'} waiting for their review in ${owner}`;
 	for (const animation of counter.getAnimations()) {
 		animation.cancel();
 	}
@@ -184,19 +184,27 @@ function addHeader(divider: Element): void {
 	);
 }
 
-async function addCounts(elements: Element[]): Promise<void> {
+function describe(count: number, reviewer: string, owner: string, directOnly: boolean): string {
+	const prs = `${count} open ${count === 1 ? 'PR' : 'PRs'}`;
+	return directOnly && !isTeam(reviewer)
+		? `${prs} requesting their review directly, not through a team, in ${owner}`
+		: `${prs} waiting for their review in ${owner}`;
+}
+
+async function addCounts(elements: Element[], directOnly: boolean): Promise<void> {
 	const {owner} = pageDetect.utils.getRepositoryInfo()!;
 	const rows = elements.flatMap((element) => {
 		const reviewer = element.textContent.trim();
 		const counter = reviewer ? reserveCounter(element) : undefined;
-		return counter ? [{counter, reviewer}] : [];
+		return counter ? [{counter, reviewer, query: pendingQuery(reviewer, owner, directOnly)}] : [];
 	});
 
-	const counts = getCounts([...new Set(rows.map(({reviewer}) => reviewer))], owner);
+	const counts = getCounts([...new Set(rows.map(({query}) => query))]);
 	const results = await Promise.allSettled(
-		rows.map(async ({counter, reviewer}) => {
+		rows.map(async ({counter, reviewer, query}) => {
 			try {
-				fillCounter(counter, await counts.get(reviewer)!, owner);
+				const count = await counts.get(query)!;
+				fillCounter(counter, count, describe(count, reviewer, owner, directOnly));
 			} catch (error) {
 				removeCounter(counter);
 				throw error;
@@ -214,12 +222,13 @@ const reviewerLoad: Feature = {
 	description: t('feature_reviewerLoad'),
 	include: [pageDetect.isPRConversation],
 	requiresToken: true,
-	init(signal) {
+	async init(signal) {
+		const {directOnly} = (await getOptions()).reviewerLoad;
 		observe(dividers, (elements) => elements.forEach(addHeader), {signal});
 		observe(
 			usernames,
 			(elements) => {
-				addCounts(elements).catch((error: unknown) => {
+				addCounts(elements, directOnly).catch((error: unknown) => {
 					console.error('polished-github: reviewer-load failed', error);
 				});
 			},
