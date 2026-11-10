@@ -8,9 +8,13 @@ import {t} from '../helpers/i18n.js';
 import {mutedColor} from '../github-helpers/colors.js';
 import {getOptions} from '../options-storage.js';
 
-// The picker loads its rows when opened and again when filtering
-const usernames = '#reviewers-select-menu .select-menu-item .js-username';
-const dividers = '#reviewers-select-menu .select-menu-divider';
+// The picker loads its rows when opened and again when filtering. The new PR overview page has a React picker, whose
+// class names end with a hash
+const reviewerPanel = '[class*="SelectPanel-Overlay"]:has([class*="reviewerOptionLogin"])';
+const usernames = `#reviewers-select-menu .select-menu-item .js-username, ${reviewerPanel} [role="option"] [class*="reviewerOptionLogin"]`;
+const dividers = `#reviewers-select-menu .select-menu-divider, ${reviewerPanel} [class*="ActionList-GroupHeadingWrap"]`;
+const items = '.select-menu-item, [role="option"]';
+const itemLabels = '.select-menu-item-text, [class*="ActionList-ActionListSubContent"]';
 const loadClass = 'polished-github-reviewer-load';
 const headerClass = 'polished-github-reviewer-load-header';
 
@@ -112,7 +116,7 @@ function getCounts(queries: string[]): Map<string, Promise<number>> {
 
 // Added as soon as the row appears, so the count fills a space already there instead of moving the rows
 function reserveCounter(username: Element): HTMLElement | undefined {
-	const item = username.closest<HTMLElement>('.select-menu-item');
+	const item = username.closest<HTMLElement>(items);
 	if (!item) {
 		return undefined;
 	}
@@ -124,7 +128,7 @@ function reserveCounter(username: Element): HTMLElement | undefined {
 
 	// The item is a block layout: an absolute counter keeps it in a right-hand column without reflowing the name
 	item.style.position = 'relative';
-	item.querySelector<HTMLElement>('.select-menu-item-text')?.style.setProperty('padding-right', '36px');
+	item.querySelector<HTMLElement>(itemLabels)?.style.setProperty('padding-right', '36px');
 	const counter = (
 		<span
 			className={loadClass}
@@ -168,17 +172,29 @@ function fillCounter(counter: HTMLElement, count: number, description: string): 
 }
 
 function removeCounter(counter: HTMLElement): void {
-	counter.parentElement?.querySelector<HTMLElement>('.select-menu-item-text')?.style.removeProperty('padding-right');
+	counter.parentElement?.querySelector<HTMLElement>(itemLabels)?.style.removeProperty('padding-right');
 	counter.remove();
 }
 
-function addHeader(divider: Element): void {
+function addHeader(divider: HTMLElement): void {
 	if (divider.querySelector(`.${headerClass}`)) {
 		return;
 	}
 
+	// Placed like the counters, above their column: the React picker's heading is a flex column, where a float would wrap
+	divider.style.position = 'relative';
 	divider.append(
-		<span className={headerClass} style={{float: 'right', fontWeight: '400', color: mutedColor}}>
+		<span
+			className={headerClass}
+			style={{
+				position: 'absolute',
+				top: '50%',
+				right: '16px',
+				transform: 'translateY(-50%)',
+				fontWeight: '400',
+				color: mutedColor,
+			}}
+		>
 			Pending reviews
 		</span>,
 	);
@@ -224,7 +240,7 @@ const reviewerLoad: Feature = {
 	requiresToken: true,
 	async init(signal) {
 		const {directOnly} = (await getOptions()).reviewerLoad;
-		observe(dividers, (elements) => elements.forEach(addHeader), {signal});
+		observe(dividers, (elements) => (elements as HTMLElement[]).forEach(addHeader), {signal});
 		observe(
 			usernames,
 			(elements) => {

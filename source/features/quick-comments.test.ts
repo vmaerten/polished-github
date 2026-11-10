@@ -62,6 +62,20 @@ test('shows the buttons meant for the current page', async () => {
 	expect(buttons()).toEqual(['LGTM', 'Thanks']);
 });
 
+test('posts from the React composer of the new PR overview page', async () => {
+	document.body.innerHTML = `
+		<form aria-label="Add comment form">
+			<textarea></textarea>
+			<div data-testid="markdown-editor-footer"><button type="button" data-variant="primary">Comment</button></div>
+		</form>
+	`;
+	let posted = 0;
+	document.querySelector('button')!.addEventListener('click', () => posted++);
+	await quickComments.init(new AbortController().signal);
+	clickButton('LGTM');
+	await vi.waitFor(() => expect(posted).toBe(1));
+});
+
 test('posts the comment in one click', async () => {
 	await quickComments.init(new AbortController().signal);
 	clickButton('LGTM');
