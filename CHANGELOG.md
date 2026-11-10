@@ -4,6 +4,10 @@ All notable changes to Polished GitHub. Versions follow [Semantic Versioning](ht
 
 ## Unreleased
 
+### 🐛 Fixes
+
+- The quick comment buttons and the pending reviews of each reviewer work again on GitHub's new pull request overview page, as well as on the classic one (`quick-comments`, `reviewer-load`).
+
 ## 0.3.0 - 2026-11-05
 
 ### ✨ Features

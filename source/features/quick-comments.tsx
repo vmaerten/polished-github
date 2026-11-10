@@ -7,8 +7,8 @@ import {observe} from '../helpers/observe.js';
 import {t} from '../helpers/i18n.js';
 import {getOptions, type QuickComment} from '../options-storage.js';
 
-// The classic form on PRs, the React composer on issues
-const composers = '#new_comment_form, [data-testid="comment-composer"]';
+// The classic form on PRs, the React composer on issues, and the one of the new PR overview page
+const composers = '#new_comment_form, [data-testid="comment-composer"], form[aria-label="Add comment form"]';
 const submitButtons =
 	'button.btn-primary[type="submit"], [data-testid="markdown-editor-footer"] button[data-variant="primary"]';
 const rowClass = 'polished-github-quick-comments';

@@ -43,6 +43,10 @@ function item(login: string): string {
 	return `<label class="select-menu-item"><div class="select-menu-item-text"><span class="select-menu-item-heading"><span class="js-username">${login}</span><span class="description">Name</span></span></div></label>`;
 }
 
+function reactItem(login: string): string {
+	return `<li role="option"><div><span class="prc-ActionList-ActionListSubContent-gKsFp"><span class="reviewerOption__5eOQau"><span class="reviewerOptionLogin__bLvEK9">${login}</span><span class="reviewerOptionName__vaOHxC">Name</span></span></span></div></li>`;
+}
+
 function counts(): string[] {
 	return [...document.querySelectorAll('.polished-github-reviewer-load')].map((count) => count.textContent);
 }
@@ -129,4 +133,18 @@ test('counts only the reviews requested from the person directly when set to', a
 	);
 	page.abort();
 	delete settings.reviewerLoad;
+});
+
+test('counts the rows of the React picker of the new PR overview page', async () => {
+	history.pushState({}, '', '/r/r/pull/1');
+	document.body.innerHTML = `<div class="prc-SelectPanel-Overlay-tEbxh" role="dialog"><ul><li role="none"><div class="prc-ActionList-GroupHeadingWrap-laXcX"><span>Everyone else</span></div><ul role="group">${reactItem('ada')}${reactItem('org/core')}</ul></li></ul></div>`;
+	v4Mock.mockImplementation(async (_query, variables) =>
+		Object.fromEntries(Object.keys(variables!).map((key, index) => [`r${key.slice(1)}`, {issueCount: index + 1}])),
+	);
+
+	const page = new AbortController();
+	await reviewerLoad.init(page.signal);
+	await vi.waitFor(() => expect(counts()).toEqual(['1', '2']));
+	expect(document.querySelector('[class*="GroupHeadingWrap"]')!.textContent).toBe('Everyone elsePending reviews');
+	page.abort();
 });
