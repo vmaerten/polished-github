@@ -13,6 +13,7 @@ vi.stubGlobal('matchMedia', () => ({matches: true}));
 const storage: Record<string, unknown> = {};
 const settings: Record<string, unknown> = {};
 vi.stubGlobal('chrome', {
+	runtime: {id: 'extension'},
 	storage: {
 		sync: {
 			get: async (defaults: Record<string, unknown>) => ({...defaults, ...structuredClone(settings)}),

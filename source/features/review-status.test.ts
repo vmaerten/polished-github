@@ -5,7 +5,7 @@ import reviewStatus, {getReviewStatus, type ReviewInfo} from './review-status.js
 
 vi.mock('../github-helpers/api.js', () => ({v4: vi.fn<typeof v4>()}));
 
-vi.stubGlobal('chrome', {storage: {sync: {get: async (defaults: object) => defaults}}});
+vi.stubGlobal('chrome', {runtime: {id: 'extension'}, storage: {sync: {get: async (defaults: object) => defaults}}});
 
 const head = 'abc';
 

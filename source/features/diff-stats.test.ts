@@ -8,6 +8,7 @@ vi.mock('../github-helpers/api.js', () => ({v4: vi.fn<typeof v4>()}));
 const v4Mock = vi.mocked(v4);
 
 vi.stubGlobal('chrome', {
+	runtime: {id: 'extension'},
 	storage: {
 		sync: {
 			get: async (defaults: object) => ({

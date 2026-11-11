@@ -3,6 +3,7 @@ import {beforeEach, expect, test, vi} from 'vitest';
 import quickApprovals from './quick-approvals.js';
 
 vi.stubGlobal('chrome', {
+	runtime: {id: 'extension'},
 	storage: {
 		sync: {
 			get: async (defaults: object) => ({
