@@ -242,20 +242,14 @@
 	"quickApprovals_approve": {
 		"message": "Approve"
 	},
-	"quickApprovals_choose": {
-		"message": "Choose the approval message"
-	},
 	"quickApprovals_approveWith": {
 		"message": "Approve with"
 	},
 	"quickApprovals_withoutMessage": {
 		"message": "Without a message"
 	},
-	"quickApprovals_title": {
-		"message": "Approve with “$1”"
-	},
-	"quickApprovals_titleEmpty": {
-		"message": "Approve without a message"
+	"quickApprovals_hint": {
+		"message": "$1-click to approve without a message"
 	},
 	"quickApprovals_approving": {
 		"message": "Approving…"

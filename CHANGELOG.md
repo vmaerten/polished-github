@@ -6,7 +6,7 @@ All notable changes to Polished GitHub. Versions follow [Semantic Versioning](ht
 
 ### ✨ Features
 
-- An Approve button next to the review button approves the pull request in one click, with one of your predefined messages or without one. Off by default, it needs a token with read and write access to Pull requests (`quick-approvals`).
+- An Approve button next to the review button approves the pull request with one of your predefined messages from its menu, or without a message on a ⌘ or Ctrl-click. Off by default, it needs a token with read and write access to Pull requests (`quick-approvals`).
 
 ### 🐛 Fixes
 

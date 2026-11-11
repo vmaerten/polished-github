@@ -1,10 +1,10 @@
 ---
 title: Quick approvals
-summary: Approve a PR in one click, with one of your messages.
+summary: Approve a PR with one of your messages, from its header.
 group: Reviewing code
 appearsIn: PR header
 order: 1
-lede: An Approve button next to the review button of a pull request. One click approves with your first message; its menu offers the others, or no message at all.
+lede: An Approve button next to the review button of a pull request. Its menu approves with one of your messages, and a ⌘ or Ctrl-click approves without a message.
 needsToken: true
 onByDefault: false
 ---
@@ -23,8 +23,8 @@ onByDefault: false
 
 ## How the button behaves
 
-- A click on Approve approves the pull request with the first message of your list.
-- The arrow opens the menu: any of your messages, or an approval without a message.
+- A click on Approve opens the menu: pick one of your messages, or an approval without a message. A click alone never approves.
+- A ⌘-click, or Ctrl-click outside macOS, approves right away without a message.
 - The button then reads Approved. GitHub records the approval under your account, as if you had approved from its page.
 - It does not show on your own pull requests, which GitHub does not let you approve, nor on closed or merged ones.
 
