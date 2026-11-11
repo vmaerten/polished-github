@@ -129,7 +129,7 @@
 		"message": "Connected as"
 	},
 	"token_requestsLeft": {
-		"message": "· $1 / $2 requests left this hour"
+		"message": "· $1 / $2 API points left this hour"
 	},
 	"token_consentDenied": {
 		"message": "Firefox needs your consent to send the token and the pages you browse to the GitHub API. Nothing was saved."

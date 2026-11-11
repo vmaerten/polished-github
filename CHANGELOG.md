@@ -8,6 +8,10 @@ All notable changes to Polished GitHub. Versions follow [Semantic Versioning](ht
 
 - An Approve button next to the review button approves the pull request in one click, with one of your predefined messages or without one. Off by default, it needs a token with read and write access to Pull requests (`quick-approvals`).
 
+### 🐛 Fixes
+
+- The token check in the options shows the GitHub API quota the features spend, the GraphQL one, instead of the REST quota none of them uses.
+
 ## 0.3.1 - 2026-11-11
 
 ### 🐛 Fixes
