@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {v3} from '../github-helpers/api.js';
+	import {v4} from '../github-helpers/api.js';
 	import {getToken, setToken} from '../options-storage.js';
 	import {t} from '../helpers/i18n.js';
 
@@ -30,12 +30,11 @@
 
 		status = {kind: 'checking'};
 		try {
-			const [{login}, {resources}] = await Promise.all([
-				v3<{login: string}>('/user'),
-				// Doesn't count against the rate limit
-				v3<{resources: {core: {remaining: number; limit: number}}}>('/rate_limit'),
-			]);
-			status = {kind: 'connected', login, ...resources.core};
+			// The features spend the GraphQL quota, which is separate from the REST one
+			const {viewer, rateLimit} = await v4<{viewer: {login: string}; rateLimit: {remaining: number; limit: number}}>(
+				'{viewer {login} rateLimit {remaining limit}}',
+			);
+			status = {kind: 'connected', login: viewer.login, ...rateLimit};
 		} catch (error) {
 			status = {kind: 'error', message: error instanceof Error ? error.message : String(error)};
 		}
