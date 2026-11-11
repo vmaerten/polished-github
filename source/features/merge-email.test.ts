@@ -5,6 +5,7 @@ import mergeEmail from './merge-email.js';
 let local: Record<string, unknown> = {};
 
 vi.stubGlobal('chrome', {
+	runtime: {id: 'extension'},
 	storage: {
 		local: {
 			get: async (defaults: object) => ({...defaults, ...local}),

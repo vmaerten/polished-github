@@ -11,6 +11,7 @@ vi.mock('text-field-edit', () => ({
 }));
 
 vi.stubGlobal('chrome', {
+	runtime: {id: 'extension'},
 	storage: {
 		sync: {
 			get: async (defaults: object) => ({

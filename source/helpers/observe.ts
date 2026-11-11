@@ -11,6 +11,13 @@ export function observe(
 
 	const seen = new WeakSet<Element>();
 	const check = (): void => {
+		// After an update or a reload of the extension, this script lives on in open tabs without the extension's APIs:
+		// the callbacks would fail on them until the tab reloads
+		if (!chrome.runtime?.id) {
+			observer.disconnect();
+			return;
+		}
+
 		const added = [...document.querySelectorAll(selector)].filter((element) => !seen.has(element));
 		for (const element of added) {
 			seen.add(element);
