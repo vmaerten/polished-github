@@ -14,12 +14,13 @@
 	import ImageModalEditor from './ImageModalEditor.svelte';
 	import MergeEmailEditor from './MergeEmailEditor.svelte';
 	import PrListSection from './PrListSection.svelte';
+	import QuickApprovalsEditor from './QuickApprovalsEditor.svelte';
 	import QuickCommentsEditor from './QuickCommentsEditor.svelte';
 	import ReviewerLoadEditor from './ReviewerLoadEditor.svelte';
 	import StaleEditor from './StaleEditor.svelte';
 	import TokenSection from './TokenSection.svelte';
 
-	const configurable = new Set(['image-modal', 'quick-comments', 'diff-stats', 'idle-prs', 'merge-email', 'reviewer-load']);
+	const configurable = new Set(['image-modal', 'quick-comments', 'quick-approvals', 'diff-stats', 'idle-prs', 'merge-email', 'reviewer-load']);
 	const {version} = chrome.runtime.getManifest();
 
 	let options = $state<Options>();
@@ -141,6 +142,11 @@
 									<QuickCommentsEditor
 										bind:comments={options.quickComments}
 										onsave={() => save({quickComments: $state.snapshot(options!.quickComments)})}
+									/>
+								{:else if feature.id === 'quick-approvals'}
+									<QuickApprovalsEditor
+										bind:approvals={options.quickApprovals}
+										onsave={() => save({quickApprovals: $state.snapshot(options!.quickApprovals)})}
 									/>
 								{:else if feature.id === 'diff-stats'}
 									<DiffStatsEditor

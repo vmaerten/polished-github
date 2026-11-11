@@ -4,6 +4,12 @@ export type QuickComment = {
 	on: 'issues' | 'prs' | 'both';
 };
 
+export type QuickApproval = {
+	label: string;
+	/** Empty to approve without a message. */
+	body: string;
+};
+
 export type DiffStatsSettings = {
 	showChangedFiles: boolean;
 	showSizeLabel: boolean;
@@ -43,6 +49,7 @@ export type Options = {
 	/** The features off by default that the user turned on. */
 	enabledFeatures: string[];
 	quickComments: QuickComment[];
+	quickApprovals: QuickApproval[];
 	diffStats: DiffStatsSettings;
 	imageModal: ImageModalSettings;
 	stale: StaleSettings;
@@ -55,7 +62,7 @@ export type Options = {
 export type FeatureToggles = Pick<Options, 'disabledFeatures' | 'enabledFeatures'>;
 
 // Off until the user turns them on, which adds them to `enabledFeatures`
-const offByDefault: ReadonlySet<string> = new Set(['unresolved-comments']);
+const offByDefault: ReadonlySet<string> = new Set(['unresolved-comments', 'quick-approvals']);
 
 export function isFeatureEnabled(id: string, {disabledFeatures, enabledFeatures}: FeatureToggles): boolean {
 	return offByDefault.has(id) ? enabledFeatures.includes(id) : !disabledFeatures.includes(id);
@@ -68,6 +75,10 @@ const defaults: Options = {
 		{label: 'LGTM', body: 'LGTM :rocket:', on: 'prs'},
 		{label: 'Rebase', body: '@dependabot rebase', on: 'prs'},
 		{label: 'Thanks', body: 'Thanks for the contribution!', on: 'both'},
+	],
+	quickApprovals: [
+		{label: 'LGTM', body: 'LGTM :rocket:'},
+		{label: 'Ship it', body: 'Ship it :ship:'},
 	],
 	diffStats: {showChangedFiles: true, showSizeLabel: true, sizeThresholds: [10, 50, 250, 1000]},
 	imageModal: {cycleImages: true, zoom: true, includeLinkedImages: false},
