@@ -15,6 +15,7 @@ Only when you have entered a token, and only to `api.github.com`:
 
 - **Your GitHub token**, to authenticate the requests.
 - **What the features need to look up**: the owner and name of the repository you are viewing, the numbers of the pull requests listed on the page, and the logins of the people and teams in the reviewers picker. GitHub answers with review status, diff stats, last activity and pending review counts.
+- **Your approvals**, when you click a quick approval button: the pull request and the message you picked. GitHub records the approval under your account, as if you had approved from its page.
 - When you open the options page, a check of the token: your login and how many API requests you have left. If the token allows it, the options page also asks for your organizations and verified emails, to suggest them in the commit email rules.
 
 Nothing is sent to the developer or to any other party. The extension has no server, no analytics and no tracking.

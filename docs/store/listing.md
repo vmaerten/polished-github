@@ -35,7 +35,7 @@ The badges go in a right-hand column aligned from row to row, or in the grey lin
 • Merge email: the commit email you chose for each organization, picked for you when you merge or squash.
 
 🔒 Your token stays with you
-The PR list badges and the reviewer load need a read-only GitHub token (a fine-grained token with read access to Pull requests). It is stored in your browser only and sent only to api.github.com. The extension has no server and no analytics.
+The PR list badges and the reviewer load need a read-only GitHub token (a fine-grained token with read access to Pull requests). Quick approvals, off by default, approves a PR in one click and needs read and write access instead. The token is stored in your browser only and sent only to api.github.com. The extension has no server and no analytics.
 
 Open source under the MIT license. Code and issues: https://github.com/vmaerten/polished-github
 ```
@@ -48,7 +48,7 @@ Open source under the MIT license. Code and issues: https://github.com/vmaerten/
 | Language                                 | English                                                                                                                                                   |
 | Single purpose                           | Improve github.com pages with information and shortcuts, each of which the user can turn off.                                                             |
 | `storage` justification                  | Saves the user's settings and, on this device only, the GitHub token they enter in the options and the reviewers' pending review counts for five minutes. |
-| Content script on `https://github.com/*` | The features run on github.com pages: PR list badges, reviewers picker counts, quick comment buttons, the image modal and the merge email.                |
+| Content script on `https://github.com/*` | The features run on github.com pages: PR list badges, reviewers picker counts, quick comment and approval buttons, the image modal and the merge email.   |
 | No host permission for `api.github.com`  | The API allows cross-origin requests, so reading review status, diff stats, last activity and pending review counts with the user's own token needs none. |
 | Remote code                              | No. Everything ships in the package.                                                                                                                      |
 
@@ -105,7 +105,7 @@ The badges go in a right-hand column aligned from row to row, or in the grey lin
 
 **🔒 Your token stays with you**
 
-The PR list badges and the reviewer load need a read-only GitHub token (a fine-grained token with read access to Pull requests). It is stored in your browser only and sent only to api.github.com. The extension has no server and no analytics.
+The PR list badges and the reviewer load need a read-only GitHub token (a fine-grained token with read access to Pull requests). Quick approvals, off by default, approves a PR in one click and needs read and write access instead. The token is stored in your browser only and sent only to api.github.com. The extension has no server and no analytics.
 
 Open source under the MIT license. Code and issues: https://github.com/vmaerten/polished-github
 ```
@@ -150,7 +150,7 @@ Les badges se placent dans une colonne à droite, alignée d'une ligne à l'autr
 
 **🔒 Votre token reste chez vous**
 
-Les badges de la liste des PR et la charge des reviewers nécessitent un token GitHub en lecture seule (un token fine-grained avec l'accès en lecture aux Pull requests). Il est stocké uniquement dans votre navigateur et envoyé uniquement à api.github.com. L'extension n'a ni serveur ni outil d'analyse.
+Les badges de la liste des PR et la charge des reviewers nécessitent un token GitHub en lecture seule (un token fine-grained avec l'accès en lecture aux Pull requests). Les approbations rapides, désactivées par défaut, approuvent une PR en un clic et demandent l'accès en lecture et écriture. Le token est stocké uniquement dans votre navigateur et envoyé uniquement à api.github.com. L'extension n'a ni serveur ni outil d'analyse.
 
 Open source sous licence MIT. Code et issues : https://github.com/vmaerten/polished-github
 ```
