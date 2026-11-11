@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Approve button in the classic header</title>
+		<style>
+			body {
+				margin: 0;
+			}
+			.frame {
+				position: relative;
+				width: 760px;
+				height: 560px;
+				box-sizing: border-box;
+				background: #0d1117;
+				color: #f0f6fc;
+				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+				font-size: 14px;
+				overflow: hidden;
+			}
+			.btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 6px;
+				height: 28px;
+				padding: 0 10px;
+				border: 1px solid #3d444d;
+				border-radius: 6px;
+				background: #212830;
+				color: #f0f6fc;
+				font-size: 12px;
+				font-weight: 600;
+				white-space: nowrap;
+			}
+			.btn-primary {
+				background: #238636;
+				border-color: rgba(240, 246, 252, 0.1);
+				color: #fff;
+			}
+			.muted {
+				color: #9198a1;
+			}
+		</style>
+	</head>
+	<body>
+		<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+			<symbol id="check" viewBox="0 0 16 16">
+				<path
+					fill="currentColor"
+					d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+				/>
+			</symbol>
+		</svg>
+		<div class="frame">
+			<div
+				style="display: flex; gap: 18px; padding: 10px 16px; border-bottom: 1px solid #3d444d; font-size: 13px"
+				class="muted"
+			>
+				<span>‹› Code</span><b style="color: #f0f6fc">⑂ Pull requests 56</b><span>▷ Actions</span
+				><span>⚙ Settings</span>
+			</div>
+
+			<div style="padding: 22px 24px 0">
+				<div style="display: flex; align-items: flex-start; gap: 8px">
+					<div style="flex: 1; font-size: 24px">
+						fix(output): synchronize the prefixed writer buffer <span class="muted">#3092</span>
+					</div>
+					<span class="muted" style="padding-top: 6px">👁 ▾</span>
+					<span class="btn muted" style="background: transparent; border-color: transparent"
+						>Try the Overview page</span
+					>
+					<span class="btn"><span style="color: #d29922">●</span> Merge status</span>
+					<span style="display: inline-flex">
+						<span class="btn" style="border-radius: 6px 0 0 6px"
+							><svg width="14" height="14" style="color: #3fb950"><use href="#check" /></svg>Approve</span
+						><span class="btn" style="padding: 0 7px; border-left: 0; border-radius: 0 6px 6px 0">▾</span>
+					</span>
+					<span class="btn btn-primary">‹› Code ▾</span>
+				</div>
+				<div style="display: flex; gap: 8px; align-items: center; margin-top: 10px; font-size: 12px" class="muted">
+					<span class="btn btn-primary" style="border-radius: 99px">⑂ Open</span>
+					<span><b style="color: #f0f6fc">bilal-younus</b> wants to merge 1 commit into main</span>
+				</div>
+				<div
+					style="
+						display: flex;
+						gap: 22px;
+						margin-top: 18px;
+						padding-bottom: 8px;
+						border-bottom: 1px solid #3d444d;
+						font-size: 13px;
+					"
+				>
+					<b style="box-shadow: 0 10px 0 -8px #f78166">Conversation 0</b><span class="muted">Commits 1</span
+					><span class="muted">Checks 0</span><span class="muted">Files changed 1</span>
+				</div>
+				<div style="display: flex; gap: 24px; margin-top: 20px">
+					<div style="flex: 1; height: 200px; border: 1px solid #3d444d; border-radius: 6px"></div>
+					<div style="width: 200px; font-size: 12px" class="muted">
+						<b style="color: #9198a1">Reviewers</b><br />No reviews<br /><br /><b style="color: #9198a1">Assignees</b
+						><br />No one
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

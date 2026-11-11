@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Approve button in the new overview composer</title>
+		<style>
+			body {
+				margin: 0;
+			}
+			.frame {
+				position: relative;
+				width: 760px;
+				height: 560px;
+				box-sizing: border-box;
+				padding: 28px 32px;
+				background: #0d1117;
+				color: #f0f6fc;
+				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+				font-size: 14px;
+			}
+			.btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 6px;
+				height: 32px;
+				padding: 0 12px;
+				border: 1px solid #3d444d;
+				border-radius: 6px;
+				background: #212830;
+				color: #f0f6fc;
+				font-size: 13px;
+				font-weight: 500;
+				white-space: nowrap;
+			}
+			.sm {
+				height: 26px;
+				font-size: 12px;
+			}
+			.btn-primary {
+				background: #238636;
+				border-color: rgba(240, 246, 252, 0.1);
+				color: #fff;
+			}
+			.muted {
+				color: #9198a1;
+			}
+			.item {
+				display: flex;
+				gap: 10px;
+				padding: 6px 8px;
+				border-radius: 6px;
+			}
+			.item small {
+				display: block;
+				color: #9198a1;
+			}
+		</style>
+	</head>
+	<body>
+		<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+			<symbol id="check" viewBox="0 0 16 16">
+				<path
+					fill="currentColor"
+					d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+				/>
+			</symbol>
+		</svg>
+		<div class="frame">
+			<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px">
+				<b style="font-size: 20px">Comments</b>
+				<span style="display: inline-flex; border: 1px solid #3d444d; border-radius: 6px; font-size: 12px"
+					><span style="padding: 5px 10px; background: #212830; border-radius: 6px">All</span
+					><span style="padding: 5px 10px">Unresolved</span><span style="padding: 5px 10px">Mine</span></span
+				>
+			</div>
+			<div style="display: flex; gap: 6px; margin-bottom: 12px">
+				<span class="btn sm">Claude review</span><span class="btn sm">Augment review</span
+				><span class="btn sm">Thanks</span>
+			</div>
+			<div style="border: 1px solid #3d444d; border-radius: 6px; overflow: hidden">
+				<div style="display: flex; justify-content: space-between; border-bottom: 1px solid #3d444d; font-size: 12px">
+					<span style="display: flex"
+						><span style="padding: 8px 14px; background: #151b23; border-right: 1px solid #3d444d">Write</span
+						><span class="muted" style="padding: 8px 14px">Preview</span></span
+					>
+					<span class="muted" style="padding: 8px 12px; letter-spacing: 6px">≡ ‹› ⛓ ☰ ☷ ☑ ⤺ ⊞</span>
+				</div>
+				<div style="margin: 8px; height: 96px; padding: 8px; border: 1px solid #3d444d; border-radius: 6px">
+					Nice. One nit on the naming, not blocking.
+				</div>
+				<div class="muted" style="padding: 0 10px 8px; font-size: 12px">⌇ Paste, drop, or click to add files</div>
+			</div>
+			<div style="display: flex; justify-content: flex-end; gap: 8px; margin-top: 8px">
+				<span class="btn"><span style="color: #f85149">⑂</span> Close pull request</span>
+				<span style="display: inline-flex">
+					<span class="btn" style="border-radius: 6px 0 0 6px"
+						><svg width="16" height="16" style="color: #3fb950"><use href="#check" /></svg>Approve</span
+					><span class="btn" style="padding: 0 8px; border-left: 0; border-radius: 0 6px 6px 0; background: #2a313c"
+						>▾</span
+					>
+				</span>
+				<span class="btn btn-primary">Comment</span>
+			</div>
+
+			<div
+				style="
+					position: absolute;
+					top: 310px;
+					right: 120px;
+					width: 300px;
+					padding: 6px;
+					border: 1px solid #3d444d;
+					border-radius: 12px;
+					background: #151b23;
+					box-shadow: 0 8px 24px rgba(1, 4, 9, 0.6);
+					font-size: 13px;
+				"
+			>
+				<div class="muted" style="padding: 4px 8px 6px; font-size: 12px; font-weight: 600">Approve with</div>
+				<div class="item" style="background: #212830">
+					<svg width="14" height="14" style="flex: none; margin-top: 3px; color: #3fb950"><use href="#check" /></svg
+					><span>The text above<small>“Nice. One nit on the naming…”</small></span>
+				</div>
+				<div style="height: 1px; margin: 6px 0; background: #3d444d"></div>
+				<div class="item">
+					<span style="width: 14px"></span><span>LGTM<small>LGTM :rocket:</small></span>
+				</div>
+				<div class="item">
+					<span style="width: 14px"></span><span>Ship it<small>Ship it :ship:</small></span>
+				</div>
+				<div class="item">
+					<span style="width: 14px"></span
+					><span>Nits inline<small>Looks good, a few nits inline, merge when ready.</small></span>
+				</div>
+				<div style="height: 1px; margin: 6px 0; background: #3d444d"></div>
+				<div class="item muted"><span style="width: 14px"></span><span>Without a message</span></div>
+			</div>
+		</div>
+	</body>
+</html>
