@@ -12,6 +12,8 @@ import {getOptions, type QuickApproval} from '../options-storage.js';
 const newAnchors = 'button[class*="ReviewMenuButton"]';
 const classicAnchors = '.gh-header-actions';
 const groupClass = 'polished-github-quick-approvals';
+const menuId = `${groupClass}-menu`;
+const menuWidth = 280;
 
 type PullRequest = {id: string; state: string; viewerDidAuthor: boolean};
 
@@ -40,11 +42,38 @@ function explain(error: unknown): string {
 	return /not accessible by/i.test(message) ? t('quickApprovals_needsWrite') : message;
 }
 
+// Primer's legacy `.btn` classes render taller than the React buttons of the new pages: match these with their variables
+const buttonStyle = {
+	display: 'inline-flex',
+	alignItems: 'center',
+	gap: '4px',
+	boxSizing: 'border-box',
+	height: '28px',
+	padding: '0 8px',
+	border: '1px solid var(--button-default-borderColor-rest, #d1d9e0)',
+	background: 'var(--button-default-bgColor-rest, #f6f8fa)',
+	color: 'var(--button-default-fgColor-rest, #25292e)',
+	font: 'inherit',
+	fontSize: '12px',
+	fontWeight: '500',
+	lineHeight: '1',
+	cursor: 'pointer',
+} as const;
+
+function highlightOnHover(element: HTMLElement, hover: string, rest: string): void {
+	element.addEventListener('mouseenter', () => {
+		element.style.background = hover;
+	});
+	element.addEventListener('mouseleave', () => {
+		element.style.background = rest;
+	});
+}
+
 function titleFor({body}: QuickApproval): string {
 	return body === '' ? t('quickApprovals_titleEmpty') : t('quickApprovals_title', body);
 }
 
-function createGroup(pullRequestId: string, approvals: QuickApproval[], signal: AbortSignal): HTMLElement {
+function createGroup(pullRequestId: string, approvals: QuickApproval[]): HTMLElement {
 	const choices = [...approvals, {label: t('quickApprovals_withoutMessage'), body: ''}];
 	const icon = (
 		<span style={{display: 'inline-flex', color: 'var(--fgColor-success, #1a7f37)'}}>
@@ -55,7 +84,7 @@ function createGroup(pullRequestId: string, approvals: QuickApproval[], signal: 
 	) as HTMLElement;
 	const label = <span>{t('quickApprovals_approve')}</span>;
 	const main = (
-		<button type="button" className="btn btn-sm BtnGroup-item" title={titleFor(choices[0])}>
+		<button type="button" title={titleFor(choices[0])} style={{...buttonStyle, borderRadius: '6px 0 0 6px'}}>
 			{icon}
 			{label}
 		</button>
@@ -63,29 +92,32 @@ function createGroup(pullRequestId: string, approvals: QuickApproval[], signal: 
 	const toggle = (
 		<button
 			type="button"
-			className="btn btn-sm BtnGroup-item"
 			aria-haspopup="menu"
-			aria-expanded="false"
 			aria-label={t('quickApprovals_choose')}
+			style={{...buttonStyle, marginLeft: '-1px', padding: '0 4px', borderRadius: '0 6px 6px 0'}}
 		>
-			▾
+			<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+				<path d="m4.427 7.427 3.396 3.396a.25.25 0 0 0 .354 0l3.396-3.396A.25.25 0 0 0 11.396 7H4.604a.25.25 0 0 0-.177.427Z" />
+			</svg>
 		</button>
 	) as HTMLElement;
+	// A popover, in the top layer: the sticky header of the new pages clips what overflows it
 	const menu = (
 		<div
+			id={menuId}
 			role="menu"
-			hidden
 			style={{
-				position: 'absolute',
-				top: 'calc(100% + 4px)',
-				right: '0',
-				zIndex: '100',
-				width: '280px',
+				position: 'fixed',
+				inset: 'auto',
+				margin: '0',
+				boxSizing: 'border-box',
+				width: `${menuWidth}px`,
 				padding: '6px',
 				border: '1px solid var(--borderColor-default, #d1d9e0)',
 				borderRadius: '12px',
 				background: 'var(--overlay-bgColor, #fff)',
 				boxShadow: 'var(--shadow-floating-large, 0 8px 24px rgba(0, 0, 0, 0.2))',
+				color: 'var(--fgColor-default, #1f2328)',
 				textAlign: 'left',
 			}}
 		>
@@ -95,30 +127,42 @@ function createGroup(pullRequestId: string, approvals: QuickApproval[], signal: 
 		</div>
 	) as HTMLElement;
 	const group = (
-		<div
-			className={`${groupClass} BtnGroup`}
-			style={{position: 'relative', display: 'inline-flex', marginRight: '8px'}}
-		>
+		<div className={groupClass} style={{display: 'inline-flex', flex: 'none', marginLeft: '8px'}}>
 			{main}
 			{toggle}
 			{menu}
 		</div>
 	) as HTMLElement;
 
-	const setOpen = (open: boolean): void => {
-		menu.hidden = !open;
-		toggle.setAttribute('aria-expanded', String(open));
-	};
+	for (const button of [main, toggle]) {
+		highlightOnHover(
+			button,
+			'var(--button-default-bgColor-hover, #eff2f5)',
+			'var(--button-default-bgColor-rest, #f6f8fa)',
+		);
+	}
+
+	// Set as attributes: the JSX types predate the popover API
+	menu.setAttribute('popover', 'auto');
+	toggle.setAttribute('popovertarget', menuId);
+	menu.addEventListener('beforetoggle', (event) => {
+		if (event.newState === 'open') {
+			const {bottom, right} = toggle.getBoundingClientRect();
+			menu.style.top = `${bottom + 4}px`;
+			menu.style.left = `${right - menuWidth}px`;
+		}
+	});
 
 	const run = async (choice: QuickApproval): Promise<void> => {
-		setOpen(false);
 		main.toggleAttribute('disabled', true);
 		toggle.toggleAttribute('disabled', true);
+		group.style.opacity = '0.6';
 		label.textContent = t('quickApprovals_approving');
 		try {
 			await approve(pullRequestId, choice.body);
 			label.textContent = t('quickApprovals_approved');
 			main.title = '';
+			group.style.opacity = '';
 		} catch (error) {
 			console.error('polished-github: quick-approvals failed', error);
 			label.textContent = t('quickApprovals_failed');
@@ -126,11 +170,12 @@ function createGroup(pullRequestId: string, approvals: QuickApproval[], signal: 
 			main.title = explain(error);
 			main.toggleAttribute('disabled', false);
 			toggle.toggleAttribute('disabled', false);
+			group.style.opacity = '';
 		}
 	};
 
 	for (const choice of choices) {
-		menu.append(
+		const item = (
 			<button
 				type="button"
 				role="menuitem"
@@ -148,38 +193,20 @@ function createGroup(pullRequestId: string, approvals: QuickApproval[], signal: 
 					cursor: 'pointer',
 				}}
 				onClick={() => void run(choice)}
-				onMouseEnter={(event) => {
-					event.currentTarget.style.background = 'var(--bgColor-neutral-muted, #818b981f)';
-				}}
-				onMouseLeave={(event) => {
-					event.currentTarget.style.background = 'none';
-				}}
 			>
 				{choice.label}
 				{choice.body && choice.body !== choice.label ? (
 					<span style={{display: 'block', fontSize: '12px', color: mutedColor}}>{choice.body}</span>
 				) : null}
-			</button>,
-		);
+			</button>
+		) as HTMLElement;
+		item.setAttribute('popovertarget', menuId);
+		item.setAttribute('popovertargetaction', 'hide');
+		highlightOnHover(item, 'var(--bgColor-neutral-muted, #818b981f)', 'none');
+		menu.append(item);
 	}
 
 	main.addEventListener('click', () => void run(choices[0]));
-	toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
-	group.addEventListener('keydown', (event) => {
-		if (event.key === 'Escape') {
-			setOpen(false);
-			toggle.focus();
-		}
-	});
-	document.addEventListener(
-		'click',
-		(event) => {
-			if (!group.contains(event.target as Node)) {
-				setOpen(false);
-			}
-		},
-		{signal},
-	);
 	return group;
 }
 
@@ -212,11 +239,12 @@ const quickApprovals: Feature = {
 					return;
 				}
 
-				const group = createGroup(pullRequest.id, approvals, signal);
+				const group = createGroup(pullRequest.id, approvals);
 				const anchor = elements.find((element) => element.matches(newAnchors)) ?? elements[0];
 				if (anchor.matches(newAnchors)) {
 					anchor.before(group);
 				} else {
+					group.style.margin = '0 8px 0 0';
 					anchor.prepend(group);
 				}
 			},
