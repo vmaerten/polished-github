@@ -50,18 +50,22 @@ function group(): Element | null {
 	return document.querySelector('.polished-github-quick-approvals');
 }
 
-function click(label: string): void {
+function click(label: string, init: MouseEventInit = {}): void {
 	const button = [...document.querySelectorAll<HTMLButtonElement>('.polished-github-quick-approvals button')].find(
 		(candidate) => candidate.textContent.startsWith(label),
 	)!;
-	button.click();
+	button.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true, ...init}));
 }
 
-test('approves with the first message in one click', async () => {
+test('a click only opens the menu; a ⌘ or Ctrl-click approves without a message', async () => {
 	await quickApprovals.init(new AbortController().signal);
 	click('Approve');
+	await new Promise((resolve) => setTimeout(resolve, 50));
+	expect(approvals()).toEqual([]);
+
+	click('Approve', {metaKey: true});
 	await vi.waitFor(() => expect(group()!.textContent).toContain('Approved'));
-	expect(approvals()).toEqual([{id: 'PR_1', body: 'LGTM :rocket:'}]);
+	expect(approvals()).toEqual([{id: 'PR_1', body: ''}]);
 });
 
 test('approves with the message picked in the menu, or without one', async () => {
@@ -94,7 +98,7 @@ test('stays away from your own PRs and from closed ones', async () => {
 test('explains a token that cannot approve', async () => {
 	mutationResponse = {data: null, errors: [{message: 'Resource not accessible by personal access token'}]};
 	await quickApprovals.init(new AbortController().signal);
-	click('Approve');
+	click('LGTM');
 	await vi.waitFor(() => expect(group()!.textContent).toContain('Not approved'));
 	expect(group()!.querySelector('button')!.title).toContain('read and write access to Pull requests');
 });

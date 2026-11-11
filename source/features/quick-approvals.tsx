@@ -69,12 +69,9 @@ function highlightOnHover(element: HTMLElement, hover: string, rest: string): vo
 	});
 }
 
-function titleFor({body}: QuickApproval): string {
-	return body === '' ? t('quickApprovals_titleEmpty') : t('quickApprovals_title', body);
-}
-
 function createGroup(pullRequestId: string, approvals: QuickApproval[]): HTMLElement {
-	const choices = [...approvals, {label: t('quickApprovals_withoutMessage'), body: ''}];
+	const withoutMessage = {label: t('quickApprovals_withoutMessage'), body: ''};
+	const choices = [...approvals, withoutMessage];
 	const icon = (
 		<span style={{display: 'inline-flex', color: 'var(--fgColor-success, #1a7f37)'}}>
 			<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
@@ -83,19 +80,16 @@ function createGroup(pullRequestId: string, approvals: QuickApproval[]): HTMLEle
 		</span>
 	) as HTMLElement;
 	const label = <span>{t('quickApprovals_approve')}</span>;
-	const main = (
-		<button type="button" title={titleFor(choices[0])} style={{...buttonStyle, borderRadius: '6px 0 0 6px'}}>
-			{icon}
-			{label}
-		</button>
-	) as HTMLElement;
-	const toggle = (
+	// A click opens the menu rather than approving, so that no plain click approves by accident
+	const button = (
 		<button
 			type="button"
 			aria-haspopup="menu"
-			aria-label={t('quickApprovals_choose')}
-			style={{...buttonStyle, marginLeft: '-1px', padding: '0 4px', borderRadius: '0 6px 6px 0'}}
+			title={t('quickApprovals_hint', navigator.platform.startsWith('Mac') ? '⌘' : 'Ctrl')}
+			style={{...buttonStyle, borderRadius: '6px'}}
 		>
+			{icon}
+			{label}
 			<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
 				<path d="m4.427 7.427 3.396 3.396a.25.25 0 0 0 .354 0l3.396-3.396A.25.25 0 0 0 11.396 7H4.604a.25.25 0 0 0-.177.427Z" />
 			</svg>
@@ -128,48 +122,43 @@ function createGroup(pullRequestId: string, approvals: QuickApproval[]): HTMLEle
 	) as HTMLElement;
 	const group = (
 		<div className={groupClass} style={{display: 'inline-flex', flex: 'none', marginLeft: '8px'}}>
-			{main}
-			{toggle}
+			{button}
 			{menu}
 		</div>
 	) as HTMLElement;
 
-	for (const button of [main, toggle]) {
-		highlightOnHover(
-			button,
-			'var(--button-default-bgColor-hover, #eff2f5)',
-			'var(--button-default-bgColor-rest, #f6f8fa)',
-		);
-	}
+	highlightOnHover(
+		button,
+		'var(--button-default-bgColor-hover, #eff2f5)',
+		'var(--button-default-bgColor-rest, #f6f8fa)',
+	);
 
 	// Set as attributes: the JSX types predate the popover API
 	menu.setAttribute('popover', 'auto');
-	toggle.setAttribute('popovertarget', menuId);
+	button.setAttribute('popovertarget', menuId);
 	menu.addEventListener('beforetoggle', (event) => {
 		if (event.newState === 'open') {
-			const {bottom, right} = toggle.getBoundingClientRect();
+			const {bottom, right} = button.getBoundingClientRect();
 			menu.style.top = `${bottom + 4}px`;
 			menu.style.left = `${right - menuWidth}px`;
 		}
 	});
 
 	const run = async (choice: QuickApproval): Promise<void> => {
-		main.toggleAttribute('disabled', true);
-		toggle.toggleAttribute('disabled', true);
+		button.toggleAttribute('disabled', true);
 		group.style.opacity = '0.6';
 		label.textContent = t('quickApprovals_approving');
 		try {
 			await approve(pullRequestId, choice.body);
 			label.textContent = t('quickApprovals_approved');
-			main.title = '';
+			button.title = '';
 			group.style.opacity = '';
 		} catch (error) {
 			console.error('polished-github: quick-approvals failed', error);
 			label.textContent = t('quickApprovals_failed');
 			icon.style.color = 'var(--fgColor-danger, #d1242f)';
-			main.title = explain(error);
-			main.toggleAttribute('disabled', false);
-			toggle.toggleAttribute('disabled', false);
+			button.title = explain(error);
+			button.toggleAttribute('disabled', false);
 			group.style.opacity = '';
 		}
 	};
@@ -206,7 +195,13 @@ function createGroup(pullRequestId: string, approvals: QuickApproval[]): HTMLEle
 		menu.append(item);
 	}
 
-	main.addEventListener('click', () => void run(choices[0]));
+	button.addEventListener('click', (event) => {
+		if (event.metaKey || event.ctrlKey) {
+			// A cancelled click leaves the menu closed
+			event.preventDefault();
+			void run(withoutMessage);
+		}
+	});
 	return group;
 }
 
