@@ -20,6 +20,9 @@
 	"feature_quickComments": {
 		"message": "Buttons above the comment box that post a predefined comment in one click. Shift-click inserts it instead."
 	},
+	"feature_quickApprovals": {
+		"message": "A button next to the review button that approves the pull request with one of your predefined messages."
+	},
 	"feature_reviewerLoad": {
 		"message": "Shows how many reviews each person already has pending in the reviewers picker of a PR."
 	},
@@ -235,6 +238,51 @@
 	},
 	"quickComments_newBody": {
 		"message": "New comment"
+	},
+	"quickApprovals_approve": {
+		"message": "Approve"
+	},
+	"quickApprovals_choose": {
+		"message": "Choose the approval message"
+	},
+	"quickApprovals_approveWith": {
+		"message": "Approve with"
+	},
+	"quickApprovals_withoutMessage": {
+		"message": "Without a message"
+	},
+	"quickApprovals_title": {
+		"message": "Approve with “$1”"
+	},
+	"quickApprovals_titleEmpty": {
+		"message": "Approve without a message"
+	},
+	"quickApprovals_approving": {
+		"message": "Approving…"
+	},
+	"quickApprovals_approved": {
+		"message": "Approved"
+	},
+	"quickApprovals_failed": {
+		"message": "Not approved"
+	},
+	"quickApprovals_needsWrite": {
+		"message": "Your token can't approve: it needs read and write access to Pull requests"
+	},
+	"quickApprovals_message": {
+		"message": "Message"
+	},
+	"quickApprovals_add": {
+		"message": "+ Add approval"
+	},
+	"quickApprovals_newBody": {
+		"message": "Approved"
+	},
+	"quickApprovals_tokenHelp": {
+		"message": "Approving needs a token with read and write access to Pull requests, unlike the other features."
+	},
+	"quickApprovals_createToken": {
+		"message": "Create one"
 	},
 	"mergeEmail_help": {
 		"message": "On the repositories of each owner, merges and squashes use this email. Owners without a rule keep GitHub's default."

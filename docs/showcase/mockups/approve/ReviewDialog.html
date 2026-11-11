@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Approve chips in the review dialog</title>
+		<style>
+			body {
+				margin: 0;
+			}
+			.frame {
+				position: relative;
+				width: 760px;
+				height: 560px;
+				box-sizing: border-box;
+				background: #0d1117;
+				color: #f0f6fc;
+				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+				font-size: 14px;
+				overflow: hidden;
+			}
+			.btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 6px;
+				height: 28px;
+				padding: 0 12px;
+				border: 1px solid #3d444d;
+				border-radius: 6px;
+				background: #212830;
+				color: #f0f6fc;
+				font-size: 12px;
+				font-weight: 500;
+				white-space: nowrap;
+			}
+			.btn-primary {
+				background: #238636;
+				border-color: rgba(240, 246, 252, 0.1);
+				color: #fff;
+			}
+			.approve svg {
+				color: #3fb950;
+			}
+			.muted {
+				color: #9198a1;
+			}
+			.radio {
+				display: flex;
+				gap: 10px;
+			}
+			.radio i {
+				flex: none;
+				width: 14px;
+				height: 14px;
+				margin-top: 2px;
+				border: 1px solid #9198a1;
+				border-radius: 50%;
+				box-sizing: border-box;
+			}
+			.radio i.on {
+				border: 4px solid #4493f8;
+			}
+			.radio small {
+				display: block;
+				color: #9198a1;
+				font-size: 12px;
+			}
+		</style>
+	</head>
+	<body>
+		<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+			<symbol id="check" viewBox="0 0 16 16">
+				<path
+					fill="currentColor"
+					d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+				/>
+			</symbol>
+		</svg>
+		<div class="frame">
+			<div
+				style="
+					display: flex;
+					align-items: center;
+					gap: 8px;
+					padding: 10px 24px;
+					border-bottom: 1px solid #3d444d;
+					font-size: 12px;
+				"
+			>
+				<span class="muted">#3092</span><b>fix(output): synchronize the prefixed writer buffer</b>
+				<span style="flex: 1"></span>
+				<span class="btn">● Merge status</span><span class="btn btn-primary">Submit review ▾</span>
+			</div>
+
+			<div
+				style="
+					position: absolute;
+					top: 52px;
+					right: 24px;
+					width: 560px;
+					border: 1px solid #3d444d;
+					border-radius: 12px;
+					background: #151b23;
+					box-shadow: 0 8px 24px rgba(1, 4, 9, 0.6);
+				"
+			>
+				<div style="display: flex; justify-content: space-between; padding: 14px 16px 10px; font-weight: 600">
+					Finish your review<span class="muted">✕</span>
+				</div>
+				<div style="padding: 0 16px">
+					<div style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 10px">
+						<span class="muted" style="font-size: 12px; margin-right: 2px">Approve with</span>
+						<span class="btn approve"
+							><svg width="14" height="14"><use href="#check" /></svg>LGTM</span
+						>
+						<span class="btn approve"
+							><svg width="14" height="14"><use href="#check" /></svg>Ship it</span
+						>
+						<span class="btn approve"
+							><svg width="14" height="14"><use href="#check" /></svg>Nits inline</span
+						>
+					</div>
+					<div style="border: 1px solid #3d444d; border-radius: 6px; overflow: hidden">
+						<div
+							style="display: flex; justify-content: space-between; border-bottom: 1px solid #3d444d; font-size: 12px"
+						>
+							<span style="display: flex"
+								><span style="padding: 8px 14px; background: #151b23; border-right: 1px solid #3d444d">Write</span
+								><span class="muted" style="padding: 8px 14px">Preview</span></span
+							>
+							<span class="muted" style="padding: 8px 12px; letter-spacing: 6px">≡ ‹› ⛓ ☰ ☷ ☑</span>
+						</div>
+						<div
+							style="margin: 8px; height: 72px; padding: 8px; border: 1px solid #3d444d; border-radius: 6px"
+							class="muted"
+						>
+							Add your comment here, be kind
+						</div>
+						<div class="muted" style="padding: 0 10px 8px; font-size: 12px">⌇ Paste, drop, or click to add files</div>
+					</div>
+					<div style="display: grid; gap: 12px; margin: 18px 0 16px">
+						<div class="radio">
+							<i></i><span><b>Comment</b><small>Submit general feedback without explicit approval.</small></span>
+						</div>
+						<div class="radio">
+							<i class="on"></i
+							><span><b>Approve</b><small>Submit feedback and approve merging these changes.</small></span>
+						</div>
+						<div class="radio">
+							<i></i
+							><span><b>Request changes</b><small>Submit feedback that must be addressed before merging.</small></span>
+						</div>
+					</div>
+				</div>
+				<div
+					style="display: flex; justify-content: flex-end; gap: 8px; padding: 12px 16px; border-top: 1px solid #3d444d"
+				>
+					<span class="btn">Cancel</span
+					><span class="btn btn-primary">Submit review <span style="opacity: 0.6">⌘ ⏎</span></span>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
