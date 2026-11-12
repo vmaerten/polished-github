@@ -13,6 +13,7 @@
 	import DiffStatsEditor from './DiffStatsEditor.svelte';
 	import ImageModalEditor from './ImageModalEditor.svelte';
 	import MergeEmailEditor from './MergeEmailEditor.svelte';
+	import {takeNewFeatures} from './new-features.js';
 	import PrListSection from './PrListSection.svelte';
 	import QuickApprovalsEditor from './QuickApprovalsEditor.svelte';
 	import QuickCommentsEditor from './QuickCommentsEditor.svelte';
@@ -28,6 +29,7 @@
 	let filter = $state('');
 	let expanded = $state<string>();
 	let saveError = $state('');
+	let newIds = $state(new Set<string>());
 
 	const visibleFeatures = $derived(
 		features.filter(({id, description}) =>
@@ -68,6 +70,7 @@
 	}
 
 	void load();
+	void takeNewFeatures(features.map(({id}) => id)).then((ids) => (newIds = ids));
 </script>
 
 <main>
@@ -107,6 +110,7 @@
 							<div class="feature-text">
 								<div class="feature-title">
 									<h3 class="mono">{feature.id}</h3>
+									{#if newIds.has(feature.id)}<span class="pill new">{t('options_new')}</span>{/if}
 									{#if feature.requiresToken}<span class="pill">{t('options_needsToken')}</span>{/if}
 								</div>
 								<p class="muted">{feature.description}</p>
@@ -519,6 +523,11 @@
 		border-radius: 12px;
 		padding: 0 8px;
 		line-height: 20px;
+	}
+
+	.pill.new {
+		border-color: var(--accent);
+		color: var(--accent);
 	}
 
 	.switch {

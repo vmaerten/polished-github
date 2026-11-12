@@ -68,6 +68,9 @@
 	"options_filter": {
 		"message": "Filter features"
 	},
+	"options_new": {
+		"message": "new"
+	},
 	"options_needsToken": {
 		"message": "needs token"
 	},
