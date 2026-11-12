@@ -10,12 +10,12 @@ All notable changes to Polished GitHub. Versions follow [Semantic Versioning](ht
 - The review status, diff stats, idle time and unresolved conversations badges also show in your pull request list at github.com/pulls, for the repositories your token can read (`review-status`, `diff-stats`, `idle-prs`, `unresolved-comments`).
 - After an update that brings new features, a toast on github.com links to what's new.
 
-  <img width="332" alt="The toast after an update, with a link to what's new" src="https://github.com/user-attachments/assets/fd12557c-9379-4f42-a729-391535647061">
+  <img width="318" alt="The toast after an update, with a link to what's new" src="https://github.com/user-attachments/assets/122a1bc4-7743-47ba-8654-3e0c1ad31722">
 
 - In the changelog and the release notes, each feature id links to the page that explains the feature.
 - The options flag the features you see there for the first time as new.
 
-  <img width="862" alt="The new badge next to quick-approvals in the options" src="https://github.com/user-attachments/assets/68b0369d-2ad2-4f14-ad28-c530354fa550">
+  <img width="862" alt="The new badge next to quick-approvals in the options" src="https://github.com/user-attachments/assets/4d58c63b-b9b7-4af0-b56f-1aa2bc58044d">
 
 ### 🐛 Fixes
 
