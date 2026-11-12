@@ -8,6 +8,8 @@
 		"jsx": "react",
 		"strict": true,
 		"noEmit": true,
+		// The build scripts run on Node directly, which needs the .ts extension
+		"allowImportingTsExtensions": true,
 		"verbatimModuleSyntax": true,
 		"isolatedModules": true,
 		"skipLibCheck": true,

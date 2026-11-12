@@ -1,5 +1,6 @@
 import {expect, test} from 'vitest';
 
+import {linkFeatureIds} from './feature-links.js';
 import {getReleaseNotes, releaseChangelog} from './release.js';
 
 const changelog = `# Changelog
@@ -28,4 +29,10 @@ test('refuses to release without notes', () => {
 	const released = releaseChangelog(changelog, '0.2.0', '2026-10-30');
 	expect(() => releaseChangelog(released, '0.3.0', '2026-10-31')).toThrow('nothing under');
 	expect(() => getReleaseNotes(changelog, '9.9.9')).toThrow('no notes for 9.9.9');
+});
+
+test('links the feature ids of the release notes to their page', () => {
+	expect(linkFeatureIds('- Approve in one click (`quick-approvals`, `unknown`).', ['quick-approvals'])).toBe(
+		'- Approve in one click ([`quick-approvals`](https://polished-github.vmaerten.fr/features/quick-approvals/), `unknown`).',
+	);
 });
