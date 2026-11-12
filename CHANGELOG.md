@@ -4,6 +4,8 @@ All notable changes to Polished GitHub. Versions follow [Semantic Versioning](ht
 
 ## Unreleased
 
+## 0.4.0 - 2026-11-12
+
 ### ✨ Features
 
 - An Approve button next to the review button approves the pull request with one of your predefined messages from its menu, which shows their emoji as GitHub does, or without a message on a ⌘ or Ctrl-click. A toast confirms the approval, or explains why GitHub refused it. Off by default, it needs a token with read and write access to Pull requests (`quick-approvals`).
