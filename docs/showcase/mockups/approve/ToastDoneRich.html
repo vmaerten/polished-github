@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Approval toast with the message sent</title>
+		<style>
+			body {
+				margin: 0;
+			}
+			.frame {
+				position: relative;
+				width: 760px;
+				height: 560px;
+				box-sizing: border-box;
+				background: #0d1117;
+				color: #f0f6fc;
+				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+				font-size: 14px;
+				overflow: hidden;
+			}
+			.btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 6px;
+				height: 28px;
+				padding: 0 10px;
+				border: 1px solid #3d444d;
+				border-radius: 6px;
+				background: #212830;
+				color: #f0f6fc;
+				font-size: 12px;
+				font-weight: 600;
+				white-space: nowrap;
+			}
+			.btn-primary {
+				background: #238636;
+				border-color: rgba(240, 246, 252, 0.1);
+				color: #fff;
+			}
+			.muted {
+				color: #9198a1;
+			}
+			/* Primer's .Toast, placed as Refined GitHub does: position-fixed bottom-0 right-0 mb-5 */
+			.toast {
+				position: absolute;
+				right: 8px;
+				bottom: 40px;
+				display: flex;
+				max-width: 450px;
+				border-radius: 6px;
+				background: #151b23;
+				box-shadow:
+					inset 0 0 0 1px #3d444d,
+					0 8px 24px rgba(1, 4, 9, 0.6);
+				font-size: 14px;
+			}
+			.toast-icon {
+				display: flex;
+				flex: none;
+				align-items: center;
+				justify-content: center;
+				width: 48px;
+				border-radius: 6px 0 0 6px;
+				color: #fff;
+			}
+			.toast-content {
+				padding: 8px 16px;
+				line-height: 1.5;
+			}
+			.toast-content small {
+				display: block;
+				font-size: 12px;
+				color: #9198a1;
+			}
+			/* Refined GitHub's signature, above the message */
+			.signature {
+				display: flex;
+				align-items: center;
+				gap: 4px;
+				margin-bottom: -0.3em;
+				font-size: 10px;
+				color: silver;
+			}
+			.toast-action {
+				align-self: center;
+				margin-right: 12px;
+				color: #4493f8;
+				font-size: 13px;
+				font-weight: 600;
+				white-space: nowrap;
+			}
+			.toast-close {
+				align-self: flex-start;
+				padding: 8px 12px 0 0;
+				color: #9198a1;
+			}
+			.spinner {
+				animation: spin 0.8s linear infinite;
+			}
+			@keyframes spin {
+				to {
+					transform: rotate(360deg);
+				}
+			}
+			.callout {
+				position: absolute;
+				left: 16px;
+				padding: 4px 8px;
+				border: 1px dashed #d29922;
+				border-radius: 6px;
+				color: #d29922;
+				font-size: 12px;
+			}
+		</style>
+	</head>
+	<body>
+		<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+			<symbol id="check" viewBox="0 0 16 16">
+				<path
+					fill="currentColor"
+					d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+				/>
+			</symbol>
+			<symbol id="logo" viewBox="12 9 41 48">
+				<path
+					fill="currentColor"
+					fill-rule="evenodd"
+					d="M17 12H34Q37 12 39 14L48 23Q50 25 50 28V33Q50 35 48 37L40 45Q38 47 35 47H27V52Q27 54 25 54H17Q15 54 15 52V14Q15 12 17 12ZM27 24V35H32Q34 35 35 34L39 30Q40 29 39 28L36 25Q35 24 33 24Z"
+				/>
+			</symbol>
+			<symbol id="stop" viewBox="0 0 16 16">
+				<path
+					fill="currentColor"
+					d="M4.47.22A.749.749 0 0 1 5 0h6c.199 0 .389.079.53.22l4.25 4.25c.141.14.22.331.22.53v6a.749.749 0 0 1-.22.53l-4.25 4.25A.749.749 0 0 1 11 16H5a.749.749 0 0 1-.53-.22L.22 11.53A.749.749 0 0 1 0 11V5c0-.199.079-.389.22-.53Zm.84 1.28L1.5 5.31v5.38l3.81 3.81h5.38l3.81-3.81V5.31L10.69 1.5ZM8 4a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 8 4Zm0 8a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
+				/>
+			</symbol>
+		</svg>
+		<div class="frame">
+			<div style="display: flex; gap: 18px; padding: 10px 16px; font-size: 13px" class="muted">
+				<span>‹› Code</span><b style="color: #f0f6fc; box-shadow: 0 10px 0 -8px #f78166">⑂ Pull requests 29</b
+				><span>▷ Actions</span><span>⚙ Settings</span>
+			</div>
+			<div
+				style="
+					display: flex;
+					align-items: center;
+					gap: 8px;
+					padding: 8px 16px;
+					border-top: 1px solid #3d444d;
+					border-bottom: 1px solid #3d444d;
+					font-size: 12px;
+				"
+			>
+				<span class="muted">#7089</span><b>feat(backend): list the evaluations of an AI analysis</b
+				><span class="muted">⧉</span>
+				<span style="flex: 1"></span>
+				<span class="btn"><span style="color: #d29922">●</span> Merge status</span>
+				<span class="btn" style="opacity: 0.6"
+					><svg width="14" height="14" style="color: #3fb950"><use href="#check" /></svg>Approved<span class="muted"
+						>▾</span
+					></span
+				>
+				<span class="btn btn-primary">Submit review ▾</span>
+				<span class="muted" style="margin-left: 8px; letter-spacing: 8px">▢◫</span>
+			</div>
+
+			<div style="padding: 24px 0 0 120px">
+				<div style="font-size: 26px">feat(backend): list the evaluations of an AI analysis</div>
+				<div style="display: flex; gap: 8px; align-items: center; margin-top: 10px; font-size: 12px" class="muted">
+					<span class="btn btn-primary" style="border-radius: 99px">⑂ Open ▾</span>
+					<span><b style="color: #f0f6fc">thomasdiben</b> opened yesterday</span>
+				</div>
+				<div style="margin-top: 28px; width: 420px; height: 120px; border: 1px solid #3d444d; border-radius: 6px">
+					<div
+						style="
+							display: flex;
+							align-items: center;
+							gap: 8px;
+							padding: 12px;
+							font-size: 12px;
+							box-shadow: inset 2px 0 0 #3fb950;
+						"
+					>
+						<span style="display: inline-flex; padding: 4px; border-radius: 50%; background: #238636; color: #fff"
+							><svg width="12" height="12"><use href="#check" /></svg></span
+						><span><b>valoche</b> <span class="muted">approved these changes now</span></span>
+					</div>
+					<div style="padding: 0 12px 0 44px; font-size: 13px">LGTM 🚀</div>
+				</div>
+			</div>
+
+			<div class="callout" style="bottom: 44px">rappelle le message envoyé · timeline rafraîchie</div>
+			<div class="toast" role="log">
+				<span class="toast-icon" style="background: #238636"
+					><svg width="16" height="16"><use href="#check" /></svg
+				></span>
+				<span class="toast-content"
+					><span class="signature">Polished GitHub</span>Approved #7089
+					<small>“LGTM 🚀”</small>
+				</span>
+			</div>
+		</div>
+	</body>
+</html>
