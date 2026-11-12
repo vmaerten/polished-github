@@ -76,5 +76,6 @@ featured: true
 ## Good to know
 
 - Statuses are fetched again on every visit, so they are never stale.
+- Shown on the pull request list of a repository and on your own, at github.com/pulls. There, PRs from repositories your token cannot read stay without a badge.
 - A review you started but did not submit counts as no review.
 - Needs a token with read access to <i>Pull requests</i>.

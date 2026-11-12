@@ -49,7 +49,7 @@ function addBadge(title: HTMLElement, stats: DiffStats, settings: DiffStatsSetti
 const diffStats: Feature = {
 	id: 'diff-stats',
 	description: t('feature_diffStats'),
-	include: [pageDetect.isRepoPRList],
+	include: [pageDetect.isRepoPRList, pageDetect.isGlobalPRList],
 	requiresToken: true,
 	async init(signal) {
 		const options = await getOptions();

@@ -1,5 +1,3 @@
-import * as pageDetect from 'github-url-detection';
-
 import {observe} from '../helpers/observe.js';
 import {isFeatureEnabled, type Options} from '../options-storage.js';
 import {v4} from './api.js';
@@ -27,13 +25,19 @@ export type BadgeOptions = Pick<Options, 'prListBadges' | 'disabledFeatures' | '
 
 const containerClass = 'polished-github-badges';
 
-function getNumber(link: HTMLAnchorElement): number | undefined {
-	const match = /\/pull\/(\d+)\/?$/.exec(link.pathname);
-	return match ? Number(match[1]) : undefined;
+type ListedPullRequest = {owner: string; name: string; number: number};
+
+/** The PR a title link points to. Read from the link rather than the page: the global list mixes repositories. */
+export function parsePullRequestLink(link: Element): ListedPullRequest | undefined {
+	const match = link instanceof HTMLAnchorElement ? /^\/([^/]+)\/([^/]+)\/pull\/(\d+)\/?$/.exec(link.pathname) : null;
+	return match ? {owner: match[1], name: match[2], number: Number(match[3])} : undefined;
 }
 
-async function fetchPullRequests<T>(numbers: number[], fields: string): Promise<Record<string, T>> {
-	const {owner, name} = pageDetect.utils.getRepositoryInfo()!;
+async function fetchPullRequests<T>(
+	{owner, name}: Pick<ListedPullRequest, 'owner' | 'name'>,
+	numbers: number[],
+	fields: string,
+): Promise<Record<string, T>> {
 	const aliases = numbers.map((number) => `pr${number}: pullRequest(number: ${number}) {${fields}}`);
 	const {repository} = await v4<{repository: Record<string, T>}>(
 		`query($owner: String!, $name: String!) {repository(owner: $owner, name: $name) {${aliases.join(' ')}}}`,
@@ -48,31 +52,52 @@ async function handleTitles<T>(
 	callback: (title: HTMLHeadingElement, pr: T) => void,
 	cache: Map<string, T>,
 ): Promise<void> {
-	const {nameWithOwner} = pageDetect.utils.getRepositoryInfo()!;
-	const keyOf = (number: number): string => `${nameWithOwner}#${number}`;
+	const keyOf = ({owner, name, number}: ListedPullRequest): string => `${owner}/${name}#${number}`;
 	const rows = links.flatMap((link) => {
 		const title = link.closest('h3');
-		const number = link instanceof HTMLAnchorElement ? getNumber(link) : undefined;
-		return title && number !== undefined ? [{title, number}] : [];
+		const pr = parsePullRequestLink(link);
+		return title && pr ? [{title, pr}] : [];
 	});
 
-	const missing = [...new Set(rows.map(({number}) => number))].filter((number) => !cache.has(keyOf(number)));
-	if (missing.length > 0) {
-		const fetched = await fetchPullRequests<T>(missing, fields);
-		for (const number of missing) {
-			cache.set(keyOf(number), fetched[`pr${number}`]);
+	const missingByRepository = new Map<string, ListedPullRequest[]>();
+	for (const {pr} of rows) {
+		if (!cache.has(keyOf(pr))) {
+			const nameWithOwner = `${pr.owner}/${pr.name}`;
+			missingByRepository.set(nameWithOwner, [...(missingByRepository.get(nameWithOwner) ?? []), pr]);
 		}
 	}
 
-	for (const {title, number} of rows) {
-		callback(title, cache.get(keyOf(number))!);
+	// One query per repository: GraphQL fails the whole query when one repository is out of the token's reach, which
+	// on the global list would leave every row bare
+	const results = await Promise.allSettled(
+		[...missingByRepository].map(async ([nameWithOwner, prs]) => {
+			const numbers = [...new Set(prs.map(({number}) => number))];
+			const fetched = await fetchPullRequests<T>(prs[0], numbers, fields).catch((error: unknown) => {
+				throw new Error(`fetching the PRs of ${nameWithOwner} failed`, {cause: error});
+			});
+			for (const pr of prs) {
+				cache.set(keyOf(pr), fetched[`pr${pr.number}`]);
+			}
+		}),
+	);
+
+	for (const {title, pr} of rows) {
+		// Not cached when its repository failed: the row keeps whatever it showed
+		if (cache.has(keyOf(pr))) {
+			callback(title, cache.get(keyOf(pr))!);
+		}
+	}
+
+	const errors = results.flatMap((result) => (result.status === 'rejected' ? [result.reason as unknown] : []));
+	if (errors.length > 0) {
+		throw new AggregateError(errors, 'some repositories failed');
 	}
 }
 
 /**
- * Calls `callback` with each PR title of the repository PR list and the GraphQL `fields` of that PR, now and as GitHub
- * renders more rows. One query per render; PRs already in `cache` are not fetched again, so its lifetime sets freshness:
- * without one, every render fetches afresh.
+ * Calls `callback` with each PR title of a PR list, of a repository or the global one, and the GraphQL `fields` of that
+ * PR, now and as GitHub renders more rows. One query per repository and render; PRs already in `cache` are not fetched
+ * again, so its lifetime sets freshness: without one, every render fetches afresh.
  */
 export function forEachListedPullRequest<T>(
 	fields: string,

@@ -1,6 +1,12 @@
 import {expect, test} from 'vitest';
 
-import {addPullRequestBadge, type BadgeClass, type BadgeOptions, removePullRequestBadge} from './pr-list.js';
+import {
+	addPullRequestBadge,
+	type BadgeClass,
+	type BadgeOptions,
+	parsePullRequestLink,
+	removePullRequestBadge,
+} from './pr-list.js';
 
 const right: BadgeOptions = {prListBadges: 'right', disabledFeatures: [], enabledFeatures: []};
 const metadata: BadgeOptions = {prListBadges: 'metadata', disabledFeatures: [], enabledFeatures: []};
@@ -70,4 +76,20 @@ test('falls back to the title when the row layout is unknown', () => {
 	addPullRequestBadge(title, 'polished-github-diff-stats', badge('polished-github-diff-stats'), right);
 
 	expect(title.querySelector('.polished-github-badges .polished-github-diff-stats')).not.toBeNull();
+});
+
+function link(href: string): HTMLAnchorElement {
+	return Object.assign(document.createElement('a'), {href});
+}
+
+test('reads the repository and number of a PR from its link', () => {
+	expect(parsePullRequestLink(link('/owner/repo/pull/12'))).toEqual({owner: 'owner', name: 'repo', number: 12});
+	expect(parsePullRequestLink(link('https://github.com/owner/repo/pull/12/'))).toEqual({
+		owner: 'owner',
+		name: 'repo',
+		number: 12,
+	});
+	expect(parsePullRequestLink(link('/owner/repo/pull/12/files'))).toBeUndefined();
+	expect(parsePullRequestLink(link('/owner/repo/issues/12'))).toBeUndefined();
+	expect(parsePullRequestLink(document.createElement('span'))).toBeUndefined();
 });
