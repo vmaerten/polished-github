@@ -3,6 +3,7 @@ import * as pageDetect from 'github-url-detection';
 import {insertTextIntoField} from 'text-field-edit';
 
 import type {Feature} from '../feature-manager.js';
+import {type Emojis, getEmojis, renderEmoji, renderEmojiText} from '../github-helpers/emoji.js';
 import {observe} from '../helpers/observe.js';
 import {t} from '../helpers/i18n.js';
 import {getOptions, type QuickComment} from '../options-storage.js';
@@ -53,7 +54,7 @@ async function useComment(composer: Element, {body}: QuickComment, {insertOnly}:
 	}
 }
 
-function addButtons(composer: Element, comments: QuickComment[]): void {
+function addButtons(composer: Element, comments: QuickComment[], emojis: Emojis): void {
 	if (composer.previousElementSibling?.classList.contains(rowClass)) {
 		return;
 	}
@@ -64,14 +65,14 @@ function addButtons(composer: Element, comments: QuickComment[]): void {
 				<button
 					type="button"
 					className="btn btn-sm"
-					title={`Post “${comment.body}”. Shift-click to insert it instead.`}
+					title={`Post “${renderEmojiText(comment.body, emojis)}”. Shift-click to insert it instead.`}
 					onClick={(event) => {
 						useComment(composer, comment, {insertOnly: event.shiftKey}).catch((error: unknown) => {
 							console.error('polished-github: quick-comments failed', error);
 						});
 					}}
 				>
-					{comment.label}
+					{renderEmoji(comment.label, emojis)}
 				</button>
 			))}
 		</div>,
@@ -89,11 +90,13 @@ const quickComments: Feature = {
 			return;
 		}
 
+		const emojis = await getEmojis();
+
 		observe(
 			composers,
 			(elements) => {
 				for (const composer of elements) {
-					addButtons(composer, comments);
+					addButtons(composer, comments, emojis);
 				}
 			},
 			{signal},

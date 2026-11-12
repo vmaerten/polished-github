@@ -11,14 +11,22 @@ vi.mock('text-field-edit', () => ({
 }));
 
 vi.stubGlobal('chrome', {
-	runtime: {id: 'extension'},
+	runtime: {id: 'extension', getManifest: () => ({version: '1.0.0'})},
 	storage: {
+		local: {
+			get: async () => ({
+				emojis: {
+					version: '1.0.0',
+					urls: {tada: 'https://github.githubassets.com/images/icons/emoji/unicode/1f389.png'},
+				},
+			}),
+		},
 		sync: {
 			get: async (defaults: object) => ({
 				...defaults,
 				quickComments: [
 					{label: 'LGTM', body: 'LGTM', on: 'prs'},
-					{label: 'Thanks', body: 'Thanks!', on: 'both'},
+					{label: 'Thanks :tada:', body: 'Thanks :tada:', on: 'both'},
 					{label: 'Triage', body: 'Needs triage', on: 'issues'},
 				],
 			}),
@@ -49,6 +57,8 @@ beforeEach(() => {
 	});
 });
 
+const tada = String.fromCodePoint(0x1_f3_89, 0xfe_0f);
+
 function buttons(): string[] {
 	return [...document.querySelectorAll('.polished-github-quick-comments button')].map((button) => button.textContent);
 }
@@ -60,7 +70,10 @@ function clickButton(label: string, init: MouseEventInit = {}): void {
 
 test('shows the buttons meant for the current page', async () => {
 	await quickComments.init(new AbortController().signal);
-	expect(buttons()).toEqual(['LGTM', 'Thanks']);
+	expect(buttons()).toEqual(['LGTM', `Thanks ${tada}`]);
+	expect(document.querySelector<HTMLElement>('.polished-github-quick-comments button:last-child')!.title).toContain(
+		`Post “Thanks ${tada}”`,
+	);
 });
 
 test('posts from the React composer of the new PR overview page', async () => {
@@ -86,10 +99,10 @@ test('posts the comment in one click', async () => {
 
 test('inserts without posting on Shift-click, or when a draft is in progress', async () => {
 	await quickComments.init(new AbortController().signal);
-	clickButton('Thanks', {shiftKey: true});
+	clickButton(`Thanks ${tada}`, {shiftKey: true});
 	clickButton('LGTM');
 	await new Promise((resolve) => setTimeout(resolve, 100));
-	expect(document.querySelector('textarea')!.value).toBe('Thanks!LGTM');
+	expect(document.querySelector('textarea')!.value).toBe('Thanks :tada:LGTM');
 	expect(submitted).toBe(0);
 });
 
