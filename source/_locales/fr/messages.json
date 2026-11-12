@@ -68,6 +68,9 @@
 	"options_filter": {
 		"message": "Filtrer les fonctionnalités"
 	},
+	"options_new": {
+		"message": "nouveau"
+	},
 	"options_needsToken": {
 		"message": "token requis"
 	},
