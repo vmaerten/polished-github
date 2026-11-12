@@ -50,6 +50,10 @@ function group(): Element | null {
 	return document.querySelector('.polished-github-quick-approvals');
 }
 
+function toast(): Element | null {
+	return document.querySelector('.polished-github-toast');
+}
+
 function click(label: string, init: MouseEventInit = {}): void {
 	const button = [...document.querySelectorAll<HTMLButtonElement>('.polished-github-quick-approvals button')].find(
 		(candidate) => candidate.textContent.startsWith(label),
@@ -66,6 +70,8 @@ test('a click only opens the menu; a ⌘ or Ctrl-click approves without a messag
 	click('Approve', {metaKey: true});
 	await vi.waitFor(() => expect(group()!.textContent).toContain('Approved'));
 	expect(approvals()).toEqual([{id: 'PR_1', body: ''}]);
+	expect(toast()!.classList).toContain('Toast--success');
+	expect(toast()!.textContent).toContain('Approved');
 });
 
 test('approves with the message picked in the menu, or without one', async () => {
@@ -101,4 +107,20 @@ test('explains a token that cannot approve', async () => {
 	click('LGTM');
 	await vi.waitFor(() => expect(group()!.textContent).toContain('Not approved'));
 	expect(group()!.querySelector('button')!.title).toContain('read and write access to Pull requests');
+	expect(toast()!.classList).toContain('Toast--error');
+	expect(toast()!.textContent).toContain('read and write access to Pull requests');
+	expect(toast()!.querySelector('a')!.href).toBe('https://github.com/settings/personal-access-tokens');
+});
+
+test('a retry replaces the toast of the failed attempt', async () => {
+	mutationResponse = {data: null, errors: [{message: 'Something broke'}]};
+	await quickApprovals.init(new AbortController().signal);
+	click('LGTM');
+	await vi.waitFor(() => expect(toast()!.classList).toContain('Toast--error'));
+	expect(toast()!.querySelector('a')).toBeNull();
+
+	mutationResponse = {data: {addPullRequestReview: {clientMutationId: null}}};
+	click('LGTM');
+	await vi.waitFor(() => expect(toast()!.classList).toContain('Toast--success'));
+	expect(document.querySelectorAll('.polished-github-toast')).toHaveLength(1);
 });

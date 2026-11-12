@@ -263,6 +263,12 @@
 	"quickApprovals_needsWrite": {
 		"message": "Votre token ne peut pas approuver : il lui faut l'accès en lecture et écriture aux Pull requests"
 	},
+	"quickApprovals_tokenSettings": {
+		"message": "Modifier vos tokens"
+	},
+	"toast_dismiss": {
+		"message": "Fermer"
+	},
 	"quickApprovals_message": {
 		"message": "Message"
 	},

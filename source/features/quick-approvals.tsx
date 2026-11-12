@@ -4,6 +4,7 @@ import * as pageDetect from 'github-url-detection';
 import type {Feature} from '../feature-manager.js';
 import {v4} from '../github-helpers/api.js';
 import {mutedColor} from '../github-helpers/colors.js';
+import {showToast} from '../github-helpers/toast.js';
 import {observe} from '../helpers/observe.js';
 import {t} from '../helpers/i18n.js';
 import {getOptions, type QuickApproval} from '../options-storage.js';
@@ -36,10 +37,23 @@ async function approve(pullRequestId: string, body: string): Promise<void> {
 	);
 }
 
-function explain(error: unknown): string {
-	const message = error instanceof Error ? error.message : String(error);
+function errorMessage(error: unknown): string {
+	return error instanceof Error ? error.message : String(error);
+}
+
+function lacksWriteAccess(error: unknown): boolean {
 	// What GitHub answers to a token that can only read pull requests
-	return /not accessible by/i.test(message) ? t('quickApprovals_needsWrite') : message;
+	return /not accessible by/i.test(errorMessage(error));
+}
+
+function explain(error: unknown): string {
+	return lacksWriteAccess(error) ? t('quickApprovals_needsWrite') : errorMessage(error);
+}
+
+// Classic pages only: they reload the timeline on this live-update event, which the new pages don't listen to
+function refreshTimeline(): void {
+	const marker = document.querySelector<HTMLElement>('.js-timeline-marker');
+	marker?.dispatchEvent(new CustomEvent('socket:message', {bubbles: true, detail: {data: {gid: marker.dataset.gid}}}));
 }
 
 // Primer's legacy `.btn` classes render taller than the React buttons of the new pages: match these with their variables
@@ -148,11 +162,14 @@ function createGroup(pullRequestId: string, approvals: QuickApproval[]): HTMLEle
 		button.toggleAttribute('disabled', true);
 		group.style.opacity = '0.6';
 		label.textContent = t('quickApprovals_approving');
+		const toast = showToast(t('quickApprovals_approving'));
 		try {
 			await approve(pullRequestId, choice.body);
 			label.textContent = t('quickApprovals_approved');
 			button.title = '';
 			group.style.opacity = '';
+			toast.succeed(t('quickApprovals_approved'));
+			refreshTimeline();
 		} catch (error) {
 			console.error('polished-github: quick-approvals failed', error);
 			label.textContent = t('quickApprovals_failed');
@@ -160,6 +177,13 @@ function createGroup(pullRequestId: string, approvals: QuickApproval[]): HTMLEle
 			button.title = explain(error);
 			button.toggleAttribute('disabled', false);
 			group.style.opacity = '';
+			toast.fail(
+				t('quickApprovals_failed'),
+				explain(error),
+				lacksWriteAccess(error)
+					? {label: t('quickApprovals_tokenSettings'), url: 'https://github.com/settings/personal-access-tokens'}
+					: undefined,
+			);
 		}
 	};
 
