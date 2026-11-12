@@ -20,6 +20,8 @@ All notable changes to Polished GitHub. Versions follow [Semantic Versioning](ht
 
   <img width="862" alt="The new badge next to quick-approvals in the options" src="https://github.com/user-attachments/assets/4d58c63b-b9b7-4af0-b56f-1aa2bc58044d">
 
+- The quick comment buttons show the emoji of their label, and their tooltip those of the comment, as GitHub does (`quick-comments`).
+
 ### 🐛 Fixes
 
 - The token check in the options shows the GitHub API quota the features spend, the GraphQL one, instead of the REST quota none of them uses.

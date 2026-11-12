@@ -1,5 +1,5 @@
 import {expect, test} from 'vitest';
-import {renderEmoji} from './emoji.js';
+import {renderEmoji, renderEmojiText} from './emoji.js';
 
 const emojis = {
 	rocket: 'https://github.githubassets.com/images/icons/emoji/unicode/1f680.png?v8',
@@ -30,4 +30,8 @@ test('leaves unknown shortcodes and lookalikes of object keys as they are', () =
 		':30:',
 		'00',
 	]);
+});
+
+test("keeps the shortcode of GitHub's own emojis in plain text", () => {
+	expect(renderEmojiText('Ship :octocat: from :fr:', emojis)).toBe('Ship :octocat: from 🇫🇷');
 });

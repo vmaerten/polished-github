@@ -248,11 +248,7 @@ const quickApprovals: Feature = {
 		const [{quickApprovals: approvals}, pullRequest, emojis] = await Promise.all([
 			getOptions(),
 			fetchPullRequest(owner, name, number),
-			// The menu still works with the shortcodes as text
-			getEmojis().catch((error: unknown) => {
-				console.error('polished-github: quick-approvals could not load the emojis', error);
-				return {};
-			}),
+			getEmojis(),
 		]);
 		// GitHub refuses an approval from the author, and of a closed or merged PR
 		if (pullRequest.state !== 'OPEN' || pullRequest.viewerDidAuthor) {
