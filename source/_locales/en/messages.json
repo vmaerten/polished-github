@@ -263,6 +263,12 @@
 	"quickApprovals_needsWrite": {
 		"message": "Your token can't approve: it needs read and write access to Pull requests"
 	},
+	"quickApprovals_tokenSettings": {
+		"message": "Edit your tokens"
+	},
+	"toast_dismiss": {
+		"message": "Dismiss"
+	},
 	"quickApprovals_message": {
 		"message": "Message"
 	},
