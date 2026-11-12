@@ -307,5 +307,11 @@
 	},
 	"mergeEmail_add": {
 		"message": "+ Ajouter une règle"
+	},
+	"whatsNew_updated": {
+		"message": "Mis à jour vers la version $1"
+	},
+	"whatsNew_link": {
+		"message": "Voir les nouveautés"
 	}
 }

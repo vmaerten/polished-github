@@ -8,10 +8,12 @@ const displayTime = 3000;
 // The length of Primer's Toast--animateOut
 const animationTime = 180;
 
+type Action = {label: string; url: string};
+
 export type Toast = {
 	succeed(message: string): void;
 	/** Unlike a success, a failure stays until dismissed: the user has to read it. */
-	fail(message: string, details: string, action?: {label: string; url: string}): void;
+	fail(message: string, details: string, action?: Action): void;
 };
 
 function octicon(path: string): JSX.Element {
@@ -38,14 +40,19 @@ function spinner(): JSX.Element {
 	);
 }
 
-/** Shows Primer's toast, which GitHub's stylesheet defines, in a loading state until the returned toast settles. */
-export function showToast(message: string): Toast {
+const infoPath =
+	'M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z';
+
+type Parts = {toast: HTMLElement; icon: HTMLElement; text: HTMLElement; content: HTMLElement};
+
+// Without a state modifier, Primer's toast is the informational one
+function mountToast(message: string, state: 'Toast--loading' | undefined, iconContent: JSX.Element): Parts {
 	// A retry replaces the toast of the previous attempt rather than stacking on it
 	for (const previous of document.querySelectorAll(`.${toastClass}`)) {
 		previous.remove();
 	}
 
-	const icon = <span className="Toast-icon">{spinner()}</span>;
+	const icon = <span className="Toast-icon">{iconContent}</span>;
 	const text = <span>{message}</span>;
 	const content = (
 		<span className="Toast-content" style={{padding: '8px 16px'}}>
@@ -56,7 +63,7 @@ export function showToast(message: string): Toast {
 	const toast = (
 		<div
 			role="log"
-			className={`${toastClass} Toast Toast--loading Toast--animateIn`}
+			className={[toastClass, 'Toast', state, 'Toast--animateIn'].filter(Boolean).join(' ')}
 			style={{position: 'fixed', right: '0', bottom: '0', marginBottom: '32px', zIndex: '101'}}
 		>
 			{icon}
@@ -64,6 +71,35 @@ export function showToast(message: string): Toast {
 		</div>
 	);
 	document.body.append(toast);
+	return {toast, icon, text, content};
+}
+
+function dismiss(toast: HTMLElement): void {
+	toast.classList.replace('Toast--animateIn', 'Toast--animateOut');
+	// A timer rather than animationend, which never fires when the animations are disabled
+	setTimeout(() => {
+		toast.remove();
+	}, animationTime);
+}
+
+function addDismissButton(toast: HTMLElement): void {
+	toast.append(
+		<button
+			type="button"
+			className="Toast-dismissButton"
+			aria-label={t('toast_dismiss')}
+			onClick={() => {
+				dismiss(toast);
+			}}
+		>
+			{octicon(xPath)}
+		</button>,
+	);
+}
+
+/** Shows Primer's toast, which GitHub's stylesheet defines, in a loading state until the returned toast settles. */
+export function showToast(message: string): Toast {
+	const {toast, icon, text, content} = mountToast(message, 'Toast--loading', spinner());
 
 	const settle = (state: 'success' | 'error', iconPath: string, newMessage: string): void => {
 		toast.classList.replace('Toast--loading', `Toast--${state}`);
@@ -71,18 +107,12 @@ export function showToast(message: string): Toast {
 		text.textContent = newMessage;
 	};
 
-	const dismiss = (): void => {
-		toast.classList.replace('Toast--animateIn', 'Toast--animateOut');
-		// A timer rather than animationend, which never fires when the animations are disabled
-		setTimeout(() => {
-			toast.remove();
-		}, animationTime);
-	};
-
 	return {
 		succeed(newMessage) {
 			settle('success', checkPath, newMessage);
-			setTimeout(dismiss, displayTime);
+			setTimeout(() => {
+				dismiss(toast);
+			}, displayTime);
 		},
 		fail(newMessage, details, action) {
 			settle('error', stopPath, newMessage);
@@ -99,12 +129,20 @@ export function showToast(message: string): Toast {
 					) : null}
 				</div>,
 			);
-			const close = (
-				<button type="button" className="Toast-dismissButton" aria-label={t('toast_dismiss')} onClick={dismiss}>
-					{octicon(xPath)}
-				</button>
-			);
-			toast.append(close);
+			addDismissButton(toast);
 		},
 	};
+}
+
+/** An informational toast that stays until dismissed. */
+export function showNotice(message: string, action: Action): void {
+	const {toast, content} = mountToast(message, undefined, octicon(infoPath));
+	content.append(
+		<div style={{fontSize: '12px'}}>
+			<a href={action.url} target="_blank" rel="noreferrer">
+				{action.label}
+			</a>
+		</div>,
+	);
+	addDismissButton(toast);
 }
