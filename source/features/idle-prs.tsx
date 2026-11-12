@@ -63,7 +63,7 @@ function addBadge(title: HTMLElement, days: number, options: BadgeOptions): void
 const idlePrs: Feature = {
 	id: 'idle-prs',
 	description: t('feature_idlePrs'),
-	include: [pageDetect.isRepoPRList],
+	include: [pageDetect.isRepoPRList, pageDetect.isGlobalPRList],
 	requiresToken: true,
 	async init(signal) {
 		const options = await getOptions();

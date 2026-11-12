@@ -61,6 +61,6 @@ featured: true
 
 ## Good to know
 
-- Shown on the pull request list of a repository.
+- Shown on the pull request list of a repository and on your own, at github.com/pulls. There, PRs from repositories your token cannot read stay without a badge.
 - The numbers are fetched once per tab: reload the page to refresh them.
 - Needs a token with read access to <i>Pull requests</i>.

@@ -58,7 +58,7 @@ function addBadge(title: HTMLElement, count: string, options: BadgeOptions): voi
 const unresolvedComments: Feature = {
 	id: 'unresolved-comments',
 	description: t('feature_unresolvedComments'),
-	include: [pageDetect.isRepoPRList],
+	include: [pageDetect.isRepoPRList, pageDetect.isGlobalPRList],
 	requiresToken: true,
 	async init(signal) {
 		const options = await getOptions();

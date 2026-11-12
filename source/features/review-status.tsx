@@ -94,7 +94,7 @@ function addBadge(title: HTMLElement, status: ReviewStatus, options: BadgeOption
 const reviewStatus: Feature = {
 	id: 'review-status',
 	description: t('feature_reviewStatus'),
-	include: [pageDetect.isRepoPRList],
+	include: [pageDetect.isRepoPRList, pageDetect.isGlobalPRList],
 	requiresToken: true,
 	async init(signal) {
 		const options = await getOptions();

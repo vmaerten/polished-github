@@ -9,13 +9,13 @@
 		"message": "Opens images from issues, PRs, comments and READMEs in a zoomable modal instead of a new tab."
 	},
 	"feature_diffStats": {
-		"message": "Shows lines added and removed for each PR in the repository pull request list."
+		"message": "Shows lines added and removed for each PR in the pull request lists, of a repository and your own on github.com/pulls."
 	},
 	"feature_reviewStatus": {
-		"message": "Shows where each PR stands for you in the repository pull request list: review requested, re-review, changes requested, or approved with commits pushed since."
+		"message": "Shows where each PR stands for you in the pull request lists, of a repository and your own on github.com/pulls: review requested, re-review, changes requested, or approved with commits pushed since."
 	},
 	"feature_idlePrs": {
-		"message": "Flags PRs with no recent activity in the repository pull request list."
+		"message": "Flags PRs with no recent activity in the pull request lists, of a repository and your own on github.com/pulls."
 	},
 	"feature_quickComments": {
 		"message": "Buttons above the comment box that post a predefined comment in one click. Shift-click inserts it instead."
@@ -30,7 +30,7 @@
 		"message": "Picks the commit email for each owner when you merge a pull request."
 	},
 	"feature_unresolvedComments": {
-		"message": "Shows how many review conversations are still unresolved on each open PR in the repository pull request list."
+		"message": "Shows how many review conversations are still unresolved on each open PR in the pull request lists, of a repository and your own on github.com/pulls."
 	},
 	"api_noToken": {
 		"message": "No GitHub token: set one in the Polished GitHub options"

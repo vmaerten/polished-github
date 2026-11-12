@@ -50,5 +50,5 @@ featured: true
 
 ## Good to know
 
-- Shown on the pull request list of a repository.
+- Shown on the pull request list of a repository and on your own, at github.com/pulls. There, PRs from repositories your token cannot read stay without a badge.
 - Needs a token with read access to <i>Pull requests</i>.

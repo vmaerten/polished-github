@@ -9,13 +9,13 @@
 		"message": "Ouvre les images des issues, des PR, des commentaires et des README dans une fenêtre zoomable au lieu d'un nouvel onglet."
 	},
 	"feature_diffStats": {
-		"message": "Affiche les lignes ajoutées et supprimées de chaque PR dans la liste des pull requests du dépôt."
+		"message": "Affiche les lignes ajoutées et supprimées de chaque PR dans les listes de pull requests, celle d'un dépôt et la vôtre sur github.com/pulls."
 	},
 	"feature_reviewStatus": {
-		"message": "Indique où en est chaque PR pour vous dans la liste des pull requests du dépôt : review demandée, nouvelle review, modifications demandées, ou approuvée avec des commits poussés depuis."
+		"message": "Indique où en est chaque PR pour vous dans les listes de pull requests, celle d'un dépôt et la vôtre sur github.com/pulls : review demandée, nouvelle review, modifications demandées, ou approuvée avec des commits poussés depuis."
 	},
 	"feature_idlePrs": {
-		"message": "Signale les PR sans activité récente dans la liste des pull requests du dépôt."
+		"message": "Signale les PR sans activité récente dans les listes de pull requests, celle d'un dépôt et la vôtre sur github.com/pulls."
 	},
 	"feature_quickComments": {
 		"message": "Des boutons au-dessus de la zone de commentaire qui publient un commentaire prédéfini en un clic. Maj-clic l'insère à la place."
@@ -30,7 +30,7 @@
 		"message": "Choisit l'email de commit selon l'owner quand vous mergez une pull request."
 	},
 	"feature_unresolvedComments": {
-		"message": "Affiche le nombre de conversations de revue encore non résolues de chaque PR ouverte dans la liste des pull requests du dépôt."
+		"message": "Affiche le nombre de conversations de revue encore non résolues de chaque PR ouverte dans les listes de pull requests, celle d'un dépôt et la vôtre sur github.com/pulls."
 	},
 	"api_noToken": {
 		"message": "Aucun token GitHub : ajoutez-en un dans les options de Polished GitHub"
