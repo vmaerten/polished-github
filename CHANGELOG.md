@@ -9,8 +9,13 @@ All notable changes to Polished GitHub. Versions follow [Semantic Versioning](ht
 - An Approve button next to the review button approves the pull request with one of your predefined messages from its menu, or without a message on a ⌘ or Ctrl-click. A toast confirms the approval, or explains why GitHub refused it. Off by default, it needs a token with read and write access to Pull requests (`quick-approvals`).
 - The review status, diff stats, idle time and unresolved conversations badges also show in your pull request list at github.com/pulls, for the repositories your token can read (`review-status`, `diff-stats`, `idle-prs`, `unresolved-comments`).
 - After an update that brings new features, a toast on github.com links to what's new.
+
+  <img width="332" alt="The toast after an update, with a link to what's new" src="https://github.com/user-attachments/assets/fd12557c-9379-4f42-a729-391535647061">
+
 - In the changelog and the release notes, each feature id links to the page that explains the feature.
 - The options flag the features you see there for the first time as new.
+
+  <img width="862" alt="The new badge next to quick-approvals in the options" src="https://github.com/user-attachments/assets/68b0369d-2ad2-4f14-ad28-c530354fa550">
 
 ### 🐛 Fixes
 
