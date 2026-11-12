@@ -1,6 +1,8 @@
 import {readFileSync, writeFileSync} from 'node:fs';
 import process from 'node:process';
 
+import {featuresWithPage, linkFeatureIds} from './feature-links.ts';
+
 // From a section heading to the next one, or the end of the file
 function sectionPattern(heading: string): RegExp {
 	return new RegExp(`^## ${heading.replaceAll('.', String.raw`\.`)}\\b.*\\n([\\s\\S]*?)(?=^## |(?![\\s\\S]))`, 'm');
@@ -44,7 +46,7 @@ if (import.meta.main) {
 		setVersion('package.json', version);
 		setVersion('source/manifest.json', version);
 	} else if (command === 'notes') {
-		console.log(getReleaseNotes(changelog, version));
+		console.log(linkFeatureIds(getReleaseNotes(changelog, version), featuresWithPage()));
 	} else {
 		throw new Error(`Unknown command: ${command}`);
 	}
