@@ -3,7 +3,7 @@ import {beforeEach, expect, test, vi} from 'vitest';
 import quickApprovals from './quick-approvals.js';
 
 vi.stubGlobal('chrome', {
-	runtime: {id: 'extension'},
+	runtime: {id: 'extension', getManifest: () => ({version: '1.0.0'})},
 	storage: {
 		sync: {
 			get: async (defaults: object) => ({
@@ -14,7 +14,15 @@ vi.stubGlobal('chrome', {
 				],
 			}),
 		},
-		local: {get: async () => ({token: 'secret'})},
+		local: {
+			get: async () => ({
+				token: 'secret',
+				emojis: {
+					version: '1.0.0',
+					urls: {ship: 'https://github.githubassets.com/images/icons/emoji/unicode/1f6a2.png'},
+				},
+			}),
+		},
 	},
 });
 
@@ -76,6 +84,7 @@ test('a click only opens the menu; a ⌘ or Ctrl-click approves without a messag
 
 test('approves with the message picked in the menu, or without one', async () => {
 	await quickApprovals.init(new AbortController().signal);
+	expect(group()!.querySelector('[role="menu"]')!.textContent).toContain('Ship it 🚢');
 	click('Ship it');
 	await vi.waitFor(() => expect(approvals()).toHaveLength(1));
 

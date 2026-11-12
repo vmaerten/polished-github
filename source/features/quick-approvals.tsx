@@ -4,6 +4,7 @@ import * as pageDetect from 'github-url-detection';
 import type {Feature} from '../feature-manager.js';
 import {v4} from '../github-helpers/api.js';
 import {mutedColor} from '../github-helpers/colors.js';
+import {type Emojis, getEmojis, renderEmoji} from '../github-helpers/emoji.js';
 import {showToast} from '../github-helpers/toast.js';
 import {observe} from '../helpers/observe.js';
 import {t} from '../helpers/i18n.js';
@@ -83,7 +84,7 @@ function highlightOnHover(element: HTMLElement, hover: string, rest: string): vo
 	});
 }
 
-function createGroup(pullRequestId: string, approvals: QuickApproval[]): HTMLElement {
+function createGroup(pullRequestId: string, approvals: QuickApproval[], emojis: Emojis): HTMLElement {
 	const withoutMessage = {label: t('quickApprovals_withoutMessage'), body: ''};
 	const choices = [...approvals, withoutMessage];
 	const icon = (
@@ -207,9 +208,11 @@ function createGroup(pullRequestId: string, approvals: QuickApproval[]): HTMLEle
 				}}
 				onClick={() => void run(choice)}
 			>
-				{choice.label}
+				{renderEmoji(choice.label, emojis)}
 				{choice.body && choice.body !== choice.label ? (
-					<span style={{display: 'block', fontSize: '12px', color: mutedColor}}>{choice.body}</span>
+					<span style={{display: 'block', fontSize: '12px', color: mutedColor}}>
+						{renderEmoji(choice.body, emojis)}
+					</span>
 				) : null}
 			</button>
 		) as HTMLElement;
@@ -242,9 +245,14 @@ const quickApprovals: Feature = {
 
 		const {owner, name, path} = pageDetect.utils.getRepositoryInfo()!;
 		const number = Number(/^pull\/(\d+)/.exec(path)![1]);
-		const [{quickApprovals: approvals}, pullRequest] = await Promise.all([
+		const [{quickApprovals: approvals}, pullRequest, emojis] = await Promise.all([
 			getOptions(),
 			fetchPullRequest(owner, name, number),
+			// The menu still works with the shortcodes as text
+			getEmojis().catch((error: unknown) => {
+				console.error('polished-github: quick-approvals could not load the emojis', error);
+				return {};
+			}),
 		]);
 		// GitHub refuses an approval from the author, and of a closed or merged PR
 		if (pullRequest.state !== 'OPEN' || pullRequest.viewerDidAuthor) {
@@ -258,7 +266,7 @@ const quickApprovals: Feature = {
 					return;
 				}
 
-				const group = createGroup(pullRequest.id, approvals);
+				const group = createGroup(pullRequest.id, approvals, emojis);
 				const anchor = elements.find((element) => element.matches(newAnchors)) ?? elements[0];
 				if (anchor.matches(newAnchors)) {
 					anchor.before(group);
