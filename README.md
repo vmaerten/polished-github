@@ -20,6 +20,10 @@ Every feature can be turned off in the options. The badges and the reviewer load
 - **Chrome**: from the [Chrome Web Store](https://chromewebstore.google.com/detail/polished-github/bdmfdhhfmbkfbgomeefpchhgfbapjbpg).
 - **Firefox**: from [Firefox Add-ons](https://addons.mozilla.org/firefox/addon/polished-github/).
 
+## Support
+
+Polished GitHub is a side project I build on my own time. If it saves you time, you can [sponsor me on GitHub](https://github.com/sponsors/vmaerten) or [buy me a coffee](https://buymeacoffee.com/vmaerten). Starring the repository helps too.
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). [MIT](LICENSE) licensed. Not affiliated with, endorsed or sponsored by GitHub, Inc.
