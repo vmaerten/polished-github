@@ -107,6 +107,24 @@
 	"options_preview": {
 		"message": "Preview"
 	},
+	"options_sponsor": {
+		"message": "Sponsor"
+	},
+	"about_title": {
+		"message": "Made by Valentin Maerten"
+	},
+	"about_description": {
+		"message": "I build Polished GitHub on my own time, for the GitHub I use all day at work. It's free, open source and collects nothing. If it saves you time, you can help me keep it going."
+	},
+	"about_sponsor": {
+		"message": "Sponsor on GitHub"
+	},
+	"about_coffee": {
+		"message": "Buy me a coffee"
+	},
+	"about_story": {
+		"message": "Why I made it"
+	},
 	"token_title": {
 		"message": "GitHub token"
 	},

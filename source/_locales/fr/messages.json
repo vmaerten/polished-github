@@ -107,6 +107,24 @@
 	"options_preview": {
 		"message": "Aperçu"
 	},
+	"options_sponsor": {
+		"message": "Soutenir"
+	},
+	"about_title": {
+		"message": "Créé par Valentin Maerten"
+	},
+	"about_description": {
+		"message": "Je développe Polished GitHub sur mon temps libre, pour le GitHub que j'utilise toute la journée au travail. L'extension est gratuite, open source et ne collecte rien. Si elle vous fait gagner du temps, vous pouvez m'aider à la faire vivre."
+	},
+	"about_sponsor": {
+		"message": "Sponsoriser sur GitHub"
+	},
+	"about_coffee": {
+		"message": "M'offrir un café"
+	},
+	"about_story": {
+		"message": "Pourquoi je l'ai créée"
+	},
 	"token_title": {
 		"message": "Token GitHub"
 	},
