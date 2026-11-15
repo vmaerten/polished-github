@@ -8,6 +8,8 @@ All notable changes to Polished GitHub. Versions follow [Semantic Versioning](ht
 
 - The options page says who makes Polished GitHub, with a Sponsor link in its header and a card at the bottom to sponsor it on GitHub or buy me a coffee.
 
+  <img width="880" alt="The about card at the bottom of the options" src="https://github.com/user-attachments/assets/eaa0198d-c2d1-4bcb-b5fc-2347f46dd1c5">
+
 ## 0.4.0 - 2026-11-12
 
 ### ✨ Features
