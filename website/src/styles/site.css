@@ -20,6 +20,8 @@
 	--token-fg: light-dark(#7d4e00, #e3b341);
 	--ok-bg: light-dark(#dafbe1, #12261e);
 	--ok-fg: light-dark(#116329, #3fb950);
+	--sponsor: light-dark(#bf3989, #db61a2);
+	--sponsor-soft: light-dark(#ffeff7, #2b1525);
 	--font: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
 	--display: 'Manrope', system-ui, sans-serif;
 	--mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -867,6 +869,73 @@ a.item:hover .item-name {
 .footer-legal p {
 	padding-block: 20px 28px;
 	font-size: var(--text-sm);
+}
+
+/* About */
+.about {
+	padding-block: 56px 96px;
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+}
+.about-hero {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 24px 32px;
+}
+.about-hero .doc-head {
+	flex: 1 1 420px;
+	min-width: 0;
+	max-width: 720px;
+}
+.about-hero h1 {
+	font-size: var(--text-4xl);
+	letter-spacing: -0.015em;
+	line-height: 1.15;
+}
+.about-avatar {
+	flex: none;
+	border-radius: 50%;
+	border: 1px solid var(--line);
+}
+.about .card h2 {
+	font-size: var(--text-lg);
+}
+.about-support {
+	padding: 28px;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 20px 32px;
+	border-color: transparent;
+	background: var(--sponsor-soft);
+}
+.about-support > div:first-child {
+	flex: 1 1 360px;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+.about-support h2 {
+	font-size: var(--text-2xl);
+}
+.btn-sponsor,
+.btn-coffee {
+	gap: 8px;
+}
+.btn-sponsor svg {
+	color: var(--sponsor);
+}
+/* Buy Me a Coffee's own yellow, so the button reads as theirs in both themes */
+.btn-coffee {
+	background: #ffdd00;
+	color: #0d0c22;
+}
+.btn-coffee:hover {
+	background: #f5d000;
+	color: #0d0c22;
 }
 
 /* Catalog */
