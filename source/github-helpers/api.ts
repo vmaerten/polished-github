@@ -5,6 +5,11 @@ export class GitHubApiError extends Error {
 	override name = 'GitHubApiError';
 }
 
+/** Whether GitHub refused a write because the token can only read pull requests. */
+export function lacksWriteAccess(error: unknown): boolean {
+	return error instanceof Error && /not accessible by/i.test(error.message);
+}
+
 async function request(path: string, init: RequestInit = {}): Promise<Response> {
 	const token = await getToken();
 	if (!token) {

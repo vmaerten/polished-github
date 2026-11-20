@@ -2,7 +2,7 @@ import React from 'dom-chef';
 import * as pageDetect from 'github-url-detection';
 
 import type {Feature} from '../feature-manager.js';
-import {v4} from '../github-helpers/api.js';
+import {lacksWriteAccess, v4} from '../github-helpers/api.js';
 import {mutedColor} from '../github-helpers/colors.js';
 import {type Emojis, getEmojis, renderEmoji} from '../github-helpers/emoji.js';
 import {showToast} from '../github-helpers/toast.js';
@@ -40,11 +40,6 @@ async function approve(pullRequestId: string, body: string): Promise<void> {
 
 function errorMessage(error: unknown): string {
 	return error instanceof Error ? error.message : String(error);
-}
-
-function lacksWriteAccess(error: unknown): boolean {
-	// What GitHub answers to a token that can only read pull requests
-	return /not accessible by/i.test(errorMessage(error));
 }
 
 function explain(error: unknown): string {
