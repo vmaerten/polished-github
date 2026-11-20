@@ -32,6 +32,9 @@
 	"feature_unresolvedComments": {
 		"message": "Affiche le nombre de conversations de revue encore non résolues de chaque PR ouverte dans les listes de pull requests, celle d'un dépôt et la vôtre sur github.com/pulls."
 	},
+	"feature_stackActions": {
+		"message": "Passe toute une stack de pull requests en ready for review, et demande aussi sur les autres PRs de la stack les reviewers ajoutés sur l'une d'elles."
+	},
 	"api_noToken": {
 		"message": "Aucun token GitHub : ajoutez-en un dans les options de Polished GitHub"
 	},
@@ -334,5 +337,68 @@
 	},
 	"whatsNew_link": {
 		"message": "Voir les nouveautés"
+	},
+	"stackActions_more": {
+		"message": "Autres façons de passer en ready for review"
+	},
+	"stackActions_thisPullRequest": {
+		"message": "Cette pull request"
+	},
+	"stackActions_wholeStack": {
+		"message": "Toute la stack"
+	},
+	"stackActions_draftRange": {
+		"message": "$1 drafts, de #$2 à #$3"
+	},
+	"stackActions_dialogTitle": {
+		"message": "Passer la stack en ready for review"
+	},
+	"stackActions_dialogNote": {
+		"message": "Du bas de la stack vers le haut, pour que les demandes de review arrivent dans l'ordre de la stack. Les code owners et les reviewers demandés sont notifiés pour chacune."
+	},
+	"stackActions_confirm": {
+		"message": "Passer $1 en ready for review"
+	},
+	"stackActions_cancel": {
+		"message": "Annuler"
+	},
+	"stackActions_thisOne": {
+		"message": "cette pull request"
+	},
+	"stackActions_alreadyOpen": {
+		"message": "déjà en ready for review"
+	},
+	"stackActions_merged": {
+		"message": "mergée"
+	},
+	"stackActions_closed": {
+		"message": "fermée"
+	},
+	"stackActions_cannotEdit": {
+		"message": "vous ne pouvez pas la modifier"
+	},
+	"stackActions_marking": {
+		"message": "Passage de la stack en ready for review… $1 sur $2"
+	},
+	"stackActions_marked": {
+		"message": "Passées en ready for review"
+	},
+	"stackActions_alsoOnStack": {
+		"message": "Les demander aussi sur le reste de la stack"
+	},
+	"stackActions_requesting": {
+		"message": "Demande des reviewers sur la stack… $1 sur $2"
+	},
+	"stackActions_requested": {
+		"message": "$1 demandés sur le reste de la stack"
+	},
+	"stackActions_partial": {
+		"message": "Fait sur $1 des $2 pull requests"
+	},
+	"stackActions_needsWrite": {
+		"message": "Votre token ne peut pas modifier les pull requests : il lui faut l'accès en lecture et écriture aux Pull requests"
+	},
+	"stackActions_tokenSettings": {
+		"message": "Modifier vos tokens"
 	}
 }

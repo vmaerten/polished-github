@@ -62,7 +62,7 @@ export type Options = {
 export type FeatureToggles = Pick<Options, 'disabledFeatures' | 'enabledFeatures'>;
 
 // Off until the user turns them on, which adds them to `enabledFeatures`
-const offByDefault: ReadonlySet<string> = new Set(['unresolved-comments', 'quick-approvals']);
+const offByDefault: ReadonlySet<string> = new Set(['unresolved-comments', 'quick-approvals', 'stack-actions']);
 
 export function isFeatureEnabled(id: string, {disabledFeatures, enabledFeatures}: FeatureToggles): boolean {
 	return offByDefault.has(id) ? enabledFeatures.includes(id) : !disabledFeatures.includes(id);

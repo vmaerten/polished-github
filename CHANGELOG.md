@@ -10,6 +10,10 @@ All notable changes to Polished GitHub. Versions follow [Semantic Versioning](ht
 
   <img width="880" alt="The about card at the bottom of the options" src="https://github.com/user-attachments/assets/eaa0198d-c2d1-4bcb-b5fc-2347f46dd1c5">
 
+- In a stack of pull requests, the Ready for review button of a draft marks the whole stack ready from the bottom up, after you confirm which PRs, and the reviewers picker can request the reviewers you add on the rest of the stack too. Off by default, it needs a token with read and write access to Pull requests (`stack-actions`).
+
+  <img width="516" alt="The dialog that lists the PRs of the stack, its drafts checked" src="https://github.com/user-attachments/assets/942541db-1e07-4633-86ca-da2a9a96f712">
+
 ## 0.4.0 - 2026-11-12
 
 ### ✨ Features

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Stack checkbox in the native reviewers picker</title>
+		<link rel="stylesheet" href="stack.css" />
+		<style>
+			.side {
+				position: absolute;
+				top: 180px;
+				right: 24px;
+				width: 230px;
+				font-size: 12px;
+			}
+			.side h3 {
+				display: flex;
+				justify-content: space-between;
+				margin: 0 0 6px;
+				font-size: 12px;
+				color: #9198a1;
+			}
+		</style>
+	</head>
+	<body>
+		<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+			<symbol id="logo" viewBox="12 9 41 48">
+				<path
+					fill="currentColor"
+					fill-rule="evenodd"
+					d="M17 12H34Q37 12 39 14L48 23Q50 25 50 28V33Q50 35 48 37L40 45Q38 47 35 47H27V52Q27 54 25 54H17Q15 54 15 52V14Q15 12 17 12ZM27 24V35H32Q34 35 35 34L39 30Q40 29 39 28L36 25Q35 24 33 24Z"
+				/>
+			</symbol>
+		</svg>
+		<div class="frame">
+			<div class="nav"><span>‹› Code</span><b>⑂ Pull requests 36</b><span>▷ Actions</span><span>⚙ Settings</span></div>
+			<div class="title">
+				<h1>refactor(frontend): fetch the account and users through the client</h1>
+				<div class="meta">
+					<span class="state-draft">⊙ Draft ▾</span><span class="pill">≋ 5/6</span>
+					<b style="color: #f0f6fc">vmaerten</b> opened 2 hours ago
+				</div>
+			</div>
+			<div class="tabs">
+				<span class="on">Overview</span><span>Commits 3</span><span>Checks 25</span><span>Files changed 14</span>
+			</div>
+			<div class="ghost" style="position: absolute; top: 180px; left: 24px; width: 440px; height: 360px"></div>
+
+			<div class="side">
+				<h3><span>Reviewers</span><span>⚙</span></h3>
+				<div class="muted">No reviews</div>
+			</div>
+
+			<div class="overlay" style="top: 204px; right: 24px; width: 300px">
+				<div style="padding: 10px 12px 6px; font-weight: 600">Request up to 15 reviewers</div>
+				<div style="margin: 0 12px 6px; padding: 5px 8px; border: 1px solid #3d444d; border-radius: 6px" class="muted">
+					Type or choose a user
+				</div>
+				<div class="item" style="margin: 0 6px">
+					<span class="check on">✓</span><span class="avatar" style="background: #a371f7">E</span
+					><span>ondorse/engineering</span>
+				</div>
+				<div class="item" style="margin: 0 6px">
+					<span class="check on">✓</span><span class="avatar" style="background: #3fb950">T</span
+					><span>thomasdiben</span>
+				</div>
+				<div class="item" style="margin: 0 6px">
+					<span class="check"></span><span class="avatar" style="background: #d29922">M</span
+					><span>mathieu-ondorse</span>
+				</div>
+				<div class="item" style="margin: 0 6px 6px">
+					<span class="check"></span><span class="avatar" style="background: #f778ba">M</span><span>marie-l</span>
+				</div>
+				<div
+					style="padding: 10px 12px; border-top: 1px solid #3d444d; background: #10151c; border-radius: 0 0 12px 12px"
+				>
+					<div style="display: flex; gap: 8px">
+						<span class="check on">✓</span
+						><span
+							>Also on the 5 other pull requests of the stack<small
+								class="muted"
+								style="display: block; font-size: 11px"
+								>#7293 to #7298</small
+							></span
+						>
+					</div>
+					<span class="signature" style="margin: 6px 0 0 22px"
+						><svg width="9" height="9"><use href="#logo" /></svg>Polished GitHub</span
+					>
+				</div>
+			</div>
+
+			<div class="callout" style="left: 24px; bottom: 16px; max-width: 420px">
+				No new UI to learn: one checkbox under GitHub’s own picker, applied when the picker closes. Off by default.
+			</div>
+		</div>
+	</body>
+</html>

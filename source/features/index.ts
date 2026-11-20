@@ -8,6 +8,7 @@ import quickApprovals from './quick-approvals.js';
 import reviewerLoad from './reviewer-load.js';
 import mergeEmail from './merge-email.js';
 import unresolvedComments from './unresolved-comments.js';
+import stackActions from './stack-actions/index.js';
 
 export const features: Feature[] = [
 	imageModal,
@@ -19,4 +20,5 @@ export const features: Feature[] = [
 	reviewerLoad,
 	mergeEmail,
 	unresolvedComments,
+	stackActions,
 ];
