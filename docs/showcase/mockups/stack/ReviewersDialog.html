@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Request reviewers on the whole stack</title>
+		<link rel="stylesheet" href="stack.css" />
+		<style>
+			.chip {
+				display: inline-flex;
+				align-items: center;
+				gap: 4px;
+				height: 22px;
+				padding: 0 6px 0 2px;
+				border: 1px solid #3d444d;
+				border-radius: 99px;
+				background: #212830;
+				font-size: 12px;
+			}
+			.pr {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				padding: 5px 16px;
+			}
+			.pr > span:nth-child(2) {
+				flex: 1;
+				min-width: 0;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				font-size: 12px;
+			}
+			.pr .now {
+				display: flex;
+				align-items: center;
+				gap: 3px;
+				font-size: 11px;
+			}
+			.section {
+				padding: 8px 16px 4px;
+				color: #9198a1;
+				font-size: 11px;
+				font-weight: 600;
+			}
+		</style>
+	</head>
+	<body>
+		<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+			<symbol id="logo" viewBox="12 9 41 48">
+				<path
+					fill="currentColor"
+					fill-rule="evenodd"
+					d="M17 12H34Q37 12 39 14L48 23Q50 25 50 28V33Q50 35 48 37L40 45Q38 47 35 47H27V52Q27 54 25 54H17Q15 54 15 52V14Q15 12 17 12ZM27 24V35H32Q34 35 35 34L39 30Q40 29 39 28L36 25Q35 24 33 24Z"
+				/>
+			</symbol>
+		</svg>
+		<div class="frame">
+			<div class="nav"><span>‹› Code</span><b>⑂ Pull requests 36</b><span>▷ Actions</span><span>⚙ Settings</span></div>
+			<div class="title">
+				<h1>refactor(frontend): fetch the account and users through the client</h1>
+			</div>
+			<div class="backdrop"></div>
+
+			<div class="dialog" style="top: 24px; left: 110px; width: 540px">
+				<div class="dialog-head">
+					<h2>Request reviewers on the stack</h2>
+					<span class="muted">✕</span>
+				</div>
+				<div style="padding: 12px 16px 6px">
+					<div
+						style="
+							display: flex;
+							flex-wrap: wrap;
+							align-items: center;
+							gap: 6px;
+							padding: 5px 8px;
+							border: 1px solid #1f6feb;
+							border-radius: 6px;
+							box-shadow: 0 0 0 1px #1f6feb;
+						"
+					>
+						<span class="chip"><span class="avatar" style="background: #a371f7">E</span>ondorse/engineering ✕</span>
+						<span class="chip"><span class="avatar" style="background: #3fb950">T</span>thomasdiben ✕</span>
+						<span class="muted" style="font-size: 12px">ma|</span>
+					</div>
+				</div>
+				<div style="padding: 0 10px">
+					<div class="item hover">
+						<span class="avatar" style="background: #d29922">M</span
+						><span>mathieu-ondorse<small>2 open reviews</small></span>
+					</div>
+					<div class="item">
+						<span class="avatar" style="background: #f778ba">M</span><span>marie-l<small>4 open reviews</small></span>
+					</div>
+				</div>
+				<div class="section">ON</div>
+				<div class="pr">
+					<span class="check on">✓</span><span><b>#7298</b> build(frontend): reject hand-written API calls…</span
+					><span class="now muted"><span class="avatar" style="background: #a371f7">E</span>already</span>
+				</div>
+				<div class="pr" style="background: #1c2330">
+					<span class="check on">✓</span><span><b>#7297</b> refactor(frontend): fetch the account, users…</span
+					><span class="now muted">draft</span>
+				</div>
+				<div class="pr">
+					<span class="check on">✓</span><span><b>#7296</b> refactor(frontend): fetch the applicant portal…</span
+					><span class="now muted">draft</span>
+				</div>
+				<div class="pr">
+					<span class="check on">✓</span><span><b>#7295</b> refactor(frontend): fetch webhooks, credentials…</span
+					><span class="now muted">draft</span>
+				</div>
+				<div class="pr">
+					<span class="check on">✓</span><span><b>#7294</b> refactor(frontend): fetch rules, custom fields…</span
+					><span class="now muted">draft</span>
+				</div>
+				<div class="pr">
+					<span class="check on">✓</span><span><b>#7293</b> refactor(frontend): fetch task runs, scans…</span
+					><span class="now muted">draft</span>
+				</div>
+				<div style="display: flex; align-items: center; gap: 8px; padding: 10px 16px 0; font-size: 12px">
+					<span class="check on">✓</span>Mark the 5 drafts ready for review first
+				</div>
+				<div class="dialog-foot" style="margin-top: 10px">
+					<span class="signature" style="flex: 1"
+						><svg width="10" height="10"><use href="#logo" /></svg>Polished GitHub</span
+					>
+					<span class="btn">Cancel</span><span class="btn btn-primary">Request on 6 pull requests</span>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
