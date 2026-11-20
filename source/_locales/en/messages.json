@@ -32,6 +32,9 @@
 	"feature_unresolvedComments": {
 		"message": "Shows how many review conversations are still unresolved on each open PR in the pull request lists, of a repository and your own on github.com/pulls."
 	},
+	"feature_stackActions": {
+		"message": "Marks a whole stack of pull requests ready for review, and requests the reviewers you add on one PR of a stack on the others too."
+	},
 	"api_noToken": {
 		"message": "No GitHub token: set one in the Polished GitHub options"
 	},
@@ -334,5 +337,68 @@
 	},
 	"whatsNew_link": {
 		"message": "See what's new"
+	},
+	"stackActions_more": {
+		"message": "More ways to mark ready for review"
+	},
+	"stackActions_thisPullRequest": {
+		"message": "This pull request"
+	},
+	"stackActions_wholeStack": {
+		"message": "The whole stack"
+	},
+	"stackActions_draftRange": {
+		"message": "$1 drafts, from #$2 up to #$3"
+	},
+	"stackActions_dialogTitle": {
+		"message": "Mark the stack ready for review"
+	},
+	"stackActions_dialogNote": {
+		"message": "From the bottom of the stack up, so the review requests arrive in the order of the stack. The code owners and the requested reviewers get notified for each one."
+	},
+	"stackActions_confirm": {
+		"message": "Mark $1 ready for review"
+	},
+	"stackActions_cancel": {
+		"message": "Cancel"
+	},
+	"stackActions_thisOne": {
+		"message": "this pull request"
+	},
+	"stackActions_alreadyOpen": {
+		"message": "already ready for review"
+	},
+	"stackActions_merged": {
+		"message": "merged"
+	},
+	"stackActions_closed": {
+		"message": "closed"
+	},
+	"stackActions_cannotEdit": {
+		"message": "you can't edit it"
+	},
+	"stackActions_marking": {
+		"message": "Marking the stack ready for review… $1 of $2"
+	},
+	"stackActions_marked": {
+		"message": "Marked ready for review"
+	},
+	"stackActions_alsoOnStack": {
+		"message": "Also request them on the rest of the stack"
+	},
+	"stackActions_requesting": {
+		"message": "Requesting reviewers on the stack… $1 of $2"
+	},
+	"stackActions_requested": {
+		"message": "$1 requested on the rest of the stack"
+	},
+	"stackActions_partial": {
+		"message": "Done on $1 of $2 pull requests"
+	},
+	"stackActions_needsWrite": {
+		"message": "Your token can't edit pull requests: it needs read and write access to Pull requests"
+	},
+	"stackActions_tokenSettings": {
+		"message": "Edit your tokens"
 	}
 }

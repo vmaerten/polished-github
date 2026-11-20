@@ -11,6 +11,8 @@ const animationTime = 180;
 type Action = {label: string; url: string};
 
 export type Toast = {
+	/** Replaces the message while it still loads, to show progress. */
+	update(message: string): void;
 	succeed(message: string): void;
 	/** Unlike a success, a failure stays until dismissed: the user has to read it. */
 	fail(message: string, details: string, action?: Action): void;
@@ -108,6 +110,9 @@ export function showToast(message: string): Toast {
 	};
 
 	return {
+		update(newMessage) {
+			text.textContent = newMessage;
+		},
 		succeed(newMessage) {
 			settle('success', checkPath, newMessage);
 			setTimeout(() => {
